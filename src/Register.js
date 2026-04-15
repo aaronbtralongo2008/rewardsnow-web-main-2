@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useIsMobile } from './useIsMobile';
+import { API } from './config';
 
 const GOLD = 'linear-gradient(135deg, #C9A84C 0%, #E8D48B 40%, #C9A84C 60%, #A67C2E 100%)';
 const ROYAL = '#2040C8';
@@ -34,7 +35,7 @@ function Register({ onRegister, onBack }) {
     }
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8080/api/v1/customers/register', {
+      const res = await fetch(`${API}/customers/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, age: parseInt(form.age) })
@@ -54,9 +55,6 @@ function Register({ onRegister, onBack }) {
 
   return (
       <div style={s.container}>
-        <div style={s.demoBanner}>
-          DEMO VERSION — This is a development build of RewardsNow. Data may be reset at any time.
-        </div>
         <div style={{ ...s.wrapper, flexDirection: isMobile ? 'column' : 'row' }}>
 
           {isMobile ? (
@@ -69,7 +67,6 @@ function Register({ onRegister, onBack }) {
                 <div style={s.badge}>REWARDSNOW</div>
                 <div style={s.goldLine} />
                 <p style={s.tagline}>Join thousands earning rewards every day.</p>
-                <p style={s.taglineSub}>– slogan subject to change</p>
               </div>
           )}
 
@@ -152,7 +149,6 @@ function Register({ onRegister, onBack }) {
 
 const s = {
   container: { minHeight: '100vh', background: '#F4F6FB', fontFamily: "'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
-  demoBanner: { background: '#1a2f9e', color: 'rgba(255,255,255,0.85)', fontSize: '12px', fontWeight: '600', textAlign: 'center', padding: '9px', letterSpacing: '0.5px' },
   wrapper: { display: 'flex', flex: 1 },
   mobileHeader: { background: 'linear-gradient(145deg, #152a9e 0%, #1e35b5 100%)', padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
   mobileHeaderBrand: { color: '#fff', fontSize: '1.4rem', fontWeight: '800' },
@@ -161,7 +157,6 @@ const s = {
   badge: { display: 'inline-block', backgroundImage: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: '13px', fontWeight: '800', letterSpacing: '4px', marginBottom: '16px' },
   goldLine: { width: '83%', height: '2px', background: GOLD, marginBottom: '28px', borderRadius: '2px' },
   tagline: { backgroundImage: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: '2.8rem', fontWeight: '800', lineHeight: 1.2, margin: '0 0 16px 0', maxWidth: '440px' },
-  taglineSub: { color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', fontStyle: 'italic', margin: 0 },
   rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#ffffff', boxSizing: 'border-box', overflowY: 'auto' },
   brandName: { color: ROYAL, fontWeight: '800', margin: '0 0 6px 0' },
   brandSub: { color: '#888', fontSize: '1rem', margin: '0 0 24px 0' },

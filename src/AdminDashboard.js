@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
+import { API } from './config';
 
 const ROYAL = '#2040C8';
 
@@ -21,7 +22,7 @@ function AdminDashboard() {
   const handleLogin = async () => {
     setError('');
     try {
-      const res = await fetch('http://localhost:8080/api/v1/customers/login', {
+      const res = await fetch(`${API}/customers/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -48,7 +49,7 @@ function AdminDashboard() {
   const fetchPending = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8080/api/v1/business-requests/pending', { headers: auth });
+      const res = await fetch(`${API}/business-requests/pending`, { headers: auth });
       const data = await res.json();
       setPending(Array.isArray(data) ? data : []);
     } catch { }
@@ -58,7 +59,7 @@ function AdminDashboard() {
   const fetchBusinesses = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8080/api/v1/businesses', { headers: auth });
+      const res = await fetch(`${API}/businesses`, { headers: auth });
       const data = await res.json();
       setBusinesses(Array.isArray(data) ? data : []);
     } catch { }
@@ -67,6 +68,7 @@ function AdminDashboard() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
+    if (!token) return;
     if (tab === 'pending') fetchPending();
     if (tab === 'businesses') fetchBusinesses();
   }, [token, tab]);
@@ -75,7 +77,7 @@ function AdminDashboard() {
     if (acting) return;
     setActing(id + '-approve');
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/business-requests/${id}/approve`, {
+      const res = await fetch(`${API}/business-requests/${id}/approve`, {
         method: 'POST', headers: auth,
         body: JSON.stringify({ reviewerNotes: 'Approved by admin' })
       });
@@ -91,7 +93,7 @@ function AdminDashboard() {
     setActing(id + '-reject');
     try {
       const notes = rejectNotes[id] || 'Does not meet requirements';
-      await fetch(`http://localhost:8080/api/v1/business-requests/${id}/reject`, {
+      await fetch(`${API}/business-requests/${id}/reject`, {
         method: 'POST', headers: auth,
         body: JSON.stringify({ reviewerNotes: notes })
       });
@@ -104,7 +106,7 @@ function AdminDashboard() {
   const handleSuspend = async (id) => {
     if (!window.confirm('Suspend this business?')) return;
     try {
-      await fetch(`http://localhost:8080/api/v1/business-requests/${id}/suspend`, {
+      await fetch(`${API}/business-requests/${id}/suspend`, {
         method: 'POST', headers: auth, body: JSON.stringify({ reason: 'Suspended by admin' })
       });
       showMsg('Business suspended.');
@@ -115,7 +117,7 @@ function AdminDashboard() {
   const handleTerminate = async (id) => {
     if (!window.confirm('Permanently terminate this business? This cannot be undone.')) return;
     try {
-      await fetch(`http://localhost:8080/api/v1/business-requests/${id}/terminate`, {
+      await fetch(`${API}/business-requests/${id}/terminate`, {
         method: 'POST', headers: auth, body: JSON.stringify({ reason: 'Terminated by admin' })
       });
       showMsg('Business terminated.');
@@ -162,7 +164,6 @@ function AdminDashboard() {
           <button style={s.logoutBtn} onClick={() => setToken(null)}>Sign Out</button>
         </div>
 
-        {/* Tabs — horizontal on mobile, sidebar on desktop */}
         {isMobile ? (
             <div style={s.mobileTabs}>
               {TABS.map(({ key, label }) => (

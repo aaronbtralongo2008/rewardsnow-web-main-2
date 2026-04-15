@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
+import { API } from './config';
 
 const ROYAL = '#2040C8';
 
@@ -33,7 +34,7 @@ function BusinessOwnerDashboard() {
   const handleLogin = async () => {
     setError('');
     try {
-      const res = await fetch('http://localhost:8080/api/v1/business-accounts/login', {
+      const res = await fetch(`${API}/business-accounts/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -41,7 +42,7 @@ function BusinessOwnerDashboard() {
       const data = await res.json();
       if (data.error || !data.token) { setError('Invalid credentials'); return; }
       setToken(data.token);
-      const meRes = await fetch('http://localhost:8080/api/v1/business-accounts/me', {
+      const meRes = await fetch(`${API}/business-accounts/me`, {
         headers: { 'Authorization': `Bearer ${data.token}` }
       });
       const meData = await meRes.json();
@@ -54,7 +55,7 @@ function BusinessOwnerDashboard() {
   const fetchEmployees = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8080/api/v1/employees', { headers: auth });
+      const res = await fetch(`${API}/employees`, { headers: auth });
       const data = await res.json();
       setEmployees(Array.isArray(data) ? data : []);
     } catch { }
@@ -65,7 +66,7 @@ function BusinessOwnerDashboard() {
     if (!account?.businessId) return;
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/businesses/${account.businessId}/services`);
+      const res = await fetch(`${API}/businesses/${account.businessId}/services`);
       const data = await res.json();
       setServices(Array.isArray(data) ? data : []);
     } catch { }
@@ -76,7 +77,7 @@ function BusinessOwnerDashboard() {
     if (!account?.businessId) return;
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/businesses/${account.businessId}/stats`, { headers: auth });
+      const res = await fetch(`${API}/businesses/${account.businessId}/stats`, { headers: auth });
       setStats(await res.json());
     } catch { }
     setLoading(false);
@@ -97,7 +98,7 @@ function BusinessOwnerDashboard() {
     }
     setSaving(true);
     try {
-      const res = await fetch('http://localhost:8080/api/v1/employees', {
+      const res = await fetch(`${API}/employees`, {
         method: 'POST', headers: auth, body: JSON.stringify(empForm)
       });
       const data = await res.json();
@@ -113,7 +114,7 @@ function BusinessOwnerDashboard() {
   const handleDeactivate = async (id) => {
     if (!window.confirm('Deactivate this employee?')) return;
     try {
-      await fetch(`http://localhost:8080/api/v1/employees/${id}`, { method: 'DELETE', headers: auth });
+      await fetch(`${API}/employees/${id}`, { method: 'DELETE', headers: auth });
       showMsg('Employee deactivated.');
       fetchEmployees();
     } catch { showMsg('Error deactivating employee.', 'error'); }
@@ -127,8 +128,8 @@ function BusinessOwnerDashboard() {
     try {
       const payload = { name: svcForm.name, description: svcForm.description, rewardsCost: parseInt(svcForm.rewardsCost) || 0, rewardsGrant: parseInt(svcForm.rewardsGrant) || 0 };
       const url = editingSvc
-          ? `http://localhost:8080/api/v1/businesses/${account.businessId}/services/${editingSvc}`
-          : `http://localhost:8080/api/v1/businesses/${account.businessId}/services`;
+          ? `${API}/businesses/${account.businessId}/services/${editingSvc}`
+          : `${API}/businesses/${account.businessId}/services`;
       const res = await fetch(url, { method: editingSvc ? 'PUT' : 'POST', headers: auth, body: JSON.stringify(payload) });
       const data = await res.json();
       if (data.error) { showMsg(`Error: ${data.error}`, 'error'); return; }
@@ -149,7 +150,7 @@ function BusinessOwnerDashboard() {
   const handleDeleteService = async (id) => {
     if (!window.confirm('Delete this service?')) return;
     try {
-      await fetch(`http://localhost:8080/api/v1/businesses/${account.businessId}/services/${id}`, { method: 'DELETE', headers: auth });
+      await fetch(`${API}/businesses/${account.businessId}/services/${id}`, { method: 'DELETE', headers: auth });
       showMsg('Service deleted.');
       fetchServices();
     } catch { showMsg('Could not delete service.', 'error'); }
@@ -200,7 +201,6 @@ function BusinessOwnerDashboard() {
           </div>
         </div>
 
-        {/* Tab nav — horizontal scrolling on mobile */}
         {isMobile && (
             <div style={s.mobileTabs}>
               {TABS.map(({ key, label }) => (
@@ -344,13 +344,13 @@ function BusinessOwnerDashboard() {
                                 <p style={s.empName}>{emp.firstName} {emp.lastName}</p>
                                 <p style={s.empEmail}>{emp.email}</p>
                                 <span style={{ ...s.roleBadge, background: emp.role === 'MANAGER' ? '#f0e8ff' : '#f0f4ff', color: emp.role === 'MANAGER' ? '#6b21a8' : ROYAL }}>
-                          {emp.role}
-                        </span>
+                                  {emp.role}
+                                </span>
                               </div>
                               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px', flexShrink: 0 }}>
-                        <span style={{ fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px', background: emp.active ? '#e8f4ed' : '#fdeaea', color: emp.active ? '#2e7d52' : '#c0392b' }}>
-                          {emp.active ? 'Active' : 'Inactive'}
-                        </span>
+                                <span style={{ fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px', background: emp.active ? '#e8f4ed' : '#fdeaea', color: emp.active ? '#2e7d52' : '#c0392b' }}>
+                                  {emp.active ? 'Active' : 'Inactive'}
+                                </span>
                                 {emp.active && (
                                     <button style={s.deactivateBtn} onClick={() => handleDeactivate(emp.id)}>Deactivate</button>
                                 )}

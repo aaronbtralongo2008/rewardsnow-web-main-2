@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useIsMobile } from './useIsMobile';
+import { API } from './config';
 
 const ROYAL = '#2040C8';
 
@@ -28,7 +29,7 @@ function EmployeeDashboard() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8080/api/v1/employees/login', {
+      const res = await fetch(`${API}/employees/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -42,8 +43,8 @@ function EmployeeDashboard() {
       setToken(data.token);
       setEmployee(data);
       const [svcRes, bizRes] = await Promise.all([
-        fetch(`http://localhost:8080/api/v1/businesses/${data.businessId}/services`),
-        fetch(`http://localhost:8080/api/v1/businesses/${data.businessId}`)
+        fetch(`${API}/businesses/${data.businessId}/services`),
+        fetch(`${API}/businesses/${data.businessId}`)
       ]);
       const svcData = await svcRes.json();
       const bizData = await bizRes.json();
@@ -63,7 +64,7 @@ function EmployeeDashboard() {
     setLoading(true);
     try {
       const res = await fetch(
-          `http://localhost:8080/api/v1/customers/lookup?phone=${phone.replace(/\D/g, '')}`,
+          `${API}/customers/lookup?phone=${phone.replace(/\D/g, '')}`,
           { headers: { 'Authorization': `Bearer ${token}` } }
       );
       const data = await res.json();
@@ -74,7 +75,7 @@ function EmployeeDashboard() {
         if (isUniquePoints) {
           try {
             const balRes = await fetch(
-                `http://localhost:8080/api/v1/unique-points/balance?businessId=${employee.businessId}&customerId=${data.id}`,
+                `${API}/unique-points/balance?businessId=${employee.businessId}&customerId=${data.id}`,
                 { headers: { 'Authorization': `Bearer ${token}` } }
             );
             if (balRes.ok) {
@@ -107,7 +108,7 @@ function EmployeeDashboard() {
     setResult(null);
     try {
       const description = selectedServices.map(s => s.name).join(', ');
-      const res = await fetch('http://localhost:8080/api/v1/ledger/employee/issue', {
+      const res = await fetch(`${API}/ledger/employee/issue`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ customerId: customer.id, amount: totalPoints, description: `Purchase: ${description}` })
@@ -128,7 +129,7 @@ function EmployeeDashboard() {
     setResult(null);
     try {
       const description = selectedServices.map(s => s.name).join(', ');
-      const url = isUniquePoints ? 'http://localhost:8080/api/v1/unique-points/redeem' : 'http://localhost:8080/api/v1/ledger/redeem';
+      const url = isUniquePoints ? `${API}/unique-points/redeem` : `${API}/ledger/redeem`;
       const body = isUniquePoints
           ? { businessId: employee.businessId, customerId: customer.id, amount: totalPoints, name: description }
           : { businessId: employee.businessId, customerId: customer.id, rnTransacted: totalPoints, description };
@@ -269,8 +270,8 @@ function EmployeeDashboard() {
                               <p style={st.menuItemName}>{svc.name}</p>
                               <p style={st.menuItemDesc}>{svc.description}</p>
                               <span style={{ ...st.earnBadge, background: mode === 'redeem' ? '#fdeaea' : '#e8f4ed', color: mode === 'redeem' ? '#c0392b' : '#2e7d52' }}>
-                        {mode === 'issue' ? '+' : '-'}{pts} pts
-                      </span>
+                                {mode === 'issue' ? '+' : '-'}{pts} pts
+                              </span>
                             </div>
                         );
                       })}
@@ -321,8 +322,8 @@ function EmployeeDashboard() {
                         <div key={s.id} style={st.confirmItem}>
                           <span style={st.confirmItemName}>{s.name}</span>
                           <span style={{ ...st.confirmItemPts, color: mode === 'redeem' ? '#c0392b' : '#2e7d52' }}>
-                      {mode === 'issue' ? '+' : '-'}{mode === 'issue' ? s.rewardsGrant : s.rewardsCost} pts
-                    </span>
+                            {mode === 'issue' ? '+' : '-'}{mode === 'issue' ? s.rewardsGrant : s.rewardsCost} pts
+                          </span>
                         </div>
                     ))}
                   </div>

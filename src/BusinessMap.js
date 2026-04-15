@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useIsMobile } from './useIsMobile';
+import { API } from './config';
 
 const ROYAL = '#2040C8';
 
@@ -18,7 +19,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState([26.35, -80.08]);
-  const [showSidebar, setShowSidebar] = useState(!isMobile); // closed by default on mobile
+  const [showSidebar, setShowSidebar] = useState(!isMobile);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -29,7 +30,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
     }
     const fetchBusinesses = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/v1/businesses');
+        const res = await fetch(`${API}/businesses`);
         const data = await res.json();
         setBusinesses(Array.isArray(data) ? data.filter(b => b.latitude && b.longitude) : []);
       } catch (err) {
@@ -55,13 +56,11 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
             <button style={s.navBtn} onClick={() => setShowSidebar(v => !v)}>
               {showSidebar ? (isMobile ? '✕ Close' : 'Hide list') : '☰ Nearby'}
             </button>
-            {!isMobile && <span style={s.demoBadge}>DEMO</span>}
             <button style={s.logoutBtn} onClick={onLogout}>{isMobile ? '↩' : 'Log Out'}</button>
           </div>
         </div>
 
         <div style={{ ...s.body, flexDirection: isMobile ? 'column' : 'row' }}>
-          {/* Sidebar — full-width overlay panel on mobile */}
           {showSidebar && (
               <div style={{
                 ...s.sidebar,
@@ -87,7 +86,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
                           <div
                               key={biz.id}
                               style={s.bizCard}
-                              onClick={() => { onSelectBusiness(biz); }}
+                              onClick={() => onSelectBusiness(biz)}
                               onMouseEnter={e => e.currentTarget.style.borderColor = ROYAL}
                               onMouseLeave={e => e.currentTarget.style.borderColor = '#eee'}
                           >
@@ -106,11 +105,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
 
           <div style={{ ...s.mapWrapper, flex: 1, minHeight: isMobile ? (showSidebar ? '55vh' : 'calc(100vh - 60px)') : 'auto' }}>
             {!loading && (
-                <MapContainer
-                    center={userLocation}
-                    zoom={13}
-                    style={{ width: '100%', height: '100%' }}
-                >
+                <MapContainer center={userLocation} zoom={13} style={{ width: '100%', height: '100%' }}>
                   <TileLayer
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -138,7 +133,6 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
           </div>
         </div>
 
-        {/* Mobile bottom nav */}
         {isMobile && (
             <div style={s.mobileBottomNav}>
               <button style={s.mobileNavBtn} onClick={() => onNavigate('/home')}>🏠 Home</button>
@@ -156,7 +150,6 @@ const s = {
   logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800' },
   topBarRight: { display: 'flex', alignItems: 'center', gap: '6px' },
   navBtn: { padding: '6px 10px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: ROYAL, cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
-  demoBadge: { background: '#1a2f9e', color: '#ffffff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '4px 10px', borderRadius: '20px' },
   logoutBtn: { padding: '6px 12px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
   body: { display: 'flex', flex: 1, overflow: 'hidden' },
   sidebar: { background: '#ffffff', padding: '16px', overflowY: 'auto', zIndex: 10 },
