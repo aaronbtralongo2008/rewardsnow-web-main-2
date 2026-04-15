@@ -1,0 +1,94 @@
+// TermsAndPrivacy.jsx — put this in src/
+// Add routes: <Route path="/terms" element={<Terms />} />
+//             <Route path="/privacy" element={<Privacy />} />
+
+const PageShell = ({ title, children }) => (
+  <div style={s.root}>
+    <nav style={s.nav}>
+      <a href="/" style={s.brand}>RewardsNow</a>
+    </nav>
+    <div style={s.body}>
+      <h1 style={s.title}>{title}</h1>
+      <p style={s.updated}>Last updated: April 2026</p>
+      {children}
+    </div>
+  </div>
+);
+
+export function Terms() {
+  return (
+    <PageShell title="Terms of Service">
+      <Section title="1. Acceptance of Terms">
+        By creating a RewardsNow account or using our services, you agree to these Terms of Service. If you do not agree, do not use the service.
+      </Section>
+      <Section title="2. Eligibility">
+        You must be at least 13 years old to create a customer account. Business accounts require you to be a legal adult in your jurisdiction.
+      </Section>
+      <Section title="3. Points and Rewards">
+        RewardsNow points have no cash value and cannot be exchanged for currency. Points are earned through transactions at partner businesses and may be redeemed for rewards as described in each partner's service listing. We reserve the right to modify point values, redemption rates, and available rewards at any time.
+      </Section>
+      <Section title="4. Account Responsibility">
+        You are responsible for all activity under your account. Keep your credentials secure. Notify us immediately at hello@rewardsnow.app if you suspect unauthorized access.
+      </Section>
+      <Section title="5. Partner Businesses">
+        RewardsNow is not responsible for the quality, safety, or availability of products or services offered by partner businesses. Disputes with partners should be resolved directly with the partner.
+      </Section>
+      <Section title="6. Termination">
+        We may suspend or terminate accounts that violate these terms, engage in fraud, or abuse the points system.
+      </Section>
+      <Section title="7. Changes to Terms">
+        We may update these terms from time to time. Continued use of the service after changes constitutes acceptance.
+      </Section>
+      <Section title="8. Contact">
+        Questions? Email us at hello@rewardsnow.app.
+      </Section>
+    </PageShell>
+  );
+}
+
+export function Privacy() {
+  return (
+    <PageShell title="Privacy Policy">
+      <Section title="1. What We Collect">
+        We collect information you provide when creating an account (name, email, phone number, age), and transaction data generated when you earn or redeem points at partner businesses.
+      </Section>
+      <Section title="2. How We Use It">
+        We use your information to operate the RewardsNow service, send transaction notifications, process points, and improve the platform. We do not sell your personal information to third parties.
+      </Section>
+      <Section title="3. Sharing with Partners">
+        When you transact at a partner business, that business receives confirmation of the transaction and your name. They do not receive your full account details.
+      </Section>
+      <Section title="4. Data Security">
+        Passwords are stored as one-way cryptographic hashes. We use industry-standard security practices including encrypted connections for all data in transit.
+      </Section>
+      <Section title="5. Your Rights">
+        You may request deletion of your account and associated data by emailing hello@rewardsnow.app. We will process requests within 30 days.
+      </Section>
+      <Section title="6. Cookies">
+        We use session tokens stored in browser memory to keep you signed in. We do not use tracking cookies or third-party advertising pixels.
+      </Section>
+      <Section title="7. Contact">
+        For privacy questions, contact hello@rewardsnow.app.
+      </Section>
+    </PageShell>
+  );
+}
+
+const Section = ({ title, children }) => (
+  <div style={s.section}>
+    <h2 style={s.sectionTitle}>{title}</h2>
+    <p style={s.sectionBody}>{children}</p>
+  </div>
+);
+
+const s = {
+  root: { minHeight: '100vh', background: '#fff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" },
+  nav: { height: '60px', display: 'flex', alignItems: 'center', padding: '0 40px', borderBottom: '1px solid #f0f0f0' },
+  brand: { color: '#0a0a0a', fontSize: '15px', fontWeight: '700', textDecoration: 'none' },
+  body: { maxWidth: '680px', margin: '0 auto', padding: '64px 24px' },
+  title: { color: '#0a0a0a', fontSize: '2rem', fontWeight: '700', margin: '0 0 8px', letterSpacing: '-0.03em' },
+  updated: { color: '#9ca3af', fontSize: '13px', margin: '0 0 48px' },
+  section: { marginBottom: '32px' },
+  sectionTitle: { color: '#0a0a0a', fontSize: '15px', fontWeight: '600', margin: '0 0 8px' },
+  sectionBody: { color: '#374151', fontSize: '14px', lineHeight: 1.8, margin: 0 },
+};
