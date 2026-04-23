@@ -82,13 +82,13 @@ function Register({ onRegister, onBack }) {
 
             <div style={s.row}>
               <div style={s.half}>
-                <label style={s.inputLabel}>First name</label>
+                <label style={s.inputLabel}>First Name</label>
                 <input style={s.input} placeholder="First name" value={form.firstName}
                        onChange={handleChange('firstName')} autoComplete="given-name"
                        onKeyDown={e => e.key === 'Enter' && handleRegister()} />
               </div>
               <div style={s.half}>
-                <label style={s.inputLabel}>Last name</label>
+                <label style={s.inputLabel}>Last Name</label>
                 <input style={s.input} placeholder="Last name" value={form.lastName}
                        onChange={handleChange('lastName')} autoComplete="family-name"
                        onKeyDown={e => e.key === 'Enter' && handleRegister()} />
@@ -100,14 +100,14 @@ function Register({ onRegister, onBack }) {
                    onChange={handleChange('username')} autoComplete="username"
                    onKeyDown={e => e.key === 'Enter' && handleRegister()} />
 
-            <label style={s.inputLabel}>Email address</label>
+            <label style={s.inputLabel}>Email</label>
             <input style={s.input} type="email" placeholder="you@email.com" value={form.email}
                    onChange={handleChange('email')} autoComplete="email"
                    onKeyDown={e => e.key === 'Enter' && handleRegister()} />
 
             <div style={s.row}>
               <div style={s.half}>
-                <label style={s.inputLabel}>Phone number</label>
+                <label style={s.inputLabel}>Phone</label>
                 <input style={s.input} type="tel" placeholder="10-15 digits" value={form.phoneNumber}
                        onChange={handleChange('phoneNumber')} autoComplete="tel-national"
                        onKeyDown={e => e.key === 'Enter' && handleRegister()} />
@@ -139,7 +139,7 @@ function Register({ onRegister, onBack }) {
             </div>
 
             <button style={s.backBtn} onClick={onBack}>
-              Already have an account? Log In
+              Already have an account? Sign In
             </button>
           </div>
         </div>
@@ -156,13 +156,13 @@ const s = {
   leftPanel: { flex: 1, background: 'linear-gradient(145deg, #152a9e 0%, #1e35b5 50%, #172fa8 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px' },
   badge: { display: 'inline-block', backgroundImage: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: '13px', fontWeight: '800', letterSpacing: '4px', marginBottom: '16px' },
   goldLine: { width: '83%', height: '2px', background: GOLD, marginBottom: '28px', borderRadius: '2px' },
-  tagline: { backgroundImage: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: '2.8rem', fontWeight: '800', lineHeight: 1.2, margin: '0 0 16px 0', maxWidth: '440px' },
+  tagline: { color: '#fff', fontSize: '2.8rem', fontWeight: '800', lineHeight: 1.2, margin: '0 0 16px 0', maxWidth: '440px' },
   rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#ffffff', boxSizing: 'border-box', overflowY: 'auto' },
-  brandName: { color: ROYAL, fontWeight: '800', margin: '0 0 6px 0' },
+  brandName: { color: '#0f172a', fontWeight: '800', margin: '0 0 6px 0' },
   brandSub: { color: '#888', fontSize: '1rem', margin: '0 0 24px 0' },
   row: { display: 'flex', gap: '12px' },
   half: { flex: 1, display: 'flex', flexDirection: 'column' },
-  inputLabel: { color: '#444', fontSize: '13px', fontWeight: '600', marginBottom: '6px', display: 'block', letterSpacing: '0.3px' },
+  inputLabel: { color: '#6b7280', fontSize: '11px', fontWeight: '600', marginBottom: '6px', display: 'block', letterSpacing: '1.5px', textTransform: 'uppercase' },
   input: { padding: '12px 16px', borderRadius: '10px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   registerBtn: { padding: '14px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#ffffff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%', marginTop: '4px' },
   backBtn: { padding: '14px', borderRadius: '10px', border: '1.5px solid #d0d0d0', background: 'transparent', color: '#555', fontSize: '14px', fontWeight: '600', cursor: 'pointer', width: '100%' },

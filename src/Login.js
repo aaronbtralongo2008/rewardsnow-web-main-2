@@ -50,7 +50,8 @@ function Login({ onLogin }) {
                 <div style={styles.leftContent}>
                   <div style={styles.badge}>REWARDSNOW</div>
                   <div style={styles.goldLine} />
-                  <p style={styles.tagline}>One card. Every business.</p>
+                  <p style={styles.tagline}>One card.<br />Every business.</p>
+                  <p style={styles.leftDesc}>Join thousands of customers earning rewards at local businesses across the city.</p>
                 </div>
               </div>
           )}
@@ -62,9 +63,9 @@ function Login({ onLogin }) {
             boxShadow: isMobile ? 'none' : '-8px 0 40px rgba(0,0,0,0.06)',
             flex: isMobile ? '1' : 'none',
           }}>
-            <h1 style={{ ...styles.brandName, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>RewardsNow</h1>
-            <p style={styles.brandSub}>Sign in to your account</p>
-            <label style={styles.inputLabel}>Email address</label>
+            <h1 style={{ ...styles.brandName, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>Welcome back</h1>
+            <p style={styles.brandSub}>Sign in to your RewardsNow account</p>
+            <label style={styles.inputLabel}>Email</label>
             <input style={styles.input} type="email" placeholder="you@email.com"
                    value={email} onChange={e => setEmail(e.target.value)}
                    onKeyDown={e => e.key === 'Enter' && handleLogin()} />
@@ -75,7 +76,7 @@ function Login({ onLogin }) {
             {error && <p style={styles.error}>{error}</p>}
             <button style={{ ...styles.loginBtn, opacity: loading ? 0.7 : 1 }}
                     onClick={handleLogin} disabled={loading}>
-              {loading ? 'Signing in...' : 'Log In'}
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
             <div style={{ textAlign: 'right', marginTop: '8px' }}>
               <span style={styles.forgotLink} onClick={() => navigate('/forgot-password')}>
@@ -114,11 +115,12 @@ const styles = {
   leftContent: { position: 'relative', zIndex: 2 },
   badge: { display: 'inline-block', backgroundImage: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: '13px', fontWeight: '800', letterSpacing: '4px', marginBottom: '16px' },
   goldLine: { width: '83%', height: '2px', background: GOLD, marginBottom: '28px', borderRadius: '2px' },
-  tagline: { backgroundImage: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: '2.8rem', fontWeight: '800', lineHeight: 1.2, margin: '0 0 16px 0', maxWidth: '440px' },
+  tagline: { color: '#fff', fontSize: '2.8rem', fontWeight: '800', lineHeight: 1.2, margin: '0 0 20px 0', maxWidth: '440px' },
+  leftDesc: { color: 'rgba(255,255,255,0.6)', fontSize: '15px', lineHeight: 1.6, margin: 0, maxWidth: '380px' },
   rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#ffffff', boxSizing: 'border-box' },
-  brandName: { color: ROYAL, fontWeight: '800', margin: '0 0 6px 0' },
+  brandName: { color: '#0f172a', fontWeight: '800', margin: '0 0 6px 0' },
   brandSub: { color: '#888', fontSize: '1rem', margin: '0 0 36px 0' },
-  inputLabel: { color: '#444', fontSize: '13px', fontWeight: '600', marginBottom: '6px', display: 'block', letterSpacing: '0.3px' },
+  inputLabel: { color: '#6b7280', fontSize: '11px', fontWeight: '600', marginBottom: '6px', display: 'block', letterSpacing: '1.5px', textTransform: 'uppercase' },
   input: { padding: '14px 16px', borderRadius: '10px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   loginBtn: { padding: '15px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#ffffff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', transition: 'background 0.2s' },
   forgotLink: { color: ROYAL, fontSize: '13px', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline' },
