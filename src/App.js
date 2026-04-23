@@ -64,8 +64,16 @@ function App() {
     navigate('/business');
   };
 
+  // Redirects unauthenticated customers to the login page
   const Protected = ({ children }) => {
     if (!customer) return <Navigate to="/" replace />;
+    return children;
+  };
+
+  // Redirects already-authenticated customers away from staff/admin portals.
+  // Unauthenticated visitors still reach the portal's own login form.
+  const StaffRoute = ({ children }) => {
+    if (customer) return <Navigate to="/home" replace />;
     return children;
   };
 
@@ -95,9 +103,9 @@ function App() {
       <Route path="/business" element={<Protected><BusinessDetailWrapper /></Protected>} />
       <Route path="/map" element={<Protected><BusinessMap key={refreshKey} customer={customer} onLogout={handleLogout} onNavigate={navigate} onSelectBusiness={handleSelectBusiness} /></Protected>} />
 
-      <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/business-owner" element={<BusinessOwnerDashboard />} />
-      <Route path="/employee" element={<EmployeeDashboard />} />
+      <Route path="/admin" element={<StaffRoute><AdminDashboard /></StaffRoute>} />
+      <Route path="/business-owner" element={<StaffRoute><BusinessOwnerDashboard /></StaffRoute>} />
+      <Route path="/employee" element={<StaffRoute><EmployeeDashboard /></StaffRoute>} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
