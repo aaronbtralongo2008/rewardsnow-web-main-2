@@ -147,7 +147,6 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                 <h1 style={s.headline}>Grow your business<br />with loyalty.</h1>
                 <p style={s.tagline}>
                   Join the RewardsNow network and give your customers a reason to keep coming back.
-                  Setup takes under 10 minutes.
                 </p>
                 <div style={s.steps}>
                   {['Create account', 'Business details', 'Under review'].map((label, i) => (
@@ -198,7 +197,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                   <div style={s.field}>
                     <label style={s.label}>Email</label>
                     <input style={s.input} type="email" autoComplete="email"
-                           placeholder="owner@yourbusiness.com"
+                           placeholder="owner@business.com"
                            value={form.email} onChange={set(setForm, 'email')}
                            onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
                   </div>
@@ -209,7 +208,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                            onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
                   </div>
                   <div style={s.field}>
-                    <label style={s.label}>Phone number</label>
+                    <label style={s.label}>Phone</label>
                     <input style={s.input} type="tel" autoComplete="tel-national" placeholder="5551234567"
                            value={form.phoneNumber} onChange={set(setForm, 'phoneNumber')}
                            onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
@@ -217,7 +216,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                   <div style={s.field}>
                     <label style={s.label}>Password</label>
                     <input style={s.input} type="password" autoComplete="new-password"
-                           placeholder="At least 8 characters"
+                           placeholder="8+ characters"
                            value={form.password} onChange={set(setForm, 'password')}
                            onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
                   </div>
@@ -233,12 +232,12 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                   <h2 style={s.formTitle}>Business details</h2>
                   <p style={s.formSub}>Step 2 of 2</p>
                   <div style={s.field}>
-                    <label style={s.label}>Business name</label>
+                    <label style={s.label}>Business Name</label>
                     <input style={s.input} autoComplete="organization" placeholder="Joe's Coffee"
                            value={bizForm.businessName} onChange={set(setBizForm, 'businessName')} />
                   </div>
                   <div style={s.field}>
-                    <label style={s.label}>Business address</label>
+                    <label style={s.label}>Business Address</label>
                     <div style={s.addrRow}>
                       <input style={{ ...s.input, marginBottom: 0, flex: 1 }}
                              autoComplete="street-address" placeholder="123 Main St, Boca Raton FL 33431"
@@ -253,7 +252,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                     )}
                   </div>
                   <div style={s.field}>
-                    <label style={s.label}>Select your plan</label>
+                    <label style={s.label}>Select Your Plan</label>
                     <div style={s.tierList}>
                       {TIERS.map(t => (
                           <div key={t.key} style={{ ...s.tierCard, ...(tier === t.key ? s.tierCardSelected : {}) }}
@@ -320,7 +319,7 @@ const s = {
   formTitle: { color: '#0a0a0a', fontSize: '1.5rem', fontWeight: '700', margin: '0 0 6px', letterSpacing: '-0.02em' },
   formSub: { color: '#9ca3af', fontSize: '13px', margin: '0 0 28px' },
   field: { marginBottom: '16px' },
-  label: { display: 'block', color: '#374151', fontSize: '12px', fontWeight: '600', marginBottom: '5px', letterSpacing: '0.02em' },
+  label: { display: 'block', color: '#6b7280', fontSize: '11px', fontWeight: '600', marginBottom: '6px', letterSpacing: '1.5px', textTransform: 'uppercase' },
   input: { width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: '8px', fontSize: '14px', color: '#0a0a0a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: 0 },
   addrRow: { display: 'flex', gap: '8px', alignItems: 'center' },
   geocodeBtn: { padding: '10px 14px', background: '#f3f4f6', border: '1.5px solid #e5e7eb', borderRadius: '8px', color: '#374151', fontSize: '13px', fontWeight: '600', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 },
