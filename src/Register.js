@@ -64,9 +64,14 @@ function Register({ onRegister, onBack }) {
               </div>
           ) : (
               <div style={s.leftPanel}>
-                <div style={s.badge}>REWARDSNOW</div>
-                <div style={s.goldLine} />
-                <p style={s.tagline}>Join thousands earning rewards every day.</p>
+                <div style={s.orb1} />
+                <div style={s.orb2} />
+                <div style={s.orb3} />
+                <div style={s.leftContent}>
+                  <div style={s.badge}>REWARDSNOW</div>
+                  <div style={s.goldLine} />
+                  <p style={s.tagline}>Join thousands earning rewards every day.</p>
+                </div>
               </div>
           )}
 
@@ -148,28 +153,32 @@ function Register({ onRegister, onBack }) {
 }
 
 const s = {
-  container: { minHeight: '100vh', background: '#F4F6FB', fontFamily: "'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  container: { minHeight: '100vh', background: '#faf8ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   wrapper: { display: 'flex', flex: 1 },
-  mobileHeader: { background: 'linear-gradient(145deg, #152a9e 0%, #1e35b5 100%)', padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
+  mobileHeader: { background: 'linear-gradient(145deg, #08011a 0%, #1a0533 100%)', padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
   mobileHeaderBrand: { color: '#fff', fontSize: '1.4rem', fontWeight: '800' },
   mobileHeaderSub: { color: 'rgba(255,255,255,0.6)', fontSize: '13px', marginTop: '4px' },
-  leftPanel: { flex: 1, background: 'linear-gradient(145deg, #152a9e 0%, #1e35b5 50%, #172fa8 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px' },
-  badge: { display: 'inline-block', backgroundImage: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: '13px', fontWeight: '800', letterSpacing: '4px', marginBottom: '16px' },
-  goldLine: { width: '83%', height: '2px', background: GOLD, marginBottom: '28px', borderRadius: '2px' },
-  tagline: { color: '#fff', fontSize: '2.8rem', fontWeight: '800', lineHeight: 1.2, margin: '0 0 16px 0', maxWidth: '440px' },
-  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#ffffff', boxSizing: 'border-box', overflowY: 'auto' },
-  brandName: { color: '#0f172a', fontWeight: '800', margin: '0 0 6px 0' },
-  brandSub: { color: '#888', fontSize: '1rem', margin: '0 0 24px 0' },
+  leftPanel: { flex: 1, background: '#08011a', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
+  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(124, 58, 237, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  orb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
+  orb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  leftContent: { position: 'relative', zIndex: 2 },
+  badge: { display: 'inline-block', color: '#22d3ee', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  goldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
+  tagline: { color: '#fff', fontSize: '3.4rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 16px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
+  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#faf8ff', boxSizing: 'border-box', overflowY: 'auto' },
+  brandName: { color: '#0f172a', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  brandSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 24px 0' },
   row: { display: 'flex', gap: '12px' },
   half: { flex: 1, display: 'flex', flexDirection: 'column' },
-  inputLabel: { color: '#6b7280', fontSize: '11px', fontWeight: '600', marginBottom: '6px', display: 'block', letterSpacing: '1.5px', textTransform: 'uppercase' },
-  input: { padding: '12px 16px', borderRadius: '10px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  registerBtn: { padding: '14px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#ffffff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%', marginTop: '4px' },
-  backBtn: { padding: '14px', borderRadius: '10px', border: '1.5px solid #d0d0d0', background: 'transparent', color: '#555', fontSize: '14px', fontWeight: '600', cursor: 'pointer', width: '100%' },
+  inputLabel: { color: '#7c3aed', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  input: { padding: '12px 16px', borderRadius: '10px', border: '2px solid #ede8fa', background: '#fff', color: '#0f172a', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  registerBtn: { padding: '14px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)', color: '#ffffff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%', marginTop: '4px', boxShadow: '0 4px 24px rgba(124, 58, 237, 0.45)' },
+  backBtn: { padding: '14px', borderRadius: '12px', border: '2px solid #ede8fa', background: '#fff', color: '#374151', fontSize: '14px', fontWeight: '600', cursor: 'pointer', width: '100%' },
   divider: { display: 'flex', alignItems: 'center', gap: '12px', margin: '18px 0' },
-  dividerLine: { flex: 1, height: '1px', background: '#eee' },
-  dividerText: { color: '#bbb', fontSize: '13px' },
-  error: { color: '#e03434', fontSize: '13px', margin: '0 0 14px 0', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0' },
+  dividerLine: { flex: 1, height: '1px', background: '#ede8fa' },
+  dividerText: { color: '#a78bfa', fontSize: '13px' },
+  error: { color: '#dc2626', fontSize: '13px', margin: '0 0 14px 0', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0' },
 };
 
 export default Register;
