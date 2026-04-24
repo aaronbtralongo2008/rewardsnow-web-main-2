@@ -10,6 +10,8 @@ import Login from './Login';
 import AdminDashboard from './AdminDashboard';
 import BusinessOwnerDashboard from './BusinessOwnerDashboard';
 import EmployeeDashboard from './EmployeeDashboard';
+import LandingPage from './LandingPage';
+import BusinessOverview from './BusinessOverview';
 import { ForgotPassword, ResetPassword } from './AuthPages';
 
 
@@ -66,7 +68,7 @@ function App() {
 
   // Redirects unauthenticated customers to the login page
   const Protected = ({ children }) => {
-    if (!customer) return <Navigate to="/" replace />;
+    if (!customer) return <Navigate to="/signin" replace />;
     return children;
   };
 
@@ -92,9 +94,11 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Login onLogin={handleLogin} />} />
-      <Route path="/register" element={<Register onRegister={handleLogin} onBack={() => navigate('/')} />} />
-      <Route path="/business-register" element={<BusinessRegister onBack={() => navigate('/')} onSuccess={() => setRefreshKey(k => k + 1)} />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/signin" element={<Login onLogin={handleLogin} />} />
+      <Route path="/register" element={<Register onRegister={handleLogin} onBack={() => navigate('/signin')} />} />
+      <Route path="/business-overview" element={<BusinessOverview />} />
+      <Route path="/business-register" element={<BusinessRegister onBack={() => navigate('/business-overview')} onSuccess={() => setRefreshKey(k => k + 1)} />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 

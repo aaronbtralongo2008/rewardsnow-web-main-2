@@ -38,7 +38,7 @@ export function ForgotPassword() {
         <div style={s.orb2} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
           <div style={s.brand}>RewardsNow</div>
-          <button style={s.backLink} onClick={() => navigate('/')}>← Back to sign in</button>
+          <button style={s.backLink} onClick={() => navigate('/signin')}>← Back to sign in</button>
           {!sent ? (
               <>
                 <h1 style={s.title}>Reset your password</h1>
@@ -61,7 +61,7 @@ export function ForgotPassword() {
                   If an account exists for <strong>{email}</strong>, you'll receive a reset link shortly.
                   Check your spam folder if you don't see it.
                 </p>
-                <button style={s.btn} onClick={() => navigate('/')}>Back to sign in</button>
+                <button style={s.btn} onClick={() => navigate('/signin')}>Back to sign in</button>
               </div>
           )}
         </div>
@@ -130,7 +130,7 @@ export function ResetPassword() {
                 <div style={s.successIcon}>✓</div>
                 <h1 style={s.title}>Password updated</h1>
                 <p style={s.sub}>Your password has been changed. You can now sign in with your new password.</p>
-                <button style={s.btn} onClick={() => navigate('/')}>Sign in</button>
+                <button style={s.btn} onClick={() => navigate('/signin')}>Sign in</button>
               </div>
           )}
         </div>

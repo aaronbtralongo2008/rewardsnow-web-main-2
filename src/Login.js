@@ -94,8 +94,8 @@ function Login({ onLogin }) {
             <button style={styles.registerBtn} onClick={() => navigate('/register')}>
               Create an Account
             </button>
-            <button style={styles.bizRegisterBtn} onClick={() => navigate('/business-register')}>
-              Register a Business
+            <button style={styles.bizRegisterBtn} onClick={() => navigate('/business-overview')}>
+              Own a business?
             </button>
             <p style={styles.terms}>
               By signing in you agree to our{' '}
