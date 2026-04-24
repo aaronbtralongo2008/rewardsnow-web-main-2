@@ -43,10 +43,10 @@ export default function BusinessOverview() {
               { value: '4.8-5.2×', label: 'ROI reported by 90% of loyalty program owners' },
               { value: '25×', label: 'costlier to acquire new customers than retain existing' },
               { value: '$50K-$200K', label: 'average launch cost for a small business loyalty program' },
-            ].map(s => (
-              <div key={s.value} style={s.stat}>
-                <p style={s.statValue}>{s.value}</p>
-                <p style={s.statLabel}>{s.label}</p>
+            ].map(item => (
+              <div key={item.value} style={s.stat}>
+                <p style={s.statValue}>{item.value}</p>
+                <p style={s.statLabel}>{item.label}</p>
               </div>
             ))}
           </div>
@@ -61,7 +61,7 @@ export default function BusinessOverview() {
           <p style={s.body}>
             Building your own loyalty program costs $50,000–$200,000 to launch. Add software operations, marketing, and customer acquisition, and traditional programs still don't help you find new customers — they only keep existing ones.
           </p>
-          <p style={s.body}}>
+          <p style={s.body}>
             RewardsNow amplifies the advantages of rewards systems and solves what they don't address: finding new customers and the large implementation losses for small businesses.
           </p>
           <div style={{ ...s.grid, gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '14px', marginTop: '32px' }}>
