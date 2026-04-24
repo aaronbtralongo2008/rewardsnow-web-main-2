@@ -13,6 +13,8 @@ function Login({ onLogin }) {
 
   const handleLogin = async () => {
     setError('');
+    if (!email || !password) { setError('Please enter your email and password'); return; }
+    if (!email.includes('@')) { setError('Please enter a valid email address'); return; }
     setLoading(true);
     try {
       const response = await fetch(`${API}/customers/login`, {
