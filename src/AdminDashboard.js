@@ -71,6 +71,7 @@ function AdminDashboard() {
     if (!token) return;
     if (tab === 'pending') fetchPending();
     if (tab === 'businesses') fetchBusinesses();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, tab]);
 
   const handleApprove = async (id) => {

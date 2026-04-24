@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
-const BLUE = '#2563eb';
-
 export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
   const isMobile = useIsMobile();
   const [history, setHistory] = useState([]);
@@ -23,6 +21,7 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
         })
         .catch(console.error)
         .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customer.customerId, customer.token, refreshKey]);
 
   return (

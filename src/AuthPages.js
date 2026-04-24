@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
-const BLUE = '#2563eb';
-
 export function ForgotPassword() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
