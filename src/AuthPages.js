@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
-const BLUE = '#7c3aed';
+const BLUE = '#2563eb';
 
 export function ForgotPassword() {
   const navigate = useNavigate();
@@ -140,17 +140,17 @@ export function ResetPassword() {
 
 const s = {
   root: { minHeight: '100vh', background: '#08011a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(124, 58, 237, 0.5)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.5)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
   orb2: { position: 'absolute', bottom: '-80px', right: '-60px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.25)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  card: { background: '#faf8ff', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2 },
-  brand: { color: '#7c3aed', fontSize: '15px', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.01em' },
-  backLink: { background: 'none', border: 'none', color: '#a78bfa', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
+  card: { background: '#f0f7ff', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2 },
+  brand: { color: '#2563eb', fontSize: '15px', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.01em' },
+  backLink: { background: 'none', border: 'none', color: '#60a5fa', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
   title: { color: '#0f172a', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 8px', letterSpacing: '-0.03em' },
   sub: { color: '#64748b', fontSize: '14px', lineHeight: 1.6, margin: '0 0 28px' },
-  label: { display: 'block', color: '#7c3aed', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
-  input: { width: '100%', padding: '13px 16px', border: '2px solid #ede8fa', borderRadius: '10px', fontSize: '14px', color: '#0f172a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: '20px' },
+  label: { display: 'block', color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
+  input: { width: '100%', padding: '13px 16px', border: '2px solid #bfdbfe', borderRadius: '10px', fontSize: '14px', color: '#0f172a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: '20px' },
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 16px' },
-  btn: { width: '100%', padding: '14px', background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 24px rgba(124, 58, 237, 0.45)' },
+  btn: { width: '100%', padding: '14px', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
   success: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '12px' },
-  successIcon: { width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #4f46e5, #7c3aed)', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(124, 58, 237, 0.45)' },
+  successIcon: { width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
 };

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
-const ROYAL = '#7c3aed';
+const ROYAL = '#2563eb';
 
 function BusinessOwnerDashboard() {
   const isMobile = useIsMobile();
@@ -229,7 +229,7 @@ function BusinessOwnerDashboard() {
               <div style={s.sidebar}>
                 {TABS.map(({ key, label }) => (
                     <button key={key}
-                            style={{ ...s.navBtn, background: tab === key ? '#f0f4ff' : 'transparent', color: tab === key ? ROYAL : '#555', fontWeight: tab === key ? '700' : '400' }}
+                            style={{ ...s.navBtn, background: tab === key ? '#eff6ff' : 'transparent', color: tab === key ? ROYAL : '#555', fontWeight: tab === key ? '700' : '400' }}
                             onClick={() => setTab(key)}>
                       {label}
                     </button>
@@ -295,7 +295,7 @@ function BusinessOwnerDashboard() {
                         {[
                           { label: 'Points Issued Today', value: stats.pointsIssuedToday ?? 0, color: '#2e7d52', bg: '#e8f4ed' },
                           { label: 'Points Redeemed Today', value: stats.pointsRedeemedToday ?? 0, color: '#c0392b', bg: '#fdeaea' },
-                          { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: '#f0f4ff' },
+                          { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: '#eff6ff' },
                           { label: 'Total Customers', value: stats.totalCustomers ?? 0, color: '#7a5500', bg: '#fff8e1' },
                         ].map(stat => (
                             <div key={stat.label} style={{ ...s.statCard, background: stat.bg }}>
@@ -355,7 +355,7 @@ function BusinessOwnerDashboard() {
                               <div style={s.empInfo}>
                                 <p style={s.empName}>{emp.firstName} {emp.lastName}</p>
                                 <p style={s.empEmail}>{emp.email}</p>
-                                <span style={{ ...s.roleBadge, background: emp.role === 'MANAGER' ? '#f0e8ff' : '#f0f4ff', color: emp.role === 'MANAGER' ? '#6b21a8' : ROYAL }}>
+                                <span style={{ ...s.roleBadge, background: emp.role === 'MANAGER' ? '#dbeafe' : '#eff6ff', color: emp.role === 'MANAGER' ? '#6b21a8' : ROYAL }}>
                                   {emp.role}
                                 </span>
                               </div>
@@ -443,28 +443,28 @@ function BusinessOwnerDashboard() {
 
 const s = {
   loginLeft: { flex: 1, background: '#08011a', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
-  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(124, 58, 237, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
   loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
   loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
   loginLeftContent: { position: 'relative', zIndex: 2 },
-  loginBrandBadge: { color: '#22d3ee', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  loginBrandBadge: { color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
   loginGoldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
   loginHeadline: { color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
   loginDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
-  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#faf8ff' },
-  mobileLoginBrand: { color: '#7c3aed', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
-  loginPortalTag: { display: 'inline-block', background: '#ede8fa', color: '#7c3aed', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },
+  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#f0f7ff' },
+  mobileLoginBrand: { color: '#2563eb', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
+  loginPortalTag: { display: 'inline-block', background: '#bfdbfe', color: '#2563eb', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },
   loginTitle: { color: '#0f172a', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
   loginSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 36px 0' },
-  loginLabel: { color: '#7c3aed', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
-  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid #ede8fa', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(124, 58, 237, 0.45)' },
+  loginLabel: { color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid #bfdbfe', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
   loginError: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
   label: { color: '#374151', fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' },
   input: { padding: '10px 14px', borderRadius: '8px', border: '1.5px solid #e5e7eb', background: '#fff', color: '#0f172a', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   btn: { padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%' },
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
-  container: { minHeight: '100vh', background: '#faf8ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
   logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800' },
   portalBadge: { background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
@@ -483,7 +483,7 @@ const s = {
   empty: { background: '#fff', borderRadius: '16px', padding: '40px 24px', textAlign: 'center', border: '1px solid #eee', color: '#888' },
   statusCard: { background: '#fff', borderRadius: '16px', padding: '18px', border: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', gap: '12px' },
   statusLeft: { display: 'flex', alignItems: 'center', gap: '12px' },
-  bizInitial: { width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #4f46e5, #7c3aed)', color: '#fff', fontSize: '1.1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  bizInitial: { width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   statusName: { color: '#111', fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' },
   statusEmail: { color: '#888', fontSize: '12px', margin: 0 },
   pendingNote: { background: '#fff8e1', borderRadius: '14px', padding: '16px 18px', border: '1px solid #ffe082', marginBottom: '16px' },
@@ -497,13 +497,13 @@ const s = {
   statCard: { borderRadius: '14px', padding: '18px', border: '1px solid #eee' },
   statValue: { fontWeight: '800', margin: '0 0 6px 0', lineHeight: 1 },
   statLabel: { color: '#555', fontSize: '12px', fontWeight: '600', margin: 0 },
-  formCard: { background: '#f8f9ff', borderRadius: '14px', padding: '18px', border: '1.5px solid #e8ecff', marginBottom: '16px' },
+  formCard: { background: '#eff6ff', borderRadius: '14px', padding: '18px', border: '1.5px solid #e8ecff', marginBottom: '16px' },
   formTitle: { color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 14px 0' },
   formRow: { display: 'flex', gap: '12px' },
   formHalf: { flex: 1, display: 'flex', flexDirection: 'column' },
   empList: { display: 'flex', flexDirection: 'column', gap: '10px' },
   empCard: { background: '#fff', borderRadius: '14px', padding: '14px 16px', border: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '12px' },
-  empAvatar: { width: '38px', height: '38px', borderRadius: '50%', background: 'linear-gradient(135deg, #4f46e5, #7c3aed)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  empAvatar: { width: '38px', height: '38px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   empInfo: { flex: 1, minWidth: '80px' },
   empName: { color: '#111', fontSize: '13px', fontWeight: '700', margin: '0 0 2px 0' },
   empEmail: { color: '#888', fontSize: '11px', margin: '0 0 4px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
@@ -515,7 +515,7 @@ const s = {
   svcDesc: { color: '#888', fontSize: '12px', margin: '0 0 12px 0', lineHeight: 1.5 },
   svcFooter: { display: 'flex', gap: '8px', flexWrap: 'wrap' },
   earnPill: { background: '#e8f4ed', color: '#2e7d52', fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' },
-  redeemPill: { background: '#f0f4ff', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' },
+  redeemPill: { background: '#eff6ff', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' },
   editBtn: { padding: '5px 10px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
   deleteBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
 };
