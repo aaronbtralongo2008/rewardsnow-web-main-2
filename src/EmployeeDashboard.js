@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
-const ROYAL = '#2040C8';
+const ROYAL = '#7c3aed';
 
 function EmployeeDashboard() {
   const isMobile = useIsMobile();
@@ -156,19 +156,31 @@ function EmployeeDashboard() {
 
   if (!token) {
     return (
-        <div style={st.loginContainer}>
-          <div style={{ ...st.loginBox, width: isMobile ? '100%' : '400px', padding: isMobile ? '40px 24px' : '48px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxSizing: 'border-box', boxShadow: isMobile ? 'none' : '0 8px 40px rgba(0,0,0,0.1)' }}>
-            <div style={st.loginHeader}>
-              <span style={st.loginBadge}>EMPLOYEE PORTAL</span>
-              <h1 style={st.loginTitle}>Staff Login</h1>
-              <p style={st.loginSub}>Sign in to issue customer points</p>
-            </div>
-            <label style={st.label}>Email</label>
-            <input style={st.input} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-            <label style={st.label}>Password</label>
-            <input style={st.input} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-            {error && <p style={st.error}>{error}</p>}
-            <button style={{ ...st.primaryBtn, opacity: loading ? 0.7 : 1 }} onClick={handleLogin} disabled={loading}>
+        <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
+          {!isMobile && (
+              <div style={st.loginLeft}>
+                <div style={st.loginOrb1} />
+                <div style={st.loginOrb2} />
+                <div style={st.loginOrb3} />
+                <div style={st.loginLeftContent}>
+                  <div style={st.loginBrandBadge}>REWARDSNOW</div>
+                  <div style={st.loginGoldLine} />
+                  <h1 style={st.loginHeadline}>Built for<br />your team.</h1>
+                  <p style={st.loginDesc}>Look up customers and manage reward transactions in seconds.</p>
+                </div>
+              </div>
+          )}
+          <div style={{ ...st.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
+            {isMobile && <div style={st.mobileLoginBrand}>RewardsNow</div>}
+            <span style={st.loginPortalTag}>EMPLOYEE PORTAL</span>
+            <h2 style={st.loginTitle}>Staff Login</h2>
+            <p style={st.loginSub}>Sign in to issue customer points</p>
+            <label style={st.loginLabel}>Email</label>
+            <input style={st.loginInput} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            <label style={st.loginLabel}>Password</label>
+            <input style={st.loginInput} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            {error && <p style={st.loginError}>{error}</p>}
+            <button style={{ ...st.loginBtn, opacity: loading ? 0.7 : 1 }} onClick={handleLogin} disabled={loading}>
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </div>
@@ -375,17 +387,29 @@ function EmployeeDashboard() {
 }
 
 const st = {
-  loginContainer: { minHeight: '100vh', background: '#F4F6FB', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Segoe UI', system-ui, sans-serif" },
-  loginBox: { background: '#fff' },
-  loginHeader: { textAlign: 'center', marginBottom: '32px' },
-  loginBadge: { background: '#2e7d52', color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '3px', padding: '4px 12px', borderRadius: '20px' },
-  loginTitle: { color: ROYAL, fontSize: '1.8rem', fontWeight: '800', margin: '12px 0 4px 0' },
-  loginSub: { color: '#888', fontSize: '13px', margin: 0 },
-  label: { color: '#444', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' },
-  input: { padding: '13px 16px', borderRadius: '10px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  primaryBtn: { padding: '14px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%' },
-  error: { color: '#e03434', fontSize: '13px', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0', margin: '0 0 14px 0' },
-  container: { minHeight: '100vh', background: '#F4F6FB', fontFamily: "'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  loginLeft: { flex: 1, background: '#08011a', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
+  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(124, 58, 237, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.28)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
+  loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.22)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  loginLeftContent: { position: 'relative', zIndex: 2 },
+  loginBrandBadge: { color: '#22d3ee', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  loginGoldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
+  loginHeadline: { color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
+  loginDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
+  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#faf8ff' },
+  mobileLoginBrand: { color: '#7c3aed', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
+  loginPortalTag: { display: 'inline-block', background: '#ede8fa', color: '#7c3aed', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },
+  loginTitle: { color: '#0f172a', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  loginSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 36px 0' },
+  loginLabel: { color: '#7c3aed', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid #ede8fa', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(124, 58, 237, 0.45)' },
+  loginError: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
+  label: { color: '#374151', fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' },
+  input: { padding: '10px 14px', borderRadius: '8px', border: '1.5px solid #e5e7eb', background: '#fff', color: '#0f172a', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  primaryBtn: { padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%' },
+  error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
+  container: { minHeight: '100vh', background: '#faf8ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
   logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800' },
   empBadge: { background: '#e8f4ed', color: '#2e7d52', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
@@ -404,7 +428,7 @@ const st = {
   lookupHint: { color: '#aaa', fontSize: '12px', marginTop: '12px', lineHeight: 1.5 },
   inlineError: { color: '#e03434', fontSize: '13px', marginTop: '8px', marginBottom: 0 },
   customerBanner: { background: '#fff', borderRadius: '14px', padding: '14px 16px', border: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' },
-  customerAvatar: { width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #152a9e, #1e35b5)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  customerAvatar: { width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #4f46e5, #7c3aed)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   customerInfo: { flex: 1, minWidth: '100px' },
   customerName: { color: '#111', fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' },
   customerBalance: { color: '#888', fontSize: '12px', margin: 0 },
