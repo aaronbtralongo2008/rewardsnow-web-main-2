@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
-const BLUE = '#2040C8';
+const BLUE = '#7c3aed';
 
 export function ForgotPassword() {
   const navigate = useNavigate();
@@ -34,9 +34,11 @@ export function ForgotPassword() {
 
   return (
       <div style={s.root}>
-        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '400px', borderRadius: isMobile ? '0' : '16px', border: isMobile ? 'none' : '1px solid #e5e7eb', minHeight: isMobile ? '100vh' : 'auto' }}>
-          <button style={s.backLink} onClick={() => navigate('/')}>← Back to sign in</button>
+        <div style={s.orb1} />
+        <div style={s.orb2} />
+        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
           <div style={s.brand}>RewardsNow</div>
+          <button style={s.backLink} onClick={() => navigate('/')}>← Back to sign in</button>
           {!sent ? (
               <>
                 <h1 style={s.title}>Reset your password</h1>
@@ -101,7 +103,9 @@ export function ResetPassword() {
 
   return (
       <div style={s.root}>
-        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '400px', borderRadius: isMobile ? '0' : '16px', border: isMobile ? 'none' : '1px solid #e5e7eb', minHeight: isMobile ? '100vh' : 'auto' }}>
+        <div style={s.orb1} />
+        <div style={s.orb2} />
+        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
           <div style={s.brand}>RewardsNow</div>
           {!done ? (
               <>
@@ -135,16 +139,18 @@ export function ResetPassword() {
 }
 
 const s = {
-  root: { minHeight: '100vh', background: '#f9fafb', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '0' },
-  card: { background: '#fff', width: '100%', boxSizing: 'border-box' },
-  backLink: { background: 'none', border: 'none', color: '#9ca3af', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
-  brand: { color: '#0a0a0a', fontSize: '14px', fontWeight: '700', marginBottom: '28px' },
-  title: { color: '#0a0a0a', fontSize: '1.4rem', fontWeight: '700', margin: '0 0 8px', letterSpacing: '-0.02em' },
-  sub: { color: '#6b7280', fontSize: '14px', lineHeight: 1.6, margin: '0 0 24px' },
-  label: { display: 'block', color: '#374151', fontSize: '12px', fontWeight: '600', marginBottom: '5px', letterSpacing: '0.02em' },
-  input: { width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: '8px', fontSize: '14px', color: '#0a0a0a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: '14px' },
-  error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 14px' },
-  btn: { width: '100%', padding: '11px', background: BLUE, color: '#fff', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' },
+  root: { minHeight: '100vh', background: '#08011a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative', overflow: 'hidden' },
+  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(124, 58, 237, 0.5)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  orb2: { position: 'absolute', bottom: '-80px', right: '-60px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.25)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
+  card: { background: '#faf8ff', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2 },
+  brand: { color: '#7c3aed', fontSize: '15px', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.01em' },
+  backLink: { background: 'none', border: 'none', color: '#a78bfa', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
+  title: { color: '#0f172a', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 8px', letterSpacing: '-0.03em' },
+  sub: { color: '#64748b', fontSize: '14px', lineHeight: 1.6, margin: '0 0 28px' },
+  label: { display: 'block', color: '#7c3aed', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
+  input: { width: '100%', padding: '13px 16px', border: '2px solid #ede8fa', borderRadius: '10px', fontSize: '14px', color: '#0f172a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: '20px' },
+  error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 16px' },
+  btn: { width: '100%', padding: '14px', background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 24px rgba(124, 58, 237, 0.45)' },
   success: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '12px' },
-  successIcon: { width: '52px', height: '52px', borderRadius: '50%', background: '#f0fdf4', color: '#16a34a', fontSize: '1.4rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  successIcon: { width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #4f46e5, #7c3aed)', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(124, 58, 237, 0.45)' },
 };
