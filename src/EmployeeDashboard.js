@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
@@ -6,6 +7,7 @@ const ROYAL = '#2563eb';
 
 function EmployeeDashboard() {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const [employee, setEmployee] = useState(null);
   const [email, setEmail] = useState('');
@@ -192,7 +194,7 @@ function EmployeeDashboard() {
       <div style={st.container}>
         <div style={st.topBar}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={st.logo}>RewardsNow</span>
+            <button style={st.logo} onClick={() => navigate('/')}>RewardsNow</button>
             <span style={st.empBadge}>{employee?.role}</span>
             {isUniquePoints && !isMobile && <span style={st.uniqueBadge}>Custom Points</span>}
           </div>
@@ -411,7 +413,7 @@ const st = {
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
   container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
-  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800' },
+  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
   empBadge: { background: '#e8f4ed', color: '#2e7d52', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
   uniqueBadge: { background: '#f0e8ff', color: '#6b21a8', fontSize: '10px', fontWeight: '700', letterSpacing: '1px', padding: '3px 10px', borderRadius: '20px' },
   empName: { color: '#555', fontSize: '13px', fontWeight: '600' },

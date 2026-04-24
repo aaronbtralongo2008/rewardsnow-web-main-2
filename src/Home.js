@@ -27,8 +27,11 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
 
   return (
       <div style={s.root}>
+        <div style={s.orb1} />
+        <div style={s.orb2} />
+
         <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
-          <span style={s.navBrand}>RewardsNow</span>
+          <button style={s.navBrand} onClick={() => onNavigate('/home')}>RewardsNow</button>
           <div style={s.navRight}>
             <button style={s.navLink} onClick={() => onNavigate('/businesses')}>Partners</button>
             <button style={s.navLink} onClick={() => onNavigate('/map')}>Map</button>
@@ -39,25 +42,21 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
         <div style={{ ...s.body, padding: isMobile ? '20px 16px' : '40px 24px' }}>
           {/* Balance hero */}
           <div style={{ ...s.hero, padding: isMobile ? '28px 24px' : '40px 44px' }}>
-            <div style={s.heroOrb1} />
-            <div style={s.heroOrb2} />
-            <div style={s.heroInner}>
-              <p style={s.heroGreeting}>Good to see you, {customer.username}.</p>
-              <div style={s.balanceRow}>
-                <span style={{ ...s.balanceNum, fontSize: isMobile ? '3rem' : '4rem' }}>
-                  {loading ? '—' : balance.toLocaleString()}
-                </span>
-                <span style={s.balancePts}>pts</span>
-              </div>
-              <p style={s.balanceSub}>Available to spend at any partner</p>
-              <div style={{ ...s.heroActions, flexWrap: 'wrap' }}>
-                <button style={{ ...s.actionPrimary, flex: isMobile ? '1' : 'none' }} onClick={() => onNavigate('/businesses')}>
-                  Browse partners
-                </button>
-                <button style={{ ...s.actionSecondary, flex: isMobile ? '1' : 'none' }} onClick={() => onNavigate('/map')}>
-                  View map
-                </button>
-              </div>
+            <p style={s.heroGreeting}>Good to see you, {customer.username}.</p>
+            <div style={s.balanceRow}>
+              <span style={{ ...s.balanceNum, fontSize: isMobile ? '3rem' : '4rem' }}>
+                {loading ? '—' : balance.toLocaleString()}
+              </span>
+              <span style={s.balancePts}>pts</span>
+            </div>
+            <p style={s.balanceSub}>Available to spend at any partner</p>
+            <div style={{ ...s.heroActions, flexWrap: 'wrap' }}>
+              <button style={{ ...s.actionPrimary, flex: isMobile ? '1' : 'none' }} onClick={() => onNavigate('/businesses')}>
+                Browse partners
+              </button>
+              <button style={{ ...s.actionSecondary, flex: isMobile ? '1' : 'none' }} onClick={() => onNavigate('/map')}>
+                View map
+              </button>
             </div>
           </div>
 
@@ -104,34 +103,33 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
 }
 
 const s = {
-  root: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" },
-  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#fff', borderBottom: '1px solid #bfdbfe', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 12px rgba(37,99,235,0.06)' },
-  navBrand: { color: BLUE, fontSize: '15px', fontWeight: '800', letterSpacing: '-0.01em' },
+  root: { minHeight: '100vh', background: 'linear-gradient(160deg, #0f172a 0%, #1e3a8a 100%)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", position: 'relative', overflow: 'hidden' },
+  orb1: { position: 'fixed', top: '-80px', right: '10%', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.3)', filter: 'blur(80px)', zIndex: 0, pointerEvents: 'none' },
+  orb2: { position: 'fixed', bottom: '-60px', left: '15%', width: '350px', height: '350px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.15)', filter: 'blur(70px)', zIndex: 0, pointerEvents: 'none' },
+  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: 'rgba(15,23,42,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100 },
+  navBrand: { color: '#f59e0b', fontSize: '15px', fontWeight: '800', letterSpacing: '-0.01em', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
   navRight: { display: 'flex', alignItems: 'center', gap: '4px' },
-  navLink: { background: 'none', border: 'none', color: '#475569', fontSize: '14px', fontWeight: '500', cursor: 'pointer', padding: '6px 8px', borderRadius: '6px' },
-  navLogout: { background: 'none', border: '1px solid #bfdbfe', color: '#374151', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px' },
+  navLink: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontWeight: '500', cursor: 'pointer', padding: '6px 8px', borderRadius: '6px', fontFamily: 'inherit' },
+  navLogout: { background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px', fontFamily: 'inherit' },
   body: { maxWidth: '720px', margin: '0 auto', boxSizing: 'border-box' },
-  hero: { background: 'linear-gradient(145deg, #0f172a 0%, #1e3a8a 60%, #1e40af 100%)', borderRadius: '20px', marginBottom: '32px', position: 'relative', overflow: 'hidden' },
-  heroOrb1: { position: 'absolute', top: '-60px', right: '-40px', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.4)', filter: 'blur(70px)', pointerEvents: 'none' },
-  heroOrb2: { position: 'absolute', bottom: '-40px', left: '20%', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.18)', filter: 'blur(60px)', pointerEvents: 'none' },
-  heroInner: { position: 'relative', zIndex: 1 },
-  heroGreeting: { color: 'rgba(255,255,255,0.6)', fontSize: '14px', margin: '0 0 12px', fontWeight: '500' },
-  balanceRow: { display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '6px' },
-  balanceNum: { color: '#fff', fontWeight: '800', lineHeight: 1, letterSpacing: '-0.04em' },
-  balancePts: { color: '#f59e0b', fontSize: '18px', fontWeight: '700' },
-  balanceSub: { color: 'rgba(255,255,255,0.45)', fontSize: '13px', margin: '0 0 28px' },
+  hero: { background: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', marginBottom: '32px', boxShadow: '0 8px 40px rgba(0,0,0,0.3)' },
+  heroGreeting: { color: '#64748b', fontSize: '14px', margin: '0 0 12px', fontWeight: '500' },
+  balanceRow: { display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' },
+  balanceNum: { color: '#0f172a', fontWeight: '800', lineHeight: 1, letterSpacing: '-0.04em' },
+  balancePts: { color: '#f59e0b', fontSize: '16px', fontWeight: '600' },
+  balanceSub: { color: '#9ca3af', fontSize: '13px', margin: '0 0 28px' },
   heroActions: { display: 'flex', gap: '10px' },
-  actionPrimary: { padding: '11px 22px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', color: '#0f172a', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 16px rgba(245,158,11,0.4)' },
-  actionSecondary: { padding: '11px 22px', background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1.5px solid rgba(255,255,255,0.2)', borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', backdropFilter: 'blur(4px)' },
+  actionPrimary: { padding: '11px 22px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', color: '#0f172a', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 16px rgba(245,158,11,0.4)', fontFamily: 'inherit' },
+  actionSecondary: { padding: '11px 22px', background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1.5px solid rgba(255,255,255,0.2)', borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit', backdropFilter: 'blur(4px)' },
   section: {},
-  sectionTitle: { color: '#0f172a', fontSize: '15px', fontWeight: '700', margin: '0 0 16px', letterSpacing: '-0.01em' },
+  sectionTitle: { color: '#fff', fontSize: '15px', fontWeight: '700', margin: '0 0 16px', letterSpacing: '-0.01em' },
   skeletons: { display: 'flex', flexDirection: 'column', gap: '8px' },
-  skeleton: { height: '64px', borderRadius: '10px', background: 'linear-gradient(90deg, #dbeafe 25%, #bfdbfe 50%, #dbeafe 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
-  empty: { background: '#fff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '40px 24px', textAlign: 'center' },
-  emptyTitle: { color: '#374151', fontSize: '15px', fontWeight: '600', margin: '0 0 8px' },
-  emptySub: { color: '#9ca3af', fontSize: '13px', lineHeight: 1.6, margin: 0, maxWidth: '340px', display: 'inline-block' },
+  skeleton: { height: '64px', borderRadius: '10px', background: 'linear-gradient(90deg, rgba(255,255,255,0.07) 25%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.07) 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
+  empty: { background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '40px 24px', textAlign: 'center' },
+  emptyTitle: { color: '#fff', fontSize: '15px', fontWeight: '600', margin: '0 0 8px' },
+  emptySub: { color: 'rgba(255,255,255,0.5)', fontSize: '13px', lineHeight: 1.6, margin: 0, maxWidth: '340px', display: 'inline-block' },
   txList: { display: 'flex', flexDirection: 'column', gap: '2px' },
-  tx: { display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: '#fff', borderRadius: '10px', border: '1px solid #bfdbfe' },
+  tx: { display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: '#fff', borderRadius: '10px', border: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' },
   txDot: { width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   txMeta: { flex: 1, minWidth: 0 },
   txDesc: { color: '#111', fontSize: '14px', fontWeight: '500', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },

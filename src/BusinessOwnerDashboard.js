@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
@@ -6,6 +7,7 @@ const ROYAL = '#2563eb';
 
 function BusinessOwnerDashboard() {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const [account, setAccount] = useState(null);
   const [email, setEmail] = useState('');
@@ -204,7 +206,7 @@ function BusinessOwnerDashboard() {
       <div style={s.container}>
         <div style={s.topBar}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={s.logo}>RewardsNow</span>
+            <button style={s.logo} onClick={() => navigate('/')}>RewardsNow</button>
             {!isMobile && <span style={s.portalBadge}>BUSINESS</span>}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -466,7 +468,7 @@ const s = {
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
   container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
-  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800' },
+  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
   portalBadge: { background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
   logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
   userName: { color: '#555', fontSize: '13px', fontWeight: '600' },
