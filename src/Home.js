@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
-const BLUE = '#2040C8';
+const BLUE = '#2563eb';
 
 export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
   const isMobile = useIsMobile();
@@ -38,13 +38,15 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
 
         <div style={{ ...s.body, padding: isMobile ? '20px 16px' : '40px 24px' }}>
           {/* Balance hero */}
-          <div style={{ ...s.hero, padding: isMobile ? '24px' : '36px' }}>
-            <div style={s.heroLeft}>
+          <div style={{ ...s.hero, padding: isMobile ? '28px 24px' : '40px 44px' }}>
+            <div style={s.heroOrb1} />
+            <div style={s.heroOrb2} />
+            <div style={s.heroInner}>
               <p style={s.heroGreeting}>Good to see you, {customer.username}.</p>
               <div style={s.balanceRow}>
-              <span style={{ ...s.balanceNum, fontSize: isMobile ? '2.6rem' : '3.5rem' }}>
-                {loading ? '—' : balance.toLocaleString()}
-              </span>
+                <span style={{ ...s.balanceNum, fontSize: isMobile ? '3rem' : '4rem' }}>
+                  {loading ? '—' : balance.toLocaleString()}
+                </span>
                 <span style={s.balancePts}>pts</span>
               </div>
               <p style={s.balanceSub}>Available to spend at any partner</p>
@@ -76,9 +78,9 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
                   {history.map(tx => (
                       <div key={tx.id} style={s.tx}>
                         <div style={{ ...s.txDot, background: tx.rnTransacted > 0 ? '#dcfce7' : '#fee2e2' }}>
-                    <span style={{ color: tx.rnTransacted > 0 ? '#16a34a' : '#dc2626', fontSize: '14px', fontWeight: '700' }}>
-                      {tx.rnTransacted > 0 ? '+' : '−'}
-                    </span>
+                          <span style={{ color: tx.rnTransacted > 0 ? '#16a34a' : '#dc2626', fontSize: '14px', fontWeight: '700' }}>
+                            {tx.rnTransacted > 0 ? '+' : '−'}
+                          </span>
                         </div>
                         <div style={s.txMeta}>
                           <p style={s.txDesc}>{tx.description}</p>
@@ -89,8 +91,8 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
                           </p>
                         </div>
                         <span style={{ ...s.txAmt, color: tx.rnTransacted > 0 ? '#16a34a' : '#dc2626' }}>
-                    {tx.rnTransacted > 0 ? '+' : ''}{tx.rnTransacted} pts
-                  </span>
+                          {tx.rnTransacted > 0 ? '+' : ''}{tx.rnTransacted} pts
+                        </span>
                       </div>
                   ))}
                 </div>
@@ -102,32 +104,34 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
 }
 
 const s = {
-  root: { minHeight: '100vh', background: '#f9fafb', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" },
-  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#fff', borderBottom: '1px solid #f0f0f0', position: 'sticky', top: 0, zIndex: 100 },
-  navBrand: { color: '#0a0a0a', fontSize: '15px', fontWeight: '700' },
+  root: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" },
+  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#fff', borderBottom: '1px solid #bfdbfe', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 12px rgba(37,99,235,0.06)' },
+  navBrand: { color: BLUE, fontSize: '15px', fontWeight: '800', letterSpacing: '-0.01em' },
   navRight: { display: 'flex', alignItems: 'center', gap: '4px' },
-  navLink: { background: 'none', border: 'none', color: '#6b7280', fontSize: '14px', fontWeight: '500', cursor: 'pointer', padding: '6px 8px', borderRadius: '6px' },
-  navLogout: { background: 'none', border: '1px solid #e5e7eb', color: '#374151', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px' },
+  navLink: { background: 'none', border: 'none', color: '#475569', fontSize: '14px', fontWeight: '500', cursor: 'pointer', padding: '6px 8px', borderRadius: '6px' },
+  navLogout: { background: 'none', border: '1px solid #bfdbfe', color: '#374151', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px' },
   body: { maxWidth: '720px', margin: '0 auto', boxSizing: 'border-box' },
-  hero: { background: '#fff', border: '1px solid #e5e7eb', borderRadius: '16px', marginBottom: '32px' },
-  heroLeft: {},
-  heroGreeting: { color: '#6b7280', fontSize: '14px', margin: '0 0 12px', fontWeight: '500' },
-  balanceRow: { display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' },
-  balanceNum: { color: '#0a0a0a', fontWeight: '800', lineHeight: 1, letterSpacing: '-0.04em' },
-  balancePts: { color: '#9ca3af', fontSize: '16px', fontWeight: '600' },
-  balanceSub: { color: '#9ca3af', fontSize: '13px', margin: '0 0 28px' },
+  hero: { background: 'linear-gradient(145deg, #0f172a 0%, #1e3a8a 60%, #1e40af 100%)', borderRadius: '20px', marginBottom: '32px', position: 'relative', overflow: 'hidden' },
+  heroOrb1: { position: 'absolute', top: '-60px', right: '-40px', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.4)', filter: 'blur(70px)', pointerEvents: 'none' },
+  heroOrb2: { position: 'absolute', bottom: '-40px', left: '20%', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.18)', filter: 'blur(60px)', pointerEvents: 'none' },
+  heroInner: { position: 'relative', zIndex: 1 },
+  heroGreeting: { color: 'rgba(255,255,255,0.6)', fontSize: '14px', margin: '0 0 12px', fontWeight: '500' },
+  balanceRow: { display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '6px' },
+  balanceNum: { color: '#fff', fontWeight: '800', lineHeight: 1, letterSpacing: '-0.04em' },
+  balancePts: { color: '#f59e0b', fontSize: '18px', fontWeight: '700' },
+  balanceSub: { color: 'rgba(255,255,255,0.45)', fontSize: '13px', margin: '0 0 28px' },
   heroActions: { display: 'flex', gap: '10px' },
-  actionPrimary: { padding: '9px 20px', background: BLUE, color: '#fff', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' },
-  actionSecondary: { padding: '9px 20px', background: 'transparent', color: '#374151', border: '1px solid #e5e7eb', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' },
+  actionPrimary: { padding: '11px 22px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', color: '#0f172a', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 16px rgba(245,158,11,0.4)' },
+  actionSecondary: { padding: '11px 22px', background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1.5px solid rgba(255,255,255,0.2)', borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', backdropFilter: 'blur(4px)' },
   section: {},
-  sectionTitle: { color: '#0a0a0a', fontSize: '15px', fontWeight: '700', margin: '0 0 16px', letterSpacing: '-0.01em' },
+  sectionTitle: { color: '#0f172a', fontSize: '15px', fontWeight: '700', margin: '0 0 16px', letterSpacing: '-0.01em' },
   skeletons: { display: 'flex', flexDirection: 'column', gap: '8px' },
-  skeleton: { height: '64px', borderRadius: '10px', background: 'linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
-  empty: { background: '#fff', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '40px 24px', textAlign: 'center' },
+  skeleton: { height: '64px', borderRadius: '10px', background: 'linear-gradient(90deg, #dbeafe 25%, #bfdbfe 50%, #dbeafe 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
+  empty: { background: '#fff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '40px 24px', textAlign: 'center' },
   emptyTitle: { color: '#374151', fontSize: '15px', fontWeight: '600', margin: '0 0 8px' },
   emptySub: { color: '#9ca3af', fontSize: '13px', lineHeight: 1.6, margin: 0, maxWidth: '340px', display: 'inline-block' },
   txList: { display: 'flex', flexDirection: 'column', gap: '2px' },
-  tx: { display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: '#fff', borderRadius: '10px', border: '1px solid #f0f0f0' },
+  tx: { display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: '#fff', borderRadius: '10px', border: '1px solid #bfdbfe' },
   txDot: { width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   txMeta: { flex: 1, minWidth: 0 },
   txDesc: { color: '#111', fontSize: '14px', fontWeight: '500', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
