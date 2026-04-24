@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
-const GOLD = 'linear-gradient(135deg, #C9A84C 0%, #E8D48B 40%, #C9A84C 60%, #A67C2E 100%)';
-const ROYAL = '#2040C8';
-
 function Register({ onRegister, onBack }) {
   const isMobile = useIsMobile();
   const [form, setForm] = useState({

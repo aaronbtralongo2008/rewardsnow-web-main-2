@@ -85,12 +85,12 @@ function BusinessOwnerDashboard() {
     setLoading(false);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!token || !account) return;
     if (tab === 'employees') fetchEmployees();
     if (tab === 'services') fetchServices();
     if (tab === 'stats') fetchStats();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, account, tab]);
 
   const handleAddEmployee = async () => {
