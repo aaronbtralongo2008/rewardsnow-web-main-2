@@ -22,7 +22,7 @@ export default function LandingPage() {
       <section style={{ ...s.hero, padding: isMobile ? '72px 24px 56px' : '120px 80px 80px' }}>
         <p style={s.eyebrow}>REWARDS, REIMAGINED</p>
         <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.8rem' : '4.6rem' }}>
-          Rewards you can use.<br />Now at many business.
+          Rewards you can use,<br />Now at many business.
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
