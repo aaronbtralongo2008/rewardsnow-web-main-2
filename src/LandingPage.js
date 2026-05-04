@@ -22,11 +22,11 @@ export default function LandingPage() {
       <section style={{ ...s.hero, padding: isMobile ? '72px 24px 56px' : '120px 80px 80px' }}>
         <p style={s.eyebrow}>REWARDS, REIMAGINED</p>
         <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.8rem' : '4.6rem' }}>
-          One card.<br />Every business.
+          Rewards you can use.<br />Now at many business.
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
-          Earn and spend rewards points across a whole network of local businesses — all from one app.
+          Earn and spend rewards points across a whole network of businesses all on one app.
         </p>
         <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px' }}>
           <button style={s.ctaPrimary} onClick={() => navigate('/register')}>Create free account</button>
