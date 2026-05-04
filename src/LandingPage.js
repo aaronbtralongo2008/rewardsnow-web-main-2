@@ -11,7 +11,7 @@ export default function LandingPage() {
       <div style={s.orb2} />
       <div style={s.orb3} />
 
-      <nav style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
+      <nav style={{ ...s.nav, padding: isMobile ? '0 0px' : '0 0px' }}>
         <span style={s.brand}>RewardsNow</span>
         <div style={s.navRight}>
           <button style={s.navBtn} onClick={() => navigate('/signin')}>Sign in</button>
