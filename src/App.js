@@ -16,6 +16,24 @@ import { ForgotPassword, ResetPassword } from './AuthPages';
 
 
 function App() {
+  useEffect(() => {
+    // Remove all default margins and padding
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.documentElement.style.margin = '0';
+    document.documentElement.style.padding = '0';
+    
+    // Optional: Remove default browser styles completely
+    document.body.style.boxSizing = 'border-box';
+    document.documentElement.style.boxSizing = 'border-box';
+  }, []);
+
+  return (
+    <div className="app">
+      {/* Your content */}
+    </div>
+  );
+}
   const [customer, setCustomer] = useState(() => {
     try {
       const saved = sessionStorage.getItem('rn_customer');
