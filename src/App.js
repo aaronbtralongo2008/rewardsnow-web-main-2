@@ -28,12 +28,6 @@ function App() {
     document.documentElement.style.boxSizing = 'border-box';
   }, []);
 
-  return (
-    <div className="app">
-      {/* Your content */}
-    </div>
-  );
-}
   const [customer, setCustomer] = useState(() => {
     try {
       const saved = sessionStorage.getItem('rn_customer');
