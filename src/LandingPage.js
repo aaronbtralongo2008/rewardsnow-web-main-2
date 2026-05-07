@@ -26,7 +26,7 @@ export default function LandingPage() {
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
-          Earn and spend rewards points across a whole network of businesses all on one app.
+          Download the FREE RewardsNowtm app today and start earning points for your everyday spending.
         </p>
         <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px' }}>
           <button style={s.ctaPrimary} onClick={() => navigate('/register')}>Create free account</button>
@@ -41,13 +41,13 @@ export default function LandingPage() {
           <h2 style={{ ...s.h2, fontSize: isMobile ? '2rem' : '2.6rem' }}>What is RewardsNow?</h2>
           <div style={s.goldLine} />
           <p style={s.body}>
-            RewardsNow is a company that runs software where rewards points are standardized among a large group of different companies. For example, someone could use RewardsNow points to get discounts at Nordstrom or at Dunkin — all from the same app. RewardsNow is also willing to, for a bigger contract, become a long-term partner of a company in order to set up their own rewards system without needing to run their own software operations.
+            Your points are redeemable at ANY other RewardsNowtm participating business!
           </p>
           <p style={s.body}>
-            RewardsNow seeks to bring convenience to both the customer and the companies they interact with. Customers will be given a map of RewardsNow partners near them, alongside the ability to scroll a list of RewardsNow partners, where companies can pay RewardsNow a larger sum of money to be recommended to users more often.
+            You buy a slice at your favorite pizzeria >>>get RewardsNowtm points. Want ice cream later >>>use RewardsNowtm points for your cone at the local creamery.
           </p>
           <p style={s.body}>
-            RewardsNow's structure brings a business model that creates a large small business network, where customers are not earned in isolation by each company. This will positively affect every RewardsNow partner in the long term, as other customers will be given exposure to them more accessibly alongside cutting the cost of finding new customers.
+            Not sure which businesses participate – No problem. There’s a directory on the app!
           </p>
         </div>
       </section>
