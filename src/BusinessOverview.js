@@ -20,11 +20,11 @@ export default function BusinessOverview() {
       <section style={{ ...s.hero, padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
         <p style={s.eyebrow}>FOR BUSINESS PARTNERS</p>
         <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
-          Loyalty programs work.<br />RewardsNow makes them affordable.
+          RewardsNow - A profit strategy for customer acquisition and retention
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: '540px' }}>
-          Research proves it: businesses with loyalty programs outperform the rest. The problem has always been cost and complexity. RewardsNow solves both.
+          RewardsNowtm is YOUR business’s answer to big competitor advertising budgets and how to stop them from poaching your customers
         </p>
         <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
       </section>
