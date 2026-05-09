@@ -3,6 +3,7 @@ import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
 const BLUE = '#2563eb';
+const FONT = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 
 const TIERS = [
   {
@@ -35,6 +36,18 @@ const TIERS = [
   },
 ];
 
+const STEP_LABELS = ['Create account', 'Business details', 'Payment', 'Under review'];
+
+function formatCardNumber(val) {
+  return val.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+}
+
+function formatExpiry(val) {
+  const digits = val.replace(/\D/g, '').slice(0, 4);
+  if (digits.length >= 3) return digits.slice(0, 2) + '/' + digits.slice(2);
+  return digits;
+}
+
 export default function BusinessRegister({ onBack, onSuccess }) {
   const isMobile = useIsMobile();
   const [step, setStep] = useState(1);
@@ -42,6 +55,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
   const [form, setForm] = useState({ email: '', phoneNumber: '', username: '', password: '' });
   const [bizForm, setBizForm] = useState({ businessName: '', address: '', latitude: '', longitude: '' });
   const [tier, setTier] = useState('standard');
+  const [cardForm, setCardForm] = useState({ cardNumber: '', cardName: '', expiry: '', cvv: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [geocoding, setGeocoding] = useState(false);
@@ -128,13 +142,32 @@ export default function BusinessRegister({ onBack, onSuccess }) {
       });
       const data = await res.json();
       if (data.error) { setError(data.error); }
-      else { setStep(3); onSuccess?.(); }
+      else { setStep(3); }
     } catch {
       setError('Could not connect. Try again.');
     } finally {
       setLoading(false);
     }
   };
+
+  const handlePayment = () => {
+    setError('');
+    const { cardNumber, cardName, expiry, cvv } = cardForm;
+    const digits = cardNumber.replace(/\s/g, '');
+    if (!cardName.trim()) { setError('Cardholder name is required'); return; }
+    if (digits.length !== 16) { setError('Enter a valid 16-digit card number'); return; }
+    if (!/^\d{2}\/\d{2}$/.test(expiry)) { setError('Enter expiry as MM/YY'); return; }
+    if (cvv.length < 3) { setError('Enter a valid CVV'); return; }
+    setLoading(true);
+    // Simulate payment processing delay
+    setTimeout(() => {
+      setLoading(false);
+      setStep(4);
+      onSuccess?.();
+    }, 1200);
+  };
+
+  const selectedTier = TIERS.find(t => t.key === tier);
 
   return (
       <div style={s.root}>
@@ -152,7 +185,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                   Join the RewardsNow network and give your customers a reason to keep coming back.
                 </p>
                 <div style={s.steps}>
-                  {['Create account', 'Business details', 'Under review'].map((label, i) => (
+                  {STEP_LABELS.map((label, i) => (
                       <div key={i} style={s.stepRow}>
                         <div style={{
                           ...s.stepCircle,
@@ -179,10 +212,10 @@ export default function BusinessRegister({ onBack, onSuccess }) {
           {/* Mobile top bar */}
           {isMobile && (
               <div style={s.mobileTopBar}>
-                <button style={s.mobileBack} onClick={step > 1 ? () => setStep(s => s - 1) : onBack}>←</button>
+                <button style={s.mobileBack} onClick={step > 1 ? () => setStep(st => st - 1) : onBack}>←</button>
                 <span style={s.mobileBrand}>RewardsNow</span>
                 <div style={s.mobileStepDots}>
-                  {[1, 2, 3].map(i => (
+                  {[1, 2, 3, 4].map(i => (
                       <div key={i} style={{
                         ...s.stepDot,
                         background: step >= i ? BLUE : '#e0e0e0',
@@ -193,10 +226,12 @@ export default function BusinessRegister({ onBack, onSuccess }) {
           )}
 
           <div style={{ ...s.form, padding: isMobile ? '28px 24px 48px' : '0' }}>
+
+            {/* ── Step 1: Account ── */}
             {step === 1 && (
                 <>
                   <h2 style={s.formTitle}>Create your account</h2>
-                  <p style={s.formSub}>Step 1 of 2</p>
+                  <p style={s.formSub}>Step 1 of 3</p>
                   <div style={s.field}>
                     <label style={s.label}>Email</label>
                     <input style={s.input} type="email" autoComplete="email"
@@ -230,10 +265,11 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                 </>
             )}
 
+            {/* ── Step 2: Business details ── */}
             {step === 2 && (
                 <>
                   <h2 style={s.formTitle}>Business details</h2>
-                  <p style={s.formSub}>Step 2 of 2</p>
+                  <p style={s.formSub}>Step 2 of 3</p>
                   <div style={s.field}>
                     <label style={s.label}>Business Name</label>
                     <input style={s.input} autoComplete="organization" placeholder="Joe's Coffee"
@@ -277,20 +313,87 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                   <div style={{ display: 'flex', gap: '10px' }}>
                     {!isMobile && <button style={s.backBtn} onClick={() => setStep(1)}>← Back</button>}
                     <button style={{ ...s.submitBtn, opacity: loading ? 0.7 : 1, flex: 1 }} onClick={handleSubmitRequest} disabled={loading}>
-                      {loading ? 'Submitting…' : 'Submit application'}
+                      {loading ? 'Submitting…' : 'Continue to payment →'}
                     </button>
                   </div>
                 </>
             )}
 
+            {/* ── Step 3: Payment ── */}
             {step === 3 && (
+                <>
+                  <h2 style={s.formTitle}>Payment</h2>
+                  <p style={s.formSub}>Step 3 of 3</p>
+
+                  {/* Order summary */}
+                  <div style={s.orderSummary}>
+                    <div style={s.orderRow}>
+                      <span style={s.orderLabel}>{selectedTier?.name} plan</span>
+                      <span style={s.orderAmount}>{selectedTier?.price}<span style={s.orderPeriod}>/mo</span></span>
+                    </div>
+                    <div style={s.orderDivider} />
+                    <div style={s.orderRow}>
+                      <span style={{ ...s.orderLabel, fontWeight: '700', color: '#0f172a' }}>Due today</span>
+                      <span style={{ ...s.orderAmount, color: BLUE }}>{selectedTier?.price}</span>
+                    </div>
+                  </div>
+
+                  {/* Card inputs */}
+                  <div style={s.field}>
+                    <label style={s.label}>Cardholder Name</label>
+                    <input style={s.input} autoComplete="cc-name" placeholder="Jane Smith"
+                           value={cardForm.cardName}
+                           onChange={e => setCardForm(p => ({ ...p, cardName: e.target.value }))} />
+                  </div>
+                  <div style={s.field}>
+                    <label style={s.label}>Card Number</label>
+                    <div style={s.cardInputWrap}>
+                      <input style={{ ...s.input, paddingRight: '48px', marginBottom: 0 }}
+                             autoComplete="cc-number" placeholder="1234 5678 9012 3456"
+                             value={cardForm.cardNumber}
+                             onChange={e => setCardForm(p => ({ ...p, cardNumber: formatCardNumber(e.target.value) }))} />
+                      <span style={s.cardIcon}>💳</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '12px' }}>
+                    <div style={{ ...s.field, flex: 1 }}>
+                      <label style={s.label}>Expiry</label>
+                      <input style={s.input} autoComplete="cc-exp" placeholder="MM/YY"
+                             value={cardForm.expiry}
+                             onChange={e => setCardForm(p => ({ ...p, expiry: formatExpiry(e.target.value) }))} />
+                    </div>
+                    <div style={{ ...s.field, width: '100px' }}>
+                      <label style={s.label}>CVV</label>
+                      <input style={s.input} autoComplete="cc-csc" placeholder="123"
+                             value={cardForm.cvv}
+                             onChange={e => setCardForm(p => ({ ...p, cvv: e.target.value.replace(/\D/g, '').slice(0, 4) }))} />
+                    </div>
+                  </div>
+
+                  <div style={s.secureNote}>
+                    <span style={s.lockIcon}>🔒</span>
+                    <span>Payments are encrypted and secure</span>
+                  </div>
+
+                  {error && <p style={s.error}>{error}</p>}
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    {!isMobile && <button style={s.backBtn} onClick={() => setStep(2)}>← Back</button>}
+                    <button style={{ ...s.submitBtn, opacity: loading ? 0.7 : 1, flex: 1 }} onClick={handlePayment} disabled={loading}>
+                      {loading ? 'Processing…' : `Pay ${selectedTier?.price} →`}
+                    </button>
+                  </div>
+                </>
+            )}
+
+            {/* ── Step 4: Success ── */}
+            {step === 4 && (
                 <div style={s.successScreen}>
                   <div style={s.successIcon}>✓</div>
-                  <h2 style={s.formTitle}>Application submitted</h2>
+                  <h2 style={s.formTitle}>You're all set!</h2>
                   <p style={s.successMsg}>
-                    Our team reviews every application within 24–48 hours. You'll get an email the moment your business goes live.
+                    Payment confirmed. Our team reviews every application within 24–48 hours. You'll get an email the moment your business goes live.
                   </p>
-                  <p style={s.successTier}>Plan selected: <strong>{TIERS.find(t => t.key === tier)?.name}</strong></p>
+                  <p style={s.successTier}>Plan: <strong>{selectedTier?.name}</strong> · <strong>{selectedTier?.price}/mo</strong></p>
                   <button style={s.submitBtn} onClick={onBack}>Back to sign in</button>
                 </div>
             )}
@@ -301,13 +404,13 @@ export default function BusinessRegister({ onBack, onSuccess }) {
 }
 
 const s = {
-  root: { display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", background: '#f0f7ff' },
+  root: { display: 'flex', minHeight: '100vh', fontFamily: FONT, background: '#f0f7ff' },
   left: { flex: 1, background: '#08011a', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
   orb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
   orb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
   leftInner: { maxWidth: '440px', width: '100%', position: 'relative', zIndex: 2 },
-  backLink: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: 0, marginBottom: '48px', display: 'block' },
+  backLink: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: 0, marginBottom: '48px', display: 'block', fontFamily: FONT },
   brand: { color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '48px', textTransform: 'uppercase' },
   headline: { color: '#fff', fontSize: '3rem', fontWeight: '900', lineHeight: 1.06, letterSpacing: '-0.03em', margin: '0 0 20px' },
   tagline: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: '0 0 48px' },
@@ -322,13 +425,13 @@ const s = {
   mobileStepDots: { display: 'flex', gap: '6px' },
   stepDot: { width: '8px', height: '8px', borderRadius: '50%', transition: 'background 0.2s' },
   form: { width: '100%', maxWidth: '400px', margin: '0 auto', boxSizing: 'border-box' },
-  formTitle: { color: '#0f172a', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 6px', letterSpacing: '-0.03em' },
-  formSub: { color: '#60a5fa', fontSize: '13px', margin: '0 0 28px' },
+  formTitle: { color: '#0f172a', fontSize: '1.6rem', fontWeight: '800', margin: '0 0 6px', letterSpacing: '-0.03em' },
+  formSub: { color: '#60a5fa', fontSize: '13px', fontWeight: '500', margin: '0 0 28px' },
   field: { marginBottom: '16px' },
   label: { display: 'block', color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
-  input: { width: '100%', padding: '11px 14px', border: '2px solid #bfdbfe', borderRadius: '8px', fontSize: '14px', color: '#0f172a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: 0 },
+  input: { width: '100%', padding: '11px 14px', border: '2px solid #bfdbfe', borderRadius: '8px', fontSize: '14px', color: '#0f172a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: 0, fontFamily: FONT },
   addrRow: { display: 'flex', gap: '8px', alignItems: 'center' },
-  geocodeBtn: { padding: '11px 14px', background: '#bfdbfe', border: '2px solid #bfdbfe', borderRadius: '8px', color: '#2563eb', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 },
+  geocodeBtn: { padding: '11px 14px', background: '#bfdbfe', border: '2px solid #bfdbfe', borderRadius: '8px', color: '#2563eb', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, fontFamily: FONT },
   geocodeConfirm: { color: '#16a34a', fontSize: '12px', margin: '6px 0 0' },
   tierList: { display: 'flex', flexDirection: 'column', gap: '8px' },
   tierCard: { border: '2px solid #bfdbfe', borderRadius: '10px', padding: '14px 16px', cursor: 'pointer', position: 'relative', background: '#fff' },
@@ -341,9 +444,21 @@ const s = {
   tierDesc: { color: '#6b7280', fontSize: '12px', lineHeight: 1.5, margin: 0, paddingRight: '24px' },
   tierRadio: { position: 'absolute', top: '16px', right: '16px', width: '16px', height: '16px', borderRadius: '50%', border: '2px solid #d1d5db', background: '#fff' },
   tierRadioSelected: { borderColor: BLUE, background: BLUE },
+  // Payment step
+  orderSummary: { background: '#fff', border: '2px solid #bfdbfe', borderRadius: '12px', padding: '16px 18px', marginBottom: '24px' },
+  orderRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+  orderLabel: { color: '#6b7280', fontSize: '13px', fontWeight: '500' },
+  orderAmount: { color: '#0f172a', fontSize: '16px', fontWeight: '700' },
+  orderPeriod: { color: '#9ca3af', fontSize: '12px', fontWeight: '400' },
+  orderDivider: { borderTop: '1px solid #e5e7eb', margin: '12px 0' },
+  cardInputWrap: { position: 'relative' },
+  cardIcon: { position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '18px', pointerEvents: 'none' },
+  secureNote: { display: 'flex', alignItems: 'center', gap: '6px', color: '#6b7280', fontSize: '12px', marginBottom: '20px', marginTop: '4px' },
+  lockIcon: { fontSize: '14px' },
+  // Shared
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 14px' },
-  submitBtn: { width: '100%', padding: '12px', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
-  backBtn: { padding: '12px 16px', background: '#fff', color: '#374151', border: '2px solid #bfdbfe', borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' },
+  submitBtn: { width: '100%', padding: '13px', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.4)', fontFamily: FONT },
+  backBtn: { padding: '12px 16px', background: '#fff', color: '#374151', border: '2px solid #bfdbfe', borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: FONT },
   successScreen: { textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' },
   successIcon: { width: '64px', height: '64px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   successMsg: { color: '#6b7280', fontSize: '14px', lineHeight: 1.7, margin: 0 },
