@@ -53,15 +53,9 @@ export default function ConsumerLandingPage() {
           <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '560px' }}>
             RewardsNow™ helps you earn points when you shop at participating independent businesses in your community.
           </p>
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px' }}>
-            {/* TODO: Replace href="#download" with your App Store and Google Play URLs */}
-            <a
-              href="#download"
-              style={s.ctaPrimaryLink}
-              aria-label="Download the RewardsNow app"
-            >
-              Download App
-            </a>
+          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px', alignItems: 'center' }}>
+            {/* Replace this pill with a real App Store / Google Play <a> once the app is live */}
+            <span style={s.comingSoon}>App coming soon</span>
             <button
               style={s.ctaGhost}
               onClick={() => navigate('/business-overview')}
@@ -138,14 +132,8 @@ export default function ConsumerLandingPage() {
             community.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-            {/* TODO: Replace href="#download" with your App Store and Google Play URLs */}
-            <a
-              href="#download"
-              style={s.ctaPrimaryLink}
-              aria-label="Download the RewardsNow app"
-            >
-              Download Now
-            </a>
+            {/* Replace this pill with a real App Store / Google Play <a> once the app is live */}
+            <span style={s.comingSoon}>App coming soon</span>
             <button
               style={s.bizLink}
               onClick={() => navigate('/business-overview')}
@@ -219,14 +207,16 @@ const s = {
     borderRadius: '2px', marginBottom: '24px',
   },
   heroSub: { color: 'rgba(255,255,255,0.55)', fontSize: '17px', lineHeight: 1.7, margin: 0 },
-  ctaPrimaryLink: {
+  comingSoon: {
     display: 'inline-block',
-    padding: '14px 32px',
-    background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)',
-    border: 'none', color: '#0f172a', borderRadius: '12px',
-    fontSize: '15px', fontWeight: '700', cursor: 'pointer',
-    boxShadow: '0 4px 20px rgba(245,158,11,0.4)',
-    fontFamily: 'inherit', textDecoration: 'none',
+    padding: '10px 22px',
+    background: 'rgba(245,158,11,0.12)',
+    border: '1.5px solid rgba(245,158,11,0.35)',
+    color: '#f59e0b',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    letterSpacing: '0.02em',
   },
   ctaGhost: {
     padding: '14px 28px', background: 'transparent',
