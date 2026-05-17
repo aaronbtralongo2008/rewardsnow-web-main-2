@@ -2,28 +2,25 @@ import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 
 // ── Logo paths (update these if you move or rename the files) ──────────────
-const LOGO_SM = process.env.PUBLIC_URL + '/logo192.png';  // used in nav
-const LOGO_LG = process.env.PUBLIC_URL + '/logo512.png';  // used in hero + footer
+const LOGO_HEADER = process.env.PUBLIC_URL + '/logo512.png'; // top navigation
+const LOGO_CARD   = process.env.PUBLIC_URL + '/logo192.png'; // hero badge card
+const LOGO_FOOTER = process.env.PUBLIC_URL + '/logo512.png'; // footer CTA section
 
 // ── Feature cards ──────────────────────────────────────────────────────────
 const FEATURES = [
   {
-    icon: '⭐',
     title: 'Earn on everyday purchases',
     desc: 'Collect RewardsNow™ points when you shop with participating local businesses.',
   },
   {
-    icon: '🏪',
     title: 'Redeem locally',
     desc: 'Use your points at participating RewardsNow™ independent businesses — not just where you earned them.',
   },
   {
-    icon: '📍',
     title: 'Discover nearby businesses',
     desc: 'Find participating restaurants, shops, cafés, and service providers in the app.',
   },
   {
-    icon: '🗺️',
     title: 'Plan your visit',
     desc: 'View menus, product offerings, maps, and directions from one convenient directory.',
   },
@@ -48,7 +45,7 @@ export default function LandingPage() {
           aria-label="RewardsNow™ — go to home"
         >
           <img
-            src={LOGO_SM}
+            src={LOGO_HEADER}
             alt="RewardsNow™"
             style={{ height: '36px', width: 'auto', display: 'block' }}
           />
@@ -98,8 +95,7 @@ export default function LandingPage() {
         {!isMobile && (
           <div style={s.heroBadgeRow} aria-hidden="true">
             <div style={s.heroBadgeCard}>
-              <img src={LOGO_LG} alt="" style={s.heroBadgeImg} />
-              <p style={s.heroBadgeLabel}>RewardsNow™</p>
+              <img src={LOGO_CARD} alt="RewardsNow™" style={s.heroBadgeImg} />
               <p style={s.heroBadgeSub}>Community rewards, simplified.</p>
             </div>
           </div>
@@ -141,7 +137,6 @@ export default function LandingPage() {
             >
               {FEATURES.map(f => (
                 <div key={f.title} style={s.featureCard}>
-                  <span style={s.featureIcon} aria-hidden="true">{f.icon}</span>
                   <p style={s.featureTitle}>{f.title}</p>
                   <p style={s.featureDesc}>{f.desc}</p>
                 </div>
@@ -175,7 +170,7 @@ export default function LandingPage() {
           }}
         >
           <img
-            src={LOGO_LG}
+            src={LOGO_FOOTER}
             alt="RewardsNow™"
             style={{ ...s.footerLogo, width: isMobile ? '72px' : '88px' }}
           />
@@ -260,6 +255,7 @@ const s = {
     padding: 0,
     display: 'flex',
     alignItems: 'center',
+    lineHeight: 0, // prevents phantom baseline space that shifts the logo image
   },
   navRight: { display: 'flex', gap: '8px', alignItems: 'center' },
   navBtn: {
@@ -439,12 +435,6 @@ const s = {
     border: '1px solid rgba(255,255,255,0.08)',
     borderRadius: '14px',
     padding: '24px 22px',
-  },
-  featureIcon: {
-    display: 'block',
-    fontSize: '24px',
-    marginBottom: '12px',
-    lineHeight: 1,
   },
   featureTitle: {
     color: '#fff',
