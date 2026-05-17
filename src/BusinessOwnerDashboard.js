@@ -193,9 +193,9 @@ function BusinessOwnerDashboard() {
             <button style={s.loginBtn} onClick={handleLogin}>Sign In</button>
             <div style={s.loginDivider} />
             <p style={s.loginEmpNote}>Are you an employee?</p>
-            <a href={EMPLOYEE_PORTAL_URL} style={s.loginEmpLink} target="_blank" rel="noopener noreferrer">
+            <button style={s.loginEmpLink} onClick={() => navigate('/employee')}>
               Go to Employee Portal →
-            </a>
+            </button>
           </div>
         </div>
     );
@@ -220,9 +220,9 @@ function BusinessOwnerDashboard() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {!isMobile && (
-              <a href={EMPLOYEE_PORTAL_URL} style={s.empPortalBtn} target="_blank" rel="noopener noreferrer">
+              <button style={s.empPortalBtn} onClick={() => navigate('/employee')}>
                 Employee Portal
-              </a>
+              </button>
             )}
             {!isMobile && <span style={s.userName}>{account?.username}</span>}
             <button style={s.logoutBtn} onClick={() => { setToken(null); setAccount(null); }}>Sign Out</button>
@@ -339,9 +339,9 @@ function BusinessOwnerDashboard() {
                       <p style={s.empPortalCardTitle}>Send employees here to sign in</p>
                       <p style={s.empPortalCardSub}>Your staff uses the employee portal to help customers earn and redeem points.</p>
                     </div>
-                    <a href={EMPLOYEE_PORTAL_URL} style={s.empPortalCardBtn} target="_blank" rel="noopener noreferrer">
+                    <button style={s.empPortalCardBtn} onClick={() => navigate('/employee')}>
                       Open Employee Portal
-                    </a>
+                    </button>
                   </div>
                   {showEmpForm && (
                       <div style={s.formCard}>
@@ -495,14 +495,14 @@ const s = {
   topBarLogoImg: { height: '30px', width: 'auto', objectFit: 'contain', display: 'block' },
   portalBadge: { background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
   logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
-  empPortalBtn: { padding: '7px 14px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '12px', fontWeight: '700', cursor: 'pointer', textDecoration: 'none', whiteSpace: 'nowrap' },
+  empPortalBtn: { padding: '7px 14px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '12px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', fontFamily: 'inherit' },
   loginDivider: { height: '1px', background: '#e2e8f0', margin: '20px 0' },
   loginEmpNote: { color: '#64748b', fontSize: '13px', margin: '0 0 6px 0' },
-  loginEmpLink: { display: 'block', color: ROYAL, fontSize: '14px', fontWeight: '700', textDecoration: 'none', padding: '12px 16px', borderRadius: '10px', border: `1.5px solid ${ROYAL}`, textAlign: 'center', background: '#eff6ff' },
+  loginEmpLink: { display: 'block', width: '100%', boxSizing: 'border-box', color: ROYAL, fontSize: '14px', fontWeight: '700', padding: '12px 16px', borderRadius: '10px', border: `1.5px solid ${ROYAL}`, textAlign: 'center', background: '#eff6ff', cursor: 'pointer', fontFamily: 'inherit' },
   empPortalCard: { background: '#eff6ff', borderRadius: '14px', padding: '16px 18px', border: `1.5px solid #bfdbfe`, marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap' },
   empPortalCardTitle: { color: '#1e40af', fontSize: '13px', fontWeight: '700', margin: '0 0 4px 0' },
   empPortalCardSub: { color: '#3b82f6', fontSize: '12px', margin: 0, lineHeight: 1.5 },
-  empPortalCardBtn: { padding: '10px 18px', borderRadius: '10px', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 },
+  empPortalCardBtn: { padding: '10px 18px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', whiteSpace: 'nowrap', flexShrink: 0, cursor: 'pointer', fontFamily: 'inherit' },
   userName: { color: '#555', fontSize: '13px', fontWeight: '600' },
   mobileTabs: { display: 'flex', background: '#fff', borderBottom: '1px solid #eee', overflowX: 'auto', flexShrink: 0 },
   mobileTab: { flexShrink: 0, padding: '12px 16px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', whiteSpace: 'nowrap' },

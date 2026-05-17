@@ -3,6 +3,7 @@ import { useIsMobile } from './useIsMobile';
 
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 const EMPLOYEE_PORTAL_URL = 'https://rewards-now.net/employee';
+const EMPLOYEE_ROUTE = '/employee';
 
 const WORKFLOW = [
   {
@@ -47,9 +48,9 @@ export default function BusinessOverview() {
 
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           {!isMobile && (
-            <a href={EMPLOYEE_PORTAL_URL} style={s.empNavLink} target="_blank" rel="noopener noreferrer">
+            <button style={s.empNavLink} onClick={() => navigate(EMPLOYEE_ROUTE)}>
               Employee Portal
-            </a>
+            </button>
           )}
           <button style={s.navBtn} onClick={() => navigate('/business-owner')}>Business sign in</button>
         </div>
@@ -151,9 +152,9 @@ export default function BusinessOverview() {
                 Staff use the RewardsNow™ employee portal — not the owner dashboard — to process customer transactions and reward redemptions.
               </p>
             </div>
-            <a href={EMPLOYEE_PORTAL_URL} style={s.empCalloutBtn} target="_blank" rel="noopener noreferrer">
+            <button style={s.empCalloutBtn} onClick={() => navigate(EMPLOYEE_ROUTE)}>
               Send employees here →
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -193,9 +194,9 @@ export default function BusinessOverview() {
             <p style={s.body}>
               Employees can use the RewardsNow™ employee portal to help customers earn and redeem rewards during day-to-day business operations. Share this link with your team — no owner credentials needed.
             </p>
-            <a href={EMPLOYEE_PORTAL_URL} style={s.empBigBtn} target="_blank" rel="noopener noreferrer">
+            <button style={s.empBigBtn} onClick={() => navigate(EMPLOYEE_ROUTE)}>
               Open Employee Portal
-            </a>
+            </button>
             <p style={s.empLinkNote}>{EMPLOYEE_PORTAL_URL}</p>
           </div>
           <div style={s.empBadgeBox}>
@@ -216,9 +217,9 @@ export default function BusinessOverview() {
           <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply now</button>
           <button style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
         </div>
-        <a href={EMPLOYEE_PORTAL_URL} style={s.footerEmpLink} target="_blank" rel="noopener noreferrer">
+        <button style={s.footerEmpLink} onClick={() => navigate(EMPLOYEE_ROUTE)}>
           Employee portal
-        </a>
+        </button>
       </section>
     </div>
   );
@@ -233,7 +234,7 @@ const s = {
   nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px', position: 'sticky', top: 0, zIndex: 100, background: 'rgba(8,1,26,0.85)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.07)' },
   backBtn: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '13px', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
   brandBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', lineHeight: 0 },
-  empNavLink: { padding: '7px 14px', background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(245,158,11,0.3)', color: '#f59e0b', borderRadius: '8px', fontSize: '12px', fontWeight: '700', textDecoration: 'none', whiteSpace: 'nowrap' },
+  empNavLink: { padding: '7px 14px', background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(245,158,11,0.3)', color: '#f59e0b', borderRadius: '8px', fontSize: '12px', fontWeight: '700', whiteSpace: 'nowrap', cursor: 'pointer', fontFamily: 'inherit' },
   navBtn: { padding: '7px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '8px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
 
   hero: { position: 'relative', zIndex: 1 },
@@ -273,7 +274,7 @@ const s = {
   empCallout: { background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: '16px', padding: '24px 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px', flexWrap: 'wrap' },
   empCalloutTitle: { color: '#fde68a', fontSize: '14px', fontWeight: '700', margin: '0 0 6px' },
   empCalloutDesc: { color: 'rgba(255,255,255,0.55)', fontSize: '13px', lineHeight: 1.6, margin: 0, maxWidth: '480px' },
-  empCalloutBtn: { padding: '12px 22px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', color: '#0f172a', borderRadius: '10px', fontSize: '14px', fontWeight: '700', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 },
+  empCalloutBtn: { padding: '12px 22px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', border: 'none', color: '#0f172a', borderRadius: '10px', fontSize: '14px', fontWeight: '700', whiteSpace: 'nowrap', flexShrink: 0, cursor: 'pointer', fontFamily: 'inherit' },
 
   stepsGrid: { display: 'grid' },
   stepCard: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '24px 20px' },
@@ -282,12 +283,12 @@ const s = {
   stepDesc: { color: 'rgba(255,255,255,0.55)', fontSize: '13px', lineHeight: 1.6, margin: 0 },
 
   empSection: { display: 'flex', alignItems: 'flex-start', position: 'relative', zIndex: 1, maxWidth: '900px' },
-  empBigBtn: { display: 'inline-block', padding: '15px 32px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', color: '#0f172a', borderRadius: '12px', fontSize: '15px', fontWeight: '700', textDecoration: 'none', boxShadow: '0 4px 20px rgba(245,158,11,0.4)', marginBottom: '10px' },
+  empBigBtn: { display: 'inline-block', padding: '15px 32px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', border: 'none', color: '#0f172a', borderRadius: '12px', fontSize: '15px', fontWeight: '700', boxShadow: '0 4px 20px rgba(245,158,11,0.4)', marginBottom: '10px', cursor: 'pointer', fontFamily: 'inherit' },
   empLinkNote: { color: 'rgba(255,255,255,0.3)', fontSize: '12px', margin: 0 },
   empBadgeBox: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px 28px', minWidth: '240px', flexShrink: 0 },
   empBadgeLabel: { color: '#f59e0b', fontSize: '10px', fontWeight: '700', letterSpacing: '3px', textTransform: 'uppercase', margin: '0 0 10px' },
   empBadgeUrl: { color: '#fff', fontSize: '14px', fontWeight: '700', margin: '0 0 8px', wordBreak: 'break-all' },
   empBadgeHint: { color: 'rgba(255,255,255,0.4)', fontSize: '12px', margin: 0 },
 
-  footerEmpLink: { display: 'inline-block', marginTop: '24px', color: 'rgba(255,255,255,0.35)', fontSize: '13px', textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.15)', textUnderlineOffset: '3px' },
+  footerEmpLink: { display: 'inline-block', marginTop: '24px', background: 'none', border: 'none', color: 'rgba(255,255,255,0.35)', fontSize: '13px', textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.15)', textUnderlineOffset: '3px', cursor: 'pointer', fontFamily: 'inherit', padding: 0 },
 };
