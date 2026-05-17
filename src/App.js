@@ -11,6 +11,7 @@ import AdminDashboard from './AdminDashboard';
 import BusinessOwnerDashboard from './BusinessOwnerDashboard';
 import EmployeeDashboard from './EmployeeDashboard';
 import LandingPage from './LandingPage';
+import ConsumerLandingPage from './ConsumerLandingPage';
 import BusinessOverview from './BusinessOverview';
 import { ForgotPassword, ResetPassword } from './AuthPages';
 
@@ -106,7 +107,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<ConsumerLandingPage />} />
       <Route path="/signin" element={<Login onLogin={handleLogin} />} />
       <Route path="/register" element={<Register onRegister={handleLogin} onBack={() => navigate('/signin')} />} />
       <Route path="/business-overview" element={<BusinessOverview />} />
