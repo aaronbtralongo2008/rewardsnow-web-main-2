@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
+const LOGO = process.env.PUBLIC_URL + '/logo514.png';
+
 function Login({ onLogin }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -41,7 +43,7 @@ function Login({ onLogin }) {
 
           {isMobile ? (
               <div style={styles.mobileHeader}>
-                <span style={styles.mobileHeaderBrand}>RewardsNow</span>
+                <img src={LOGO} alt="RewardsNow" style={styles.mobileLogoImg} />
                 <span style={styles.mobileHeaderSub}>Earn rewards everywhere</span>
               </div>
           ) : (
@@ -50,7 +52,7 @@ function Login({ onLogin }) {
                 <div style={styles.orb2} />
                 <div style={styles.orb3} />
                 <div style={styles.leftContent}>
-                  <div style={styles.badge}>REWARDSNOW</div>
+                  <img src={LOGO} alt="RewardsNow" style={styles.logoImg} />
                   <div style={styles.goldLine} />
                   <p style={styles.tagline}>One card.<br />Every business.</p>
                   <p style={styles.leftDesc}>Join thousands of customers earning rewards at local businesses across the city.</p>
@@ -111,14 +113,14 @@ const styles = {
   container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   loginWrapper: { display: 'flex', flex: 1, minHeight: 0 },
   mobileHeader: { background: 'linear-gradient(145deg, #0f172a 0%, #1e3a8a 100%)', padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
-  mobileHeaderBrand: { color: '#fff', fontSize: '1.4rem', fontWeight: '800' },
+  mobileLogoImg: { height: '44px', width: 'auto', objectFit: 'contain', marginBottom: '2px' },
   mobileHeaderSub: { color: 'rgba(255,255,255,0.6)', fontSize: '13px', marginTop: '4px' },
   leftPanel: { flex: 1, background: '#08011a', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
   orb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
   orb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
   leftContent: { position: 'relative', zIndex: 2 },
-  badge: { display: 'inline-block', color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  logoImg: { height: '52px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
   goldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
   tagline: { color: '#fff', fontSize: '3.6rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 20px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
   leftDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
+const LOGO = process.env.PUBLIC_URL + '/logo514.png';
+
 export function ForgotPassword() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -35,7 +37,7 @@ export function ForgotPassword() {
         <div style={s.orb1} />
         <div style={s.orb2} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
-          <div style={s.brand}>RewardsNow</div>
+          <img src={LOGO} alt="RewardsNow" style={s.brandLogo} />
           <button style={s.backLink} onClick={() => navigate('/signin')}>← Back to sign in</button>
           {!sent ? (
               <>
@@ -104,7 +106,7 @@ export function ResetPassword() {
         <div style={s.orb1} />
         <div style={s.orb2} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
-          <div style={s.brand}>RewardsNow</div>
+          <img src={LOGO} alt="RewardsNow" style={s.brandLogo} />
           {!done ? (
               <>
                 <h1 style={s.title}>Choose a new password</h1>
@@ -141,7 +143,7 @@ const s = {
   orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.5)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
   orb2: { position: 'absolute', bottom: '-80px', right: '-60px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.25)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
   card: { background: '#f0f7ff', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2 },
-  brand: { color: '#2563eb', fontSize: '15px', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.01em' },
+  brandLogo: { height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '12px' },
   backLink: { background: 'none', border: 'none', color: '#60a5fa', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
   title: { color: '#0f172a', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 8px', letterSpacing: '-0.03em' },
   sub: { color: '#64748b', fontSize: '14px', lineHeight: 1.6, margin: '0 0 28px' },

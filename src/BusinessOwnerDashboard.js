@@ -4,6 +4,8 @@ import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
 const ROYAL = '#2563eb';
+const LOGO = process.env.PUBLIC_URL + '/logo514.png';
+const EMPLOYEE_PORTAL_URL = 'https://rewards-now.net/employee';
 
 function BusinessOwnerDashboard() {
   const isMobile = useIsMobile();
@@ -171,7 +173,7 @@ function BusinessOwnerDashboard() {
                 <div style={s.loginOrb2} />
                 <div style={s.loginOrb3} />
                 <div style={s.loginLeftContent}>
-                  <div style={s.loginBrandBadge}>REWARDSNOW</div>
+                  <img src={LOGO} alt="RewardsNow" style={s.loginLogoImg} />
                   <div style={s.loginGoldLine} />
                   <h1 style={s.loginHeadline}>Run your business.<br />Reward your customers.</h1>
                   <p style={s.loginDesc}>Manage employees, services, and analytics from your business portal.</p>
@@ -179,7 +181,7 @@ function BusinessOwnerDashboard() {
               </div>
           )}
           <div style={{ ...s.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-            {isMobile && <div style={s.mobileLoginBrand}>RewardsNow</div>}
+            {isMobile && <img src={LOGO} alt="RewardsNow" style={s.mobileLoginLogoImg} />}
             <span style={s.loginPortalTag}>BUSINESS PORTAL</span>
             <h2 style={s.loginTitle}>Owner Dashboard</h2>
             <p style={s.loginSub}>Sign in with your business account</p>
@@ -189,6 +191,11 @@ function BusinessOwnerDashboard() {
             <input style={s.loginInput} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
             {error && <p style={s.loginError}>{error}</p>}
             <button style={s.loginBtn} onClick={handleLogin}>Sign In</button>
+            <div style={s.loginDivider} />
+            <p style={s.loginEmpNote}>Are you an employee?</p>
+            <a href={EMPLOYEE_PORTAL_URL} style={s.loginEmpLink} target="_blank" rel="noopener noreferrer">
+              Go to Employee Portal →
+            </a>
           </div>
         </div>
     );
@@ -206,10 +213,17 @@ function BusinessOwnerDashboard() {
       <div style={s.container}>
         <div style={s.topBar}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <button style={s.logo} onClick={() => navigate('/')}>RewardsNow</button>
+            <button style={s.logo} onClick={() => navigate('/')}>
+              <img src={LOGO} alt="RewardsNow" style={s.topBarLogoImg} />
+            </button>
             {!isMobile && <span style={s.portalBadge}>BUSINESS</span>}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {!isMobile && (
+              <a href={EMPLOYEE_PORTAL_URL} style={s.empPortalBtn} target="_blank" rel="noopener noreferrer">
+                Employee Portal
+              </a>
+            )}
             {!isMobile && <span style={s.userName}>{account?.username}</span>}
             <button style={s.logoutBtn} onClick={() => { setToken(null); setAccount(null); }}>Sign Out</button>
           </div>
@@ -319,6 +333,15 @@ function BusinessOwnerDashboard() {
                           {showEmpForm ? 'Cancel' : '+ Add'}
                         </button>
                     )}
+                  </div>
+                  <div style={s.empPortalCard}>
+                    <div>
+                      <p style={s.empPortalCardTitle}>Send employees here to sign in</p>
+                      <p style={s.empPortalCardSub}>Your staff uses the employee portal to help customers earn and redeem points.</p>
+                    </div>
+                    <a href={EMPLOYEE_PORTAL_URL} style={s.empPortalCardBtn} target="_blank" rel="noopener noreferrer">
+                      Open Employee Portal
+                    </a>
                   </div>
                   {showEmpForm && (
                       <div style={s.formCard}>
@@ -449,12 +472,12 @@ const s = {
   loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
   loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
   loginLeftContent: { position: 'relative', zIndex: 2 },
-  loginBrandBadge: { color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  loginLogoImg: { height: '52px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
   loginGoldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
   loginHeadline: { color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
   loginDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
   loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#f0f7ff' },
-  mobileLoginBrand: { color: '#2563eb', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
+  mobileLoginLogoImg: { height: '44px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '32px' },
   loginPortalTag: { display: 'inline-block', background: '#bfdbfe', color: '#2563eb', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },
   loginTitle: { color: '#0f172a', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
   loginSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 36px 0' },
@@ -468,9 +491,18 @@ const s = {
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
   container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
-  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
+  logo: { background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', lineHeight: 0 },
+  topBarLogoImg: { height: '30px', width: 'auto', objectFit: 'contain', display: 'block' },
   portalBadge: { background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
   logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
+  empPortalBtn: { padding: '7px 14px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '12px', fontWeight: '700', cursor: 'pointer', textDecoration: 'none', whiteSpace: 'nowrap' },
+  loginDivider: { height: '1px', background: '#e2e8f0', margin: '20px 0' },
+  loginEmpNote: { color: '#64748b', fontSize: '13px', margin: '0 0 6px 0' },
+  loginEmpLink: { display: 'block', color: ROYAL, fontSize: '14px', fontWeight: '700', textDecoration: 'none', padding: '12px 16px', borderRadius: '10px', border: `1.5px solid ${ROYAL}`, textAlign: 'center', background: '#eff6ff' },
+  empPortalCard: { background: '#eff6ff', borderRadius: '14px', padding: '16px 18px', border: `1.5px solid #bfdbfe`, marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap' },
+  empPortalCardTitle: { color: '#1e40af', fontSize: '13px', fontWeight: '700', margin: '0 0 4px 0' },
+  empPortalCardSub: { color: '#3b82f6', fontSize: '12px', margin: 0, lineHeight: 1.5 },
+  empPortalCardBtn: { padding: '10px 18px', borderRadius: '10px', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 },
   userName: { color: '#555', fontSize: '13px', fontWeight: '600' },
   mobileTabs: { display: 'flex', background: '#fff', borderBottom: '1px solid #eee', overflowX: 'auto', flexShrink: 0 },
   mobileTab: { flexShrink: 0, padding: '12px 16px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', whiteSpace: 'nowrap' },
