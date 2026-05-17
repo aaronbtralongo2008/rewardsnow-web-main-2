@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 
 // ── Logo paths (update these if you move or rename the files) ──────────────
-const LOGO_HEADER = process.env.PUBLIC_URL + '/logo512.png'; // top navigation
-const LOGO_CARD   = process.env.PUBLIC_URL + '/logo192.png'; // hero badge card
-const LOGO_FOOTER = process.env.PUBLIC_URL + '/logo512.png'; // footer CTA section
+const LOGO_HEADER = process.env.PUBLIC_URL + '/logo514.png'; // top navigation
+const LOGO_CARD   = process.env.PUBLIC_URL + '/logo514.png'; // hero badge card
+const LOGO_FOOTER = process.env.PUBLIC_URL + '/logo514.png'; // footer CTA section
 
 // ── Feature cards ──────────────────────────────────────────────────────────
 const FEATURES = [
@@ -76,7 +76,7 @@ export default function LandingPage() {
             businesses in your community.
           </p>
 
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px' }}>
+          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px', alignItems: 'center' }}>
             {/* TODO: replace href="#download" with your App Store / Google Play links */}
             <a href="#download" style={s.ctaPrimary} aria-label="Download the RewardsNow™ app">
               Download App
@@ -339,6 +339,7 @@ const s = {
     fontWeight: '600',
     cursor: 'pointer',
     fontFamily: 'inherit',
+    lineHeight: 1,
   },
   ctaBiz: {
     marginTop: '24px',
