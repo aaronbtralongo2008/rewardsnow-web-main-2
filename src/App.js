@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { ThemeProvider } from './ThemeContext';
 import Home from './Home';
 import BusinessList from './BusinessList';
 import BusinessDetail from './BusinessDetail';
@@ -105,6 +106,7 @@ function App() {
   };
 
   return (
+    <ThemeProvider>
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/signin" element={<Login onLogin={handleLogin} />} />
@@ -125,6 +127,7 @@ function App() {
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </ThemeProvider>
   );
 }
 
