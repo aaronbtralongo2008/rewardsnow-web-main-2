@@ -5,21 +5,22 @@ const noMotion =
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
- * Wraps children in a div that fades + slides up when it enters the viewport.
+ * Wraps children in a div that fades + slides up on scroll into view.
  *
  * Props:
- *   delay  – ms before transition starts (use for staggered cards)
- *   style  – merged onto the wrapper div (useful for grid children)
+ *   delay  – transition delay in ms (stagger cards with 0, 80, 160, 240)
+ *   style  – merged onto the wrapper (lets FadeInSection act as a grid child)
  */
 export default function FadeInSection({ children, delay = 0, style = {} }) {
   const ref = useRef(null);
-  // Skip animation entirely if user prefers reduced motion
   const [visible, setVisible] = useState(noMotion);
 
   useEffect(() => {
     if (noMotion) return;
     const el = ref.current;
     if (!el) return;
+
+    // threshold: 0.01 fires immediately for elements already in the viewport
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -27,7 +28,7 @@ export default function FadeInSection({ children, delay = 0, style = {} }) {
           io.disconnect();
         }
       },
-      { threshold: 0.08, rootMargin: '0px 0px -28px 0px' }
+      { threshold: 0.01 }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -38,10 +39,10 @@ export default function FadeInSection({ children, delay = 0, style = {} }) {
       ref={ref}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(22px)',
+        transform: visible ? 'translateY(0)' : 'translateY(28px)',
         transition: noMotion
           ? 'none'
-          : `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+          : `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
         ...style,
       }}
     >
