@@ -1,3 +1,5 @@
+import { useIsMobile } from './useIsMobile';
+
 // Keyframes injected at module load — must exist before first render
 ;(() => {
   if (typeof document === 'undefined') return;
@@ -35,6 +37,9 @@ const STRIPES = [
  *   count – stripes to render (default 4; use 2–3 for narrow panels)
  */
 export default function AnimatedStripes({ count = 4 }) {
+  const isMobile = useIsMobile();
+  const railOpacity = isMobile ? 0.02 : 0.05;
+
   return (
     <div
       aria-hidden="true"
@@ -60,7 +65,7 @@ export default function AnimatedStripes({ count = 4 }) {
               top: 0,
               bottom: 0,
               width: '1px',
-              background: 'rgba(255,255,255,0.05)',
+              background: `rgba(255,255,255,${railOpacity})`,
             }}
           />
           {/* Light beam — almost white, whisper-level opacity */}
