@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
+import AnimatedStripes from './AnimatedStripes';
 
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
@@ -66,6 +67,7 @@ function Register({ onRegister, onBack }) {
                 <div style={s.orb1} />
                 <div style={s.orb2} />
                 <div style={s.orb3} />
+                <AnimatedStripes count={4} />
                 <div style={s.leftContent}>
                   <img src={LOGO} alt="RewardsNow" style={s.logoImg} />
                   <div style={s.goldLine} />

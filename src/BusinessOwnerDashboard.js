@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
+import AnimatedStripes from './AnimatedStripes';
 
 const ROYAL = '#2563eb';
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
@@ -172,6 +173,7 @@ function BusinessOwnerDashboard() {
                 <div style={s.loginOrb1} />
                 <div style={s.loginOrb2} />
                 <div style={s.loginOrb3} />
+                <AnimatedStripes count={4} />
                 <div style={s.loginLeftContent}>
                   <img src={LOGO} alt="RewardsNow" style={s.loginLogoImg} />
                   <div style={s.loginGoldLine} />

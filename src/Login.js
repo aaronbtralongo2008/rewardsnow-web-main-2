@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
+import AnimatedStripes from './AnimatedStripes';
 
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
@@ -51,7 +52,8 @@ function Login({ onLogin }) {
                 <div style={styles.orb1} />
                 <div style={styles.orb2} />
                 <div style={styles.orb3} />
-                <div style={styles.leftContent}>
+                <AnimatedStripes count={4} />
+              <div style={styles.leftContent}>
                   <img src={LOGO} alt="RewardsNow" style={styles.logoImg} />
                   <div style={styles.goldLine} />
                   <p style={styles.tagline}>One card.<br />Every business.</p>

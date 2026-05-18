@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import AnimatedStripes from './AnimatedStripes';
+import FadeInSection from './FadeInSection';
 
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 const EMPLOYEE_PORTAL_URL = 'https://rewards-now.net/employee';
@@ -37,6 +39,7 @@ export default function BusinessOverview() {
       <div style={s.orb1} />
       <div style={s.orb2} />
       <div style={s.orb3} />
+      <AnimatedStripes count={7} />
 
       {/* ── Navigation ─────────────────────────────────────────────────── */}
       <nav style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
@@ -58,6 +61,7 @@ export default function BusinessOverview() {
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section style={{ ...s.hero, padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
+        <FadeInSection>
         <p style={s.eyebrow}>FOR BUSINESS PARTNERS</p>
         <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
           A smarter way to keep customers coming back.
@@ -70,11 +74,12 @@ export default function BusinessOverview() {
           <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
           <button style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
         </div>
+        </FadeInSection>
       </section>
 
       {/* ── Research stats ─────────────────────────────────────────────── */}
       <section style={{ ...s.section, padding: isMobile ? '56px 24px' : '80px 80px' }}>
-        <div style={s.contentMax}>
+        <FadeInSection><div style={s.contentMax}>
           <p style={s.tag}>THE RESEARCH</p>
           <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>What studies show</h2>
           <div style={s.goldLine} />
@@ -94,12 +99,12 @@ export default function BusinessOverview() {
               </div>
             ))}
           </div>
-        </div>
+        </div></FadeInSection>
       </section>
 
       {/* ── The problem ────────────────────────────────────────────────── */}
       <section style={{ ...s.sectionAlt, padding: isMobile ? '56px 24px' : '80px 80px' }}>
-        <div style={s.contentMax}>
+        <FadeInSection><div style={s.contentMax}>
           <p style={s.tag}>THE PROBLEM</p>
           <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>The loyalty program challenge</h2>
           <div style={s.goldLine} />
@@ -122,12 +127,12 @@ export default function BusinessOverview() {
               </div>
             ))}
           </div>
-        </div>
+        </div></FadeInSection>
       </section>
 
       {/* ── How RewardsNow works for your business ─────────────────────── */}
       <section style={{ ...s.section, padding: isMobile ? '56px 24px' : '80px 80px' }}>
-        <div style={s.contentMax}>
+        <FadeInSection><div style={s.contentMax}>
           <p style={s.tag}>HOW IT WORKS</p>
           <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>How RewardsNow™ works for your business</h2>
           <div style={s.goldLine} />
@@ -135,12 +140,12 @@ export default function BusinessOverview() {
             RewardsNow™ gives local businesses a simple workflow for managing customer rewards. Owners control the business account, configure services and reward options, and give employees access to the tools they need to help customers earn and redeem points.
           </p>
           <div style={{ ...s.workflowGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: '16px', marginTop: '40px' }}>
-            {WORKFLOW.map(step => (
-              <div key={step.n} style={s.workflowCard}>
+            {WORKFLOW.map((step, i) => (
+              <FadeInSection key={step.n} delay={i * 80} style={s.workflowCard}>
                 <span style={s.workflowNum}>{step.n}</span>
                 <p style={s.workflowTitle}>{step.title}</p>
                 <p style={s.workflowDesc}>{step.desc}</p>
-              </div>
+              </FadeInSection>
             ))}
           </div>
 
@@ -156,12 +161,12 @@ export default function BusinessOverview() {
               Send employees here →
             </button>
           </div>
-        </div>
+        </div></FadeInSection>
       </section>
 
       {/* ── Simple onboarding ──────────────────────────────────────────── */}
       <section style={{ ...s.sectionAlt, padding: isMobile ? '56px 24px' : '80px 80px' }}>
-        <div style={s.contentMax}>
+        <FadeInSection><div style={s.contentMax}>
           <p style={s.tag}>GETTING STARTED</p>
           <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Up and running in days, not months</h2>
           <div style={s.goldLine} />
@@ -181,7 +186,7 @@ export default function BusinessOverview() {
               </div>
             ))}
           </div>
-        </div>
+        </div></FadeInSection>
       </section>
 
       {/* ── Employee portal CTA ────────────────────────────────────────── */}

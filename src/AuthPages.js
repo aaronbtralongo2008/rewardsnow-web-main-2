@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
+import AnimatedStripes from './AnimatedStripes';
 
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
@@ -36,6 +37,7 @@ export function ForgotPassword() {
       <div style={s.root}>
         <div style={s.orb1} />
         <div style={s.orb2} />
+        <AnimatedStripes count={5} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
           <img src={LOGO} alt="RewardsNow" style={s.brandLogo} />
           <button style={s.backLink} onClick={() => navigate('/signin')}>← Back to sign in</button>
@@ -105,6 +107,7 @@ export function ResetPassword() {
       <div style={s.root}>
         <div style={s.orb1} />
         <div style={s.orb2} />
+        <AnimatedStripes count={5} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
           <img src={LOGO} alt="RewardsNow" style={s.brandLogo} />
           {!done ? (

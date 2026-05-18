@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import AnimatedStripes from './AnimatedStripes';
+import FadeInSection from './FadeInSection';
 
 // ── Logo paths (update these if you move or rename the files) ──────────────
 const LOGO_HEADER = process.env.PUBLIC_URL + '/logo514.png'; // top navigation
@@ -36,6 +38,7 @@ export default function LandingPage() {
       <div style={s.orb1} aria-hidden="true" />
       <div style={s.orb2} aria-hidden="true" />
       <div style={s.orb3} aria-hidden="true" />
+      <AnimatedStripes count={7} />
 
       {/* ── Navigation ─────────────────────────────────────────────────── */}
       <header style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
@@ -63,90 +66,99 @@ export default function LandingPage() {
           style={{ ...s.hero, padding: isMobile ? '72px 24px 64px' : '110px 80px 88px' }}
           aria-label="Hero"
         >
-          <p style={s.eyebrow}>LOCAL REWARDS NETWORK</p>
+          <FadeInSection delay={0}>
+            <p style={s.eyebrow}>LOCAL REWARDS NETWORK</p>
 
-          <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.5rem' : '4.2rem' }}>
-            Earn rewards while<br />supporting local businesses.
-          </h1>
+            <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.5rem' : '4.2rem' }}>
+              Earn rewards while<br />supporting local businesses.
+            </h1>
 
-          <div style={s.goldBar} />
+            <div style={s.goldBar} />
 
-          <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
-            RewardsNow™ helps you earn points when you shop at participating independent
-            businesses in your community.
-          </p>
+            <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
+              RewardsNow™ helps you earn points when you shop at participating independent
+              businesses in your community.
+            </p>
 
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px', alignItems: 'center' }}>
-            {/* TODO: replace href="#download" with your App Store / Google Play links */}
-            <a href="#download" style={s.ctaPrimary} aria-label="Download the RewardsNow™ app">
-              Download App
-            </a>
-            <button
-              style={s.ctaGhost}
-              onClick={() => navigate('/business-overview')}
-              aria-label="Learn about partnering your business with RewardsNow™"
-            >
-              For Business Owners
-            </button>
-          </div>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px', alignItems: 'center' }}>
+              {/* TODO: replace href="#download" with your App Store / Google Play links */}
+              <a href="#download" style={s.ctaPrimary} aria-label="Download the RewardsNow™ app">
+                Download App
+              </a>
+              <button
+                style={s.ctaGhost}
+                onClick={() => navigate('/business-overview')}
+                aria-label="Learn about partnering your business with RewardsNow™"
+              >
+                For Business Owners
+              </button>
+            </div>
+          </FadeInSection>
         </section>
 
         {/* ── Hero logo panel ────────────────────────────────────────────── */}
         {!isMobile && (
-          <div style={s.heroBadgeRow} aria-hidden="true">
-            <div style={s.heroBadgeCard}>
-              <img src={LOGO_CARD} alt="RewardsNow™" style={s.heroBadgeImg} />
-              <p style={s.heroBadgeSub}>Community rewards, simplified.</p>
+          <FadeInSection delay={180}>
+            <div style={s.heroBadgeRow} aria-hidden="true">
+              <div style={s.heroBadgeCard}>
+                <img src={LOGO_CARD} alt="RewardsNow™" style={s.heroBadgeImg} />
+                <p style={s.heroBadgeSub}>Community rewards, simplified.</p>
+              </div>
             </div>
-          </div>
+          </FadeInSection>
         )}
 
         {/* ── How it works ───────────────────────────────────────────────── */}
         <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '80px 80px' }}>
-          <div style={s.contentMax}>
-            <p style={s.tag}>HOW IT WORKS</p>
-            <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
-              Shop local. Earn points. Redeem anywhere.
-            </h2>
-            <div style={s.goldLine} />
-            <p style={s.body}>
-              Buy a slice at your favorite local pizzeria and earn RewardsNow™ points. Later,
-              redeem those points for ice cream, coffee, lunch, or other everyday purchases at
-              participating RewardsNow™ businesses.
-            </p>
-            <p style={s.body}>
-              Your points aren't tied to one store — they work across every participating business
-              in the RewardsNow™ network.
-            </p>
-          </div>
+          <FadeInSection>
+            <div style={s.contentMax}>
+              <p style={s.tag}>HOW IT WORKS</p>
+              <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
+                Shop local. Earn points. Redeem anywhere.
+              </h2>
+              <div style={s.goldLine} />
+              <p style={s.body}>
+                Buy a slice at your favorite local pizzeria and earn RewardsNow™ points. Later,
+                redeem those points for ice cream, coffee, lunch, or other everyday purchases at
+                participating RewardsNow™ businesses.
+              </p>
+              <p style={s.body}>
+                Your points aren't tied to one store — they work across every participating business
+                in the RewardsNow™ network.
+              </p>
+            </div>
+          </FadeInSection>
         </section>
 
         {/* ── Features ───────────────────────────────────────────────────── */}
         <section style={{ ...s.sectionAlt, padding: isMobile ? '64px 24px' : '80px 80px' }}>
-          <div style={s.contentMax}>
-            <p style={s.tag}>WHAT YOU GET</p>
-            <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
-              Everything in one app.
-            </h2>
-            <div style={s.goldLine} />
-            <div
-              style={{
-                ...s.featureGrid,
-                gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-              }}
-            >
-              {FEATURES.map(f => (
-                <div key={f.title} style={s.featureCard}>
-                  <p style={s.featureTitle}>{f.title}</p>
-                  <p style={s.featureDesc}>{f.desc}</p>
-                </div>
-              ))}
+          <FadeInSection>
+            <div style={s.contentMax}>
+              <p style={s.tag}>WHAT YOU GET</p>
+              <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
+                Everything in one app.
+              </h2>
+              <div style={s.goldLine} />
+              <div
+                style={{
+                  ...s.featureGrid,
+                  gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                }}
+              >
+                {FEATURES.map((f, i) => (
+                  <FadeInSection key={f.title} delay={i * 80} style={s.featureCard}>
+                    <p style={s.featureTitle}>{f.title}</p>
+                    <p style={s.featureDesc}>{f.desc}</p>
+                  </FadeInSection>
+                ))}
+              </div>
             </div>
-          </div>
+          </FadeInSection>
         </section>
 
         {/* ── Directory callout ──────────────────────────────────────────── */}
         <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '80px 80px' }}>
+          <FadeInSection>
           <div style={s.contentMax}>
             <p style={s.tag}>THE DIRECTORY</p>
             <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
@@ -159,6 +171,7 @@ export default function LandingPage() {
               all in one place.
             </p>
           </div>
+          </FadeInSection>
         </section>
 
         {/* ── Footer CTA ─────────────────────────────────────────────────── */}
@@ -169,6 +182,7 @@ export default function LandingPage() {
             textAlign: 'center',
           }}
         >
+          <FadeInSection>
           <img
             src={LOGO_FOOTER}
             alt="RewardsNow™"
@@ -213,6 +227,7 @@ export default function LandingPage() {
           >
             Business owner? Learn how to join RewardsNow™.
           </button>
+          </FadeInSection>
         </section>
       </main>
     </div>
