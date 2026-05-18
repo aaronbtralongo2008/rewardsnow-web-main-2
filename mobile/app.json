@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "RewardsNow",
+    "slug": "rewardsnow-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo514.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/logo514.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#08011a"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.rewardsnow.mobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "RewardsNow uses your location to show nearby partner businesses on the map."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo514.png",
+        "backgroundColor": "#08011a"
+      },
+      "package": "com.rewardsnow.mobile",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/logo514.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "RewardsNow uses your location to show nearby partner businesses on the map."
+        }
+      ]
+    ]
+  }
+}
