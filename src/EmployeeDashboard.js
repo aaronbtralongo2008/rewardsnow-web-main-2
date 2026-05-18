@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
+import AnimatedStripes from './AnimatedStripes';
 
 const ROYAL = '#2563eb';
+const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
 function EmployeeDashboard() {
   const isMobile = useIsMobile();
@@ -164,8 +166,9 @@ function EmployeeDashboard() {
                 <div style={st.loginOrb1} />
                 <div style={st.loginOrb2} />
                 <div style={st.loginOrb3} />
+                <AnimatedStripes count={4} />
                 <div style={st.loginLeftContent}>
-                  <div style={st.loginBrandBadge}>REWARDSNOW</div>
+                  <img src={LOGO} alt="RewardsNow" style={st.loginLogoImg} />
                   <div style={st.loginGoldLine} />
                   <h1 style={st.loginHeadline}>Built for<br />your team.</h1>
                   <p style={st.loginDesc}>Look up customers and manage reward transactions in seconds.</p>
@@ -173,7 +176,7 @@ function EmployeeDashboard() {
               </div>
           )}
           <div style={{ ...st.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-            {isMobile && <div style={st.mobileLoginBrand}>RewardsNow</div>}
+            {isMobile && <img src={LOGO} alt="RewardsNow" style={st.mobileLoginLogoImg} />}
             <span style={st.loginPortalTag}>EMPLOYEE PORTAL</span>
             <h2 style={st.loginTitle}>Staff Login</h2>
             <p style={st.loginSub}>Sign in to issue customer points</p>
@@ -184,6 +187,11 @@ function EmployeeDashboard() {
             {error && <p style={st.loginError}>{error}</p>}
             <button style={{ ...st.loginBtn, opacity: loading ? 0.7 : 1 }} onClick={handleLogin} disabled={loading}>
               {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+            <div style={st.loginDivider} />
+            <p style={st.loginBizNote}>Are you a business owner?</p>
+            <button style={st.loginBizBtn} onClick={() => navigate('/business-owner')}>
+              Go to Business Owner Portal
             </button>
           </div>
         </div>
@@ -407,6 +415,11 @@ const st = {
   loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid #bfdbfe', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
   loginError: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
+  loginLogoImg: { height: '48px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
+  mobileLoginLogoImg: { height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '28px' },
+  loginDivider: { height: '1px', background: '#e2e8f0', margin: '24px 0 16px' },
+  loginBizNote: { color: '#64748b', fontSize: '13px', margin: '0 0 10px', textAlign: 'center' },
+  loginBizBtn: { width: '100%', padding: '13px 16px', borderRadius: '12px', border: `1.5px solid ${ROYAL}`, background: '#eff6ff', color: ROYAL, fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxSizing: 'border-box', fontFamily: 'inherit' },
   label: { color: '#374151', fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' },
   input: { padding: '10px 14px', borderRadius: '8px', border: '1.5px solid #e5e7eb', background: '#fff', color: '#0f172a', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   primaryBtn: { padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%' },
