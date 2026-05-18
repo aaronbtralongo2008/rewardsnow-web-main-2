@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   Platform,
 } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { API } from '../config';
 
@@ -107,11 +107,13 @@ export default function MapScreen({ navigation }) {
           <MapView
             ref={mapRef}
             style={s.map}
-            provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
+            // iOS uses Apple Maps (PROVIDER_DEFAULT) — no API key needed.
+            // Android uses Google Maps — requires GOOGLE_MAPS_ANDROID_API_KEY in app.json.
+            provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : PROVIDER_DEFAULT}
             initialRegion={initialRegion}
             showsUserLocation={!!userLocation}
             showsMyLocationButton={false}
-            customMapStyle={darkMapStyle}
+            customMapStyle={Platform.OS === 'android' ? darkMapStyle : []}
           >
             {businesses.map((biz, i) => (
               <Marker
