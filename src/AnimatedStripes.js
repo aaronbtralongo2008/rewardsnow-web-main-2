@@ -1,6 +1,4 @@
-// ── Inject keyframes synchronously at module load ─────────────────────────
-// Must happen BEFORE any component mounts, otherwise browsers won't
-// retroactively start animations whose keyframe rule didn't exist at mount time.
+// Keyframes injected at module load — must exist before first render
 ;(() => {
   if (typeof document === 'undefined') return;
   if (document.getElementById('rn-stripe-styles')) return;
@@ -8,10 +6,10 @@
   el.id = 'rn-stripe-styles';
   el.textContent = `
     @keyframes rnBeam {
-      0%   { transform: translateY(-260px); opacity: 0; }
-      4%   { opacity: 1; }
-      96%  { opacity: 1; }
-      100% { transform: translateY(calc(100vh + 260px)); opacity: 0; }
+      0%   { transform: translateY(-220px); opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { transform: translateY(calc(100vh + 220px)); opacity: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
       .rn-beam { animation: none !important; opacity: 0 !important; }
@@ -20,28 +18,23 @@
   document.head.appendChild(el);
 })();
 
-// ── Stripe configs — all blue, varying speed and phase ────────────────────
-// delay is negative so beams start mid-cycle and are immediately visible on load
+// 4 stripes — well-spaced, not cramped
+// Slow durations (22–30s) feel premium and unobtrusive
 const STRIPES = [
-  { left: '8%',  color: 'rgba(59,130,246,1)',    dur:  9, delay:  0  },
-  { left: '21%', color: 'rgba(96,165,250,0.9)',  dur: 13, delay: -3  },
-  { left: '35%', color: 'rgba(59,130,246,0.95)', dur: 10, delay: -7  },
-  { left: '50%', color: 'rgba(34,211,238,0.85)', dur: 12, delay: -5  },
-  { left: '64%', color: 'rgba(59,130,246,0.95)', dur: 11, delay: -9  },
-  { left: '79%', color: 'rgba(96,165,250,0.9)',  dur: 14, delay: -2  },
-  { left: '91%', color: 'rgba(59,130,246,0.9)',  dur: 10, delay: -6  },
+  { left: '15%', dur: 24, delay:  0  },
+  { left: '38%', dur: 30, delay: -9  },
+  { left: '63%', dur: 22, delay: -15 },
+  { left: '84%', dur: 27, delay: -5  },
 ];
 
 /**
- * Linear-style animated vertical stripe grid.
- *
- * Renders visible 1px column rails, scanning blue glow beams, and a subtle
- * horizontal grid — fixed to the viewport so it works on any page height.
+ * Ultra-subtle vertical light stripes — sleek AI-startup / Spotify dark UI feel.
+ * Fixed to viewport, completely non-interactive.
  *
  * Props:
- *   count – stripes to show (default 6; use 4 for narrow panels like login)
+ *   count – stripes to render (default 4; use 2–3 for narrow panels)
  */
-export default function AnimatedStripes({ count = 6 }) {
+export default function AnimatedStripes({ count = 4 }) {
   return (
     <div
       aria-hidden="true"
@@ -51,22 +44,15 @@ export default function AnimatedStripes({ count = 6 }) {
         overflow: 'hidden',
         pointerEvents: 'none',
         zIndex: 0,
-        // Horizontal grid lines — the "blocking" cells Linear uses
-        backgroundImage: [
-          'repeating-linear-gradient(to bottom,',
-          '  transparent,',
-          '  transparent 99px,',
-          '  rgba(148,163,184,0.09) 99px,',
-          '  rgba(148,163,184,0.09) 100px',
-          ')',
-        ].join(' '),
+        // Horizontal accent — single hairline at very bottom of viewport only,
+        // gives the page a subtle "floor" without a busy grid
+        backgroundImage:
+          'linear-gradient(to bottom, transparent 94%, rgba(255,255,255,0.03) 100%)',
       }}
     >
       {STRIPES.slice(0, count).map((st, i) => (
-        // Each stripe is two separate elements so overflow:hidden on the
-        // rail doesn't clip the wider glow spread of the beam.
         <span key={i}>
-          {/* 1px visible column guide */}
+          {/* 1px column guide — barely there */}
           <div
             style={{
               position: 'absolute',
@@ -74,24 +60,21 @@ export default function AnimatedStripes({ count = 6 }) {
               top: 0,
               bottom: 0,
               width: '1px',
-              background: 'rgba(255,255,255,0.13)',
+              background: 'rgba(255,255,255,0.05)',
             }}
           />
-          {/* Glow beam — wider than the rail, centered on it via calc() */}
+          {/* Light beam — almost white, whisper-level opacity */}
           <div
             className="rn-beam"
             style={{
               position: 'absolute',
-              left: `calc(${st.left} - 20px)`,
+              left: `calc(${st.left} - 8px)`,
               top: 0,
-              width: '41px',
-              height: '260px',
-              background: `linear-gradient(to bottom,
-                transparent 0%,
-                ${st.color} 30%,
-                ${st.color} 70%,
-                transparent 100%)`,
-              filter: 'blur(16px)',
+              width: '17px',
+              height: '220px',
+              background:
+                'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.18) 40%, rgba(255,255,255,0.18) 60%, transparent 100%)',
+              filter: 'blur(6px)',
               animation: `rnBeam ${st.dur}s linear ${st.delay}s infinite both`,
             }}
           />
