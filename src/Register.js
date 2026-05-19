@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 import AnimatedStripes from './AnimatedStripes';
@@ -6,6 +7,7 @@ import AnimatedStripes from './AnimatedStripes';
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
 function Register({ onRegister, onBack }) {
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [form, setForm] = useState({
     firstName: '', lastName: '', email: '',
@@ -59,7 +61,7 @@ function Register({ onRegister, onBack }) {
 
           {isMobile ? (
               <div style={s.mobileHeader}>
-                <img src={LOGO} alt="RewardsNow" style={s.mobileLogoImg} />
+                <img src={LOGO} alt="RewardsNow" style={{ ...s.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                 <span style={s.mobileHeaderSub}>Create your free account</span>
               </div>
           ) : (
@@ -69,7 +71,7 @@ function Register({ onRegister, onBack }) {
                 <div style={s.orb3} />
                 <AnimatedStripes count={4} />
                 <div style={s.leftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={s.logoImg} />
+                  <img src={LOGO} alt="RewardsNow" style={{ ...s.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                   <div style={s.goldLine} />
                   <p style={s.tagline}>Join thousands earning rewards every day.</p>
                 </div>

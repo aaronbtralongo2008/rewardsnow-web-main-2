@@ -168,7 +168,7 @@ function EmployeeDashboard() {
                 <div style={st.loginOrb3} />
                 <AnimatedStripes count={4} />
                 <div style={st.loginLeftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={st.loginLogoImg} />
+                  <img src={LOGO} alt="RewardsNow" style={{ ...st.loginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />
                   <div style={st.loginGoldLine} />
                   <h1 style={st.loginHeadline}>Built for<br />your team.</h1>
                   <p style={st.loginDesc}>Look up customers and manage reward transactions in seconds.</p>
@@ -176,7 +176,7 @@ function EmployeeDashboard() {
               </div>
           )}
           <div style={{ ...st.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-            {isMobile && <img src={LOGO} alt="RewardsNow" style={st.mobileLoginLogoImg} />}
+            {isMobile && <img src={LOGO} alt="RewardsNow" style={{ ...st.mobileLoginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />}
             <span style={st.loginPortalTag}>EMPLOYEE PORTAL</span>
             <h2 style={st.loginTitle}>Staff Login</h2>
             <p style={st.loginSub}>Sign in to issue customer points</p>

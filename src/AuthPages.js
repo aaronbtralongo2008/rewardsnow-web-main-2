@@ -39,7 +39,7 @@ export function ForgotPassword() {
         <div style={s.orb2} />
         <AnimatedStripes count={5} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
-          <img src={LOGO} alt="RewardsNow" style={s.brandLogo} />
+          <img src={LOGO} alt="RewardsNow" style={{ ...s.brandLogo, cursor: 'pointer' }} onClick={() => navigate('/')} />
           <button style={s.backLink} onClick={() => navigate('/signin')}>← Back to sign in</button>
           {!sent ? (
               <>
@@ -109,7 +109,7 @@ export function ResetPassword() {
         <div style={s.orb2} />
         <AnimatedStripes count={5} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
-          <img src={LOGO} alt="RewardsNow" style={s.brandLogo} />
+          <img src={LOGO} alt="RewardsNow" style={{ ...s.brandLogo, cursor: 'pointer' }} onClick={() => navigate('/')} />
           {!done ? (
               <>
                 <h1 style={s.title}>Choose a new password</h1>

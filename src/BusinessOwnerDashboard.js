@@ -175,7 +175,7 @@ function BusinessOwnerDashboard() {
                 <div style={s.loginOrb3} />
                 <AnimatedStripes count={4} />
                 <div style={s.loginLeftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={s.loginLogoImg} />
+                  <img src={LOGO} alt="RewardsNow" style={{ ...s.loginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />
                   <div style={s.loginGoldLine} />
                   <h1 style={s.loginHeadline}>Run your business.<br />Reward your customers.</h1>
                   <p style={s.loginDesc}>Manage employees, services, and analytics from your business portal.</p>
@@ -183,7 +183,7 @@ function BusinessOwnerDashboard() {
               </div>
           )}
           <div style={{ ...s.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-            {isMobile && <img src={LOGO} alt="RewardsNow" style={s.mobileLoginLogoImg} />}
+            {isMobile && <img src={LOGO} alt="RewardsNow" style={{ ...s.mobileLoginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />}
             <span style={s.loginPortalTag}>BUSINESS PORTAL</span>
             <h2 style={s.loginTitle}>Owner Dashboard</h2>
             <p style={s.loginSub}>Sign in with your business account</p>

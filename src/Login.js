@@ -44,7 +44,7 @@ function Login({ onLogin }) {
 
           {isMobile ? (
               <div style={styles.mobileHeader}>
-                <img src={LOGO} alt="RewardsNow" style={styles.mobileLogoImg} />
+                <img src={LOGO} alt="RewardsNow" style={{ ...styles.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                 <span style={styles.mobileHeaderSub}>Earn rewards everywhere</span>
               </div>
           ) : (
@@ -54,7 +54,7 @@ function Login({ onLogin }) {
                 <div style={styles.orb3} />
                 <AnimatedStripes count={4} />
               <div style={styles.leftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={styles.logoImg} />
+                  <img src={LOGO} alt="RewardsNow" style={{ ...styles.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                   <div style={styles.goldLine} />
                   <p style={styles.tagline}>One card.<br />Every business.</p>
                   <p style={styles.leftDesc}>Join thousands of customers earning rewards at local businesses across the city.</p>
