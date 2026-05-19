@@ -32,7 +32,7 @@ const FEATURES = [
 export default function LandingPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark } = useTheme();
   const t = themeVars(isDark);
 
   return (
@@ -58,14 +58,6 @@ export default function LandingPage() {
         </button>
 
         <nav style={s.navRight} aria-label="Site navigation">
-          <button
-            style={{ ...s.themeToggle, ...t.themeToggle }}
-            onClick={toggleTheme}
-            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            title={isDark ? 'Light mode' : 'Dark mode'}
-          >
-            {isDark ? '☀' : '☾'}
-          </button>
           <button style={{ ...s.navBtn, ...t.navBtn }} onClick={() => navigate('/signin')}>Sign in</button>
           <button style={s.navBtnPrimary} onClick={() => navigate('/register')}>Get started</button>
         </nav>
@@ -262,10 +254,6 @@ function themeVars(d) {
       border: d ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(0,0,0,0.18)',
       color:  d ? '#fff' : '#0f172a',
     },
-    themeToggle: {
-      border: d ? '1px solid rgba(255,255,255,0.15)' : '1px solid rgba(0,0,0,0.15)',
-      color:  d ? 'rgba(255,255,255,0.65)' : 'rgba(15,23,42,0.55)',
-    },
     heroTitle:  { color: d ? '#fff' : '#0f172a' },
     heroSub:    { color: d ? 'rgba(255,255,255,0.6)' : 'rgba(15,23,42,0.65)' },
     h2:         { color: d ? '#fff' : '#0f172a' },
@@ -354,16 +342,6 @@ const s = {
     fontFamily: 'inherit',
     boxShadow: '0 2px 12px rgba(245,158,11,0.35)',
   },
-  themeToggle: {
-    padding: '6px 10px',
-    background: 'transparent',
-    borderRadius: '8px',
-    fontSize: '15px',
-    cursor: 'pointer',
-    fontFamily: 'inherit',
-    lineHeight: 1,
-  },
-
   // Hero
   hero: { position: 'relative', zIndex: 1 },
   eyebrow: {

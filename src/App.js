@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './ThemeContext';
+import { ThemeProvider, useTheme } from './ThemeContext';
 import Home from './Home';
 import BusinessList from './BusinessList';
 import BusinessDetail from './BusinessDetail';
@@ -15,6 +15,42 @@ import LandingPage from './LandingPage';
 import BusinessOverview from './BusinessOverview';
 import { ForgotPassword, ResetPassword } from './AuthPages';
 
+
+function FloatingThemeToggle() {
+  const { isDark, toggleTheme } = useTheme();
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Light mode' : 'Dark mode'}
+      style={{
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        zIndex: 9999,
+        width: '40px',
+        height: '40px',
+        borderRadius: '50%',
+        border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)'}`,
+        background: isDark ? 'rgba(20,10,40,0.85)' : 'rgba(255,255,255,0.88)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(15,23,42,0.6)',
+        fontSize: '16px',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxShadow: isDark ? '0 2px 16px rgba(0,0,0,0.4)' : '0 2px 16px rgba(0,0,0,0.12)',
+        padding: 0,
+        lineHeight: 1,
+        fontFamily: 'inherit',
+      }}
+    >
+      {isDark ? '☀' : '☾'}
+    </button>
+  );
+}
 
 function App() {
   useEffect(() => {
@@ -107,6 +143,7 @@ function App() {
 
   return (
     <ThemeProvider>
+    <FloatingThemeToggle />
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/signin" element={<Login onLogin={handleLogin} />} />
