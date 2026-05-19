@@ -1,15 +1,74 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeCtx = createContext({ isDark: true, toggleTheme: () => {} });
+
+const DARK = {
+  '--rn-bg':                '#08011a',
+  '--rn-nav-bg':            'rgba(8,1,26,0.85)',
+  '--rn-nav-border':        'rgba(255,255,255,0.07)',
+  '--rn-text':              '#ffffff',
+  '--rn-text-sub':          'rgba(255,255,255,0.6)',
+  '--rn-text-muted':        'rgba(255,255,255,0.45)',
+  '--rn-text-faint':        'rgba(255,255,255,0.3)',
+  '--rn-card-bg':           'rgba(255,255,255,0.04)',
+  '--rn-card-border':       'rgba(255,255,255,0.08)',
+  '--rn-card-border-lg':    'rgba(255,255,255,0.1)',
+  '--rn-section-alt':       'rgba(255,255,255,0.025)',
+  '--rn-section-border':    'rgba(255,255,255,0.06)',
+  '--rn-ghost-border':      'rgba(255,255,255,0.25)',
+  '--rn-ghost-color':       '#ffffff',
+  '--rn-nav-btn-border':    'rgba(255,255,255,0.2)',
+  '--rn-nav-btn-color':     '#ffffff',
+  '--rn-muted-btn-color':   'rgba(255,255,255,0.5)',
+  '--rn-orb1':              'rgba(37,99,235,0.45)',
+  '--rn-orb2':              'rgba(6,182,212,0.22)',
+  '--rn-orb3':              'rgba(217,70,239,0.15)',
+};
+
+const LIGHT = {
+  '--rn-bg':                '#f0f6ff',
+  '--rn-nav-bg':            'rgba(240,246,255,0.92)',
+  '--rn-nav-border':        'rgba(0,0,0,0.08)',
+  '--rn-text':              '#0f172a',
+  '--rn-text-sub':          'rgba(15,23,42,0.65)',
+  '--rn-text-muted':        'rgba(15,23,42,0.45)',
+  '--rn-text-faint':        'rgba(15,23,42,0.3)',
+  '--rn-card-bg':           'rgba(0,0,0,0.03)',
+  '--rn-card-border':       'rgba(0,0,0,0.08)',
+  '--rn-card-border-lg':    'rgba(0,0,0,0.1)',
+  '--rn-section-alt':       'rgba(0,0,0,0.025)',
+  '--rn-section-border':    'rgba(0,0,0,0.06)',
+  '--rn-ghost-border':      'rgba(0,0,0,0.2)',
+  '--rn-ghost-color':       '#0f172a',
+  '--rn-nav-btn-border':    'rgba(0,0,0,0.18)',
+  '--rn-nav-btn-color':     '#0f172a',
+  '--rn-muted-btn-color':   'rgba(15,23,42,0.5)',
+  '--rn-orb1':              'rgba(37,99,235,0.1)',
+  '--rn-orb2':              'rgba(6,182,212,0.07)',
+  '--rn-orb3':              'rgba(217,70,239,0.06)',
+};
+
+function applyVars(isDark) {
+  const vars = isDark ? DARK : LIGHT;
+  const root = document.documentElement;
+  Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+}
 
 export function ThemeProvider({ children }) {
   const [isDark, setIsDark] = useState(() => {
     try {
-      return localStorage.getItem('rn_theme') !== 'light';
+      const saved = localStorage.getItem('rn_theme');
+      const dark = saved !== 'light';
+      applyVars(dark);
+      return dark;
     } catch {
       return true;
     }
   });
+
+  useEffect(() => {
+    applyVars(isDark);
+  }, [isDark]);
 
   const toggleTheme = () => {
     setIsDark(prev => {

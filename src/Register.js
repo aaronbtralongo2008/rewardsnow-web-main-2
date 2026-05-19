@@ -154,19 +154,19 @@ function Register({ onRegister, onBack }) {
 }
 
 const s = {
-  container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  container: { minHeight: '100vh', background: 'var(--rn-bg)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   wrapper: { display: 'flex', flex: 1 },
   mobileHeader: { background: 'linear-gradient(145deg, #0f172a 0%, #1e3a8a 100%)', padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
   mobileLogoImg: { height: '44px', width: 'auto', objectFit: 'contain', marginBottom: '2px' },
   mobileHeaderSub: { color: 'rgba(255,255,255,0.6)', fontSize: '13px', marginTop: '4px' },
-  leftPanel: { flex: 1, background: '#08011a', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
+  leftPanel: { flex: 1, background: 'var(--rn-bg)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
   orb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
   orb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
   leftContent: { position: 'relative', zIndex: 2 },
   logoImg: { height: '52px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
   goldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
-  tagline: { color: '#fff', fontSize: '3.4rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 16px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
+  tagline: { color: 'var(--rn-text)', fontSize: '3.4rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 16px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
   rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#f0f7ff', boxSizing: 'border-box', overflowY: 'auto' },
   brandName: { color: '#0f172a', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
   brandSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 24px 0' },

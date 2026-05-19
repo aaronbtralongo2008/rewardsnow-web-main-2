@@ -469,15 +469,15 @@ function BusinessOwnerDashboard() {
 }
 
 const s = {
-  loginLeft: { flex: 1, background: '#08011a', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
-  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  loginLeft: { flex: 1, background: 'var(--rn-bg)', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
+  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'var(--rn-orb1)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'var(--rn-orb2)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
+  loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'var(--rn-orb3)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
   loginLeftContent: { position: 'relative', zIndex: 2 },
   loginLogoImg: { height: '52px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
   loginGoldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
-  loginHeadline: { color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
-  loginDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
+  loginHeadline: { color: 'var(--rn-text)', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
+  loginDesc: { color: 'var(--rn-text-sub)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
   loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#f0f7ff' },
   mobileLoginLogoImg: { height: '44px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '32px' },
   loginPortalTag: { display: 'inline-block', background: '#bfdbfe', color: '#2563eb', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },

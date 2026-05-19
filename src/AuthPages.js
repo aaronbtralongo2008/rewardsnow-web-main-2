@@ -142,9 +142,9 @@ export function ResetPassword() {
 }
 
 const s = {
-  root: { minHeight: '100vh', background: '#08011a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.5)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  orb2: { position: 'absolute', bottom: '-80px', right: '-60px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.25)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
+  root: { minHeight: '100vh', background: 'var(--rn-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative', overflow: 'hidden' },
+  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'var(--rn-orb1)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  orb2: { position: 'absolute', bottom: '-80px', right: '-60px', width: '420px', height: '420px', borderRadius: '50%', background: 'var(--rn-orb2)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
   card: { background: '#f0f7ff', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2 },
   brandLogo: { height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '12px' },
   backLink: { background: 'none', border: 'none', color: '#60a5fa', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
