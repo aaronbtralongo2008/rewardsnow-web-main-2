@@ -23,6 +23,16 @@ const DARK = {
   '--rn-orb1':              'rgba(37,99,235,0.45)',
   '--rn-orb2':              'rgba(6,182,212,0.22)',
   '--rn-orb3':              'rgba(217,70,239,0.15)',
+  '--rn-form-bg':           '#0a1628',
+  '--rn-form-text':         '#f0f6ff',
+  '--rn-form-sub':          'rgba(255,255,255,0.55)',
+  '--rn-input-bg':          'rgba(255,255,255,0.07)',
+  '--rn-input-border':      'rgba(255,255,255,0.14)',
+  '--rn-input-color':       '#e2e8f0',
+  '--rn-outline-btn-bg':    'rgba(255,255,255,0.06)',
+  '--rn-outline-btn-border':'rgba(255,255,255,0.18)',
+  '--rn-outline-btn-color': 'rgba(255,255,255,0.85)',
+  '--rn-divider':           'rgba(255,255,255,0.1)',
 };
 
 const LIGHT = {
@@ -46,6 +56,16 @@ const LIGHT = {
   '--rn-orb1':              'rgba(37,99,235,0.1)',
   '--rn-orb2':              'rgba(6,182,212,0.07)',
   '--rn-orb3':              'rgba(217,70,239,0.06)',
+  '--rn-form-bg':           '#f0f7ff',
+  '--rn-form-text':         '#0f172a',
+  '--rn-form-sub':          '#64748b',
+  '--rn-input-bg':          '#ffffff',
+  '--rn-input-border':      '#bfdbfe',
+  '--rn-input-color':       '#0f172a',
+  '--rn-outline-btn-bg':    '#ffffff',
+  '--rn-outline-btn-border':'#bfdbfe',
+  '--rn-outline-btn-color': '#374151',
+  '--rn-divider':           '#bfdbfe',
 };
 
 function applyVars(isDark) {
