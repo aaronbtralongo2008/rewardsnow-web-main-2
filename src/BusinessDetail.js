@@ -146,12 +146,12 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
 }
 
 const s = {
-  root: { minHeight: '100vh', background: '#f9fafb', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" },
-  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#fff', borderBottom: '1px solid #f0f0f0', position: 'sticky', top: 0, zIndex: 100 },
+  root: { minHeight: '100vh', background: 'var(--rn-bg)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" },
+  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: 'var(--rn-nav-bg)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid var(--rn-nav-border)', position: 'sticky', top: 0, zIndex: 100 },
   navLeft: { display: 'flex', alignItems: 'center', gap: '16px' },
-  backBtn: { background: 'none', border: '1px solid #e5e7eb', color: '#374151', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px' },
-  navBrand: { color: '#0a0a0a', fontSize: '15px', fontWeight: '700' },
-  navLogout: { background: 'none', border: '1px solid #e5e7eb', color: '#374151', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 14px', borderRadius: '6px' },
+  backBtn: { background: 'none', border: '1px solid var(--rn-outline-btn-border)', color: 'var(--rn-outline-btn-color)', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px' },
+  navBrand: { color: 'var(--rn-text)', fontSize: '15px', fontWeight: '700' },
+  navLogout: { background: 'none', border: '1px solid var(--rn-outline-btn-border)', color: 'var(--rn-outline-btn-color)', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 14px', borderRadius: '6px' },
   body: { maxWidth: '900px', margin: '0 auto', boxSizing: 'border-box' },
   bizHeader: { display: 'flex', alignItems: 'flex-start', marginBottom: '32px' },
   avatar: { borderRadius: '14px', background: '#0a0f1e', color: '#fff', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
@@ -168,7 +168,7 @@ const s = {
   flashSuccess: { background: '#f0fdf4', color: '#16a34a', border: '1px solid #bbf7d0' },
   flashError: { background: '#fef2f2', color: '#dc2626', border: '1px solid #fecaca' },
   section: {},
-  sectionTitle: { color: '#0a0a0a', fontSize: '15px', fontWeight: '700', margin: '0 0 16px', letterSpacing: '-0.01em' },
+  sectionTitle: { color: 'var(--rn-text)', fontSize: '15px', fontWeight: '700', margin: '0 0 16px', letterSpacing: '-0.01em' },
   grid: { display: 'grid', gap: '14px' },
   skeleton: { height: '160px', borderRadius: '12px', background: 'linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
   card: { background: '#fff', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' },

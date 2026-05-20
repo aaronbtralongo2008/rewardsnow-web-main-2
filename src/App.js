@@ -68,7 +68,7 @@ function App() {
 
   const [customer, setCustomer] = useState(() => {
     try {
-      const saved = sessionStorage.getItem('rn_customer');
+      const saved = localStorage.getItem('rn_customer');
       return saved ? JSON.parse(saved) : null;
     } catch { return null; }
   });
@@ -85,9 +85,9 @@ function App() {
 
   useEffect(() => {
     if (customer) {
-      sessionStorage.setItem('rn_customer', JSON.stringify(customer));
+      localStorage.setItem('rn_customer', JSON.stringify(customer));
     } else {
-      sessionStorage.removeItem('rn_customer');
+      localStorage.removeItem('rn_customer');
     }
   }, [customer]);
 
@@ -111,6 +111,7 @@ function App() {
   const handleLogout = () => {
     setCustomer(null);
     setSelectedBusiness(null);
+    localStorage.removeItem('rn_customer');
     sessionStorage.clear();
     navigate('/');
   };
