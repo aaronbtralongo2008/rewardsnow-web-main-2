@@ -34,6 +34,7 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
           <div style={s.navRight}>
             <button style={s.navLink} onClick={() => onNavigate('/businesses')}>Partners</button>
             <button style={s.navLink} onClick={() => onNavigate('/map')}>Map</button>
+            <button style={s.navLink} onClick={() => onNavigate('/settings')}>Settings</button>
             <button style={s.navLogout} onClick={onLogout}>Sign out</button>
           </div>
         </nav>

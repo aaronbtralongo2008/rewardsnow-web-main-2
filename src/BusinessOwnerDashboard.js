@@ -25,6 +25,13 @@ function BusinessOwnerDashboard() {
   const [msgType, setMsgType] = useState('success');
   const [saving, setSaving] = useState(false);
 
+  const [settingsProfile, setSettingsProfile] = useState({ firstName: '', lastName: '', email: '' });
+  const [settingsProfileSaving, setSettingsProfileSaving] = useState(false);
+  const [settingsProfileMsg, setSettingsProfileMsg] = useState({ text: '', type: '' });
+  const [settingsPw, setSettingsPw] = useState({ current: '', next: '', confirm: '' });
+  const [settingsPwSaving, setSettingsPwSaving] = useState(false);
+  const [settingsPwMsg, setSettingsPwMsg] = useState({ text: '', type: '' });
+
   const [empForm, setEmpForm] = useState({ email: '', password: '', firstName: '', lastName: '', role: 'STAFF' });
   const [showEmpForm, setShowEmpForm] = useState(false);
   const [svcForm, setSvcForm] = useState({ name: '', description: '', rewardsCost: '', rewardsGrant: '' });
@@ -52,6 +59,7 @@ function BusinessOwnerDashboard() {
       });
       const meData = await meRes.json();
       setAccount(meData);
+      setSettingsProfile({ firstName: meData.firstName || '', lastName: meData.lastName || '', email: meData.email || '' });
     } catch { setError('Could not connect to server'); }
   };
 
@@ -161,6 +169,53 @@ function BusinessOwnerDashboard() {
     } catch { showMsg('Could not delete service.', 'error'); }
   };
 
+  const handleSettingsProfileSave = async () => {
+    if (settingsProfileSaving) return;
+    setSettingsProfileSaving(true);
+    setSettingsProfileMsg({ text: '', type: '' });
+    try {
+      const res = await fetch(`${API}/business-accounts/me`, {
+        method: 'PATCH', headers: auth,
+        body: JSON.stringify(settingsProfile),
+      });
+      const data = await res.json();
+      if (data.error) {
+        setSettingsProfileMsg({ text: data.error, type: 'error' });
+      } else {
+        setSettingsProfileMsg({ text: 'Profile updated.', type: 'success' });
+        setAccount(prev => ({ ...prev, ...settingsProfile }));
+      }
+    } catch {
+      setSettingsProfileMsg({ text: 'Could not connect.', type: 'error' });
+    }
+    setSettingsProfileSaving(false);
+  };
+
+  const handleSettingsPwSave = async () => {
+    if (settingsPwSaving) return;
+    if (!settingsPw.current) { setSettingsPwMsg({ text: 'Enter your current password.', type: 'error' }); return; }
+    if (settingsPw.next.length < 8) { setSettingsPwMsg({ text: 'New password must be at least 8 characters.', type: 'error' }); return; }
+    if (settingsPw.next !== settingsPw.confirm) { setSettingsPwMsg({ text: 'Passwords do not match.', type: 'error' }); return; }
+    setSettingsPwSaving(true);
+    setSettingsPwMsg({ text: '', type: '' });
+    try {
+      const res = await fetch(`${API}/business-accounts/change-password`, {
+        method: 'POST', headers: auth,
+        body: JSON.stringify({ currentPassword: settingsPw.current, newPassword: settingsPw.next }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        setSettingsPwMsg({ text: data.error, type: 'error' });
+      } else {
+        setSettingsPwMsg({ text: 'Password updated.', type: 'success' });
+        setSettingsPw({ current: '', next: '', confirm: '' });
+      }
+    } catch {
+      setSettingsPwMsg({ text: 'Could not connect.', type: 'error' });
+    }
+    setSettingsPwSaving(false);
+  };
+
   const Skeleton = ({ h = 72 }) => (
       <div style={{ height: h, borderRadius: 12, marginBottom: 12, background: 'linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' }} />
   );
@@ -209,6 +264,7 @@ function BusinessOwnerDashboard() {
     { key: 'stats', label: 'Analytics' },
     { key: 'employees', label: 'Employees' },
     { key: 'services', label: 'Services' },
+    { key: 'settings', label: 'Settings' },
   ];
 
   return (
@@ -462,6 +518,79 @@ function BusinessOwnerDashboard() {
                   )}
                 </>
             )}
+            {tab === 'settings' && (
+                <>
+                  <h2 style={s.pageTitle}>Settings</h2>
+
+                  <div style={{ ...s.settingsCard, marginTop: '16px' }}>
+                    <p style={s.settingsCardTitle}>Account Info</p>
+                    <p style={s.settingsCardSub}>Update your name and email address</p>
+                    <div style={{ ...s.formRow, flexDirection: isMobile ? 'column' : 'row' }}>
+                      <div style={s.formHalf}>
+                        <label style={s.settingsLabel}>First Name</label>
+                        <input style={s.settingsInput} value={settingsProfile.firstName}
+                          onChange={e => setSettingsProfile({ ...settingsProfile, firstName: e.target.value })}
+                          placeholder="First name" autoComplete="given-name" />
+                      </div>
+                      <div style={s.formHalf}>
+                        <label style={s.settingsLabel}>Last Name</label>
+                        <input style={s.settingsInput} value={settingsProfile.lastName}
+                          onChange={e => setSettingsProfile({ ...settingsProfile, lastName: e.target.value })}
+                          placeholder="Last name" autoComplete="family-name" />
+                      </div>
+                    </div>
+                    <label style={s.settingsLabel}>Email</label>
+                    <input style={s.settingsInput} type="email" value={settingsProfile.email}
+                      onChange={e => setSettingsProfile({ ...settingsProfile, email: e.target.value })}
+                      placeholder="you@email.com" autoComplete="email" />
+                    {settingsProfileMsg.text && (
+                      <p style={{ ...s.settingsFeedback, color: settingsProfileMsg.type === 'error' ? '#c0392b' : '#2e7d52', background: settingsProfileMsg.type === 'error' ? '#fdeaea' : '#e8f4ed', border: `1px solid ${settingsProfileMsg.type === 'error' ? '#fbc0c0' : '#a8d5b5'}` }}>
+                        {settingsProfileMsg.text}
+                      </p>
+                    )}
+                    <button style={{ ...s.addBtn, opacity: settingsProfileSaving ? 0.7 : 1 }}
+                      onClick={handleSettingsProfileSave} disabled={settingsProfileSaving}>
+                      {settingsProfileSaving ? 'Saving…' : 'Save Changes'}
+                    </button>
+                  </div>
+
+                  <div style={s.settingsCard}>
+                    <p style={s.settingsCardTitle}>Security</p>
+                    <p style={s.settingsCardSub}>Change your password</p>
+                    <label style={s.settingsLabel}>Current Password</label>
+                    <input style={s.settingsInput} type="password" value={settingsPw.current}
+                      onChange={e => setSettingsPw({ ...settingsPw, current: e.target.value })}
+                      placeholder="••••••••" autoComplete="current-password" />
+                    <label style={s.settingsLabel}>New Password</label>
+                    <input style={s.settingsInput} type="password" value={settingsPw.next}
+                      onChange={e => setSettingsPw({ ...settingsPw, next: e.target.value })}
+                      placeholder="At least 8 characters" autoComplete="new-password" />
+                    <label style={s.settingsLabel}>Confirm New Password</label>
+                    <input style={s.settingsInput} type="password" value={settingsPw.confirm}
+                      onChange={e => setSettingsPw({ ...settingsPw, confirm: e.target.value })}
+                      placeholder="••••••••" autoComplete="new-password"
+                      onKeyDown={e => e.key === 'Enter' && handleSettingsPwSave()} />
+                    {settingsPwMsg.text && (
+                      <p style={{ ...s.settingsFeedback, color: settingsPwMsg.type === 'error' ? '#c0392b' : '#2e7d52', background: settingsPwMsg.type === 'error' ? '#fdeaea' : '#e8f4ed', border: `1px solid ${settingsPwMsg.type === 'error' ? '#fbc0c0' : '#a8d5b5'}` }}>
+                        {settingsPwMsg.text}
+                      </p>
+                    )}
+                    <button style={{ ...s.addBtn, opacity: settingsPwSaving ? 0.7 : 1 }}
+                      onClick={handleSettingsPwSave} disabled={settingsPwSaving}>
+                      {settingsPwSaving ? 'Updating…' : 'Update Password'}
+                    </button>
+                  </div>
+
+                  <div style={{ ...s.settingsCard, border: '1.5px solid #fbc0c0', background: '#fffafa' }}>
+                    <p style={{ ...s.settingsCardTitle, color: '#c0392b' }}>Sign Out</p>
+                    <p style={s.settingsCardSub}>Sign out of the business portal on this device.</p>
+                    <button style={s.settingsDangerBtn}
+                      onClick={() => { setToken(null); setAccount(null); }}>
+                      Sign Out
+                    </button>
+                  </div>
+                </>
+            )}
           </div>
         </div>
       </div>
@@ -554,6 +683,13 @@ const s = {
   redeemPill: { background: '#eff6ff', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' },
   editBtn: { padding: '5px 10px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
   deleteBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  settingsCard: { background: '#fff', borderRadius: '14px', padding: '22px', border: '1px solid #eee', marginBottom: '16px' },
+  settingsCardTitle: { color: '#111', fontSize: '14px', fontWeight: '700', margin: '0 0 3px' },
+  settingsCardSub: { color: '#888', fontSize: '12px', margin: '0 0 18px', lineHeight: 1.5 },
+  settingsLabel: { color: '#b45309', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', display: 'block', marginBottom: '6px' },
+  settingsInput: { width: '100%', padding: '11px 14px', borderRadius: '9px', border: '1.5px solid #e5e7eb', background: '#fafafa', color: '#0f172a', fontSize: '14px', marginBottom: '16px', outline: 'none', boxSizing: 'border-box', fontFamily: 'inherit' },
+  settingsFeedback: { fontSize: '13px', padding: '10px 14px', borderRadius: '8px', margin: '0 0 14px' },
+  settingsDangerBtn: { padding: '10px 20px', borderRadius: '9px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
 };
 
 export default BusinessOwnerDashboard;

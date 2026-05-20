@@ -14,6 +14,7 @@ import EmployeeDashboard from './EmployeeDashboard';
 import LandingPage from './LandingPage';
 import BusinessOverview from './BusinessOverview';
 import { ForgotPassword, ResetPassword } from './AuthPages';
+import CustomerSettings from './CustomerSettings';
 
 
 function FloatingThemeToggle() {
@@ -103,6 +104,10 @@ function App() {
     navigate('/home');
   };
 
+  const handleCustomerUpdate = (updated) => {
+    setCustomer(updated);
+  };
+
   const handleLogout = () => {
     setCustomer(null);
     setSelectedBusiness(null);
@@ -154,6 +159,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPassword />} />
 
       <Route path="/home" element={<Protected><Home customer={customer} onLogout={handleLogout} onNavigate={navigate} refreshKey={refreshKey} /></Protected>} />
+      <Route path="/settings" element={<Protected><CustomerSettings customer={customer} onCustomerUpdate={handleCustomerUpdate} onLogout={handleLogout} /></Protected>} />
       <Route path="/businesses" element={<Protected><BusinessList key={refreshKey} customer={customer} onLogout={handleLogout} onSelectBusiness={handleSelectBusiness} onNavigate={navigate} /></Protected>} />
       <Route path="/business" element={<Protected><BusinessDetailWrapper /></Protected>} />
       <Route path="/map" element={<Protected><BusinessMap key={refreshKey} customer={customer} onLogout={handleLogout} onNavigate={navigate} onSelectBusiness={handleSelectBusiness} /></Protected>} />
