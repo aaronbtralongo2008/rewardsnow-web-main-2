@@ -18,6 +18,8 @@ function AdminDashboard() {
   const [actionType, setActionType] = useState('success');
   const [acting, setActing] = useState(null);
   const [rejectNotes, setRejectNotes] = useState({});
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({});
 
   const handleLogin = async () => {
     setError('');
@@ -124,6 +126,52 @@ function AdminDashboard() {
       showMsg('Business terminated.');
       fetchBusinesses();
     } catch { showMsg('Error terminating business.', 'error'); }
+  };
+
+  const openEdit = (biz) => {
+    setEditingId(biz.id);
+    setEditForm({
+      category: biz.category || '',
+      tags: biz.tags || '',
+      priceRange: biz.priceRange || 0,
+      rankScore: biz.rankScore || 0,
+      featured: biz.featured || false,
+      featuredUntil: biz.featuredUntil ? biz.featuredUntil.substring(0, 10) : '',
+    });
+  };
+
+  const handleSaveDetails = async (id) => {
+    try {
+      const res = await fetch(`${API}/businesses/${id}/details`, {
+        method: 'PUT',
+        headers: auth,
+        body: JSON.stringify({
+          category: editForm.category || null,
+          tags: editForm.tags || null,
+          priceRange: parseInt(editForm.priceRange) || null,
+        }),
+      });
+      const data = await res.json();
+      if (data.error) showMsg(`Error: ${data.error}`, 'error');
+      else { showMsg('Details saved.'); fetchBusinesses(); }
+    } catch { showMsg('Error saving details.', 'error'); }
+  };
+
+  const handleSaveRank = async (id) => {
+    try {
+      const res = await fetch(`${API}/businesses/${id}/rank`, {
+        method: 'PUT',
+        headers: auth,
+        body: JSON.stringify({
+          rankScore: parseFloat(editForm.rankScore) || 0,
+          featured: editForm.featured,
+          featuredUntil: editForm.featuredUntil || null,
+        }),
+      });
+      const data = await res.json();
+      if (data.error) showMsg(`Error: ${data.error}`, 'error');
+      else { showMsg('Ranking saved.'); fetchBusinesses(); }
+    } catch { showMsg('Error saving ranking.', 'error'); }
   };
 
   if (!token) {
@@ -253,22 +301,83 @@ function AdminDashboard() {
                   ) : businesses.length === 0 ? (
                       <div style={s.empty}><p style={{ color: '#888', margin: 0 }}>No businesses yet.</p></div>
                   ) : (
-                      <div style={{ ...s.bizGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>
+                      <div style={{ ...s.bizGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))' }}>
                         {businesses.map(biz => (
                             <div key={biz.id} style={s.bizCard}>
-                              <div style={s.bizInitial}>{biz.name.charAt(0).toUpperCase()}</div>
-                              <div style={s.bizInfo}>
-                                <p style={s.bizName}>{biz.name}</p>
-                                <p style={s.bizAddr}>{biz.address || 'No address'}</p>
-                                <div style={s.badgeRow}>
-                                  {biz.paidPartner && <span style={s.tag}>Featured</span>}
-                                  {biz.uniqueRewardsPoint && <span style={s.tag}>Custom Points</span>}
-                                </div>
-                                <div style={s.bizActions}>
-                                  <button style={s.suspendBtn} onClick={() => handleSuspend(biz.id)}>Suspend</button>
-                                  <button style={s.terminateBtn} onClick={() => handleTerminate(biz.id)}>Terminate</button>
+                              <div style={s.bizCardRow}>
+                                <div style={s.bizInitial}>{biz.name.charAt(0).toUpperCase()}</div>
+                                <div style={s.bizInfo}>
+                                  <p style={s.bizName}>{biz.name}</p>
+                                  <p style={s.bizAddr}>{biz.address || 'No address'}</p>
+                                  <div style={s.badgeRow}>
+                                    {biz.featured && <span style={s.tag}>⭐ Featured</span>}
+                                    {biz.paidPartner && <span style={s.tag}>Partner</span>}
+                                    {biz.uniqueRewardsPoint && <span style={s.tag}>Custom Points</span>}
+                                    {biz.category && <span style={s.tagPurple}>{biz.category}</span>}
+                                    {biz.priceRange > 0 && <span style={s.tagGreen}>{'$'.repeat(biz.priceRange)}</span>}
+                                  </div>
+                                  <div style={s.bizActions}>
+                                    <button style={s.suspendBtn} onClick={() => handleSuspend(biz.id)}>Suspend</button>
+                                    <button style={s.terminateBtn} onClick={() => handleTerminate(biz.id)}>Terminate</button>
+                                    <button style={s.editBtn} onClick={() => editingId === biz.id ? setEditingId(null) : openEdit(biz)}>
+                                      {editingId === biz.id ? 'Close' : 'Edit'}
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
+                              {editingId === biz.id && (
+                                  <div style={s.editPanel}>
+                                    <div style={s.editSection}>
+                                      <p style={s.editSectionTitle}>Profile Details</p>
+                                      <div style={s.editRow}>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Category</label>
+                                          <select style={s.editSelect} value={editForm.category} onChange={e => setEditForm({ ...editForm, category: e.target.value })}>
+                                            <option value="">— None —</option>
+                                            <option value="food">Food & Drink</option>
+                                            <option value="retail">Retail</option>
+                                            <option value="services">Services</option>
+                                            <option value="health">Health & Wellness</option>
+                                            <option value="entertainment">Entertainment</option>
+                                            <option value="travel">Travel</option>
+                                            <option value="other">Other</option>
+                                          </select>
+                                        </div>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Price Range</label>
+                                          <select style={s.editSelect} value={editForm.priceRange} onChange={e => setEditForm({ ...editForm, priceRange: e.target.value })}>
+                                            <option value={0}>— None —</option>
+                                            <option value={1}>$ (Budget)</option>
+                                            <option value={2}>$$ (Moderate)</option>
+                                            <option value={3}>$$$ (Expensive)</option>
+                                            <option value={4}>$$$$ (Very Expensive)</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <label style={s.editLabel}>Tags (comma-separated)</label>
+                                      <input style={s.editInput} placeholder="e.g. coffee, wifi, vegan" value={editForm.tags} onChange={e => setEditForm({ ...editForm, tags: e.target.value })} />
+                                      <button style={s.saveBtn} onClick={() => handleSaveDetails(biz.id)}>Save Details</button>
+                                    </div>
+                                    <div style={s.editSection}>
+                                      <p style={s.editSectionTitle}>Ranking & Featured</p>
+                                      <div style={s.editRow}>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Rank Score</label>
+                                          <input style={s.editInput} type="number" step="0.1" value={editForm.rankScore} onChange={e => setEditForm({ ...editForm, rankScore: e.target.value })} />
+                                        </div>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Featured Until</label>
+                                          <input style={s.editInput} type="date" value={editForm.featuredUntil} onChange={e => setEditForm({ ...editForm, featuredUntil: e.target.value })} />
+                                        </div>
+                                      </div>
+                                      <label style={{ ...s.editLabel, display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '10px' }}>
+                                        <input type="checkbox" checked={editForm.featured} onChange={e => setEditForm({ ...editForm, featured: e.target.checked })} />
+                                        Mark as Featured
+                                      </label>
+                                      <button style={s.saveBtn} onClick={() => handleSaveRank(biz.id)}>Save Ranking</button>
+                                    </div>
+                                  </div>
+                              )}
                             </div>
                         ))}
                       </div>
@@ -320,7 +429,8 @@ const s = {
   approveBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#2e7d52', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' },
   rejectBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#c0392b', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' },
   bizGrid: { display: 'grid', gap: '14px' },
-  bizCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid #eee', display: 'flex', alignItems: 'flex-start', gap: '12px' },
+  bizCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', gap: '0' },
+  bizCardRow: { display: 'flex', alignItems: 'flex-start', gap: '12px' },
   bizInitial: { width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #152a9e, #1e35b5)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   bizInfo: { flex: 1, minWidth: 0 },
   bizName: { color: '#111', fontSize: '13px', fontWeight: '700', margin: '0 0 3px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
@@ -328,6 +438,18 @@ const s = {
   bizActions: { display: 'flex', gap: '6px', marginTop: '8px', flexWrap: 'wrap' },
   suspendBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #e0a020', background: 'transparent', color: '#e0a020', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
   terminateBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #c0392b', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  editBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #2040C8', background: 'transparent', color: '#2040C8', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  tagPurple: { background: '#f5f3ff', color: '#7c3aed', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  tagGreen: { background: '#f0fdf4', color: '#166534', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  editPanel: { borderTop: '1px solid #f0f0f0', marginTop: '12px', paddingTop: '14px', display: 'flex', flexDirection: 'column', gap: '16px' },
+  editSection: { display: 'flex', flexDirection: 'column', gap: '8px' },
+  editSectionTitle: { color: '#555', fontSize: '11px', fontWeight: '700', margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' },
+  editRow: { display: 'flex', gap: '10px' },
+  editField: { flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' },
+  editLabel: { color: '#666', fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' },
+  editSelect: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  editInput: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box', fontFamily: 'inherit', marginBottom: '2px' },
+  saveBtn: { padding: '7px 14px', borderRadius: '8px', border: 'none', background: ROYAL, color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', alignSelf: 'flex-start' },
 };
 
 export default AdminDashboard;
