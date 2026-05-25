@@ -22,7 +22,6 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
   const [redeeming, setRedeeming] = useState(null);
   const [compatibility, setCompatibility] = useState(null);
   const [aiInsight, setAiInsight] = useState(null);
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     fetch(`${API}/businesses/${business.id}/services`)
@@ -80,12 +79,9 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
     }
   };
 
-  const copyAddress = () => {
+  const openDirections = () => {
     if (!business.address) return;
-    navigator.clipboard.writeText(business.address).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(business.address)}`, '_blank');
   };
 
   const tags = business.tags ? business.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
@@ -124,9 +120,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
                 {business.uniqueRewardsPoint ? 'Custom rewards' : 'RN Points'}
               </span>
               {business.address && (
-                <button style={{ ...s.directionsBtn, ...(copied ? s.directionsBtnCopied : {}) }} onClick={copyAddress}>
-                  {copied ? '✓ Copied!' : 'Copy address'}
-                </button>
+                <button style={s.directionsBtn} onClick={openDirections}>Get directions →</button>
               )}
             </div>
             {tags.length > 0 && (
@@ -255,8 +249,7 @@ const s = {
   priceTag: { background: '#f0fdf4', color: '#16a34a', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '6px', letterSpacing: '0.05em' },
   typeTag: { background: 'var(--rn-card-bg)', color: 'var(--rn-text-muted)', fontSize: '11px', fontWeight: '600', padding: '3px 10px', borderRadius: '6px', border: '1px solid var(--rn-card-border)' },
   typeTagCustom: { background: '#f5f3ff', color: '#7c3aed', border: '1px solid #e9d5ff' },
-  directionsBtn: { background: 'none', border: '1px solid var(--rn-outline-btn-border)', color: 'var(--rn-outline-btn-color)', fontSize: '12px', fontWeight: '500', cursor: 'pointer', padding: '3px 10px', borderRadius: '6px', transition: 'all 0.15s' },
-  directionsBtnCopied: { background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#16a34a' },
+  directionsBtn: { background: 'none', border: '1px solid var(--rn-outline-btn-border)', color: 'var(--rn-outline-btn-color)', fontSize: '12px', fontWeight: '500', cursor: 'pointer', padding: '3px 10px', borderRadius: '6px' },
   tagsRow: { display: 'flex', gap: '6px', flexWrap: 'wrap' },
   tagChip: { background: 'var(--rn-card-bg)', color: 'var(--rn-text-muted)', fontSize: '11px', fontWeight: '500', padding: '2px 8px', borderRadius: '20px', border: '1px solid var(--rn-card-border)' },
   compatCard: { background: '#fff', border: '1.5px solid #bfdbfe', borderRadius: '14px', padding: '18px', marginBottom: '20px', boxShadow: '0 2px 12px rgba(37,99,235,0.08)' },
