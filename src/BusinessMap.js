@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -14,32 +14,70 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
+async function geocodeAddress(address) {
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`;
+    const res = await fetch(url, { headers: { 'Accept-Language': 'en-US,en' } });
+    const data = await res.json();
+    if (Array.isArray(data) && data[0]) {
+      return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+    }
+  } catch {}
+  return null;
+}
+
 function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
   const isMobile = useIsMobile();
-  const [businesses, setBusinesses] = useState([]);
+  const [allBusinesses, setAllBusinesses] = useState([]);
+  const [mappedBusinesses, setMappedBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [geocoding, setGeocoding] = useState(false);
   const [userLocation, setUserLocation] = useState([26.35, -80.08]);
   const [showSidebar, setShowSidebar] = useState(!isMobile);
+  const cancelRef = useRef(false);
 
   useEffect(() => {
+    cancelRef.current = false;
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
           (pos) => setUserLocation([pos.coords.latitude, pos.coords.longitude]),
           () => {}
       );
     }
-    const fetchBusinesses = async () => {
+
+    const run = async () => {
       try {
         const res = await fetch(`${API}/businesses`);
         const data = await res.json();
-        setBusinesses(Array.isArray(data) ? data.filter(b => b.latitude && b.longitude) : []);
+        const list = Array.isArray(data) ? data : [];
+        setAllBusinesses(list);
+        setLoading(false);
+
+        const withAddress = list.filter(b => b.address);
+        if (withAddress.length === 0) return;
+
+        setGeocoding(true);
+        for (const biz of withAddress) {
+          if (cancelRef.current) break;
+          const coords = await geocodeAddress(biz.address);
+          if (coords && !cancelRef.current) {
+            setMappedBusinesses(prev => [...prev, { ...biz, coords }]);
+          }
+          // Nominatim rate limit: max 1 req/sec
+          await new Promise(r => setTimeout(r, 1100));
+        }
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
+        setGeocoding(false);
       }
     };
-    fetchBusinesses();
+
+    run();
+
+    return () => { cancelRef.current = true; };
   }, []);
 
   return (
@@ -71,33 +109,43 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
                 flexShrink: isMobile ? 0 : undefined,
               }}>
                 <h2 style={s.sidebarTitle}>Nearby Partners</h2>
-                <p style={s.sidebarSub}>Tap a business or map pin to view rewards</p>
+                <p style={s.sidebarSub}>
+                  {geocoding
+                      ? `Locating businesses… (${mappedBusinesses.length}/${allBusinesses.filter(b => b.address).length})`
+                      : 'Tap a business or map pin to view rewards'}
+                </p>
                 {loading ? (
                     <div style={s.skeletonList}>
                       {[1, 2, 3].map(i => <div key={i} style={s.skeleton} />)}
                     </div>
-                ) : businesses.length === 0 ? (
+                ) : allBusinesses.length === 0 ? (
                     <div style={s.emptyState}>
-                      <p style={s.emptyText}>No businesses with locations yet.</p>
+                      <p style={s.emptyText}>No businesses yet.</p>
                     </div>
                 ) : (
                     <div style={s.bizList}>
-                      {businesses.map((biz) => (
-                          <div
-                              key={biz.id}
-                              style={s.bizCard}
-                              onClick={() => onSelectBusiness(biz)}
-                              onMouseEnter={e => e.currentTarget.style.borderColor = ROYAL}
-                              onMouseLeave={e => e.currentTarget.style.borderColor = '#eee'}
-                          >
-                            <div style={s.bizInitial}>{biz.name.charAt(0).toUpperCase()}</div>
-                            <div style={s.bizMeta}>
-                              <p style={s.bizName}>{biz.name}</p>
-                              <p style={s.bizAddress}>{biz.address || 'Address not listed'}</p>
-                              {biz.paidPartner && <span style={s.featuredPill}>Featured</span>}
+                      {allBusinesses.map((biz) => {
+                        const mapped = mappedBusinesses.find(m => m.id === biz.id);
+                        return (
+                            <div
+                                key={biz.id}
+                                style={{ ...s.bizCard, opacity: biz.address ? 1 : 0.55 }}
+                                onClick={() => onSelectBusiness(biz)}
+                                onMouseEnter={e => e.currentTarget.style.borderColor = ROYAL}
+                                onMouseLeave={e => e.currentTarget.style.borderColor = '#eee'}
+                            >
+                              <div style={{ ...s.bizInitial, background: mapped ? 'linear-gradient(135deg, #152a9e, #1e35b5)' : '#9ca3af' }}>
+                                {biz.name.charAt(0).toUpperCase()}
+                              </div>
+                              <div style={s.bizMeta}>
+                                <p style={s.bizName}>{biz.name}</p>
+                                <p style={s.bizAddress}>{biz.address || 'No address on file'}</p>
+                                {biz.paidPartner && <span style={s.featuredPill}>Featured</span>}
+                              </div>
+                              {mapped && <span style={s.pinDot} title="Shown on map" />}
                             </div>
-                          </div>
-                      ))}
+                        );
+                      })}
                     </div>
                 )}
               </div>
@@ -110,8 +158,8 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
-                  {businesses.map((biz) => (
-                      <Marker key={biz.id} position={[biz.latitude, biz.longitude]}>
+                  {mappedBusinesses.map((biz) => (
+                      <Marker key={biz.id} position={biz.coords}>
                         <Popup>
                           <div style={s.popup}>
                             <strong style={s.popupName}>{biz.name}</strong>
@@ -128,6 +176,11 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
             {loading && (
                 <div style={s.mapLoading}>
                   <p style={{ color: '#888', fontSize: '14px' }}>Loading map...</p>
+                </div>
+            )}
+            {!loading && geocoding && mappedBusinesses.length === 0 && (
+                <div style={s.geocodingOverlay}>
+                  <p style={s.geocodingText}>Locating businesses on map…</p>
                 </div>
             )}
           </div>
@@ -161,13 +214,16 @@ const s = {
   emptyText: { color: 'var(--rn-text-muted)', fontSize: '13px' },
   bizList: { display: 'flex', flexDirection: 'column', gap: '8px' },
   bizCard: { display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 12px', borderRadius: '12px', border: '1.5px solid var(--rn-card-border)', cursor: 'pointer', transition: 'border-color 0.2s' },
-  bizInitial: { width: '36px', height: '36px', borderRadius: '9px', background: 'linear-gradient(135deg, #152a9e, #1e35b5)', color: '#ffffff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  bizInitial: { width: '36px', height: '36px', borderRadius: '9px', color: '#ffffff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   bizMeta: { flex: 1, minWidth: 0 },
   bizName: { color: 'var(--rn-text)', fontSize: '13px', fontWeight: '700', margin: '0 0 2px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
   bizAddress: { color: 'var(--rn-text-muted)', fontSize: '11px', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
   featuredPill: { background: '#fff8e1', color: '#7a5500', fontSize: '10px', fontWeight: '700', padding: '2px 8px', borderRadius: '20px', marginTop: '4px', display: 'inline-block' },
+  pinDot: { width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', flexShrink: 0 },
   mapWrapper: { position: 'relative', minWidth: 0 },
   mapLoading: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--rn-bg)' },
+  geocodingOverlay: { position: 'absolute', bottom: '24px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(0,0,0,0.65)', borderRadius: '20px', padding: '8px 18px', zIndex: 500, pointerEvents: 'none' },
+  geocodingText: { color: '#fff', fontSize: '13px', margin: 0 },
   popup: { fontFamily: "'Segoe UI', system-ui, sans-serif", minWidth: '160px', maxWidth: '220px' },
   popupName: { color: ROYAL, fontSize: '14px', display: 'block', marginBottom: '4px', fontWeight: '700' },
   popupAddress: { color: '#888', fontSize: '12px', margin: '0 0 10px 0' },
