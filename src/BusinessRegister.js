@@ -59,15 +59,20 @@ export default function BusinessRegister({ onBack, onSuccess }) {
     const { email, phoneNumber, username, password } = form;
     if (!email || !phoneNumber || !username || !password) { setError('All fields are required'); return; }
     if (password.length < 8) { setError('Password must be at least 8 characters'); return; }
+    const phoneDigits = phoneNumber.replace(/\D/g, '');
+    if (phoneDigits.length < 10) { setError('Enter a valid 10-digit phone number'); return; }
     setLoading(true);
     try {
       const regRes = await fetch(`${API}/business-accounts/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, phoneNumber: phoneDigits }),
       });
       const regData = await regRes.json();
-      if (regData.error) { setError(regData.error); return; }
+      if (!regRes.ok) {
+        setError(regData.error || regData.message || JSON.stringify(regData));
+        return;
+      }
 
       const loginRes = await fetch(`${API}/business-accounts/login`, {
         method: 'POST',
@@ -75,7 +80,10 @@ export default function BusinessRegister({ onBack, onSuccess }) {
         body: JSON.stringify({ email, password }),
       });
       const loginData = await loginRes.json();
-      if (loginData.error) { setError(loginData.error); return; }
+      if (!loginRes.ok) {
+        setError(loginData.error || loginData.message || 'Login failed after registration');
+        return;
+      }
 
       setAccountToken(loginData.token);
       setStep(2);
@@ -128,7 +136,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
         body: JSON.stringify({
           businessName: bizForm.businessName,
           contactEmail: form.email,
-          contactPhone: form.phoneNumber,
+          contactPhone: form.phoneNumber.replace(/\D/g, ''),
           requestingPaidPartner: selectedTier.paidPartner,
           requestingUniqueRewardsPoint: selectedTier.uniqueRewards,
           latitude: bizForm.latitude ? parseFloat(bizForm.latitude) : null,
@@ -137,7 +145,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
         }),
       });
       const data = await res.json();
-      if (data.error) { setError(data.error); }
+      if (!res.ok) { setError(data.error || data.message || JSON.stringify(data)); }
       else { setStep(3); onSuccess?.(); }
     } catch {
       setError('Could not connect. Try again.');
