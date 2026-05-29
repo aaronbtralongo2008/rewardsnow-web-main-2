@@ -359,20 +359,25 @@ function BusinessOwnerDashboard() {
                 <>
                   <h2 style={s.pageTitle}>Analytics</h2>
                   {loading ? (
-                      <div style={{ ...s.statsGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
+                      <div style={{ ...s.statsGrid, gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                         {[1, 2, 3, 4].map(i => <Skeleton key={i} h={110} />)}
                       </div>
                   ) : !stats ? (
                       <div style={s.empty}><p>No data yet.</p></div>
                   ) : (
-                      <div style={{ ...s.statsGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
+                      <div style={s.statsTableWrap}>
                         {[
                           { label: 'Points Issued Today', value: stats.pointsIssuedToday ?? 0, color: '#2e7d52', bg: '#e8f4ed' },
                           { label: 'Points Redeemed Today', value: stats.pointsRedeemedToday ?? 0, color: '#c0392b', bg: '#fdeaea' },
                           { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: '#eff6ff' },
                           { label: 'Total Customers', value: stats.totalCustomers ?? 0, color: '#7a5500', bg: '#fff8e1' },
-                        ].map(stat => (
-                            <div key={stat.label} style={{ ...s.statCard, background: stat.bg }}>
+                        ].map((stat, i) => (
+                            <div key={stat.label} style={{
+                              ...s.statGridCell,
+                              background: stat.bg,
+                              borderRight: i % 2 === 0 ? '1.5px solid #d1d5db' : 'none',
+                              borderBottom: i < 2 ? '1.5px solid #d1d5db' : 'none',
+                            }}>
                               <p style={{ ...s.statValue, color: stat.color, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>{stat.value.toLocaleString()}</p>
                               <p style={s.statLabel}>{stat.label}</p>
                             </div>
@@ -659,6 +664,8 @@ const s = {
   quickLabel: { color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 4px 0' },
   quickSub: { color: '#888', fontSize: '12px', margin: 0 },
   statsGrid: { display: 'grid', gap: '12px' },
+  statsTableWrap: { display: 'grid', gridTemplateColumns: '1fr 1fr', borderRadius: '14px', overflow: 'hidden', border: '1.5px solid #d1d5db' },
+  statGridCell: { padding: '20px 18px' },
   statCard: { borderRadius: '14px', padding: '18px', border: '1px solid #eee' },
   statValue: { fontWeight: '800', margin: '0 0 6px 0', lineHeight: 1 },
   statLabel: { color: '#555', fontSize: '12px', fontWeight: '600', margin: 0 },

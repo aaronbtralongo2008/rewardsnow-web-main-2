@@ -40,7 +40,13 @@ export default function BusinessRegister({ onBack, onSuccess }) {
   const [step, setStep] = useState(1);
   const [accountToken, setAccountToken] = useState(null);
   const [form, setForm] = useState({ email: '', phoneNumber: '', username: '', password: '' });
-  const [bizForm, setBizForm] = useState({ businessName: '', address: '', latitude: '', longitude: '' });
+  const [bizForm, setBizForm] = useState({ businessName: '', streetAddress: '', city: '', state: '', zip: '', latitude: '', longitude: '' });
+
+  const buildAddress = () => {
+    const { streetAddress, city, state, zip } = bizForm;
+    const parts = [streetAddress, city, state && zip ? `${state} ${zip}` : (state || zip)].filter(Boolean);
+    return parts.join(', ');
+  };
   const [tier, setTier] = useState('standard');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -81,12 +87,13 @@ export default function BusinessRegister({ onBack, onSuccess }) {
   };
 
   const geocodeAddress = async () => {
-    if (!bizForm.address.trim()) { setError('Enter an address first'); return; }
+    const addr = buildAddress();
+    if (!addr.trim()) { setError('Enter a street address first'); return; }
     setGeocoding(true);
     setError('');
     try {
       const res = await fetch(
-          `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(bizForm.address)}&format=json&limit=1`,
+          `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(addr)}&format=json&limit=1`,
           { headers: { 'Accept-Language': 'en' } }
       );
       const data = await res.json();
@@ -108,7 +115,10 @@ export default function BusinessRegister({ onBack, onSuccess }) {
 
   const handleSubmitRequest = async () => {
     setError('');
-    if (!bizForm.businessName || !bizForm.address) { setError('Business name and address are required'); return; }
+    const address = buildAddress();
+    if (!bizForm.businessName || !address) { setError('Business name and full address are required'); return; }
+    if (!bizForm.streetAddress) { setError('Street address is required'); return; }
+    if (!bizForm.city) { setError('City is required'); return; }
     setLoading(true);
     const selectedTier = TIERS.find(t => t.key === tier);
     try {
@@ -123,7 +133,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
           requestingUniqueRewardsPoint: selectedTier.uniqueRewards,
           latitude: bizForm.latitude ? parseFloat(bizForm.latitude) : null,
           longitude: bizForm.longitude ? parseFloat(bizForm.longitude) : null,
-          address: bizForm.address,
+          address,
         }),
       });
       const data = await res.json();
@@ -241,17 +251,37 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                   </div>
                   <div style={s.field}>
                     <label style={s.label}>Business Address</label>
-                    <div style={s.addrRow}>
-                      <input style={{ ...s.input, marginBottom: 0, flex: 1 }}
-                             autoComplete="street-address" placeholder="123 Main St, Boca Raton FL 33431"
-                             value={bizForm.address} onChange={set(setBizForm, 'address')} />
+                    <p style={s.addrHint}>Fill in each field separately so we can locate your business accurately.</p>
+                    <input style={s.input}
+                           autoComplete="address-line1"
+                           placeholder="Street address (e.g. 123 Main Street)"
+                           value={bizForm.streetAddress} onChange={set(setBizForm, 'streetAddress')} />
+                    <div style={s.addrCityRow}>
+                      <input style={{ ...s.input, flex: 2, marginBottom: 0 }}
+                             autoComplete="address-level2"
+                             placeholder="City"
+                             value={bizForm.city} onChange={set(setBizForm, 'city')} />
+                      <input style={{ ...s.input, flex: 1, marginBottom: 0 }}
+                             autoComplete="address-level1"
+                             placeholder="State (FL)"
+                             maxLength={2}
+                             value={bizForm.state} onChange={set(setBizForm, 'state')} />
+                      <input style={{ ...s.input, flex: 1, marginBottom: 0 }}
+                             autoComplete="postal-code"
+                             placeholder="ZIP"
+                             value={bizForm.zip} onChange={set(setBizForm, 'zip')} />
+                    </div>
+                    <div style={s.addrLocateRow}>
+                      <span style={s.addrPreview}>
+                        {buildAddress() || <span style={{ color: '#aaa' }}>Full address will appear here</span>}
+                      </span>
                       <button style={{ ...s.geocodeBtn, opacity: geocoding ? 0.6 : 1 }}
                               onClick={geocodeAddress} disabled={geocoding}>
                         {geocoding ? '…' : 'Locate'}
                       </button>
                     </div>
                     {bizForm.latitude && (
-                        <p style={s.geocodeConfirm}>✓ Coordinates found: {bizForm.latitude}, {bizForm.longitude}</p>
+                        <p style={s.geocodeConfirm}>✓ Located on map: {bizForm.latitude}, {bizForm.longitude}</p>
                     )}
                   </div>
                   <div style={s.field}>
@@ -327,7 +357,10 @@ const s = {
   field: { marginBottom: '16px' },
   label: { display: 'block', color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
   input: { width: '100%', padding: '11px 14px', border: '2px solid #bfdbfe', borderRadius: '8px', fontSize: '14px', color: '#0f172a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: 0 },
-  addrRow: { display: 'flex', gap: '8px', alignItems: 'center' },
+  addrHint: { color: '#6b7280', fontSize: '12px', margin: '0 0 10px', lineHeight: 1.5 },
+  addrCityRow: { display: 'flex', gap: '8px', marginBottom: '8px' },
+  addrLocateRow: { display: 'flex', gap: '8px', alignItems: 'center', marginTop: '8px' },
+  addrPreview: { flex: 1, fontSize: '12px', color: '#374151', padding: '9px 12px', background: '#f8fafc', border: '1.5px dashed #bfdbfe', borderRadius: '8px', wordBreak: 'break-word', minHeight: '20px', display: 'block' },
   geocodeBtn: { padding: '11px 14px', background: '#bfdbfe', border: '2px solid #bfdbfe', borderRadius: '8px', color: '#2563eb', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 },
   geocodeConfirm: { color: '#16a34a', fontSize: '12px', margin: '6px 0 0' },
   tierList: { display: 'flex', flexDirection: 'column', gap: '8px' },
