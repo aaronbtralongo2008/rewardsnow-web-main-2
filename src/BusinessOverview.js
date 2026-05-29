@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import AnimatedStripes from './AnimatedStripes';
@@ -33,6 +34,8 @@ const WORKFLOW = [
 export default function BusinessOverview() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div style={s.root}>
@@ -277,7 +280,7 @@ const s = {
   workflowDesc: { color: 'var(--rn-text-muted)', fontSize: '14px', lineHeight: 1.7, margin: 0 },
 
   empCallout: { background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: '16px', padding: '24px 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px', flexWrap: 'wrap' },
-  empCalloutTitle: { color: '#fde68a', fontSize: '14px', fontWeight: '700', margin: '0 0 6px' },
+  empCalloutTitle: { color: 'var(--rn-callout-title)', fontSize: '14px', fontWeight: '700', margin: '0 0 6px' },
   empCalloutDesc: { color: 'var(--rn-text-muted)', fontSize: '13px', lineHeight: 1.6, margin: 0, maxWidth: '480px' },
   empCalloutBtn: { padding: '12px 22px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', border: 'none', color: '#0f172a', borderRadius: '10px', fontSize: '14px', fontWeight: '700', whiteSpace: 'nowrap', flexShrink: 0, cursor: 'pointer', fontFamily: 'inherit' },
 
