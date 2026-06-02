@@ -5,7 +5,7 @@ import AnimatedStripes from './AnimatedStripes';
 import FadeInSection from './FadeInSection';
 
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
-const EMPLOYEE_PORTAL_URL = 'https://rewards-now.net/employee';
+const EMPLOYEE_PORTAL_URL = process.env.REACT_APP_EMPLOYEE_PORTAL_URL || '/employee';
 const EMPLOYEE_ROUTE = '/employee';
 
 const WORKFLOW = [
@@ -22,7 +22,7 @@ const WORKFLOW = [
   {
     n: '03',
     title: 'Reward your customers',
-    desc: 'Customers earn points when they spend with your business and can redeem rewards at any participating RewardsNow™ location.',
+    desc: 'Customers earn points when they spend with your business and can redeem rewards at any participating Veniar location.',
   },
   {
     n: '04',
@@ -49,7 +49,7 @@ export default function BusinessOverview() {
         <button style={s.backBtn} onClick={() => navigate('/')}>← Back</button>
 
         <button style={s.brandBtn} onClick={() => navigate('/')}>
-          <img src={LOGO} alt="RewardsNow" style={{ height: '32px', width: 'auto', display: 'block' }} />
+          <img src={LOGO} alt="Veniar" style={{ height: '32px', width: 'auto', display: 'block' }} />
         </button>
 
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -65,13 +65,13 @@ export default function BusinessOverview() {
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section style={{ ...s.hero, padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
         <FadeInSection>
-        <p style={s.eyebrow}>FOR BUSINESS PARTNERS</p>
+        <p style={s.eyebrow}>VENIAR FOR BUSINESS</p>
         <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
           A smarter way to keep customers coming back.
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: '560px' }}>
-          RewardsNow™ helps independent businesses compete with larger brands by giving customers a reason to come back, spend locally, and stay connected to your business.
+          Veniar helps independent businesses compete with larger brands by giving customers a reason to come back, spend locally, and stay connected to your business.
         </p>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
           <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
@@ -115,7 +115,7 @@ export default function BusinessOverview() {
             Building your own loyalty program costs $50,000–$200,000 to launch. Add software operations, marketing, and customer acquisition, and traditional programs still don't help you find new customers — they only keep existing ones.
           </p>
           <p style={s.body}>
-            RewardsNow™ removes those barriers — we handle the infrastructure, bring a shared customer network, and give your staff a simple interface to manage everything.
+            Veniar removes those barriers — we handle the infrastructure, bring a shared customer network, and give your staff a simple interface to manage everything.
           </p>
           <div style={{ ...s.grid, gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '14px', marginTop: '32px' }}>
             {[
@@ -133,14 +133,14 @@ export default function BusinessOverview() {
         </div></FadeInSection>
       </section>
 
-      {/* ── How RewardsNow works for your business ─────────────────────── */}
+      {/* ── How Veniar works for your business ───────────────────────────── */}
       <section style={{ ...s.section, padding: isMobile ? '56px 24px' : '80px 80px' }}>
         <FadeInSection><div style={s.contentMax}>
           <p style={s.tag}>HOW IT WORKS</p>
-          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>How RewardsNow™ works for your business</h2>
+          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>How Veniar works for your business</h2>
           <div style={s.goldLine} />
           <p style={s.body}>
-            RewardsNow™ gives local businesses a simple workflow for managing customer rewards. Owners control the business account, configure services and reward options, and give employees access to the tools they need to help customers earn and redeem points.
+            Veniar gives local businesses a simple workflow for managing customer rewards. Owners control the business account, configure services and reward options, and give employees access to the tools they need to help customers earn and redeem points.
           </p>
           <div style={{ ...s.workflowGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: '16px', marginTop: '40px' }}>
             {WORKFLOW.map((step, i) => (
@@ -157,7 +157,7 @@ export default function BusinessOverview() {
             <div>
               <p style={s.empCalloutTitle}>Your employees need a separate sign-in</p>
               <p style={s.empCalloutDesc}>
-                Staff use the RewardsNow™ employee portal — not the owner dashboard — to process customer transactions and reward redemptions.
+                Staff use the Veniar employee portal — not the owner dashboard — to process customer transactions and reward redemptions.
               </p>
             </div>
             <button style={s.empCalloutBtn} onClick={() => navigate(EMPLOYEE_ROUTE)}>
@@ -174,7 +174,7 @@ export default function BusinessOverview() {
           <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Up and running in days, not months</h2>
           <div style={s.goldLine} />
           <p style={s.body}>
-            Submit your application, connect with a RewardsNow™ team member, configure your services, and direct your staff to the employee portal. That's it.
+            Submit your application, connect with a Veniar team member, configure your services, and direct your staff to the employee portal. That's it.
           </p>
           <div style={{ ...s.stepsGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '16px', marginTop: '40px' }}>
             {[
@@ -197,10 +197,10 @@ export default function BusinessOverview() {
         <div style={{ ...s.empSection, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '28px' : '48px' }}>
           <div style={{ flex: 1 }}>
             <p style={s.tag}>FOR YOUR STAFF</p>
-            <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>Need employees to access RewardsNow™?</h2>
+            <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>Need employees to access Veniar?</h2>
             <div style={s.goldLine} />
             <p style={s.body}>
-              Employees can use the RewardsNow™ employee portal to help customers earn and redeem rewards during day-to-day business operations. Share this link with your team — no owner credentials needed.
+              Employees can use the Veniar employee portal to help customers earn and redeem rewards during day-to-day business operations. Share this link with your team — no owner credentials needed.
             </p>
             <button style={s.empBigBtn} onClick={() => navigate(EMPLOYEE_ROUTE)}>
               Open Employee Portal

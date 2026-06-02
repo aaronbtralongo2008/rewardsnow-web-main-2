@@ -83,7 +83,7 @@ export default function CustomerSettings({ customer, onCustomerUpdate, onLogout 
       <div style={s.orb2} />
 
       <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
-        <button style={s.navBrand} onClick={() => navigate('/home')}>RewardsNow</button>
+        <button style={s.navBrand} onClick={() => navigate('/home')}>Veniar</button>
         <div style={s.navRight}>
           {!isMobile && <button style={s.navLink} onClick={() => navigate('/businesses')}>Partners</button>}
           {!isMobile && <button style={s.navLink} onClick={() => navigate('/map')}>Map</button>}
@@ -166,7 +166,7 @@ export default function CustomerSettings({ customer, onCustomerUpdate, onLogout 
 
         <div style={{ ...s.card, borderColor: 'rgba(220,38,38,0.25)' }}>
           <h2 style={{ ...s.cardTitle, color: '#f87171' }}>Sign Out</h2>
-          <p style={s.cardSub}>Sign out of your RewardsNow account on this device.</p>
+          <p style={s.cardSub}>Sign out of your Veniar account on this device.</p>
           <button style={s.dangerBtn} onClick={onLogout}>Sign out</button>
         </div>
       </div>

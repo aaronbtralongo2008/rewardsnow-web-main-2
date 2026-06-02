@@ -180,7 +180,7 @@ function AdminDashboard() {
           <div style={{ ...s.loginBox, width: isMobile ? '100%' : '400px', padding: isMobile ? '40px 24px' : '48px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxSizing: 'border-box', boxShadow: isMobile ? 'none' : '0 8px 40px rgba(0,0,0,0.1)' }}>
             <div style={s.loginHeader}>
               <span style={s.loginBadge}>ADMIN</span>
-              <h1 style={s.loginTitle}>RewardsNow Admin</h1>
+              <h1 style={s.loginTitle}>Veniar Admin</h1>
               <p style={s.loginSub}>Restricted access — authorized personnel only</p>
             </div>
             <label style={s.label}>Email</label>
@@ -207,7 +207,7 @@ function AdminDashboard() {
       <div style={s.container}>
         <div style={s.topBar}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={s.logo}>RewardsNow</span>
+            <span style={s.logo}>Veniar</span>
             <span style={s.adminBadge}>ADMIN</span>
           </div>
           <button style={s.logoutBtn} onClick={() => setToken(null)}>Sign Out</button>

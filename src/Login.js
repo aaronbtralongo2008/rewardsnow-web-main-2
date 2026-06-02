@@ -44,7 +44,7 @@ function Login({ onLogin }) {
 
           {isMobile ? (
               <div style={styles.mobileHeader}>
-                <img src={LOGO} alt="RewardsNow" style={{ ...styles.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                <img src={LOGO} alt="Veniar" style={{ ...styles.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                 <span style={styles.mobileHeaderSub}>Earn rewards everywhere</span>
               </div>
           ) : (
@@ -54,7 +54,7 @@ function Login({ onLogin }) {
                 <div style={styles.orb3} />
                 <AnimatedStripes count={4} />
               <div style={styles.leftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={{ ...styles.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                  <img src={LOGO} alt="Veniar" style={{ ...styles.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                   <div style={styles.goldLine} />
                   <p style={styles.tagline}>One card.<br />Every business.</p>
                   <p style={styles.leftDesc}>Join thousands of customers earning rewards at local businesses across the city.</p>
@@ -70,7 +70,7 @@ function Login({ onLogin }) {
             flex: isMobile ? '1' : 'none',
           }}>
             <h1 style={{ ...styles.brandName, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>Welcome back</h1>
-            <p style={styles.brandSub}>Sign in to your RewardsNow account</p>
+            <p style={styles.brandSub}>Sign in to your Veniar account</p>
             <label style={styles.inputLabel}>Email</label>
             <input style={styles.input} type="email" placeholder="you@email.com"
                    value={email} onChange={e => setEmail(e.target.value)}

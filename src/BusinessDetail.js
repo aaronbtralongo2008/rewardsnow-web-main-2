@@ -91,7 +91,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
       <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
         <div style={s.navLeft}>
           <button style={s.backBtn} onClick={onBack}>← Back</button>
-          {!isMobile && <span style={s.navBrand}>RewardsNow</span>}
+          {!isMobile && <span style={s.navBrand}>Veniar</span>}
         </div>
         <button style={s.navLogout} onClick={onLogout}>Sign out</button>
       </nav>
@@ -117,7 +117,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
                 <span style={s.priceTag}>{PRICE_LABELS[business.priceRange] || business.priceRange}</span>
               )}
               <span style={{ ...s.typeTag, ...(business.uniqueRewardsPoint ? s.typeTagCustom : {}) }}>
-                {business.uniqueRewardsPoint ? 'Custom rewards' : 'RN Points'}
+                {business.uniqueRewardsPoint ? 'Custom rewards' : 'Veniar Points'}
               </span>
               {business.address && (
                 <button style={s.directionsBtn} onClick={openDirections}>Get directions →</button>

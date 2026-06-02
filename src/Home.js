@@ -30,7 +30,7 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
         <div style={s.orb2} />
 
         <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
-          <button style={s.navBrand} onClick={() => onNavigate('/home')}>RewardsNow</button>
+          <button style={s.navBrand} onClick={() => onNavigate('/home')}>Veniar</button>
           <div style={s.navRight}>
             <button style={s.navLink} onClick={() => onNavigate('/businesses')}>Partners</button>
             <button style={s.navLink} onClick={() => onNavigate('/map')}>Map</button>
@@ -70,7 +70,7 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
             ) : history.length === 0 ? (
                 <div style={s.empty}>
                   <p style={s.emptyTitle}>No transactions yet</p>
-                  <p style={s.emptySub}>Visit any RewardsNow partner and give them your phone number at checkout to start earning points.</p>
+                  <p style={s.emptySub}>Visit any Veniar partner and give them your phone number at checkout to start earning Veniar Points.</p>
                 </div>
             ) : (
                 <div style={s.txList}>
@@ -112,10 +112,10 @@ const s = {
   navLink: { background: 'none', border: 'none', color: 'var(--rn-text-sub)', fontSize: '14px', fontWeight: '500', cursor: 'pointer', padding: '6px 8px', borderRadius: '6px', fontFamily: 'inherit' },
   navLogout: { background: 'none', border: '1px solid var(--rn-ghost-border)', color: 'var(--rn-ghost-color)', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px', fontFamily: 'inherit' },
   body: { maxWidth: '720px', margin: '0 auto', boxSizing: 'border-box' },
-  hero: { background: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', marginBottom: '32px', boxShadow: '0 8px 40px rgba(0,0,0,0.3)' },
-  heroGreeting: { color: '#64748b', fontSize: '14px', margin: '0 0 12px', fontWeight: '500' },
+  hero: { background: 'var(--rn-portal-surface)', border: '1px solid var(--rn-portal-border)', borderRadius: '20px', marginBottom: '32px', boxShadow: '0 8px 40px rgba(0,0,0,0.2)' },
+  heroGreeting: { color: 'var(--rn-portal-text-sub)', fontSize: '14px', margin: '0 0 12px', fontWeight: '500' },
   balanceRow: { display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' },
-  balanceNum: { color: '#0f172a', fontWeight: '800', lineHeight: 1, letterSpacing: '-0.04em' },
+  balanceNum: { color: 'var(--rn-portal-text)', fontWeight: '800', lineHeight: 1, letterSpacing: '-0.04em' },
   balancePts: { color: '#f59e0b', fontSize: '16px', fontWeight: '600' },
   balanceSub: { color: '#9ca3af', fontSize: '13px', margin: '0 0 28px' },
   heroActions: { display: 'flex', gap: '10px' },
@@ -129,10 +129,10 @@ const s = {
   emptyTitle: { color: 'var(--rn-text)', fontSize: '15px', fontWeight: '600', margin: '0 0 8px' },
   emptySub: { color: 'var(--rn-text-sub)', fontSize: '13px', lineHeight: 1.6, margin: 0, maxWidth: '340px', display: 'inline-block' },
   txList: { display: 'flex', flexDirection: 'column', gap: '2px' },
-  tx: { display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: '#fff', borderRadius: '10px', border: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' },
+  tx: { display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', background: 'var(--rn-portal-surface)', borderRadius: '10px', border: '1px solid var(--rn-portal-border)' },
   txDot: { width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   txMeta: { flex: 1, minWidth: 0 },
-  txDesc: { color: '#111', fontSize: '14px', fontWeight: '500', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  txDesc: { color: 'var(--rn-portal-text)', fontSize: '14px', fontWeight: '500', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
   txDate: { color: '#9ca3af', fontSize: '12px', margin: 0 },
   txAmt: { fontSize: '14px', fontWeight: '700', flexShrink: 0 },
 };

@@ -6,7 +6,6 @@ import AnimatedStripes from './AnimatedStripes';
 
 const ROYAL = '#2563eb';
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
-const EMPLOYEE_PORTAL_URL = 'https://rewards-now.net/employee';
 
 function BusinessOwnerDashboard() {
   const isMobile = useIsMobile();
@@ -299,7 +298,7 @@ function BusinessOwnerDashboard() {
                 <div style={s.loginOrb3} />
                 <AnimatedStripes count={4} />
                 <div style={s.loginLeftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={{ ...s.loginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />
+                  <img src={LOGO} alt="Veniar" style={{ ...s.loginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />
                   <div style={s.loginGoldLine} />
                   <h1 style={s.loginHeadline}>Run your business.<br />Reward your customers.</h1>
                   <p style={s.loginDesc}>Manage employees, services, and analytics from your business portal.</p>
@@ -307,7 +306,7 @@ function BusinessOwnerDashboard() {
               </div>
           )}
           <div style={{ ...s.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-            {isMobile && <img src={LOGO} alt="RewardsNow" style={{ ...s.mobileLoginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />}
+            {isMobile && <img src={LOGO} alt="Veniar" style={{ ...s.mobileLoginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />}
             <span style={s.loginPortalTag}>BUSINESS PORTAL</span>
             <h2 style={s.loginTitle}>Owner Dashboard</h2>
             <p style={s.loginSub}>Sign in with your business account</p>
@@ -343,7 +342,7 @@ function BusinessOwnerDashboard() {
         <div style={s.topBar}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <button style={s.logo} onClick={() => navigate('/')}>
-              <img src={LOGO} alt="RewardsNow" style={s.topBarLogoImg} />
+              <img src={LOGO} alt="Veniar" style={s.topBarLogoImg} />
             </button>
             {!isMobile && <span style={s.portalBadge}>BUSINESS</span>}
           </div>

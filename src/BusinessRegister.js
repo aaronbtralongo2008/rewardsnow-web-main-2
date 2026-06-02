@@ -10,7 +10,7 @@ const TIERS = [
     name: 'Standard',
     price: '$100',
     period: '/mo',
-    desc: 'Join the RewardsNow points network. Customers earn RN points that work across every partner in the city.',
+    desc: 'Join the Veniar Network. Customers earn Veniar Points that work across every partner in the city.',
     paidPartner: false,
     uniqueRewards: false,
   },
@@ -28,7 +28,7 @@ const TIERS = [
     name: 'Custom Rewards',
     price: '$250',
     period: '/mo',
-    desc: "Your own branded points currency. Customers earn your points — not RN Points. Fully private-label.",
+    desc: "Your own branded points currency. Customers earn your points — not Veniar Points. Fully private-label.",
     paidPartner: true,
     uniqueRewards: true,
     badge: 'Most popular',
@@ -164,10 +164,10 @@ export default function BusinessRegister({ onBack, onSuccess }) {
               <div style={s.orb3} />
               <div style={s.leftInner}>
                 <button style={s.backLink} onClick={onBack}>← Back to sign in</button>
-                <div style={s.brand}>RewardsNow</div>
+                <div style={s.brand}>Veniar</div>
                 <h1 style={s.headline}>Grow your business<br />with loyalty.</h1>
                 <p style={s.tagline}>
-                  Join the RewardsNow network and give your customers a reason to keep coming back.
+                  Join the Veniar Network and give your customers a reason to keep coming back.
                 </p>
                 <div style={s.steps}>
                   {['Create account', 'Business details', 'Under review'].map((label, i) => (
@@ -198,7 +198,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
           {isMobile && (
               <div style={s.mobileTopBar}>
                 <button style={s.mobileBack} onClick={step > 1 ? () => setStep(s => s - 1) : onBack}>←</button>
-                <span style={s.mobileBrand}>RewardsNow</span>
+                <span style={s.mobileBrand}>Veniar</span>
                 <div style={s.mobileStepDots}>
                   {[1, 2, 3].map(i => (
                       <div key={i} style={{

@@ -83,7 +83,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
   return (
       <div style={s.container}>
         <div style={s.topBar}>
-          <span style={s.logo}>RewardsNow</span>
+          <span style={s.logo}>Veniar</span>
           <div style={s.topBarRight}>
             {!isMobile && (
                 <>

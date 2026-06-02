@@ -168,7 +168,7 @@ function EmployeeDashboard() {
                 <div style={st.loginOrb3} />
                 <AnimatedStripes count={4} />
                 <div style={st.loginLeftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={{ ...st.loginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />
+                  <img src={LOGO} alt="Veniar" style={{ ...st.loginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />
                   <div style={st.loginGoldLine} />
                   <h1 style={st.loginHeadline}>Built for<br />your team.</h1>
                   <p style={st.loginDesc}>Look up customers and manage reward transactions in seconds.</p>
@@ -176,7 +176,7 @@ function EmployeeDashboard() {
               </div>
           )}
           <div style={{ ...st.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-            {isMobile && <img src={LOGO} alt="RewardsNow" style={{ ...st.mobileLoginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />}
+            {isMobile && <img src={LOGO} alt="Veniar" style={{ ...st.mobileLoginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />}
             <span style={st.loginPortalTag}>EMPLOYEE PORTAL</span>
             <h2 style={st.loginTitle}>Staff Login</h2>
             <p style={st.loginSub}>Sign in to issue customer points</p>
@@ -203,7 +203,7 @@ function EmployeeDashboard() {
       <div style={st.container}>
         <div style={st.topBar}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <button style={st.logo} onClick={() => navigate('/')}>RewardsNow</button>
+            <button style={st.logo} onClick={() => navigate('/')}>Veniar</button>
             <span style={st.empBadge}>{employee?.role}</span>
             {isUniquePoints && !isMobile && <span style={st.uniqueBadge}>Custom Points</span>}
           </div>
@@ -239,7 +239,7 @@ function EmployeeDashboard() {
                     </button>
                   </div>
                   {customerError && <p style={st.inlineError}>{customerError}</p>}
-                  <p style={st.lookupHint}>No account? Ask the customer to sign up on RewardsNow first.</p>
+                  <p style={st.lookupHint}>No account? Ask the customer to sign up on Veniar first.</p>
                 </div>
               </div>
           )}
@@ -251,9 +251,9 @@ function EmployeeDashboard() {
                   <div style={st.customerInfo}>
                     <p style={st.customerName}>{customer.firstName} {customer.lastName}</p>
                     {isUniquePoints ? (
-                        <p style={st.customerBalance}>{customerUniqueBalance ?? '...'} custom · {customer.rnBalance} RN pts</p>
+                        <p style={st.customerBalance}>{customerUniqueBalance ?? '...'} custom · {customer.rnBalance} pts</p>
                     ) : (
-                        <p style={st.customerBalance}>{customer.rnBalance} RN pts balance</p>
+                        <p style={st.customerBalance}>{customer.rnBalance} Veniar pts balance</p>
                     )}
                   </div>
                   <button style={st.changeCustomerBtn} onClick={resetFlow}>Change</button>

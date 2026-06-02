@@ -61,7 +61,7 @@ function Register({ onRegister, onBack }) {
 
           {isMobile ? (
               <div style={s.mobileHeader}>
-                <img src={LOGO} alt="RewardsNow" style={{ ...s.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                <img src={LOGO} alt="Veniar" style={{ ...s.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                 <span style={s.mobileHeaderSub}>Create your free account</span>
               </div>
           ) : (
@@ -71,7 +71,7 @@ function Register({ onRegister, onBack }) {
                 <div style={s.orb3} />
                 <AnimatedStripes count={4} />
                 <div style={s.leftContent}>
-                  <img src={LOGO} alt="RewardsNow" style={{ ...s.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                  <img src={LOGO} alt="Veniar" style={{ ...s.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
                   <div style={s.goldLine} />
                   <p style={s.tagline}>Join thousands earning rewards every day.</p>
                 </div>
@@ -86,7 +86,7 @@ function Register({ onRegister, onBack }) {
             flex: isMobile ? '1' : 'none',
           }}>
             <h1 style={{ ...s.brandName, fontSize: isMobile ? '1.6rem' : '2rem' }}>Create Account</h1>
-            <p style={s.brandSub}>Join RewardsNow for free</p>
+            <p style={s.brandSub}>Join Veniar for free</p>
 
             <div style={s.row}>
               <div style={s.half}>
