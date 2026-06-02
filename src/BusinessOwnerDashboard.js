@@ -38,6 +38,15 @@ function BusinessOwnerDashboard() {
   const [showSvcForm, setShowSvcForm] = useState(false);
   const [editingSvc, setEditingSvc] = useState(null);
 
+  const [offers, setOffers] = useState([]);
+  const [settlement, setSettlement] = useState(null);
+  const [showOfferForm, setShowOfferForm] = useState(false);
+  const [editingOffer, setEditingOffer] = useState(null);
+  const [offerForm, setOfferForm] = useState({
+    type: 'bonus_multiplier', name: '', multiplier: '2', bonusPoints: '50',
+    daysToReturn: '14', dayOfWeek: '', startTime: '', endTime: '', isActive: true,
+  });
+
   const showMsg = (text, type = 'success') => {
     setMsg(text); setMsgType(type);
     setTimeout(() => setMsg(''), 4000);
@@ -96,11 +105,33 @@ function BusinessOwnerDashboard() {
     setLoading(false);
   };
 
+  const fetchOffers = async () => {
+    if (!account?.businessId) return;
+    setLoading(true);
+    try {
+      const res = await fetch(`${API}/businesses/${account.businessId}/offers`, { headers: auth });
+      if (res.ok) { const d = await res.json(); setOffers(Array.isArray(d) ? d : []); }
+    } catch {}
+    setLoading(false);
+  };
+
+  const fetchSettlement = async () => {
+    if (!account?.businessId) return;
+    setLoading(true);
+    try {
+      const res = await fetch(`${API}/businesses/${account.businessId}/settlement`, { headers: auth });
+      if (res.ok) setSettlement(await res.json());
+    } catch {}
+    setLoading(false);
+  };
+
   useEffect(() => {
     if (!token || !account) return;
     if (tab === 'employees') fetchEmployees();
     if (tab === 'services') fetchServices();
     if (tab === 'stats') fetchStats();
+    if (tab === 'offers') fetchOffers();
+    if (tab === 'settlement') fetchSettlement();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, account, tab]);
 
@@ -167,6 +198,44 @@ function BusinessOwnerDashboard() {
       showMsg('Service deleted.');
       fetchServices();
     } catch { showMsg('Could not delete service.', 'error'); }
+  };
+
+  const handleSaveOffer = async () => {
+    if (saving || !account?.businessId) return;
+    if (!offerForm.name.trim()) { showMsg('Offer name is required', 'error'); return; }
+    setSaving(true);
+    try {
+      const url = editingOffer
+        ? `${API}/businesses/${account.businessId}/offers/${editingOffer}`
+        : `${API}/businesses/${account.businessId}/offers`;
+      const res = await fetch(url, { method: editingOffer ? 'PUT' : 'POST', headers: auth, body: JSON.stringify(offerForm) });
+      const data = await res.json();
+      if (data.error) { showMsg(`Error: ${data.error}`, 'error'); }
+      else {
+        showMsg(editingOffer ? 'Offer updated.' : 'Offer created.');
+        setShowOfferForm(false); setEditingOffer(null);
+        setOfferForm({ type: 'bonus_multiplier', name: '', multiplier: '2', bonusPoints: '50', daysToReturn: '14', dayOfWeek: '', startTime: '', endTime: '', isActive: true });
+        fetchOffers();
+      }
+    } catch { showMsg('Could not save offer.', 'error'); }
+    setSaving(false);
+  };
+
+  const handleToggleOffer = async (offer) => {
+    try {
+      await fetch(`${API}/businesses/${account.businessId}/offers/${offer.id}`, {
+        method: 'PUT', headers: auth, body: JSON.stringify({ ...offer, isActive: !offer.isActive })
+      });
+      fetchOffers();
+    } catch {}
+  };
+
+  const handleDeleteOffer = async (id) => {
+    if (!window.confirm('Delete this offer?')) return;
+    try {
+      await fetch(`${API}/businesses/${account.businessId}/offers/${id}`, { method: 'DELETE', headers: auth });
+      showMsg('Offer deleted.'); fetchOffers();
+    } catch { showMsg('Could not delete offer.', 'error'); }
   };
 
   const handleSettingsProfileSave = async () => {
@@ -262,6 +331,8 @@ function BusinessOwnerDashboard() {
   const TABS = [
     { key: 'overview', label: 'Overview' },
     { key: 'stats', label: 'Analytics' },
+    { key: 'offers', label: 'Offers' },
+    { key: 'settlement', label: 'Settlement' },
     { key: 'employees', label: 'Employees' },
     { key: 'services', label: 'Services' },
     { key: 'settings', label: 'Settings' },
@@ -357,7 +428,9 @@ function BusinessOwnerDashboard() {
 
             {tab === 'stats' && (
                 <>
-                  <h2 style={s.pageTitle}>Analytics</h2>
+                  <div style={s.tabHeader}>
+                    <h2 style={s.pageTitle}>Analytics</h2>
+                  </div>
                   {loading ? (
                       <div style={{ ...s.statsGrid, gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                         {[1, 2, 3, 4].map(i => <Skeleton key={i} h={110} />)}
@@ -365,24 +438,255 @@ function BusinessOwnerDashboard() {
                   ) : !stats ? (
                       <div style={s.empty}><p>No data yet.</p></div>
                   ) : (
-                      <div style={s.statsTableWrap}>
-                        {[
-                          { label: 'Points Issued Today', value: stats.pointsIssuedToday ?? 0, color: '#2e7d52', bg: '#e8f4ed' },
-                          { label: 'Points Redeemed Today', value: stats.pointsRedeemedToday ?? 0, color: '#c0392b', bg: '#fdeaea' },
-                          { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: '#eff6ff' },
-                          { label: 'Total Customers', value: stats.totalCustomers ?? 0, color: '#7a5500', bg: '#fff8e1' },
-                        ].map((stat, i) => (
-                            <div key={stat.label} style={{
-                              ...s.statGridCell,
-                              background: stat.bg,
-                              borderRight: i % 2 === 0 ? '1.5px solid #d1d5db' : 'none',
-                              borderBottom: i < 2 ? '1.5px solid #d1d5db' : 'none',
-                            }}>
-                              <p style={{ ...s.statValue, color: stat.color, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>{stat.value.toLocaleString()}</p>
-                              <p style={s.statLabel}>{stat.label}</p>
+                      <>
+                        <div style={s.statsTableWrap}>
+                          {[
+                            { label: 'Points Issued Today', value: stats.pointsIssuedToday ?? 0, color: '#2e7d52', bg: '#e8f4ed' },
+                            { label: 'Points Redeemed Today', value: stats.pointsRedeemedToday ?? 0, color: '#c0392b', bg: '#fdeaea' },
+                            { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: '#eff6ff' },
+                            { label: 'Total Customers', value: stats.totalCustomers ?? 0, color: '#7a5500', bg: '#fff8e1' },
+                          ].map((stat, i) => (
+                              <div key={stat.label} style={{
+                                ...s.statGridCell,
+                                background: stat.bg,
+                                borderRight: i % 2 === 0 ? '1.5px solid #d1d5db' : 'none',
+                                borderBottom: i < 2 ? '1.5px solid #d1d5db' : 'none',
+                              }}>
+                                <p style={{ ...s.statValue, color: stat.color, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>{stat.value.toLocaleString()}</p>
+                                <p style={s.statLabel}>{stat.label}</p>
+                              </div>
+                          ))}
+                        </div>
+
+                        <p style={s.sectionSubHead}>Customer Insights</p>
+                        <div style={{ ...s.statsGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(3, 1fr)', gap: '12px' }}>
+                          {[
+                            { label: 'Repeat Visits (Month)', value: stats.repeatVisitsThisMonth ?? stats.repeatCustomers ?? '—', color: ROYAL },
+                            { label: 'First-Time from Network', value: stats.newFromNetwork ?? stats.newCustomersFromNetwork ?? '—', color: '#7c3aed' },
+                            { label: 'Est. Revenue Attributed', value: stats.estimatedRevenue != null ? `$${Number(stats.estimatedRevenue).toLocaleString()}` : stats.pointsIssuedThisMonth ? `~$${Math.round(stats.pointsIssuedThisMonth * 0.05).toLocaleString()}` : '—', color: '#2e7d52' },
+                          ].map(stat => (
+                              <div key={stat.label} style={{ ...s.statCard, background: 'var(--rn-portal-surface)', border: '1px solid var(--rn-portal-border)' }}>
+                                <p style={{ ...s.statValue, color: stat.color, fontSize: isMobile ? '1.3rem' : '1.7rem' }}>{stat.value}</p>
+                                <p style={s.statLabel}>{stat.label}</p>
+                              </div>
+                          ))}
+                        </div>
+                        <p style={{ color: 'var(--rn-portal-text-muted)', fontSize: '11px', margin: '6px 0 0', lineHeight: 1.5 }}>
+                          Estimated Revenue uses 5¢ per point issued as a baseline — your actual figure may differ.
+                        </p>
+                      </>
+                  )}
+                </>
+            )}
+
+            {tab === 'offers' && (
+                <>
+                  <div style={s.tabHeader}>
+                    <h2 style={s.pageTitle}>Offer Engine</h2>
+                    {isApproved && (
+                        <button style={s.addBtn} onClick={() => {
+                          setEditingOffer(null);
+                          setOfferForm({ type: 'bonus_multiplier', name: '', multiplier: '2', bonusPoints: '50', daysToReturn: '14', dayOfWeek: '', startTime: '', endTime: '', isActive: true });
+                          setShowOfferForm(f => !f);
+                        }}>
+                          {showOfferForm ? 'Cancel' : '+ New Offer'}
+                        </button>
+                    )}
+                  </div>
+
+                  <div style={s.offerTypePills}>
+                    {[
+                      { icon: '2×', label: 'Bonus Multiplier', desc: 'Double (or more) points on a specific day or time window' },
+                      { icon: '★', label: 'First Visit', desc: 'Welcome bonus for customers visiting for the first time' },
+                      { icon: '↩', label: 'Return Incentive', desc: 'Reward customers who come back within N days' },
+                    ].map(p => (
+                        <div key={p.label} style={s.offerTypePill}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                            <span style={s.offerTypeIcon}>{p.icon}</span>
+                            <p style={s.offerTypePillLabel}>{p.label}</p>
+                          </div>
+                          <p style={s.offerTypePillDesc}>{p.desc}</p>
+                        </div>
+                    ))}
+                  </div>
+
+                  {showOfferForm && (
+                      <div style={s.formCard}>
+                        <h3 style={s.formTitle}>{editingOffer ? 'Edit Offer' : 'New Offer'}</h3>
+                        <label style={s.label}>Offer Name</label>
+                        <input style={s.input} placeholder="e.g. Double Points Tuesday" value={offerForm.name} onChange={e => setOfferForm({ ...offerForm, name: e.target.value })} />
+                        <label style={s.label}>Offer Type</label>
+                        <select style={s.input} value={offerForm.type} onChange={e => setOfferForm({ ...offerForm, type: e.target.value })}>
+                          <option value="bonus_multiplier">Bonus Multiplier (e.g. 2× points on a day/time)</option>
+                          <option value="first_visit">First Visit Bonus</option>
+                          <option value="return_incentive">Return Incentive (come back within N days)</option>
+                        </select>
+
+                        {offerForm.type === 'bonus_multiplier' && (
+                            <>
+                              <label style={s.label}>Points Multiplier</label>
+                              <input style={s.input} type="number" min="1.5" max="10" step="0.5" placeholder="2" value={offerForm.multiplier} onChange={e => setOfferForm({ ...offerForm, multiplier: e.target.value })} />
+                              <div style={{ ...s.formRow, flexDirection: isMobile ? 'column' : 'row' }}>
+                                <div style={s.formHalf}>
+                                  <label style={s.label}>Day of Week (optional)</label>
+                                  <select style={s.input} value={offerForm.dayOfWeek} onChange={e => setOfferForm({ ...offerForm, dayOfWeek: e.target.value })}>
+                                    <option value="">Every day</option>
+                                    {['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map(d => (
+                                        <option key={d} value={d.toUpperCase().slice(0,3)}>{d}</option>
+                                    ))}
+                                  </select>
+                                </div>
+                                <div style={s.formHalf}>
+                                  <label style={s.label}>Time Window (optional)</label>
+                                  <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <input style={{ ...s.input, flex: 1, marginBottom: 0 }} type="time" value={offerForm.startTime} onChange={e => setOfferForm({ ...offerForm, startTime: e.target.value })} />
+                                    <span style={{ color: 'var(--rn-portal-text-muted)', fontSize: '12px' }}>–</span>
+                                    <input style={{ ...s.input, flex: 1, marginBottom: 0 }} type="time" value={offerForm.endTime} onChange={e => setOfferForm({ ...offerForm, endTime: e.target.value })} />
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                        )}
+
+                        {offerForm.type === 'first_visit' && (
+                            <>
+                              <label style={s.label}>Bonus Points on First Visit</label>
+                              <input style={s.input} type="number" min="1" placeholder="100" value={offerForm.bonusPoints} onChange={e => setOfferForm({ ...offerForm, bonusPoints: e.target.value })} />
+                            </>
+                        )}
+
+                        {offerForm.type === 'return_incentive' && (
+                            <div style={{ ...s.formRow, flexDirection: isMobile ? 'column' : 'row' }}>
+                              <div style={s.formHalf}>
+                                <label style={s.label}>Return Within (days)</label>
+                                <input style={s.input} type="number" min="1" max="365" placeholder="14" value={offerForm.daysToReturn} onChange={e => setOfferForm({ ...offerForm, daysToReturn: e.target.value })} />
+                              </div>
+                              <div style={s.formHalf}>
+                                <label style={s.label}>Bonus Points on Return</label>
+                                <input style={s.input} type="number" min="1" placeholder="50" value={offerForm.bonusPoints} onChange={e => setOfferForm({ ...offerForm, bonusPoints: e.target.value })} />
+                              </div>
+                            </div>
+                        )}
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+                          <input type="checkbox" id="offerActive" checked={offerForm.isActive} onChange={e => setOfferForm({ ...offerForm, isActive: e.target.checked })} />
+                          <label htmlFor="offerActive" style={{ ...s.label, margin: 0 }}>Activate immediately</label>
+                        </div>
+                        <button style={{ ...s.btn, opacity: saving ? 0.7 : 1 }} onClick={handleSaveOffer} disabled={saving}>
+                          {saving ? 'Saving...' : editingOffer ? 'Save Changes' : 'Create Offer'}
+                        </button>
+                      </div>
+                  )}
+
+                  {!isApproved && <div style={s.pendingNote}><p style={s.pendingTitle}>Business approval required before creating offers.</p></div>}
+
+                  {loading ? [1, 2].map(i => <Skeleton key={i} h={100} />) : offers.length === 0 ? (
+                      <div style={s.empty}>
+                        <p style={{ fontWeight: '700', margin: '0 0 6px', color: 'var(--rn-portal-text)', fontSize: '14px' }}>No offers yet</p>
+                        <p style={{ fontSize: '13px', margin: 0 }}>Create offers to drive repeat visits and reward loyal customers.</p>
+                      </div>
+                  ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        {offers.map(offer => (
+                            <div key={offer.id} style={s.offerCard}>
+                              <div style={s.offerCardLeft}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                                  <span style={{ ...s.offerTypeBadge, background: offer.type === 'first_visit' ? '#f0e8ff' : offer.type === 'return_incentive' ? '#e8f4ed' : '#eff6ff', color: offer.type === 'first_visit' ? '#7c3aed' : offer.type === 'return_incentive' ? '#2e7d52' : ROYAL }}>
+                                    {offer.type === 'first_visit' ? 'First Visit' : offer.type === 'return_incentive' ? 'Return' : 'Multiplier'}
+                                  </span>
+                                  <span style={{ ...s.offerTypeBadge, background: offer.isActive ? '#e8f4ed' : 'var(--rn-portal-border)', color: offer.isActive ? '#2e7d52' : 'var(--rn-portal-text-muted)' }}>
+                                    {offer.isActive ? 'Active' : 'Inactive'}
+                                  </span>
+                                </div>
+                                <p style={s.offerName}>{offer.name}</p>
+                                <p style={s.offerMeta}>
+                                  {offer.type === 'bonus_multiplier' && `${offer.multiplier}× points${offer.dayOfWeek ? ` · ${offer.dayOfWeek}` : ''}${offer.startTime ? ` · ${offer.startTime}–${offer.endTime}` : ''}`}
+                                  {offer.type === 'first_visit' && `${offer.bonusPoints} bonus pts on first visit`}
+                                  {offer.type === 'return_incentive' && `${offer.bonusPoints} bonus pts if back within ${offer.daysToReturn} days`}
+                                </p>
+                              </div>
+                              <div style={s.offerCardActions}>
+                                <button style={s.editBtn} onClick={() => { setEditingOffer(offer.id); setOfferForm({ ...offer }); setShowOfferForm(true); }}>Edit</button>
+                                <button style={s.offerToggleBtn} onClick={() => handleToggleOffer(offer)}>{offer.isActive ? 'Pause' : 'Activate'}</button>
+                                <button style={s.deleteBtn} onClick={() => handleDeleteOffer(offer.id)}>Delete</button>
+                              </div>
                             </div>
                         ))}
                       </div>
+                  )}
+                </>
+            )}
+
+            {tab === 'settlement' && (
+                <>
+                  <h2 style={s.pageTitle}>Settlement Ledger</h2>
+                  <p style={{ color: 'var(--rn-portal-text-muted)', fontSize: '13px', margin: '6px 0 20px', lineHeight: 1.6 }}>
+                    Track points your business has issued versus redeemed across the network. Monthly net settlements are calculated automatically.
+                  </p>
+
+                  {loading ? (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {[1, 2].map(i => <Skeleton key={i} h={110} />)}
+                      </div>
+                  ) : (
+                      <>
+                        <div style={{ ...s.settlementSummary, flexDirection: isMobile ? 'column' : 'row' }}>
+                          <div style={s.settlementItem}>
+                            <p style={s.settlementItemLabel}>Points Issued (Month)</p>
+                            <p style={{ ...s.settlementItemValue, color: '#2e7d52' }}>
+                              {(settlement?.issuedThisMonth ?? stats?.pointsIssuedThisMonth)?.toLocaleString() ?? '—'}
+                            </p>
+                          </div>
+                          <div style={s.settlementDivider} />
+                          <div style={s.settlementItem}>
+                            <p style={s.settlementItemLabel}>Points Redeemed Here (Month)</p>
+                            <p style={{ ...s.settlementItemValue, color: '#c0392b' }}>
+                              {settlement?.redeemedThisMonth?.toLocaleString() ?? '—'}
+                            </p>
+                          </div>
+                          <div style={s.settlementDivider} />
+                          <div style={s.settlementItem}>
+                            <p style={s.settlementItemLabel}>Net Position</p>
+                            <p style={{ ...s.settlementItemValue, color: settlement?.netPosition >= 0 ? '#2e7d52' : '#c0392b', fontSize: isMobile ? '1.4rem' : '1.9rem' }}>
+                              {settlement?.netPosition != null ? (settlement.netPosition >= 0 ? `+${settlement.netPosition.toLocaleString()}` : settlement.netPosition.toLocaleString()) : '—'}
+                            </p>
+                            <p style={{ color: 'var(--rn-portal-text-muted)', fontSize: '11px', margin: '4px 0 0', lineHeight: 1.4 }}>
+                              {settlement?.netPosition > 0 ? 'Network owes your business' : settlement?.netPosition < 0 ? 'Your business owes the network' : 'Settled monthly at period end'}
+                            </p>
+                          </div>
+                        </div>
+
+                        {settlement?.history?.length > 0 ? (
+                            <>
+                              <p style={{ ...s.sectionSubHead, marginTop: '24px' }}>Monthly History</p>
+                              <div style={s.settlementTable}>
+                                <div style={s.settlementTableHeader}>
+                                  <span>Period</span>
+                                  <span>Issued</span>
+                                  <span>Redeemed</span>
+                                  <span>Net</span>
+                                  <span>Status</span>
+                                </div>
+                                {settlement.history.map((row, i) => (
+                                    <div key={i} style={s.settlementTableRow}>
+                                      <span style={{ color: 'var(--rn-portal-text)', fontWeight: '600' }}>{row.period}</span>
+                                      <span style={{ color: '#2e7d52', fontWeight: '600' }}>{row.issued?.toLocaleString()}</span>
+                                      <span style={{ color: '#c0392b', fontWeight: '600' }}>{row.redeemed?.toLocaleString()}</span>
+                                      <span style={{ color: row.net >= 0 ? '#2e7d52' : '#c0392b', fontWeight: '700' }}>{row.net >= 0 ? `+${row.net?.toLocaleString()}` : row.net?.toLocaleString()}</span>
+                                      <span style={{ padding: '2px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: '700', background: row.status === 'settled' ? '#e8f4ed' : '#fff8e1', color: row.status === 'settled' ? '#2e7d52' : '#7a5500' }}>
+                                        {row.status ?? 'Pending'}
+                                      </span>
+                                    </div>
+                                ))}
+                              </div>
+                            </>
+                        ) : (
+                            <div style={{ ...s.empty, marginTop: '16px' }}>
+                              <p style={{ fontWeight: '700', margin: '0 0 6px', color: 'var(--rn-portal-text)', fontSize: '14px' }}>Settlement history will appear here</p>
+                              <p style={{ fontSize: '13px', margin: 0 }}>Monthly reports are generated at the end of each billing period.</p>
+                            </div>
+                        )}
+                      </>
                   )}
                 </>
             )}
@@ -697,6 +1001,27 @@ const s = {
   settingsInput: { width: '100%', padding: '11px 14px', borderRadius: '9px', border: '1.5px solid var(--rn-portal-input-border)', background: 'var(--rn-portal-input-bg)', color: 'var(--rn-portal-input-color)', fontSize: '14px', marginBottom: '16px', outline: 'none', boxSizing: 'border-box', fontFamily: 'inherit' },
   settingsFeedback: { fontSize: '13px', padding: '10px 14px', borderRadius: '8px', margin: '0 0 14px' },
   settingsDangerBtn: { padding: '10px 20px', borderRadius: '9px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
+  sectionSubHead: { color: 'var(--rn-portal-text)', fontSize: '11px', fontWeight: '700', margin: '20px 0 12px', letterSpacing: '1.5px', textTransform: 'uppercase' },
+  offerTypePills: { display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' },
+  offerTypePill: { background: 'var(--rn-portal-surface)', border: '1px solid var(--rn-portal-border)', borderRadius: '12px', padding: '12px 14px', flex: 1, minWidth: '140px' },
+  offerTypeIcon: { fontSize: '14px', fontWeight: '800', color: ROYAL },
+  offerTypePillLabel: { color: 'var(--rn-portal-text)', fontSize: '12px', fontWeight: '700', margin: 0 },
+  offerTypePillDesc: { color: 'var(--rn-portal-text-muted)', fontSize: '11px', margin: '4px 0 0', lineHeight: 1.4 },
+  offerCard: { background: 'var(--rn-portal-surface)', borderRadius: '14px', padding: '16px', border: '1px solid var(--rn-portal-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', flexWrap: 'wrap' },
+  offerCardLeft: { flex: 1, minWidth: '180px' },
+  offerCardActions: { display: 'flex', gap: '6px', flexShrink: 0, flexWrap: 'wrap', alignItems: 'flex-start' },
+  offerTypeBadge: { fontSize: '10px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  offerName: { color: 'var(--rn-portal-text)', fontSize: '14px', fontWeight: '700', margin: '6px 0 4px' },
+  offerMeta: { color: 'var(--rn-portal-text-muted)', fontSize: '12px', margin: 0, lineHeight: 1.5 },
+  offerToggleBtn: { padding: '5px 10px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  settlementSummary: { background: 'var(--rn-portal-surface)', borderRadius: '14px', border: '1px solid var(--rn-portal-border)', display: 'flex', flexWrap: 'wrap', overflow: 'hidden' },
+  settlementItem: { flex: 1, minWidth: '140px', padding: '20px 16px', textAlign: 'center' },
+  settlementItemLabel: { color: 'var(--rn-portal-text-muted)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 8px' },
+  settlementItemValue: { fontWeight: '800', fontSize: '1.6rem', margin: 0, lineHeight: 1.1 },
+  settlementDivider: { width: '1px', background: 'var(--rn-portal-border)', flexShrink: 0 },
+  settlementTable: { background: 'var(--rn-portal-surface)', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--rn-portal-border)' },
+  settlementTableHeader: { display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr', padding: '10px 16px', background: 'var(--rn-portal-border)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--rn-portal-text-muted)', gap: '8px' },
+  settlementTableRow: { display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr', padding: '12px 16px', borderTop: '1px solid var(--rn-portal-border)', fontSize: '13px', alignItems: 'center', gap: '8px' },
 };
 
 export default BusinessOwnerDashboard;
