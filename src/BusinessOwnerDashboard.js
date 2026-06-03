@@ -163,7 +163,6 @@ function BusinessOwnerDashboard() {
   // Theme-aware values
   const rootBg = isDark ? '#07243A' : '#FFF8EA';
   const cardBg = isDark ? '#0D2E42' : '#ffffff';
-  const altSection = isDark ? 'rgba(255,255,255,0.04)' : '#F7F1E3';
   const textColor = isDark ? '#ffffff' : '#101820';
   const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
   const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
