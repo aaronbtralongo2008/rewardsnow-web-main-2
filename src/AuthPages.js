@@ -32,15 +32,13 @@ export function ForgotPassword() {
 
   return (
       <div style={s.root}>
-        <div style={s.orb1} />
-        <div style={s.orb2} />
-        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
+        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '16px', minHeight: isMobile ? '100vh' : 'auto' }}>
           <div style={s.brand}>RewardsNow</div>
           <button style={s.backLink} onClick={() => navigate('/signin')}>← Back to sign in</button>
           {!sent ? (
               <>
                 <h1 style={s.title}>Reset your password</h1>
-                <p style={s.sub}>Enter the email address on your account and we'll send a reset link.</p>
+                <p style={s.sub}>Enter the email address on your account and we&apos;ll send a reset link.</p>
                 <label style={s.label}>Email address</label>
                 <input style={s.input} type="email" autoComplete="email"
                        placeholder="you@email.com" value={email}
@@ -56,8 +54,8 @@ export function ForgotPassword() {
                 <div style={s.successIcon}>✓</div>
                 <h1 style={s.title}>Check your email</h1>
                 <p style={s.sub}>
-                  If an account exists for <strong>{email}</strong>, you'll receive a reset link shortly.
-                  Check your spam folder if you don't see it.
+                  If an account exists for <strong>{email}</strong>, you&apos;ll receive a reset link shortly.
+                  Check your spam folder if you don&apos;t see it.
                 </p>
                 <button style={s.btn} onClick={() => navigate('/signin')}>Back to sign in</button>
               </div>
@@ -101,14 +99,12 @@ export function ResetPassword() {
 
   return (
       <div style={s.root}>
-        <div style={s.orb1} />
-        <div style={s.orb2} />
-        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
+        <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '16px', minHeight: isMobile ? '100vh' : 'auto' }}>
           <div style={s.brand}>RewardsNow</div>
           {!done ? (
               <>
                 <h1 style={s.title}>Choose a new password</h1>
-                <p style={s.sub}>Pick something strong that you haven't used before.</p>
+                <p style={s.sub}>Pick something strong that you haven&apos;t used before.</p>
                 <label style={s.label}>New password</label>
                 <input style={s.input} type="password" autoComplete="new-password"
                        placeholder="At least 8 characters" value={password}
@@ -137,18 +133,16 @@ export function ResetPassword() {
 }
 
 const s = {
-  root: { minHeight: '100vh', background: '#08011a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.5)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  orb2: { position: 'absolute', bottom: '-80px', right: '-60px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.25)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  card: { background: '#f0f7ff', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2 },
-  brand: { color: '#2563eb', fontSize: '15px', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.01em' },
-  backLink: { background: 'none', border: 'none', color: '#60a5fa', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
-  title: { color: '#0f172a', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 8px', letterSpacing: '-0.03em' },
-  sub: { color: '#64748b', fontSize: '14px', lineHeight: 1.6, margin: '0 0 28px' },
-  label: { display: 'block', color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
-  input: { width: '100%', padding: '13px 16px', border: '2px solid #bfdbfe', borderRadius: '10px', fontSize: '14px', color: '#0f172a', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: '20px' },
+  root: { minHeight: '100vh', background: '#07243A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative' },
+  card: { background: '#fff', width: '100%', boxSizing: 'border-box', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 24px 80px rgba(0,0,0,0.35)' },
+  brand: { color: '#0B5CAD', fontSize: '15px', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.01em' },
+  backLink: { background: 'none', border: 'none', color: '#0B5CAD', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
+  title: { color: '#101820', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 8px', letterSpacing: '-0.03em' },
+  sub: { color: '#5F6B73', fontSize: '14px', lineHeight: 1.6, margin: '0 0 28px' },
+  label: { display: 'block', color: '#5F6B73', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
+  input: { width: '100%', padding: '13px 16px', border: '2px solid rgba(11,92,173,0.25)', borderRadius: '10px', fontSize: '14px', color: '#101820', background: '#fff', outline: 'none', boxSizing: 'border-box', marginBottom: '20px' },
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 16px' },
-  btn: { width: '100%', padding: '14px', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
+  btn: { width: '100%', padding: '14px', background: '#0B5CAD', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer' },
   success: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '12px' },
-  successIcon: { width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
+  successIcon: { width: '60px', height: '60px', borderRadius: '50%', background: '#0B5CAD', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center' },
 };

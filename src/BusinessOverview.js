@@ -7,10 +7,6 @@ export default function BusinessOverview() {
 
   return (
     <div style={s.root}>
-      <div style={s.orb1} />
-      <div style={s.orb2} />
-      <div style={s.orb3} />
-
       <nav style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
         <button style={s.backBtn} onClick={() => navigate('/')}>← Back</button>
         <span style={s.brand}>RewardsNow</span>
@@ -24,7 +20,7 @@ export default function BusinessOverview() {
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: '540px' }}>
-          RewardsNowtm is YOUR business’s answer to big competitor advertising budgets and how to stop them from poaching your customers
+          RewardsNowtm is YOUR business&apos;s answer to big competitor advertising budgets and how to stop them from poaching your customers
         </p>
         <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
       </section>
@@ -86,11 +82,11 @@ export default function BusinessOverview() {
           <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Simple onboarding</h2>
           <div style={s.goldLine} />
           <p style={s.body}>
-            A willing business submits basic information through our partner portal and connects with a RewardsNow team member. You configure which services earn or spend points. Your store managers authenticate customer transactions through our simple interface. That's it.
+            A willing business submits basic information through our partner portal and connects with a RewardsNow team member. You configure which services earn or spend points. Your store managers authenticate customer transactions through our simple interface. That&apos;s it.
           </p>
           <div style={{ ...s.stepsGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '16px', marginTop: '40px' }}>
             {[
-              { n: '01', title: 'Submit application', desc: 'Reviewed within 24–48 hours.' },
+              { n: '01', title: 'Submit application', desc: 'Reviewed by the RewardsNow team.' },
               { n: '02', title: 'Configure services', desc: 'Set point values and pricing.' },
               { n: '03', title: 'Start earning', desc: 'Reward your customers immediately.' },
             ].map(step => (
@@ -105,8 +101,8 @@ export default function BusinessOverview() {
       </section>
 
       <section style={{ ...s.ctaFooter, padding: isMobile ? '56px 24px' : '80px 80px', textAlign: 'center' }}>
-        <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Ready to grow your business?</h2>
-        <p style={{ ...s.body, marginBottom: '36px' }}>Applications reviewed within 24–48 hours.</p>
+        <h2 style={{ ...s.h2White, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Ready to grow your business?</h2>
+        <p style={{ ...s.body, color: 'rgba(255,255,255,0.6)', marginBottom: '36px' }}>Our team reviews every application and will contact you by email once approved.</p>
         <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply now</button>
           <button style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
@@ -117,40 +113,38 @@ export default function BusinessOverview() {
 }
 
 const s = {
-  root: { minHeight: '100vh', background: '#08011a', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'fixed', top: '-120px', left: '-100px', width: '600px', height: '600px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.45)', filter: 'blur(120px)', zIndex: 0, pointerEvents: 'none' },
-  orb2: { position: 'fixed', bottom: '-100px', right: '-80px', width: '500px', height: '500px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.22)', filter: 'blur(100px)', zIndex: 0, pointerEvents: 'none' },
-  orb3: { position: 'fixed', top: '50%', right: '20%', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.15)', filter: 'blur(80px)', zIndex: 0, pointerEvents: 'none' },
-  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px', position: 'sticky', top: 0, zIndex: 100, background: 'rgba(8,1,26,0.8)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.07)' },
-  backBtn: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '13px', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
-  brand: { color: '#f59e0b', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em' },
-  navBtn: { padding: '7px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '8px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
-  hero: { position: 'relative', zIndex: 1 },
-  eyebrow: { color: '#f59e0b', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 20px' },
-  heroTitle: { color: '#fff', fontWeight: '900', lineHeight: 1.06, letterSpacing: '-0.03em', margin: '0 0 24px' },
-  goldBar: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', borderRadius: '2px', marginBottom: '24px' },
-  heroSub: { color: 'rgba(255,255,255,0.55)', fontSize: '17px', lineHeight: 1.7, margin: '0 0 36px' },
-  ctaPrimary: { padding: '14px 28px', background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)', border: 'none', color: '#0f172a', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 20px rgba(245,158,11,0.4)', fontFamily: 'inherit' },
-  ctaGhost: { padding: '14px 28px', background: 'transparent', border: '1.5px solid rgba(255,255,255,0.25)', color: '#fff', borderRadius: '12px', fontSize: '15px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
-  section: { position: 'relative', zIndex: 1 },
-  sectionAlt: { position: 'relative', zIndex: 1, background: 'rgba(255,255,255,0.025)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' },
-  ctaFooter: { position: 'relative', zIndex: 1 },
+  root: { minHeight: '100vh', background: '#FFF8EA', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", position: 'relative' },
+  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px', position: 'sticky', top: 0, zIndex: 100, background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  backBtn: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.55)', fontSize: '13px', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
+  brand: { color: '#F2B84B', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em' },
+  navBtn: { padding: '7px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '6px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
+  hero: { position: 'relative' },
+  eyebrow: { color: '#F2B84B', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 20px' },
+  heroTitle: { color: '#101820', fontWeight: '900', lineHeight: 1.06, letterSpacing: '-0.03em', margin: '0 0 24px' },
+  goldBar: { width: '56px', height: '3px', background: '#F2B84B', borderRadius: '2px', marginBottom: '24px' },
+  heroSub: { color: '#5F6B73', fontSize: '17px', lineHeight: 1.7, margin: '0 0 36px' },
+  ctaPrimary: { padding: '14px 28px', background: '#0B5CAD', border: 'none', color: '#ffffff', borderRadius: '6px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit' },
+  ctaGhost: { padding: '14px 28px', background: 'transparent', border: '1.5px solid rgba(255,255,255,0.25)', color: '#ffffff', borderRadius: '6px', fontSize: '15px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
+  section: { position: 'relative' },
+  sectionAlt: { position: 'relative', background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.06)', borderBottom: '1px solid rgba(0,0,0,0.06)' },
+  ctaFooter: { position: 'relative', background: '#07243A' },
   contentMax: { maxWidth: '900px' },
-  tag: { color: '#f59e0b', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 14px' },
-  h2: { color: '#fff', fontWeight: '900', lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 20px' },
-  goldLine: { width: '40px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', borderRadius: '2px', marginBottom: '28px' },
-  body: { color: 'rgba(255,255,255,0.6)', fontSize: '16px', lineHeight: 1.8, margin: '0 0 20px' },
+  tag: { color: '#F2B84B', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 14px' },
+  h2: { color: '#101820', fontWeight: '900', lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 20px' },
+  h2White: { color: '#ffffff', fontWeight: '900', lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 20px' },
+  goldLine: { width: '40px', height: '3px', background: '#F2B84B', borderRadius: '2px', marginBottom: '28px' },
+  body: { color: '#5F6B73', fontSize: '16px', lineHeight: 1.8, margin: '0 0 20px' },
   statsGrid: { display: 'grid' },
-  stat: { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '22px 18px' },
-  statValue: { color: '#f59e0b', fontWeight: '900', letterSpacing: '-0.03em', margin: '0 0 8px', lineHeight: 1, fontSize: '1.8rem' },
-  statLabel: { color: 'rgba(255,255,255,0.6)', fontSize: '12px', lineHeight: 1.5, margin: 0 },
+  stat: { background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '8px', padding: '22px 18px' },
+  statValue: { color: '#0B5CAD', fontWeight: '900', letterSpacing: '-0.03em', margin: '0 0 8px', lineHeight: 1, fontSize: '1.8rem' },
+  statLabel: { color: '#5F6B73', fontSize: '12px', lineHeight: 1.5, margin: 0 },
   grid: { display: 'grid' },
-  problemCard: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '20px' },
-  problem: { color: '#f87171', fontSize: '13px', fontWeight: '700', margin: '0 0 8px' },
-  solution: { color: 'rgba(255,255,255,0.7)', fontSize: '13px', lineHeight: 1.6, margin: 0 },
+  problemCard: { background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '8px', padding: '20px' },
+  problem: { color: '#dc2626', fontSize: '13px', fontWeight: '700', margin: '0 0 8px' },
+  solution: { color: '#5F6B73', fontSize: '13px', lineHeight: 1.6, margin: 0 },
   stepsGrid: { display: 'grid' },
-  stepCard: { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '24px 20px' },
-  stepNum: { display: 'inline-block', color: '#f59e0b', fontSize: '11px', fontWeight: '800', letterSpacing: '2px', marginBottom: '12px' },
-  stepTitle: { color: '#fff', fontSize: '15px', fontWeight: '700', margin: '0 0 8px' },
-  stepDesc: { color: 'rgba(255,255,255,0.55)', fontSize: '13px', lineHeight: 1.6, margin: 0 },
+  stepCard: { background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '8px', padding: '24px 20px' },
+  stepNum: { display: 'inline-block', color: '#25B7C8', fontSize: '11px', fontWeight: '800', letterSpacing: '2px', marginBottom: '12px' },
+  stepTitle: { color: '#101820', fontSize: '15px', fontWeight: '700', margin: '0 0 8px' },
+  stepDesc: { color: '#5F6B73', fontSize: '13px', lineHeight: 1.6, margin: 0 },
 };

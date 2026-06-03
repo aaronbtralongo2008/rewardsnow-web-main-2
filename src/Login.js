@@ -46,14 +46,11 @@ function Login({ onLogin }) {
               </div>
           ) : (
               <div style={styles.leftPanel}>
-                <div style={styles.orb1} />
-                <div style={styles.orb2} />
-                <div style={styles.orb3} />
                 <div style={styles.leftContent}>
                   <div style={styles.badge}>REWARDSNOW</div>
                   <div style={styles.goldLine} />
                   <p style={styles.tagline}>One card.<br />Every business.</p>
-                  <p style={styles.leftDesc}>Join thousands of customers earning rewards at local businesses across the city.</p>
+                  <p style={styles.leftDesc}>Join customers earning rewards at local businesses across the city.</p>
                 </div>
               </div>
           )}
@@ -108,35 +105,32 @@ function Login({ onLogin }) {
 }
 
 const styles = {
-  container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  container: { minHeight: '100vh', background: '#FFF8EA', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   loginWrapper: { display: 'flex', flex: 1, minHeight: 0 },
-  mobileHeader: { background: 'linear-gradient(145deg, #0f172a 0%, #1e3a8a 100%)', padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
-  mobileHeaderBrand: { color: '#fff', fontSize: '1.4rem', fontWeight: '800' },
+  mobileHeader: { background: '#07243A', padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
+  mobileHeaderBrand: { color: '#F2B84B', fontSize: '1.4rem', fontWeight: '800' },
   mobileHeaderSub: { color: 'rgba(255,255,255,0.6)', fontSize: '13px', marginTop: '4px' },
-  leftPanel: { flex: 1, background: '#08011a', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  orb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  orb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  leftPanel: { flex: 1, background: '#07243A', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   leftContent: { position: 'relative', zIndex: 2 },
-  badge: { display: 'inline-block', color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
-  goldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
+  badge: { display: 'inline-block', color: '#F2B84B', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  goldLine: { width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' },
   tagline: { color: '#fff', fontSize: '3.6rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 20px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
   leftDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
-  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#f0f7ff', boxSizing: 'border-box' },
-  brandName: { color: '#0f172a', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
-  brandSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 36px 0' },
-  inputLabel: { color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
-  input: { padding: '14px 16px', borderRadius: '10px', border: '2px solid #bfdbfe', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#ffffff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)', letterSpacing: '0.02em' },
-  forgotLink: { color: '#2563eb', fontSize: '13px', fontWeight: '600', cursor: 'pointer' },
-  registerBtn: { padding: '15px', borderRadius: '12px', border: '2px solid #bfdbfe', background: '#fff', color: '#374151', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', transition: 'all 0.2s' },
-  bizRegisterBtn: { padding: '15px', borderRadius: '12px', border: '2px solid #bfdbfe', background: '#fff', color: '#374151', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', transition: 'all 0.2s', marginTop: '10px' },
+  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#FFF8EA', boxSizing: 'border-box' },
+  brandName: { color: '#101820', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  brandSub: { color: '#5F6B73', fontSize: '1rem', margin: '0 0 36px 0' },
+  inputLabel: { color: '#5F6B73', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  input: { padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(11,92,173,0.25)', background: '#fff', color: '#101820', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: '#0B5CAD', color: '#ffffff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', letterSpacing: '0.02em' },
+  forgotLink: { color: '#0B5CAD', fontSize: '13px', fontWeight: '600', cursor: 'pointer' },
+  registerBtn: { padding: '15px', borderRadius: '12px', border: '2px solid rgba(11,92,173,0.2)', background: '#fff', color: '#374151', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', transition: 'all 0.2s' },
+  bizRegisterBtn: { padding: '15px', borderRadius: '12px', border: '2px solid rgba(11,92,173,0.2)', background: '#fff', color: '#374151', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', transition: 'all 0.2s', marginTop: '10px' },
   divider: { display: 'flex', alignItems: 'center', gap: '12px', margin: '24px 0' },
-  dividerLine: { flex: 1, height: '1px', background: '#bfdbfe' },
-  dividerText: { color: '#60a5fa', fontSize: '13px' },
+  dividerLine: { flex: 1, height: '1px', background: 'rgba(11,92,173,0.15)' },
+  dividerText: { color: '#5F6B73', fontSize: '13px' },
   error: { color: '#dc2626', fontSize: '13px', margin: '0 0 14px 0', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0' },
   terms: { color: '#94a3b8', fontSize: '12px', textAlign: 'center', marginTop: '20px', lineHeight: 1.6 },
-  link: { color: '#2563eb', cursor: 'pointer' },
+  link: { color: '#0B5CAD', cursor: 'pointer' },
 };
 
 export default Login;

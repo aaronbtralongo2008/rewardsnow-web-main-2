@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 
-const BLUE = '#2563eb';
+const BLUE = '#0B5CAD';
 
 const CATEGORY_LABELS = {
   food: 'Food & Drink',
@@ -114,9 +114,6 @@ export default function BusinessList({ customer, onLogout, onSelectBusiness, onN
 
   return (
       <div style={s.root}>
-        <div style={s.orb1} />
-        <div style={s.orb2} />
-
         <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
           <button style={s.navBrand} onClick={() => onNavigate('/home')}>RewardsNow</button>
           <div style={s.navRight}>
@@ -221,43 +218,41 @@ export default function BusinessList({ customer, onLogout, onSelectBusiness, onN
 }
 
 const s = {
-  root: { minHeight: '100vh', background: 'linear-gradient(160deg, #0f172a 0%, #1e3a8a 100%)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'fixed', top: '-80px', right: '10%', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.3)', filter: 'blur(80px)', zIndex: 0, pointerEvents: 'none' },
-  orb2: { position: 'fixed', bottom: '-60px', left: '15%', width: '350px', height: '350px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.15)', filter: 'blur(70px)', zIndex: 0, pointerEvents: 'none' },
-  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: 'rgba(15,23,42,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 12px rgba(0,0,0,0.2)' },
-  navBrand: { color: '#f59e0b', fontSize: '15px', fontWeight: '800', letterSpacing: '-0.01em', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
+  root: { minHeight: '100vh', background: '#07243A', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", position: 'relative' },
+  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.1)', position: 'sticky', top: 0, zIndex: 100 },
+  navBrand: { color: '#F2B84B', fontSize: '15px', fontWeight: '800', letterSpacing: '-0.01em', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
   navRight: { display: 'flex', alignItems: 'center', gap: '4px' },
   navLink: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontWeight: '500', cursor: 'pointer', padding: '6px 8px', borderRadius: '6px', fontFamily: 'inherit' },
   navLogout: { background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px', fontFamily: 'inherit' },
   body: { maxWidth: '1100px', margin: '0 auto', boxSizing: 'border-box' },
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px' },
   title: { color: '#fff', fontWeight: '800', margin: '0 0 4px', letterSpacing: '-0.02em' },
-  subtitle: { color: 'rgba(255,255,255,0.6)', fontSize: '14px', margin: 0 },
-  searchWrap: { position: 'relative', display: 'flex', alignItems: 'center', background: '#fff', border: 'none', borderRadius: '10px', padding: '0 14px', marginBottom: '20px', gap: '8px', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' },
-  searchIcon: { color: '#60a5fa', fontSize: '18px', lineHeight: 1 },
-  searchInput: { flex: 1, border: 'none', outline: 'none', padding: '11px 0', fontSize: '14px', color: '#0f172a', background: 'transparent' },
+  subtitle: { color: 'rgba(255,255,255,0.55)', fontSize: '14px', margin: 0 },
+  searchWrap: { position: 'relative', display: 'flex', alignItems: 'center', background: '#fff', border: 'none', borderRadius: '10px', padding: '0 14px', marginBottom: '20px', gap: '8px' },
+  searchIcon: { color: BLUE, fontSize: '18px', lineHeight: 1 },
+  searchInput: { flex: 1, border: 'none', outline: 'none', padding: '11px 0', fontSize: '14px', color: '#101820', background: 'transparent' },
   searchSpinner: { color: '#9ca3af', fontSize: '12px', whiteSpace: 'nowrap' },
   clearBtn: { background: 'none', border: 'none', color: '#9ca3af', fontSize: '12px', cursor: 'pointer', padding: '4px 8px', borderRadius: '4px', fontFamily: 'inherit' },
-  aiSearchBtn: { background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: '5px 10px', borderRadius: '6px', fontFamily: 'inherit', whiteSpace: 'nowrap' },
+  aiSearchBtn: { background: '#25B7C8', border: 'none', color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: '5px 10px', borderRadius: '6px', fontFamily: 'inherit', whiteSpace: 'nowrap' },
   aiToggleBtn: { background: 'none', border: '1.5px solid #d1d5db', color: '#9ca3af', fontSize: '11px', fontWeight: '700', cursor: 'pointer', padding: '4px 8px', borderRadius: '6px', fontFamily: 'inherit', letterSpacing: '0.05em', flexShrink: 0 },
-  aiToggleBtnActive: { background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: '1.5px solid transparent', color: '#fff' },
+  aiToggleBtnActive: { background: '#25B7C8', border: '1.5px solid #25B7C8', color: '#fff' },
   grid: { display: 'grid', gap: '12px' },
-  skeleton: { height: '180px', borderRadius: '12px', background: 'linear-gradient(90deg, rgba(255,255,255,0.07) 25%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.07) 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
-  card: { background: '#fff', border: '2px solid transparent', borderRadius: '12px', padding: '16px', cursor: 'pointer', transition: 'box-shadow 0.15s', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' },
-  cardFeatured: { border: '2px solid #f59e0b', boxShadow: '0 4px 24px rgba(245,158,11,0.25)' },
+  skeleton: { height: '180px', borderRadius: '12px', background: 'rgba(255,255,255,0.07)' },
+  card: { background: '#fff', border: '2px solid transparent', borderRadius: '12px', padding: '16px', cursor: 'pointer', transition: 'box-shadow 0.15s' },
+  cardFeatured: { border: '2px solid #F2B84B' },
   cardHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' },
-  avatar: { width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.1rem', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  featuredTag: { background: '#fffbeb', color: '#92400e', fontSize: '10px', fontWeight: '600', padding: '3px 6px', borderRadius: '6px', border: '1px solid #fde68a' },
+  avatar: { width: '40px', height: '40px', borderRadius: '10px', background: BLUE, color: '#fff', fontSize: '1.1rem', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  featuredTag: { background: '#F2B84B', color: '#07243A', fontSize: '10px', fontWeight: '700', padding: '3px 6px', borderRadius: '6px' },
   priceTag: { background: '#f0fdf4', color: '#166534', fontSize: '11px', fontWeight: '700', padding: '2px 6px', borderRadius: '6px' },
-  bizName: { color: '#0f172a', fontWeight: '700', margin: '0 0 4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  bizName: { color: '#101820', fontWeight: '700', margin: '0 0 4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
   bizAddr: { color: '#9ca3af', fontSize: '12px', margin: '0 0 12px', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' },
   cardFooter: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  typeTag: { background: '#eff6ff', color: BLUE, fontSize: '11px', fontWeight: '600', padding: '3px 8px', borderRadius: '6px' },
+  typeTag: { background: 'rgba(11,92,173,0.08)', color: BLUE, fontSize: '11px', fontWeight: '600', padding: '3px 8px', borderRadius: '6px' },
   typeTagCustom: { background: '#fef3c7', color: '#b45309' },
-  categoryTag: { background: '#f5f3ff', color: '#7c3aed', fontSize: '11px', fontWeight: '600', padding: '3px 8px', borderRadius: '6px' },
+  categoryTag: { background: 'rgba(37,183,200,0.12)', color: '#25B7C8', fontSize: '11px', fontWeight: '600', padding: '3px 8px', borderRadius: '6px' },
   tagsRow: { display: 'flex', gap: '4px', flexWrap: 'wrap', marginTop: '8px' },
   tagChip: { background: '#f1f5f9', color: '#475569', fontSize: '10px', padding: '2px 6px', borderRadius: '4px' },
-  arrow: { color: '#60a5fa', fontSize: '14px' },
+  arrow: { color: BLUE, fontSize: '14px' },
   empty: { background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '60px 24px', textAlign: 'center' },
   emptyTitle: { color: '#fff', fontSize: '15px', fontWeight: '600', margin: '0 0 12px' },
   emptyAction: { background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '8px 16px', borderRadius: '8px', fontFamily: 'inherit' },

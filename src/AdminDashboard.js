@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
-const ROYAL = '#2040C8';
+const ROYAL = '#0B5CAD';
 
 function AdminDashboard() {
   const isMobile = useIsMobile();
@@ -177,7 +177,7 @@ function AdminDashboard() {
   if (!token) {
     return (
         <div style={s.loginContainer}>
-          <div style={{ ...s.loginBox, width: isMobile ? '100%' : '400px', padding: isMobile ? '40px 24px' : '48px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxSizing: 'border-box', boxShadow: isMobile ? 'none' : '0 8px 40px rgba(0,0,0,0.1)' }}>
+          <div style={{ ...s.loginBox, width: isMobile ? '100%' : '400px', padding: isMobile ? '40px 24px' : '48px', borderRadius: isMobile ? '0' : '16px', minHeight: isMobile ? '100vh' : 'auto', boxSizing: 'border-box' }}>
             <div style={s.loginHeader}>
               <span style={s.loginBadge}>ADMIN</span>
               <h1 style={s.loginTitle}>RewardsNow Admin</h1>
@@ -229,7 +229,7 @@ function AdminDashboard() {
               <div style={s.sidebar}>
                 {TABS.map(({ key, label }) => (
                     <button key={key}
-                            style={{ ...s.navBtn, background: tab === key ? '#f0f4ff' : 'transparent', color: tab === key ? ROYAL : '#555', fontWeight: tab === key ? '700' : '400' }}
+                            style={{ ...s.navBtn, background: tab === key ? 'rgba(11,92,173,0.08)' : 'transparent', color: tab === key ? ROYAL : '#555', fontWeight: tab === key ? '700' : '400' }}
                             onClick={() => setTab(key)}>
                       {label}
                     </button>
@@ -310,10 +310,10 @@ function AdminDashboard() {
                                   <p style={s.bizName}>{biz.name}</p>
                                   <p style={s.bizAddr}>{biz.address || 'No address'}</p>
                                   <div style={s.badgeRow}>
-                                    {biz.featured && <span style={s.tag}>⭐ Featured</span>}
+                                    {biz.featured && <span style={s.tagGold}>⭐ Featured</span>}
                                     {biz.paidPartner && <span style={s.tag}>Partner</span>}
                                     {biz.uniqueRewardsPoint && <span style={s.tag}>Custom Points</span>}
-                                    {biz.category && <span style={s.tagPurple}>{biz.category}</span>}
+                                    {biz.category && <span style={s.tagTeal}>{biz.category}</span>}
                                     {biz.priceRange > 0 && <span style={s.tagGreen}>{'$'.repeat(biz.priceRange)}</span>}
                                   </div>
                                   <div style={s.bizActions}>
@@ -334,10 +334,10 @@ function AdminDashboard() {
                                           <label style={s.editLabel}>Category</label>
                                           <select style={s.editSelect} value={editForm.category} onChange={e => setEditForm({ ...editForm, category: e.target.value })}>
                                             <option value="">— None —</option>
-                                            <option value="food">Food & Drink</option>
+                                            <option value="food">Food &amp; Drink</option>
                                             <option value="retail">Retail</option>
                                             <option value="services">Services</option>
-                                            <option value="health">Health & Wellness</option>
+                                            <option value="health">Health &amp; Wellness</option>
                                             <option value="entertainment">Entertainment</option>
                                             <option value="travel">Travel</option>
                                             <option value="other">Other</option>
@@ -359,7 +359,7 @@ function AdminDashboard() {
                                       <button style={s.saveBtn} onClick={() => handleSaveDetails(biz.id)}>Save Details</button>
                                     </div>
                                     <div style={s.editSection}>
-                                      <p style={s.editSectionTitle}>Ranking & Featured</p>
+                                      <p style={s.editSectionTitle}>Ranking &amp; Featured</p>
                                       <div style={s.editRow}>
                                         <div style={s.editField}>
                                           <label style={s.editLabel}>Rank Score</label>
@@ -391,64 +391,65 @@ function AdminDashboard() {
 }
 
 const s = {
-  loginContainer: { minHeight: '100vh', background: '#F4F6FB', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Segoe UI', system-ui, sans-serif" },
-  loginBox: { background: '#fff' },
+  loginContainer: { minHeight: '100vh', background: '#07243A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Segoe UI', system-ui, sans-serif" },
+  loginBox: { background: '#0D2E42', border: '1px solid rgba(255,255,255,0.1)' },
   loginHeader: { textAlign: 'center', marginBottom: '32px' },
-  loginBadge: { background: '#1a2f9e', color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '3px', padding: '4px 12px', borderRadius: '20px' },
-  loginTitle: { color: ROYAL, fontSize: '1.8rem', fontWeight: '800', margin: '12px 0 4px 0' },
-  loginSub: { color: '#888', fontSize: '13px', margin: 0 },
-  label: { color: '#444', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' },
-  input: { padding: '13px 16px', borderRadius: '10px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '14px', marginBottom: '16px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginBadge: { background: '#F2B84B', color: '#07243A', fontSize: '10px', fontWeight: '700', letterSpacing: '3px', padding: '4px 12px', borderRadius: '20px' },
+  loginTitle: { color: '#fff', fontSize: '1.8rem', fontWeight: '800', margin: '12px 0 4px 0' },
+  loginSub: { color: 'rgba(255,255,255,0.5)', fontSize: '13px', margin: 0 },
+  label: { color: 'rgba(255,255,255,0.7)', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' },
+  input: { padding: '13px 16px', borderRadius: '10px', border: '1.5px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.08)', color: '#fff', fontSize: '14px', marginBottom: '16px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   btn: { padding: '14px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%' },
-  error: { color: '#e03434', fontSize: '13px', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0', margin: '0 0 14px 0' },
-  container: { minHeight: '100vh', background: '#F4F6FB', fontFamily: "'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
-  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' },
-  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800' },
-  adminBadge: { background: '#1a2f9e', color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
-  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
+  error: { color: '#e03434', fontSize: '13px', background: 'rgba(224,52,52,0.15)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(224,52,52,0.3)', margin: '0 0 14px 0' },
+  container: { minHeight: '100vh', background: '#FFF8EA', fontFamily: "'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  logo: { color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800' },
+  adminBadge: { background: '#F2B84B', color: '#07243A', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
+  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid rgba(255,255,255,0.2)', background: 'transparent', color: '#fff', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
   mobileTabs: { display: 'flex', background: '#fff', borderBottom: '1px solid #eee', paddingLeft: '0' },
   mobileTab: { flex: 1, padding: '12px 8px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'center' },
   body: { display: 'flex', flex: 1 },
-  sidebar: { width: '200px', background: '#fff', borderRight: '1px solid #eee', padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px' },
+  sidebar: { width: '200px', background: '#fff', borderRight: '1px solid rgba(0,0,0,0.08)', padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px' },
   navBtn: { padding: '10px 14px', borderRadius: '10px', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'left', width: '100%', transition: 'all 0.15s' },
   content: { flex: 1, overflowY: 'auto' },
   banner: { padding: '12px 16px', borderRadius: '10px', fontSize: '13px', fontWeight: '600', marginBottom: '20px' },
-  pageTitle: { color: '#111', fontSize: '1.2rem', fontWeight: '700', margin: '0 0 16px 0' },
-  skeleton: { height: '140px', borderRadius: '16px', marginBottom: '12px', background: 'linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
-  empty: { background: '#fff', borderRadius: '16px', padding: '48px', textAlign: 'center', border: '1px solid #eee' },
-  card: { background: '#fff', borderRadius: '16px', padding: '16px', border: '1px solid #eee', marginBottom: '14px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' },
+  pageTitle: { color: '#101820', fontSize: '1.2rem', fontWeight: '700', margin: '0 0 16px 0' },
+  skeleton: { height: '140px', borderRadius: '16px', marginBottom: '12px', background: '#f0f0f0' },
+  empty: { background: '#fff', borderRadius: '16px', padding: '48px', textAlign: 'center', border: '1px solid rgba(0,0,0,0.08)' },
+  card: { background: '#fff', borderRadius: '16px', padding: '16px', border: '1px solid rgba(0,0,0,0.08)', marginBottom: '14px' },
   cardTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' },
-  cardTitle: { color: '#111', fontSize: '1rem', fontWeight: '700', margin: '0 0 4px 0' },
-  cardSub: { color: '#888', fontSize: '12px', margin: '0 0 3px 0' },
-  cardDate: { color: '#bbb', fontSize: '11px', margin: '8px 0 0 0' },
+  cardTitle: { color: '#101820', fontSize: '1rem', fontWeight: '700', margin: '0 0 4px 0' },
+  cardSub: { color: '#5F6B73', fontSize: '12px', margin: '0 0 3px 0' },
+  cardDate: { color: '#aaa', fontSize: '11px', margin: '8px 0 0 0' },
   badgeRow: { display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' },
-  tag: { background: '#f0f4ff', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  tag: { background: 'rgba(11,92,173,0.1)', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  tagGold: { background: '#F2B84B', color: '#07243A', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  tagTeal: { background: 'rgba(37,183,200,0.12)', color: '#25B7C8', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  tagGreen: { background: '#f0fdf4', color: '#166534', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
   rejectRow: { marginTop: '12px' },
-  notesInput: { padding: '8px 12px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '12px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  notesInput: { padding: '8px 12px', borderRadius: '8px', border: '1.5px solid rgba(0,0,0,0.1)', background: '#fafafa', color: '#111', fontSize: '12px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   actionBtns: { display: 'flex', gap: '8px', flexShrink: 0 },
   approveBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#2e7d52', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' },
   rejectBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#c0392b', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' },
   bizGrid: { display: 'grid', gap: '14px' },
-  bizCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', gap: '0' },
+  bizCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', gap: '0' },
   bizCardRow: { display: 'flex', alignItems: 'flex-start', gap: '12px' },
-  bizInitial: { width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #152a9e, #1e35b5)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  bizInitial: { width: '40px', height: '40px', borderRadius: '10px', background: ROYAL, color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   bizInfo: { flex: 1, minWidth: 0 },
-  bizName: { color: '#111', fontSize: '13px', fontWeight: '700', margin: '0 0 3px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  bizName: { color: '#101820', fontSize: '13px', fontWeight: '700', margin: '0 0 3px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
   bizAddr: { color: '#aaa', fontSize: '11px', margin: '0 0 6px 0' },
   bizActions: { display: 'flex', gap: '6px', marginTop: '8px', flexWrap: 'wrap' },
   suspendBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #e0a020', background: 'transparent', color: '#e0a020', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
   terminateBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #c0392b', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
-  editBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #2040C8', background: 'transparent', color: '#2040C8', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
-  tagPurple: { background: '#f5f3ff', color: '#7c3aed', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
-  tagGreen: { background: '#f0fdf4', color: '#166534', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
-  editPanel: { borderTop: '1px solid #f0f0f0', marginTop: '12px', paddingTop: '14px', display: 'flex', flexDirection: 'column', gap: '16px' },
+  editBtn: { padding: '5px 10px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  editPanel: { borderTop: '1px solid rgba(0,0,0,0.06)', marginTop: '12px', paddingTop: '14px', display: 'flex', flexDirection: 'column', gap: '16px' },
   editSection: { display: 'flex', flexDirection: 'column', gap: '8px' },
-  editSectionTitle: { color: '#555', fontSize: '11px', fontWeight: '700', margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' },
+  editSectionTitle: { color: '#5F6B73', fontSize: '11px', fontWeight: '700', margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' },
   editRow: { display: 'flex', gap: '10px' },
   editField: { flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' },
-  editLabel: { color: '#666', fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' },
-  editSelect: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  editInput: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box', fontFamily: 'inherit', marginBottom: '2px' },
+  editLabel: { color: '#5F6B73', fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' },
+  editSelect: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid rgba(0,0,0,0.1)', background: '#fff', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  editInput: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid rgba(0,0,0,0.1)', background: '#fff', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box', fontFamily: 'inherit', marginBottom: '2px' },
   saveBtn: { padding: '7px 14px', borderRadius: '8px', border: 'none', background: ROYAL, color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', alignSelf: 'flex-start' },
 };
 

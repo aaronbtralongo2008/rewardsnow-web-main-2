@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 
-const ROYAL = '#2563eb';
+const ROYAL = '#0B5CAD';
 
 function BusinessOwnerDashboard() {
   const isMobile = useIsMobile();
@@ -159,7 +159,7 @@ function BusinessOwnerDashboard() {
   };
 
   const Skeleton = ({ h = 72 }) => (
-      <div style={{ height: h, borderRadius: 12, marginBottom: 12, background: 'linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' }} />
+      <div style={{ height: h, borderRadius: 12, marginBottom: 12, background: '#f0f0f0' }} />
   );
 
   if (!token) {
@@ -167,9 +167,6 @@ function BusinessOwnerDashboard() {
         <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
           {!isMobile && (
               <div style={s.loginLeft}>
-                <div style={s.loginOrb1} />
-                <div style={s.loginOrb2} />
-                <div style={s.loginOrb3} />
                 <div style={s.loginLeftContent}>
                   <div style={s.loginBrandBadge}>REWARDSNOW</div>
                   <div style={s.loginGoldLine} />
@@ -444,75 +441,72 @@ function BusinessOwnerDashboard() {
 }
 
 const s = {
-  loginLeft: { flex: 1, background: '#08011a', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
-  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  loginLeft: { flex: 1, background: '#07243A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   loginLeftContent: { position: 'relative', zIndex: 2 },
-  loginBrandBadge: { color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
-  loginGoldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
+  loginBrandBadge: { color: '#F2B84B', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  loginGoldLine: { width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' },
   loginHeadline: { color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
   loginDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
-  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#f0f7ff' },
-  mobileLoginBrand: { color: '#2563eb', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
-  loginPortalTag: { display: 'inline-block', background: '#bfdbfe', color: '#2563eb', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },
-  loginTitle: { color: '#0f172a', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
-  loginSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 36px 0' },
-  loginLabel: { color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
-  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid #bfdbfe', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
+  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0D2E42' },
+  mobileLoginBrand: { color: '#F2B84B', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
+  loginPortalTag: { display: 'inline-block', background: 'rgba(11,92,173,0.3)', color: '#F2B84B', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },
+  loginTitle: { color: '#fff', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  loginSub: { color: 'rgba(255,255,255,0.5)', fontSize: '1rem', margin: '0 0 36px 0' },
+  loginLabel: { color: '#F2B84B', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(11,92,173,0.25)', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: '#0B5CAD', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: 'none' },
   loginError: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
   label: { color: '#374151', fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' },
-  input: { padding: '10px 14px', borderRadius: '8px', border: '1.5px solid #e5e7eb', background: '#fff', color: '#0f172a', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  btn: { padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%' },
+  input: { padding: '10px 14px', borderRadius: '8px', border: '2px solid rgba(11,92,173,0.25)', background: '#fff', color: '#0f172a', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  btn: { padding: '12px', borderRadius: '10px', border: 'none', background: '#0B5CAD', color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: 'none' },
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
-  container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
-  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
-  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
-  portalBadge: { background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
-  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
-  userName: { color: '#555', fontSize: '13px', fontWeight: '600' },
-  mobileTabs: { display: 'flex', background: '#fff', borderBottom: '1px solid #eee', overflowX: 'auto', flexShrink: 0 },
+  container: { minHeight: '100vh', background: '#FFF8EA', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.1)', position: 'sticky', top: 0, zIndex: 100 },
+  logo: { color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
+  portalBadge: { background: '#0B5CAD', color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
+  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid rgba(255,255,255,0.2)', background: 'transparent', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
+  userName: { color: 'rgba(255,255,255,0.7)', fontSize: '13px', fontWeight: '600' },
+  mobileTabs: { display: 'flex', background: '#fff', borderBottom: '1px solid rgba(0,0,0,0.08)', overflowX: 'auto', flexShrink: 0 },
   mobileTab: { flexShrink: 0, padding: '12px 16px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', whiteSpace: 'nowrap' },
   body: { display: 'flex', flex: 1 },
-  sidebar: { width: '190px', background: '#fff', borderRight: '1px solid #eee', padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px', flexShrink: 0 },
+  sidebar: { width: '190px', background: '#fff', borderRight: '1px solid rgba(0,0,0,0.08)', padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px', flexShrink: 0 },
   navBtn: { padding: '10px 14px', borderRadius: '10px', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'left', width: '100%', transition: 'all 0.15s' },
   content: { flex: 1, overflowY: 'auto', minWidth: 0 },
   banner: { padding: '12px 16px', borderRadius: '10px', fontSize: '13px', fontWeight: '600', marginBottom: '20px' },
   pageTitle: { color: '#111', fontSize: '1.2rem', fontWeight: '700', margin: 0 },
   tabHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' },
-  addBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 },
-  empty: { background: '#fff', borderRadius: '16px', padding: '40px 24px', textAlign: 'center', border: '1px solid #eee', color: '#888' },
-  statusCard: { background: '#fff', borderRadius: '16px', padding: '18px', border: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', gap: '12px' },
+  addBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#0B5CAD', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0, boxShadow: 'none' },
+  empty: { background: '#fff', borderRadius: '16px', padding: '40px 24px', textAlign: 'center', border: '1px solid rgba(0,0,0,0.08)', color: '#888' },
+  statusCard: { background: '#fff', borderRadius: '16px', padding: '18px', border: '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', gap: '12px' },
   statusLeft: { display: 'flex', alignItems: 'center', gap: '12px' },
-  bizInitial: { width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  bizInitial: { width: '42px', height: '42px', borderRadius: '12px', background: '#0B5CAD', color: '#fff', fontSize: '1.1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   statusName: { color: '#111', fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' },
   statusEmail: { color: '#888', fontSize: '12px', margin: 0 },
   pendingNote: { background: '#fff8e1', borderRadius: '14px', padding: '16px 18px', border: '1px solid #ffe082', marginBottom: '16px' },
   pendingTitle: { color: '#7a5500', fontSize: '13px', fontWeight: '700', margin: '0 0 4px 0' },
   pendingSub: { color: '#7a5500', fontSize: '12px', margin: 0, lineHeight: 1.6 },
   quickGrid: { display: 'grid', gap: '12px' },
-  quickCard: { background: '#fff', borderRadius: '14px', padding: '18px', border: '1px solid #eee', cursor: 'pointer' },
+  quickCard: { background: '#fff', borderRadius: '14px', padding: '18px', border: '1px solid rgba(0,0,0,0.08)', cursor: 'pointer' },
   quickLabel: { color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 4px 0' },
   quickSub: { color: '#888', fontSize: '12px', margin: 0 },
   statsGrid: { display: 'grid', gap: '12px' },
-  statCard: { borderRadius: '14px', padding: '18px', border: '1px solid #eee' },
+  statCard: { borderRadius: '14px', padding: '18px', border: '1px solid rgba(0,0,0,0.08)' },
   statValue: { fontWeight: '800', margin: '0 0 6px 0', lineHeight: 1 },
   statLabel: { color: '#555', fontSize: '12px', fontWeight: '600', margin: 0 },
-  formCard: { background: '#eff6ff', borderRadius: '14px', padding: '18px', border: '1.5px solid #e8ecff', marginBottom: '16px' },
+  formCard: { background: '#f0f4ff', borderRadius: '14px', padding: '18px', border: '1.5px solid rgba(11,92,173,0.15)', marginBottom: '16px' },
   formTitle: { color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 14px 0' },
   formRow: { display: 'flex', gap: '12px' },
   formHalf: { flex: 1, display: 'flex', flexDirection: 'column' },
   empList: { display: 'flex', flexDirection: 'column', gap: '10px' },
-  empCard: { background: '#fff', borderRadius: '14px', padding: '14px 16px', border: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '12px' },
-  empAvatar: { width: '38px', height: '38px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  empCard: { background: '#fff', borderRadius: '14px', padding: '14px 16px', border: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', gap: '12px' },
+  empAvatar: { width: '38px', height: '38px', borderRadius: '50%', background: '#0B5CAD', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   empInfo: { flex: 1, minWidth: '80px' },
   empName: { color: '#111', fontSize: '13px', fontWeight: '700', margin: '0 0 2px 0' },
   empEmail: { color: '#888', fontSize: '11px', margin: '0 0 4px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
   roleBadge: { fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
   deactivateBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
   svcGrid: { display: 'grid', gap: '12px' },
-  svcCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid #eee' },
+  svcCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid rgba(0,0,0,0.08)' },
   svcName: { color: '#111', fontSize: '14px', fontWeight: '700', margin: 0, wordBreak: 'break-word' },
   svcDesc: { color: '#888', fontSize: '12px', margin: '0 0 12px 0', lineHeight: 1.5 },
   svcFooter: { display: 'flex', gap: '8px', flexWrap: 'wrap' },
