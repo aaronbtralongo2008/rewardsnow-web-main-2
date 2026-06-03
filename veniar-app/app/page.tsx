@@ -12,7 +12,7 @@ const STEPS = [
   {
     n: '01',
     title: 'Customers earn Veniar Points.',
-    body: 'When a customer visits a participating business, they give their phone number or scan their Veniar code at checkout. Points are added automatically.',
+    body: 'When a customer visits a participating business, they give their phone number at checkout. Points are added automatically — no app required.',
   },
   {
     n: '02',
@@ -27,12 +27,12 @@ const STEPS = [
 ];
 
 const BUSINESS_TYPES = [
-  { label: 'Restaurants', icon: '\u{1F37D}' },
+  { label: 'Restaurants', icon: '🍽' },
   { label: 'Cafes', icon: '☕' },
-  { label: 'Bakeries', icon: '\u{1F950}' },
-  { label: 'Food trucks', icon: '\u{1F69A}' },
-  { label: 'Local retailers', icon: '\u{1F6CD}' },
-  { label: 'Neighborhood spots', icon: '\u{1F4CD}' },
+  { label: 'Bakeries', icon: '🥐' },
+  { label: 'Food trucks', icon: '🚚' },
+  { label: 'Local retailers', icon: '🛍' },
+  { label: 'Neighborhood spots', icon: '📍' },
 ];
 
 const PRODUCTS = [
@@ -40,31 +40,37 @@ const PRODUCTS = [
     title: 'Veniar Points',
     desc: 'A shared promotional rewards currency that works across every participating business in the network.',
     href: '/veniar',
+    accent: 'bg-vn-obi-teal',
   },
   {
     title: 'Veniar Network',
     desc: 'The local loyalty network that connects independent businesses and gives them access to each other\'s customers.',
     href: '/network',
+    accent: 'bg-vn-flight-blue',
   },
   {
     title: 'Veniar for Business',
     desc: 'Merchant tools: onboarding, offer controls, customer lookup, redemption tracking, and dashboard reporting.',
     href: '/business',
+    accent: 'bg-vn-sunset-gold',
   },
   {
     title: 'Customer App',
     desc: 'One account for earning and redeeming Veniar Points across independent restaurants and local businesses.',
     href: '/customer-app',
+    accent: 'bg-vn-obi-teal',
   },
   {
     title: 'Merchant Dashboard',
     desc: 'See points issued, redemptions, repeat visits, network referrals, and offer performance in one place.',
     href: '/merchant-dashboard',
+    accent: 'bg-vn-sunset-orange',
   },
   {
     title: 'Offers & Redemptions',
-    desc: 'Merchant-controlled offers — bonus points, first-visit rewards, return incentives — all redeemable across the network.',
+    desc: 'Merchant-controlled offers — bonus points, first-visit rewards, return incentives — redeemable across the network.',
     href: '/business',
+    accent: 'bg-vn-flight-blue',
   },
 ];
 
@@ -77,7 +83,7 @@ const PRICING_PLANS = [
     note: 'Available during launch period',
     cta: 'Join Veniar',
     href: '/join',
-    accent: 'border-t-vn-obi-teal',
+    accent: 'border-vn-obi-teal',
   },
   {
     name: 'Network',
@@ -86,8 +92,8 @@ const PRICING_PLANS = [
     price: 'Contact support',
     note: 'Pricing available on request',
     cta: 'Contact us',
-    href: '/contact',
-    accent: 'border-t-vn-sunset-gold',
+    href: `/contact`,
+    accent: 'border-vn-sunset-gold',
   },
   {
     name: 'Multi-location',
@@ -96,30 +102,32 @@ const PRICING_PLANS = [
     price: 'Contact support',
     note: 'Custom pricing available',
     cta: 'Contact us',
-    href: '/contact',
-    accent: 'border-t-vn-sunset-orange',
+    href: `/contact`,
+    accent: 'border-vn-sunset-orange',
   },
 ];
 
+/* Placeholder metric grid — values are illustrative UI only, not real data */
 const MOCK_METRICS = [
-  { label: 'Points Issued', value: '12,480', unit: 'pts', color: 'text-vn-sunset-gold' },
-  { label: 'Network Referrals', value: '847', unit: 'this month', color: 'text-vn-obi-teal' },
-  { label: 'Redemptions', value: '3,210', unit: 'this month', color: 'text-white' },
-  { label: 'Active Offers', value: '6', unit: 'running', color: 'text-vn-sunset-orange' },
+  { label: 'Points Issued', value: '—', unit: 'this month', color: 'text-vn-sunset-gold' },
+  { label: 'Network Referrals', value: '—', unit: 'this month', color: 'text-vn-obi-teal' },
+  { label: 'Redemptions', value: '—', unit: 'this month', color: 'text-white' },
+  { label: 'Active Offers', value: '—', unit: 'running', color: 'text-vn-sunset-orange' },
 ];
 
 const MOCK_ACTIVITY = [
-  { label: 'New customer from network', value: '+32 pts', positive: true },
-  { label: 'Repeat visit — Jane D.', value: '+48 pts', positive: true },
-  { label: 'Redemption processed', value: '−200 pts', positive: false },
+  { label: 'New customer from network', positive: true },
+  { label: 'Repeat visit', positive: true },
+  { label: 'Redemption processed', positive: false },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="bg-vn-ivory border-b border-black/[0.08]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-16 items-center">
+          {/* Text */}
           <div>
             <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-obi-teal mb-5">
               VENIAR™ — LOCAL REWARDS NETWORK
@@ -134,56 +142,94 @@ export default function HomePage() {
               businesses join.
             </p>
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <Link href="/join" className="px-7 py-3.5 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors">
+              <Link
+                href="/join"
+                className="px-7 py-3.5 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors"
+              >
                 Join Veniar
               </Link>
-              <Link href="/login" className="px-7 py-3.5 text-sm font-semibold text-vn-ink border border-black/20 rounded hover:bg-black/[0.04] transition-colors">
+              <Link
+                href="/login"
+                className="px-7 py-3.5 text-sm font-semibold text-vn-ink border border-black/20 rounded hover:bg-black/[0.04] transition-colors"
+              >
                 Log in
               </Link>
             </div>
-            <Link href="/network" className="text-sm font-semibold text-vn-flight-blue hover:underline underline-offset-4">
+            <Link
+              href="/network"
+              className="text-sm font-semibold text-vn-flight-blue hover:underline underline-offset-4"
+            >
               Explore the network →
             </Link>
           </div>
 
-          {/* Dashboard preview */}
+          {/* Dashboard preview — placeholder UI only */}
           <div className="bg-vn-deep-flight rounded-lg overflow-hidden border border-white/10 shadow-2xl">
+            {/* Top bar */}
             <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.08]">
-              <span className="text-white/60 text-[11px] font-bold tracking-[0.2em] uppercase">Veniar for Business</span>
+              <span className="text-white/60 text-[11px] font-bold tracking-[0.2em] uppercase">
+                Veniar for Business
+              </span>
               <span className="flex items-center gap-1.5 text-[11px] font-bold text-vn-obi-teal tracking-widest uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-vn-obi-teal" />
                 Preview
               </span>
             </div>
+
+            {/* Metrics grid */}
             <div className="grid grid-cols-2">
               {MOCK_METRICS.map((m, i) => (
-                <div key={m.label} className={`px-5 py-5 ${i < 2 ? 'border-b border-white/[0.08]' : ''} ${i % 2 === 0 ? 'border-r border-white/[0.08]' : ''}`}>
-                  <p className="text-white/40 text-[10px] font-bold uppercase tracking-[0.18em] mb-2">{m.label}</p>
+                <div
+                  key={m.label}
+                  className={`px-5 py-5 ${i < 2 ? 'border-b border-white/[0.08]' : ''} ${
+                    i % 2 === 0 ? 'border-r border-white/[0.08]' : ''
+                  }`}
+                >
+                  <p className="text-white/40 text-[10px] font-bold uppercase tracking-[0.18em] mb-2">
+                    {m.label}
+                  </p>
                   <p className={`text-2xl font-black leading-none ${m.color}`}>{m.value}</p>
                   <p className="text-white/30 text-[10px] mt-1">{m.unit}</p>
                 </div>
               ))}
             </div>
+
+            {/* Activity feed */}
             <div className="px-5 py-4 border-t border-white/[0.08]">
-              <p className="text-white/30 text-[10px] font-bold uppercase tracking-[0.18em] mb-3">Recent activity</p>
+              <p className="text-white/30 text-[10px] font-bold uppercase tracking-[0.18em] mb-3">
+                Recent activity
+              </p>
               {MOCK_ACTIVITY.map((a, i) => (
-                <div key={i} className="flex items-center justify-between py-2 border-t border-white/[0.05] first:border-0">
+                <div
+                  key={i}
+                  className="flex items-center justify-between py-2 border-t border-white/[0.05] first:border-0"
+                >
                   <span className="text-white/60 text-xs">{a.label}</span>
-                  <span className={`text-xs font-bold ${a.positive ? 'text-vn-obi-teal' : 'text-vn-sunset-orange'}`}>{a.value}</span>
+                  <span
+                    className={`w-2 h-2 rounded-full shrink-0 ${
+                      a.positive ? 'bg-vn-obi-teal' : 'bg-vn-sunset-orange'
+                    }`}
+                  />
                 </div>
               ))}
             </div>
+
+            {/* Footer note */}
             <div className="px-5 py-3 border-t border-white/[0.05] bg-white/[0.02]">
-              <p className="text-white/25 text-[10px] text-center">Dashboard preview — placeholder metrics only</p>
+              <p className="text-white/25 text-[10px] text-center">
+                Dashboard preview — placeholder metrics only, not real data
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How it works */}
+      {/* ── How it works ─────────────────────────────────────────────────── */}
       <section className="bg-vn-deep-flight">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">HOW IT WORKS</p>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            HOW IT WORKS
+          </p>
           <h2 className="text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight mb-4 max-w-xl">
             Shop local. Earn points.<br />Redeem anywhere.
           </h2>
@@ -191,73 +237,137 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-px bg-white/[0.08]">
             {STEPS.map((step) => (
               <div key={step.n} className="bg-vn-deep-flight px-8 py-10">
-                <span className="text-vn-obi-teal text-[11px] font-black tracking-[0.3em] uppercase block mb-5">{step.n}</span>
+                <span className="text-vn-obi-teal text-[11px] font-black tracking-[0.3em] uppercase block mb-5">
+                  {step.n}
+                </span>
                 <h3 className="text-white text-lg font-bold leading-snug mb-3">{step.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{step.body}</p>
               </div>
             ))}
           </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/how-it-works"
+              className="text-sm font-semibold text-white/60 hover:text-white transition-colors"
+            >
+              Full explanation of how Veniar works →
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Built for independent businesses */}
+      {/* ── Built for independent businesses ─────────────────────────────── */}
       <section className="bg-vn-ivory border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">BUILT FOR</p>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            BUILT FOR
+          </p>
           <h2 className="text-3xl lg:text-4xl font-black text-vn-ink leading-tight tracking-tight mb-4 max-w-2xl">
             Independent businesses of every kind.
           </h2>
           <div className="w-10 h-[3px] bg-vn-obi-teal mb-12" />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {BUSINESS_TYPES.map((b) => (
-              <div key={b.label} className="border border-black/[0.1] rounded-lg px-5 py-6 text-center bg-white">
-                <span className="text-3xl block mb-3" role="img" aria-hidden="true">{b.icon}</span>
+              <div
+                key={b.label}
+                className="border border-black/[0.1] rounded-lg px-5 py-6 text-center bg-white"
+              >
+                <span className="text-3xl block mb-3" role="img" aria-hidden="true">
+                  {b.icon}
+                </span>
                 <p className="text-sm font-semibold text-vn-ink">{b.label}</p>
               </div>
             ))}
           </div>
+          <p className="text-vn-muted text-sm mt-8 max-w-xl">
+            Veniar is designed for independent, community-anchored businesses — not chains or franchise locations.
+          </p>
         </div>
       </section>
 
-      {/* Product modules */}
+      {/* ── Product modules ───────────────────────────────────────────────── */}
       <section className="bg-rn-cloud border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">THE PLATFORM</p>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            THE PLATFORM
+          </p>
           <h2 className="text-3xl lg:text-4xl font-black text-vn-ink leading-tight tracking-tight mb-4">
             Every part of the network, connected.
           </h2>
           <div className="w-10 h-[3px] bg-vn-obi-teal mb-12" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {PRODUCTS.map((p) => (
-              <Link key={p.title} href={p.href} className="group border border-black/[0.1] rounded-lg bg-white p-6 hover:border-vn-flight-blue/40 transition-colors">
-                <div className="w-8 h-[3px] bg-vn-obi-teal mb-5" />
-                <h3 className="text-base font-bold text-vn-ink mb-2 group-hover:text-vn-flight-blue transition-colors">{p.title}</h3>
+              <Link
+                key={p.title}
+                href={p.href}
+                className="group border border-black/[0.1] rounded-lg bg-white p-6 hover:border-vn-flight-blue/40 transition-colors block"
+              >
+                <div className={`w-8 h-[3px] ${p.accent} mb-5`} />
+                <h3 className="text-base font-bold text-vn-ink mb-2 group-hover:text-vn-flight-blue transition-colors">
+                  {p.title}
+                </h3>
                 <p className="text-vn-muted text-sm leading-relaxed">{p.desc}</p>
                 <p className="text-vn-flight-blue text-xs font-semibold mt-4">Learn more →</p>
               </Link>
             ))}
           </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/products"
+              className="inline-block px-5 py-2.5 text-sm font-semibold text-vn-ink border border-black/20 rounded hover:bg-black/[0.04] transition-colors"
+            >
+              View all products →
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* For customers */}
+      {/* ── For customers ─────────────────────────────────────────────────── */}
       <section className="bg-vn-deep-flight">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">FOR CUSTOMERS</p>
+            <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+              FOR CUSTOMERS
+            </p>
             <h2 className="text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight mb-4">
               One account for the independent places you love.
             </h2>
             <div className="w-10 h-[3px] bg-vn-sunset-gold mb-7" />
             <p className="text-white/60 text-base leading-relaxed mb-8 max-w-md">
               Earn Veniar Points every time you visit a participating local restaurant, café, or
-              business. Your balance follows you across the entire Veniar Network.
+              business. Your balance follows you across the entire Veniar Network — spend where
+              you want, whenever you want.
             </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                'No app required to earn at checkout',
+                'One account, every participating partner',
+                'Points never locked to one business',
+                'Free — no fees for customers',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-vn-obi-teal mt-2 shrink-0" />
+                  <span className="text-white/60 text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
             <div className="flex flex-wrap gap-3">
-              <Link href="/customer-app" className="px-6 py-3 text-sm font-bold text-vn-ink bg-vn-sunset-gold rounded hover:bg-[#d9a43f] transition-colors">Get the app</Link>
-              <Link href="/login" className="px-6 py-3 text-sm font-semibold text-white border border-white/25 rounded hover:bg-white/[0.08] transition-colors">Log in</Link>
+              <Link
+                href="/customer-app"
+                className="px-6 py-3 text-sm font-bold text-vn-ink bg-vn-sunset-gold rounded hover:bg-[#d9a43f] transition-colors"
+              >
+                Learn about the app
+              </Link>
+              <Link
+                href="/login"
+                className="px-6 py-3 text-sm font-semibold text-white border border-white/25 rounded hover:bg-white/[0.08] transition-colors"
+              >
+                Log in
+              </Link>
             </div>
           </div>
+
+          {/* Customer wallet mockup — placeholder only */}
           <div className="bg-white/[0.05] border border-white/10 rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-white/[0.08] flex items-center justify-between">
               <span className="text-white/50 text-[11px] font-bold tracking-[0.2em] uppercase">Veniar Wallet</span>
@@ -265,120 +375,200 @@ export default function HomePage() {
             </div>
             <div className="px-6 py-8 border-b border-white/[0.08]">
               <p className="text-white/40 text-xs font-bold uppercase tracking-widest mb-3">Available balance</p>
-              <p className="text-5xl font-black text-vn-sunset-gold leading-none">1,240</p>
+              <p className="text-5xl font-black text-vn-sunset-gold leading-none">—</p>
               <p className="text-white/40 text-xs mt-2">Veniar Points</p>
             </div>
             <div className="px-6 py-5">
-              <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest mb-4">Nearby businesses</p>
-              {['The Corner Café', 'Harbor Bakery', 'Main Street Kitchen'].map((b) => (
+              <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest mb-4">Participating businesses nearby</p>
+              {['Restaurant partner', 'Local business', 'Nearby partner'].map((b) => (
                 <div key={b} className="flex items-center justify-between py-2.5 border-t border-white/[0.05] first:border-0">
-                  <span className="text-white/60 text-xs">{b}</span>
+                  <span className="text-white/50 text-xs italic">{b}</span>
                   <span className="text-vn-obi-teal text-xs font-semibold">Accepts points</span>
                 </div>
               ))}
-              <p className="text-white/20 text-[10px] text-center mt-4">Wallet preview — placeholder data only</p>
+              <p className="text-white/20 text-[10px] text-center mt-4">
+                Wallet preview — placeholder data only, not real account
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* For businesses */}
+      {/* ── For businesses ────────────────────────────────────────────────── */}
       <section className="bg-vn-ivory border-t border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28 grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-obi-teal mb-5">FOR BUSINESSES</p>
+            <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-obi-teal mb-5">
+              FOR BUSINESSES
+            </p>
             <h2 className="text-3xl lg:text-4xl font-black text-vn-ink leading-tight tracking-tight mb-4">
               Loyalty works better when independent businesses are connected.
             </h2>
             <div className="w-10 h-[3px] bg-vn-obi-teal mb-7" />
             <p className="text-vn-muted text-base leading-relaxed mb-4 max-w-lg">
               Veniar gives independent restaurants and local businesses a complete loyalty program,
-              offer controls, and access to a shared customer network.
+              offer controls, and access to a shared customer network — without building it alone.
+            </p>
+            <p className="text-vn-muted text-base leading-relaxed mb-8 max-w-lg">
+              Customers who earn points at another Veniar business can discover and redeem with
+              you. New foot traffic from the network, not just returning regulars.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/business" className="px-6 py-3 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors">Learn about Veniar for Business</Link>
-              <Link href="/pricing" className="px-6 py-3 text-sm font-semibold text-vn-ink border border-black/20 rounded hover:bg-black/[0.04] transition-colors">View pricing</Link>
+              <Link
+                href="/business"
+                className="px-6 py-3 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors"
+              >
+                Veniar for Business
+              </Link>
+              <Link
+                href="/pricing"
+                className="px-6 py-3 text-sm font-semibold text-vn-ink border border-black/20 rounded hover:bg-black/[0.04] transition-colors"
+              >
+                View pricing
+              </Link>
             </div>
           </div>
+
+          {/* Feature blocks */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              { label: 'Merchant dashboard', color: 'bg-vn-flight-blue', tc: 'text-white' },
-              { label: 'Offer engine', color: 'bg-vn-deep-flight', tc: 'text-vn-obi-teal' },
-              { label: 'Network referrals', color: 'bg-vn-obi-teal', tc: 'text-vn-deep-flight' },
-              { label: 'Settlement ledger', color: 'bg-vn-panel border border-black/[0.1]', tc: 'text-vn-ink' },
+              { label: 'Merchant dashboard', sub: 'Points, redemptions, network referrals', color: 'bg-vn-flight-blue', tc: 'text-white', sc: 'text-white/60' },
+              { label: 'Offer engine', sub: 'Bonus points, first-visit, return incentives', color: 'bg-vn-deep-flight', tc: 'text-vn-obi-teal', sc: 'text-white/40' },
+              { label: 'Network referrals', sub: 'New customers from partner locations', color: 'bg-vn-obi-teal', tc: 'text-vn-deep-flight', sc: 'text-vn-deep-flight/60' },
+              { label: 'Settlement ledger', sub: 'Monthly cross-network reporting', color: 'bg-white border border-black/[0.1]', tc: 'text-vn-ink', sc: 'text-vn-muted' },
             ].map((item) => (
               <div key={item.label} className={`${item.color} rounded-lg px-5 py-6`}>
-                <div className="w-6 h-[2px] bg-current opacity-40 mb-4" />
-                <p className={`text-sm font-bold ${item.tc}`}>{item.label}</p>
+                <div className="w-6 h-[2px] bg-current opacity-30 mb-4" />
+                <p className={`text-sm font-bold mb-1 ${item.tc}`}>{item.label}</p>
+                <p className={`text-xs leading-relaxed ${item.sc}`}>{item.sub}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Network placeholder */}
+      {/* ── Network placeholder ───────────────────────────────────────────── */}
       <section className="bg-rn-cloud border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">THE NETWORK</p>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            THE NETWORK
+          </p>
           <h2 className="text-3xl lg:text-4xl font-black text-vn-ink leading-tight tracking-tight mb-4 max-w-2xl">
             The local rewards network gets stronger as more businesses join.
           </h2>
           <div className="w-10 h-[3px] bg-vn-obi-teal mb-7" />
           <p className="text-vn-muted text-base leading-relaxed mb-10 max-w-xl">
             Every business that joins expands what customers can do with their Veniar Points.
+            A stronger network means more discovery, more repeat visits, and more foot
+            traffic across the whole community.
           </p>
-          <div className="border border-black/[0.1] rounded-lg bg-white p-10 text-center">
-            <p className="text-vn-muted/60 text-sm font-medium mb-2">Veniar Network directory</p>
-            <p className="text-vn-ink font-bold text-lg mb-1">Coming soon to your city.</p>
-            <p className="text-vn-muted text-sm mb-6">Network listings will appear here as merchants join the founding network.</p>
-            <Link href="/join" className="inline-block px-6 py-3 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors">Join the founding network</Link>
+          <div className="border border-black/[0.1] rounded-lg bg-white p-10 text-center max-w-2xl">
+            <div className="w-10 h-[3px] bg-vn-obi-teal mx-auto mb-6" />
+            <p className="text-vn-ink font-bold text-lg mb-2">Coming soon to your city.</p>
+            <p className="text-vn-muted text-sm mb-6">
+              Network listings will appear here as merchants join the founding network.
+            </p>
+            <Link
+              href="/join"
+              className="inline-block px-6 py-3 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors"
+            >
+              Join the founding network
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Pricing preview */}
+      {/* ── Pricing preview ───────────────────────────────────────────────── */}
       <section className="bg-vn-ivory border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">PRICING</p>
-          <h2 className="text-3xl lg:text-4xl font-black text-vn-ink leading-tight tracking-tight mb-4">Founding merchant pricing.</h2>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            PRICING
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-black text-vn-ink leading-tight tracking-tight mb-4">
+            Founding merchant pricing.
+          </h2>
           <div className="w-10 h-[3px] bg-vn-obi-teal mb-12" />
           <div className="grid md:grid-cols-3 gap-4 mb-8">
             {PRICING_PLANS.map((plan) => (
-              <div key={plan.name} className={`border border-black/[0.1] border-t-4 ${plan.accent} rounded-lg bg-white p-7`}>
+              <div
+                key={plan.name}
+                className={`border border-black/[0.1] border-t-4 ${plan.accent} rounded-lg bg-white p-7`}
+              >
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-lg font-black text-vn-ink">{plan.name}</h3>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-vn-sunset-gold bg-vn-sunset-gold/10 px-2 py-1 rounded">{plan.badge}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-vn-sunset-gold bg-vn-sunset-gold/10 px-2 py-1 rounded">
+                    {plan.badge}
+                  </span>
                 </div>
                 <p className="text-vn-muted text-sm leading-relaxed mb-6">{plan.desc}</p>
                 <p className="text-vn-ink font-black text-xl mb-0.5">{plan.price}</p>
                 <p className="text-vn-muted text-xs mb-6">{plan.note}</p>
-                <Link href={plan.href} className="block text-center py-2.5 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors">{plan.cta}</Link>
+                <Link
+                  href={plan.href}
+                  className="block text-center py-2.5 text-sm font-bold text-white bg-vn-flight-blue rounded hover:bg-[#094d92] transition-colors"
+                >
+                  {plan.cta}
+                </Link>
               </div>
             ))}
           </div>
           <p className="text-center text-vn-muted text-sm">
             Questions about pricing?{' '}
-            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-vn-flight-blue font-semibold hover:underline underline-offset-4">{SUPPORT_EMAIL}</a>
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-vn-flight-blue font-semibold hover:underline underline-offset-4">
+              {SUPPORT_EMAIL}
+            </a>
           </p>
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* ── Points disclaimer ─────────────────────────────────────────────── */}
+      <section className="bg-rn-cloud border-b border-black/[0.06]">
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="border border-black/[0.08] rounded-lg bg-white p-5">
+            <p className="text-vn-muted text-xs leading-relaxed">
+              <strong className="text-vn-ink font-semibold">Important: </strong>
+              Veniar Points are promotional rewards. They are not cash, currency, stored value, or
+              transferable money. Rewards are subject to Veniar Rewards Terms and participating
+              merchant rules.{' '}
+              <Link href="/rewards-terms" className="text-vn-flight-blue hover:underline underline-offset-4">
+                Veniar Rewards Terms →
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ─────────────────────────────────────────────────────── */}
       <section className="bg-vn-ink">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28 text-center">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">GET STARTED</p>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            GET STARTED
+          </p>
           <h2 className="text-3xl lg:text-5xl font-black text-white leading-tight tracking-tight mb-4 max-w-2xl mx-auto">
             Bring shared rewards to your local business.
           </h2>
           <div className="w-10 h-[3px] bg-vn-obi-teal mx-auto mb-7" />
           <p className="text-white/55 text-base leading-relaxed mb-10 max-w-lg mx-auto">
-            Join the founding Veniar network. Applications are reviewed within 24–48 hours. No long-term contract required.
+            Join the founding Veniar network. Applications are reviewed by the Veniar team.
+            No long-term contract required.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/join" className="px-8 py-4 text-sm font-bold text-vn-ink bg-vn-sunset-gold rounded hover:bg-[#d9a43f] transition-colors">Join Veniar</Link>
-            <Link href="/business" className="px-8 py-4 text-sm font-semibold text-white border border-white/25 rounded hover:bg-white/[0.08] transition-colors">Learn how it works</Link>
+            <Link
+              href="/join"
+              className="px-8 py-4 text-sm font-bold text-vn-ink bg-vn-sunset-gold rounded hover:bg-[#d9a43f] transition-colors"
+            >
+              Join Veniar
+            </Link>
+            <Link
+              href="/business"
+              className="px-8 py-4 text-sm font-semibold text-white border border-white/25 rounded hover:bg-white/[0.08] transition-colors"
+            >
+              Learn how it works
+            </Link>
           </div>
-          <p className="text-white/30 text-xs mt-8">Veniar is a product of RewardsNow.</p>
+          <p className="text-white/30 text-xs mt-8">
+            Veniar is a product of RewardsNow.
+          </p>
         </div>
       </section>
     </>
