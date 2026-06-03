@@ -4,7 +4,8 @@ import { SUPPORT_EMAIL } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'Veniar Support | Help for Merchants and Customers',
-  description: 'Get help with Veniar. Resources for merchants, customers, and anyone getting started with the Veniar Network.',
+  description:
+    'Get help with Veniar. Resources for merchants, customers, and anyone getting started with the Veniar Network.',
 };
 
 const MERCHANT_GUIDES = [
@@ -19,7 +20,7 @@ const MERCHANT_GUIDES = [
 const CUSTOMER_GUIDES = [
   { title: 'How to start earning Veniar Points', desc: 'Give your phone number at any Veniar counter — no download required.' },
   { title: 'Redeeming your points', desc: 'How to redeem Veniar Points at checkout at any participating partner.' },
-  { title: "Checking your balance", desc: "View your points balance, visit history, and where you've earned and spent." },
+  { title: 'Checking your balance', desc: "View your points balance, visit history, and where you've earned and spent." },
   { title: 'Lost account access', desc: 'How to recover access to your Veniar customer account.' },
   { title: 'Finding Veniar partners near you', desc: 'Browse and discover participating businesses through the Veniar app.' },
 ];
@@ -35,24 +36,42 @@ const FAQ = [
 export default function SupportPage() {
   return (
     <>
+      {/* Hero */}
       <section className="bg-vn-ivory border-b border-black/[0.08]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-obi-teal mb-5">SUPPORT</p>
-          <h1 className="text-4xl lg:text-5xl font-black text-vn-ink leading-tight tracking-tight mb-4 max-w-2xl">Veniar support.</h1>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-obi-teal mb-5">
+            SUPPORT
+          </p>
+          <h1 className="text-4xl lg:text-5xl font-black text-vn-ink leading-tight tracking-tight mb-4 max-w-2xl">
+            Veniar support.
+          </h1>
           <div className="w-10 h-[3px] bg-vn-obi-teal mb-7" />
-          <p className="text-vn-muted text-lg leading-relaxed max-w-xl mb-8">Help for merchants, customers, and anyone getting started with Veniar.</p>
+          <p className="text-vn-muted text-lg leading-relaxed max-w-xl mb-8">
+            Help for merchants, customers, and anyone getting started with Veniar.
+          </p>
           <div className="inline-flex items-center gap-3 border border-black/[0.1] rounded-lg bg-white px-5 py-4">
             <div>
               <p className="text-xs font-bold text-vn-muted uppercase tracking-widest mb-0.5">Contact support</p>
-              <a href={`mailto:${SUPPORT_EMAIL}`} className="text-vn-flight-blue font-bold text-sm hover:underline underline-offset-4">{SUPPORT_EMAIL}</a>
+              <a
+                href={`mailto:${SUPPORT_EMAIL}`}
+                className="text-vn-flight-blue font-bold text-sm hover:underline underline-offset-4"
+              >
+                {SUPPORT_EMAIL}
+              </a>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Merchant guides */}
       <section className="bg-rn-cloud border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">MERCHANT GUIDE</p>
-          <h2 className="text-2xl lg:text-3xl font-black text-vn-ink mb-4 tracking-tight">Help for business owners.</h2>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            MERCHANT GUIDE
+          </p>
+          <h2 className="text-2xl lg:text-3xl font-black text-vn-ink mb-4 tracking-tight">
+            Help for business owners.
+          </h2>
           <div className="w-8 h-[3px] bg-vn-obi-teal mb-12" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {MERCHANT_GUIDES.map((g) => (
@@ -64,14 +83,25 @@ export default function SupportPage() {
             ))}
           </div>
           <div className="mt-6">
-            <a href={`mailto:${SUPPORT_EMAIL}?subject=Merchant%20Support%20Question`} className="inline-block text-sm font-semibold text-vn-flight-blue hover:underline underline-offset-4">Can’t find what you need? Email merchant support →</a>
+            <a
+              href={`mailto:${SUPPORT_EMAIL}?subject=Merchant%20Support%20Question`}
+              className="inline-block text-sm font-semibold text-vn-flight-blue hover:underline underline-offset-4"
+            >
+              Can&apos;t find what you need? Email merchant support →
+            </a>
           </div>
         </div>
       </section>
+
+      {/* Customer guides */}
       <section className="bg-vn-ivory border-b border-black/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">CUSTOMER GUIDE</p>
-          <h2 className="text-2xl lg:text-3xl font-black text-vn-ink mb-4 tracking-tight">Help for customers.</h2>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            CUSTOMER GUIDE
+          </p>
+          <h2 className="text-2xl lg:text-3xl font-black text-vn-ink mb-4 tracking-tight">
+            Help for customers.
+          </h2>
           <div className="w-8 h-[3px] bg-vn-obi-teal mb-12" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {CUSTOMER_GUIDES.map((g) => (
@@ -82,12 +112,26 @@ export default function SupportPage() {
               </div>
             ))}
           </div>
+          <div className="mt-6">
+            <a
+              href={`mailto:${SUPPORT_EMAIL}?subject=Customer%20Support%20Question`}
+              className="inline-block text-sm font-semibold text-vn-flight-blue hover:underline underline-offset-4"
+            >
+              Can&apos;t find what you need? Email customer support →
+            </a>
+          </div>
         </div>
       </section>
+
+      {/* FAQ */}
       <section className="bg-rn-cloud border-b border-black/[0.06]">
         <div className="max-w-4xl mx-auto px-6 py-20 lg:py-24">
-          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">FAQ</p>
-          <h2 className="text-2xl lg:text-3xl font-black text-vn-ink mb-12 tracking-tight">Common questions.</h2>
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-vn-sunset-gold mb-5">
+            FAQ
+          </p>
+          <h2 className="text-2xl lg:text-3xl font-black text-vn-ink mb-12 tracking-tight">
+            Common questions.
+          </h2>
           <div className="divide-y divide-black/[0.08]">
             {FAQ.map((item) => (
               <div key={item.q} className="py-6">
@@ -98,18 +142,38 @@ export default function SupportPage() {
           </div>
         </div>
       </section>
+
+      {/* Contact block */}
       <section className="bg-vn-ivory">
         <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border border-black/[0.1] rounded-lg bg-white p-6">
-              <p className="text-xs font-bold tracking-widest uppercase text-vn-obi-teal mb-3">Veniar support</p>
-              <p className="text-vn-muted text-sm leading-relaxed mb-4">Product, merchant, and customer questions.</p>
-              <a href={`mailto:${SUPPORT_EMAIL}`} className="text-vn-flight-blue font-bold text-sm hover:underline underline-offset-4">{SUPPORT_EMAIL}</a>
+              <p className="text-xs font-bold tracking-widest uppercase text-vn-obi-teal mb-3">
+                Veniar support
+              </p>
+              <p className="text-vn-muted text-sm leading-relaxed mb-4">
+                Product, merchant, and customer questions.
+              </p>
+              <a
+                href={`mailto:${SUPPORT_EMAIL}`}
+                className="text-vn-flight-blue font-bold text-sm hover:underline underline-offset-4"
+              >
+                {SUPPORT_EMAIL}
+              </a>
             </div>
             <div className="border border-black/[0.1] rounded-lg bg-white p-6">
-              <p className="text-xs font-bold tracking-widest uppercase text-vn-obi-teal mb-3">Still need help?</p>
-              <p className="text-vn-muted text-sm leading-relaxed mb-4">Use the contact page and we’ll route your question to the right team.</p>
-              <Link href="/contact" className="text-vn-flight-blue font-bold text-sm hover:underline underline-offset-4">Go to contact →</Link>
+              <p className="text-xs font-bold tracking-widest uppercase text-vn-obi-teal mb-3">
+                Still need help?
+              </p>
+              <p className="text-vn-muted text-sm leading-relaxed mb-4">
+                Use the contact form and we&apos;ll route your question to the right team.
+              </p>
+              <Link
+                href="/contact"
+                className="text-vn-flight-blue font-bold text-sm hover:underline underline-offset-4"
+              >
+                Go to contact form →
+              </Link>
             </div>
           </div>
         </div>
