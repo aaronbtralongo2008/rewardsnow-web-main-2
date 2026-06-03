@@ -17,7 +17,7 @@ export default function BusinessOverview() {
       {/* ── Navigation ─────────────────────────────────────────────────── */}
       <nav style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
         <button style={s.backBtn} onClick={() => navigate('/')}>← Back</button>
-        <span style={s.brand}>RewardsNow</span>
+        <span style={s.brand}>Veniar</span>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button style={s.navBtn} onClick={() => navigate('/business-owner')}>Business sign in</button>
           <button onClick={toggleTheme} style={s.themeToggle}>
@@ -30,11 +30,11 @@ export default function BusinessOverview() {
       <section style={{ background: '#07243A', padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
         <p style={s.eyebrow}>FOR BUSINESS PARTNERS</p>
         <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
-          RewardsNow - A profit strategy for customer acquisition and retention
+          Veniar — Shared loyalty that brings new customers to your door.
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: '540px' }}>
-          RewardsNowtm is YOUR business&apos;s answer to big competitor advertising budgets and how to stop them from poaching your customers
+          Independent restaurants and local businesses shouldn&apos;t need to build their own loyalty programs from scratch. Veniar gives them one — shared, connected, and stronger every time a new business joins.
         </p>
         <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
       </section>
@@ -84,7 +84,7 @@ export default function BusinessOverview() {
               Building your own loyalty program costs $50,000–$200,000 to launch. Add software operations, marketing, and customer acquisition, and traditional programs still don't help you find new customers — they only keep existing ones.
             </p>
             <p style={s.body}>
-              RewardsNow amplifies the advantages of rewards systems and solves what they don't address: finding new customers and the large implementation losses for small businesses.
+              Veniar amplifies the advantages of rewards systems and solves what they don't address: finding new customers and the large implementation losses for small businesses.
             </p>
             <div
               style={{
@@ -133,7 +133,7 @@ export default function BusinessOverview() {
             <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)', marginBottom: '28px' }} />
 
             <p style={s.bodyOnDark}>
-              A willing business submits basic information through our partner portal and connects with a RewardsNow team member. You configure which services earn or spend points. Your store managers authenticate customer transactions through our simple interface. That&apos;s it.
+              A willing business submits basic information through our partner portal and connects with a Veniar team member. You configure which services earn or spend points. Your store managers authenticate customer transactions through our simple interface. That&apos;s it.
             </p>
 
             <div
@@ -145,7 +145,7 @@ export default function BusinessOverview() {
               }}
             >
               {[
-                { n: '01', title: 'Submit application', desc: 'Reviewed by the RewardsNow team.' },
+                { n: '01', title: 'Submit application', desc: 'Reviewed by the Veniar team.' },
                 { n: '02', title: 'Configure services', desc: 'Set point values and pricing.' },
                 { n: '03', title: 'Start earning', desc: 'Reward your customers immediately.' },
               ].map(step => (

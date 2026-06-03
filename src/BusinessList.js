@@ -120,7 +120,7 @@ export default function BusinessList({ customer, onLogout, onSelectBusiness, onN
       <div style={{ height: '3px', background: '#25B7C8' }} />
 
       <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
-        <button style={s.navBrand} onClick={() => onNavigate('/home')}>RewardsNow</button>
+        <button style={s.navBrand} onClick={() => onNavigate('/home')}>Veniar</button>
         <div style={s.navRight}>
           <button style={s.navLink} onClick={() => onNavigate('/home')}>Home</button>
           <button style={s.navLink} onClick={() => onNavigate('/map')}>Map</button>

@@ -11,7 +11,7 @@ const TIERS = [
     name: 'Standard',
     price: '$100',
     period: '/mo',
-    desc: 'Join the RewardsNow points network. Customers earn RN points that work across every partner in the city.',
+    desc: 'Join the Veniar Network. Customers earn Veniar Points that work across every partner location.',
     paidPartner: false,
     uniqueRewards: false,
   },
@@ -155,12 +155,12 @@ export default function BusinessRegister({ onBack, onSuccess }) {
         <div style={{ flex: 1, background: '#07243A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
           <div style={{ maxWidth: '440px', width: '100%', position: 'relative', zIndex: 2 }}>
             <button style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: 0, marginBottom: '48px', display: 'block' }} onClick={onBack}>← Back to sign in</button>
-            <div style={{ color: '#F2B84B', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px', textTransform: 'uppercase' }}>RewardsNow</div>
+            <div style={{ color: '#F2B84B', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px', textTransform: 'uppercase' }}>Veniar</div>
             {/* Gold accent bar */}
             <div style={{ width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' }} />
             <h1 style={{ color: '#fff', fontSize: '3rem', fontWeight: '900', lineHeight: 1.06, letterSpacing: '-0.03em', margin: '0 0 20px' }}>Grow your business<br />with loyalty.</h1>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: '0 0 48px' }}>
-              Join the RewardsNow network and give your customers a reason to keep coming back.
+              Join the Veniar network and give your customers a reason to keep coming back.
             </p>
             {/* Step indicators in teal */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -194,7 +194,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
         {isMobile && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px', borderBottom: `1px solid ${borderColor}`, position: 'sticky', top: '3px', background: mobileTopBg, zIndex: 10 }}>
             <button style={{ background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer', color: mutedColor, padding: '4px 8px' }} onClick={step > 1 ? () => setStep(s => s - 1) : onBack}>←</button>
-            <span style={{ color: textColor, fontSize: '15px', fontWeight: '700' }}>RewardsNow</span>
+            <span style={{ color: textColor, fontSize: '15px', fontWeight: '700' }}>Veniar</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <button
                 onClick={toggleTheme}

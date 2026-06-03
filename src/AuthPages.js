@@ -69,7 +69,7 @@ export function ForgotPassword() {
 
         {isMobile && (
           <div style={styles.mobileHeader}>
-            <span style={styles.mobileHeaderBrand}>RewardsNow</span>
+            <span style={styles.mobileHeaderBrand}>Veniar</span>
             <span style={styles.mobileHeaderSub}>Reset your password</span>
           </div>
         )}
@@ -80,7 +80,7 @@ export function ForgotPassword() {
           </button>
 
           <div style={styles.brandRow}>
-            <span style={styles.brandLabel}>RewardsNow</span>
+            <span style={styles.brandLabel}>Veniar</span>
           </div>
 
           {!sent ? (
@@ -192,7 +192,7 @@ export function ResetPassword() {
 
         {isMobile && (
           <div style={styles.mobileHeader}>
-            <span style={styles.mobileHeaderBrand}>RewardsNow</span>
+            <span style={styles.mobileHeaderBrand}>Veniar</span>
             <span style={styles.mobileHeaderSub}>Set a new password</span>
           </div>
         )}
@@ -203,7 +203,7 @@ export function ResetPassword() {
           </button>
 
           <div style={styles.brandRow}>
-            <span style={styles.brandLabel}>RewardsNow</span>
+            <span style={styles.brandLabel}>Veniar</span>
           </div>
 
           {!done ? (

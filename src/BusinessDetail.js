@@ -105,7 +105,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100, padding: isMobile ? '0 16px' : '0 40px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <button style={{ background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px' }} onClick={onBack}>← Back</button>
-          {!isMobile && <span style={{ color: '#F2B84B', fontSize: '15px', fontWeight: '700' }}>RewardsNow</span>}
+          {!isMobile && <span style={{ color: '#F2B84B', fontSize: '15px', fontWeight: '700' }}>Veniar</span>}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button

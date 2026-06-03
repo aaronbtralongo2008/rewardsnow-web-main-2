@@ -316,7 +316,7 @@ function Register({ onRegister, onBack }) {
 
         {isMobile ? (
           <div style={mobileHeader}>
-            <span style={mobileHeaderBrand}>RewardsNow</span>
+            <span style={mobileHeaderBrand}>Veniar</span>
             <span style={mobileHeaderSub}>Create your free account</span>
           </div>
         ) : (
@@ -358,7 +358,7 @@ function Register({ onRegister, onBack }) {
           </button>
           <h1 style={{ ...brandName, fontSize: isMobile ? '1.6rem' : '2rem' }}>Create Account</h1>
           <div style={goldAccentBar} />
-          <p style={brandSub}>Join RewardsNow for free</p>
+          <p style={brandSub}>Join Veniar for free</p>
 
           <div style={row}>
             <div style={half}>

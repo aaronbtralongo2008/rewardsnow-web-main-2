@@ -175,7 +175,7 @@ function EmployeeDashboard() {
         {!isMobile && (
           <div style={{ flex: 1, background: '#07243A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'relative', zIndex: 2 }}>
-              <img src={LOGO} alt="RewardsNow" style={{ height: '48px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' }} />
+              <img src={LOGO} alt="Veniar" style={{ height: '48px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' }} />
               <div style={{ width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' }} />
               <h1 style={{ color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' }}>Built for<br />your team.</h1>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' }}>Look up customers and manage reward transactions in seconds.</p>
@@ -185,7 +185,7 @@ function EmployeeDashboard() {
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0D2E42', width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
           {/* Teal top line on login card */}
           <div style={{ height: '3px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
-          {isMobile && <img src={LOGO} alt="RewardsNow" style={{ height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '28px' }} />}
+          {isMobile && <img src={LOGO} alt="Veniar" style={{ height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '28px' }} />}
           <span style={{ display: 'inline-block', background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' }}>EMPLOYEE PORTAL</span>
           <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Staff Login</h2>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', margin: '0 0 36px 0' }}>Sign in to issue customer points</p>
@@ -213,7 +213,7 @@ function EmployeeDashboard() {
       <div style={{ height: '3px', background: '#25B7C8' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }} onClick={() => navigate('/')}>RewardsNow</button>
+          <button style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }} onClick={() => navigate('/')}>Veniar</button>
           <span style={{ background: '#e8f4ed', color: '#2e7d52', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' }}>{employee?.role}</span>
           {isUniquePoints && !isMobile && <span style={{ background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '10px', fontWeight: '700', letterSpacing: '1px', padding: '3px 10px', borderRadius: '20px' }}>Custom Points</span>}
         </div>
@@ -265,7 +265,7 @@ function EmployeeDashboard() {
                 </button>
               </div>
               {customerError && <p style={{ color: '#e03434', fontSize: '13px', marginTop: '8px', marginBottom: 0 }}>{customerError}</p>}
-              <p style={{ color: isDark ? 'rgba(255,255,255,0.35)' : '#aaa', fontSize: '12px', marginTop: '12px', lineHeight: 1.5 }}>No account? Ask the customer to sign up on RewardsNow first.</p>
+              <p style={{ color: isDark ? 'rgba(255,255,255,0.35)' : '#aaa', fontSize: '12px', marginTop: '12px', lineHeight: 1.5 }}>No account? Ask the customer to sign up on Veniar first.</p>
             </div>
           </div>
         )}

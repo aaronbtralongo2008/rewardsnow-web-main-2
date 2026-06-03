@@ -199,7 +199,7 @@ function AdminDashboard() {
           <div style={{ height: '3px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <span style={{ background: '#F2B84B', color: '#07243A', fontSize: '10px', fontWeight: '700', letterSpacing: '3px', padding: '4px 12px', borderRadius: '20px' }}>ADMIN</span>
-            <h1 style={{ color: '#fff', fontSize: '1.8rem', fontWeight: '800', margin: '12px 0 4px 0' }}>RewardsNow Admin</h1>
+            <h1 style={{ color: '#fff', fontSize: '1.8rem', fontWeight: '800', margin: '12px 0 4px 0' }}>Veniar Admin</h1>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px', margin: 0 }}>Restricted access — authorized personnel only</p>
           </div>
           <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Email</label>
@@ -228,7 +228,7 @@ function AdminDashboard() {
       <div style={{ height: '3px', background: '#25B7C8' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800' }}>RewardsNow</span>
+          <span style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800' }}>Veniar</span>
           <span style={{ background: '#F2B84B', color: '#07243A', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' }}>ADMIN</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

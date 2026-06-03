@@ -34,7 +34,7 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
       <div style={{ height: '3px', background: '#25B7C8' }} />
 
       <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
-        <button style={s.navBrand} onClick={() => onNavigate('/home')}>RewardsNow</button>
+        <button style={s.navBrand} onClick={() => onNavigate('/home')}>Veniar</button>
         <div style={s.navRight}>
           <button style={s.navLink} onClick={() => onNavigate('/businesses')}>Partners</button>
           <button style={s.navLink} onClick={() => onNavigate('/map')}>Map</button>
@@ -100,7 +100,7 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
             <div style={s.empty}>
               <p style={s.emptyTitle}>No transactions yet</p>
               <p style={s.emptySub}>
-                Visit any RewardsNow partner and give them your phone number at checkout to start earning points.
+                Visit any Veniar partner and give them your phone number at checkout to start earning points.
               </p>
             </div>
           ) : (

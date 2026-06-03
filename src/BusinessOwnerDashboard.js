@@ -195,7 +195,7 @@ function BusinessOwnerDashboard() {
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0D2E42', width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
           {/* Teal top line on login card */}
           <div style={{ height: '3px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
-          {isMobile && <div style={{ color: '#F2B84B', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' }}>RewardsNow</div>}
+          {isMobile && <div style={{ color: '#F2B84B', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' }}>Veniar</div>}
           <span style={{ display: 'inline-block', background: 'rgba(11,92,173,0.3)', color: '#F2B84B', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' }}>BUSINESS PORTAL</span>
           <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Owner Dashboard</h2>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', margin: '0 0 36px 0' }}>Sign in with your business account</p>
@@ -224,7 +224,7 @@ function BusinessOwnerDashboard() {
       <div style={{ height: '3px', background: '#25B7C8' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <button style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }} onClick={() => navigate('/')}>RewardsNow</button>
+          <button style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }} onClick={() => navigate('/')}>Veniar</button>
           {!isMobile && <span style={{ background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' }}>BUSINESS</span>}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>

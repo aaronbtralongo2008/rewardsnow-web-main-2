@@ -11,11 +11,11 @@ const LOGO_FOOTER = process.env.PUBLIC_URL + '/logo514.png'; // footer CTA secti
 const FEATURES = [
   {
     title: 'Earn on everyday purchases',
-    desc: 'Collect RewardsNow™ points when you shop with participating local businesses.',
+    desc: 'Collect Veniar Points when you shop with participating local businesses.',
   },
   {
     title: 'Redeem locally',
-    desc: 'Use your points at participating RewardsNow™ independent businesses — not just where you earned them.',
+    desc: 'Use your points at participating Veniar independent businesses — not just where you earned them.',
   },
   {
     title: 'Discover nearby businesses',
@@ -42,11 +42,11 @@ export default function LandingPage() {
         <button
           style={s.brandBtn}
           onClick={() => navigate('/')}
-          aria-label="RewardsNow™ — go to home"
+          aria-label="Veniar — go to home"
         >
           <img
             src={LOGO_HEADER}
-            alt="RewardsNow™"
+            alt="Veniar"
             style={{ height: '36px', width: 'auto', display: 'block' }}
           />
         </button>
@@ -75,19 +75,19 @@ export default function LandingPage() {
           <div style={s.goldBar} />
 
           <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
-            RewardsNow™ helps you earn points when you shop at participating independent
+            Veniar helps you earn points when you shop at participating independent
             businesses in your community.
           </p>
 
           <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px', alignItems: 'center' }}>
             {/* TODO: replace href="#download" with your App Store / Google Play links */}
-            <a href="#download" style={s.ctaPrimary} aria-label="Download the RewardsNow™ app">
+            <a href="#download" style={s.ctaPrimary} aria-label="Download the Veniar app">
               Download App
             </a>
             <button
               style={s.ctaGhost}
               onClick={() => navigate('/business-overview')}
-              aria-label="Learn about partnering your business with RewardsNow™"
+              aria-label="Learn about partnering your business with Veniar"
             >
               For Business Owners
             </button>
@@ -98,7 +98,7 @@ export default function LandingPage() {
         {!isMobile && (
           <div style={s.heroBadgeRow} aria-hidden="true">
             <div style={s.heroBadgeCard}>
-              <img src={LOGO_CARD} alt="RewardsNow™" style={s.heroBadgeImg} />
+              <img src={LOGO_CARD} alt="Veniar" style={s.heroBadgeImg} />
               <p style={s.heroBadgeSub}>Community rewards, simplified.</p>
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function LandingPage() {
             <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', marginBottom: '36px' }}>
               {[
                 { n: 'VN·01', label: 'Shop at a local partner' },
-                { n: 'VN·02', label: 'Earn RewardsNow™ points' },
+                { n: 'VN·02', label: 'Earn Veniar Points' },
                 { n: 'VN·03', label: 'Redeem across the network' },
               ].map(step => (
                 <div key={step.n} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -130,13 +130,13 @@ export default function LandingPage() {
             <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)', marginBottom: '28px' }} />
 
             <p style={s.bodyOnDark}>
-              Buy a slice at your favorite local pizzeria and earn RewardsNow™ points. Later,
+              Buy a slice at your favorite local pizzeria and earn Veniar Points. Later,
               redeem those points for ice cream, coffee, lunch, or other everyday purchases at
-              participating RewardsNow™ businesses.
+              participating Veniar partner businesses.
             </p>
             <p style={s.bodyOnDark}>
               Your points aren't tied to one store — they work across every participating business
-              in the RewardsNow™ network.
+              in the Veniar Network.
             </p>
           </div>
         </section>
@@ -176,7 +176,7 @@ export default function LandingPage() {
             <div style={s.goldLine} />
             <div style={{ height: '1px', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)', marginBottom: '28px' }} />
             <p style={s.body}>
-              The RewardsNow™ app includes a directory of participating businesses so you can
+              The Veniar app includes a directory of participating businesses so you can
               easily find places near you — restaurants, cafés, shops, and local service providers,
               all in one place.
             </p>
@@ -196,7 +196,7 @@ export default function LandingPage() {
         >
           <img
             src={LOGO_FOOTER}
-            alt="RewardsNow™"
+            alt="Veniar"
             style={{ ...s.footerLogo, width: isMobile ? '72px' : '88px' }}
           />
 
@@ -210,7 +210,7 @@ export default function LandingPage() {
               marginRight: 'auto',
             }}
           >
-            Download the free RewardsNow™ app today.
+            Download the free Veniar app today.
           </h2>
 
           <p
@@ -226,7 +226,7 @@ export default function LandingPage() {
 
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
             {/* TODO: replace href="#download" with your App Store / Google Play links */}
-            <a href="#download" style={s.ctaPrimary} aria-label="Download the free RewardsNow™ app">
+            <a href="#download" style={s.ctaPrimary} aria-label="Download the free Veniar app">
               Download Now
             </a>
           </div>
@@ -234,9 +234,9 @@ export default function LandingPage() {
           <button
             style={s.ctaBiz}
             onClick={() => navigate('/business-overview')}
-            aria-label="Learn how to join RewardsNow™ as a business owner"
+            aria-label="Learn how to join Veniar as a business owner"
           >
-            Business owner? Learn how to join RewardsNow™.
+            Business owner? Learn how to join Veniar.
           </button>
         </section>
       </main>

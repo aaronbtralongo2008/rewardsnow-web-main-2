@@ -323,7 +323,7 @@ function Login({ onLogin }) {
 
         {isMobile ? (
           <div style={mobileHeader}>
-            <span style={mobileHeaderBrand}>RewardsNow</span>
+            <span style={mobileHeaderBrand}>Veniar</span>
             <span style={mobileHeaderSub}>Earn rewards everywhere</span>
           </div>
         ) : (
@@ -365,7 +365,7 @@ function Login({ onLogin }) {
           </button>
           <h1 style={{ ...brandName, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>Welcome back</h1>
           <div style={goldAccentBar} />
-          <p style={brandSub}>Sign in to your RewardsNow account</p>
+          <p style={brandSub}>Sign in to your Veniar account</p>
           <label style={inputLabel}>Email</label>
           <input style={input} type="email" placeholder="you@email.com"
                  value={email} onChange={e => setEmail(e.target.value)}

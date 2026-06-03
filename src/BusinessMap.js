@@ -50,7 +50,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
       <div style={{ height: '3px', background: '#25B7C8', flexShrink: 0 }} />
 
       <div style={s.topBar}>
-        <span style={s.logo}>RewardsNow</span>
+        <span style={s.logo}>Veniar</span>
         <div style={s.topBarRight}>
           {!isMobile && (
             <>
