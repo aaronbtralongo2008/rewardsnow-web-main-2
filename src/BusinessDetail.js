@@ -95,8 +95,6 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
   const textColor = isDark ? '#ffffff' : '#101820';
   const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
   const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
-  const inputBg = isDark ? 'rgba(255,255,255,0.07)' : '#ffffff';
-  const inputBorder = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)';
   const skeletonBg = isDark ? 'rgba(255,255,255,0.06)' : '#f0f0f0';
   const tableBorder = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
 
