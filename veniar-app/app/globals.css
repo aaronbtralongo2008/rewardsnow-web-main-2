@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/* ── Veniar Design Token System ───────────────────────────────────────────── */
+@theme {
+  /* RewardsNow base tokens (inherited) */
+  --color-rn-sky: #BFDDF2;
+  --color-rn-sky-soft: #EAF6FB;
+  --color-rn-ocean: #1677B8;
+  --color-rn-ocean-deep: #075985;
+  --color-rn-obi-blue: #0067C5;
+  --color-rn-sand: #EAD9B8;
+  --color-rn-sand-soft: #F7F0E3;
+  --color-rn-cloud: #FBFAF6;
+  --color-rn-palm: #6E8F64;
+  --color-rn-charcoal: #182026;
+  --color-rn-muted: #64727C;
+
+  /* Veniar product tokens */
+  --color-vn-flight-blue: #0B5CAD;
+  --color-vn-deep-flight: #07243A;
+  --color-vn-skyline: #111827;
+  --color-vn-sunset-gold: #F2B84B;
+  --color-vn-sunset-orange: #E86F2E;
+  --color-vn-obi-teal: #25B7C8;
+  --color-vn-ivory: #FFF8EA;
+  --color-vn-panel: #F7F1E3;
+  --color-vn-ink: #101820;
+  --color-vn-muted: #5F6B73;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* CSS custom properties for opacity-based values */
+:root {
+  --vn-border: rgba(16, 24, 32, 0.14);
+  --vn-border-light: rgba(16, 24, 32, 0.08);
+  --rn-border: rgba(24, 32, 38, 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FFF8EA;
+  color: #101820;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid #0B5CAD;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
