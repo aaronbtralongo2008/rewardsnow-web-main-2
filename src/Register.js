@@ -144,6 +144,50 @@ function Register({ onRegister, onBack }) {
     letterSpacing: '-0.03em',
   };
 
+  const leftDesc = {
+    color: 'rgba(255,255,255,0.5)',
+    fontSize: '15px',
+    lineHeight: 1.7,
+    margin: 0,
+    maxWidth: '360px',
+  };
+
+  const stepRow = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    marginTop: '48px',
+  };
+
+  const stepItem = {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '14px',
+  };
+
+  const stepNum = {
+    color: '#25B7C8',
+    fontWeight: '800',
+    fontSize: '11px',
+    letterSpacing: '0.05em',
+    marginTop: '2px',
+    minWidth: '20px',
+  };
+
+  const stepText = {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: '13px',
+    lineHeight: 1.5,
+  };
+
+  const tealConnector = {
+    width: '2px',
+    height: '16px',
+    background: '#25B7C8',
+    marginLeft: '9px',
+    opacity: 0.4,
+  };
+
   const rightPanel = {
     display: 'flex',
     flexDirection: 'column',
@@ -159,8 +203,16 @@ function Register({ onRegister, onBack }) {
   const brandName = {
     color: isDark ? '#ffffff' : '#101820',
     fontWeight: '900',
-    margin: '0 0 8px 0',
+    margin: '0 0 6px 0',
     letterSpacing: '-0.03em',
+  };
+
+  const goldAccentBar = {
+    width: '40px',
+    height: '3px',
+    background: '#F2B84B',
+    borderRadius: '2px',
+    margin: '0 0 16px 0',
   };
 
   const brandSub = {
@@ -273,6 +325,23 @@ function Register({ onRegister, onBack }) {
               <div style={badge}>REWARDSNOW</div>
               <div style={goldLine} />
               <p style={tagline}>Join customers earning rewards every day.</p>
+              <p style={leftDesc}>It only takes a minute to get started.</p>
+              <div style={stepRow}>
+                <div style={stepItem}>
+                  <span style={stepNum}>01</span>
+                  <span style={stepText}>Create your free account</span>
+                </div>
+                <div style={tealConnector} />
+                <div style={stepItem}>
+                  <span style={stepNum}>02</span>
+                  <span style={stepText}>Visit participating businesses</span>
+                </div>
+                <div style={tealConnector} />
+                <div style={stepItem}>
+                  <span style={stepNum}>03</span>
+                  <span style={stepText}>Earn and redeem your rewards</span>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -288,6 +357,7 @@ function Register({ onRegister, onBack }) {
             {isDark ? 'LIGHT' : 'DARK'}
           </button>
           <h1 style={{ ...brandName, fontSize: isMobile ? '1.6rem' : '2rem' }}>Create Account</h1>
+          <div style={goldAccentBar} />
           <p style={brandSub}>Join RewardsNow for free</p>
 
           <div style={row}>
