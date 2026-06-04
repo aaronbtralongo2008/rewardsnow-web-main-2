@@ -54,6 +54,17 @@ const DARK = {
   '--rn-beam-mid':          'rgba(37,183,200,0.22)',
   '--rn-rail':              'rgba(255,255,255,0.04)',
   '--rn-dark-band':         'rgba(0,0,0,0.38)',
+  // VN contextual vars (dark)
+  '--vn-bg':                '#07243A',
+  '--vn-text':              '#F5F0E8',
+  '--vn-text-sub':          'rgba(245,240,232,0.66)',
+  '--vn-text-muted':        'rgba(245,240,232,0.42)',
+  '--vn-card':              'rgba(255,255,255,0.06)',
+  '--vn-card-border':       'rgba(255,255,255,0.10)',
+  '--vn-nav-bg':            'rgba(7,36,58,0.97)',
+  '--vn-nav-border':        'rgba(255,255,255,0.07)',
+  '--vn-section-alt':       'rgba(0,0,0,0.22)',
+  '--vn-divider':           'rgba(255,255,255,0.10)',
 };
 
 const LIGHT = {
@@ -104,6 +115,17 @@ const LIGHT = {
   '--rn-beam-mid':          'rgba(11,92,173,0.09)',
   '--rn-rail':              'rgba(11,92,173,0.04)',
   '--rn-dark-band':         '#07243A',
+  // VN contextual vars (light)
+  '--vn-bg':                '#FFF8EA',
+  '--vn-text':              '#101820',
+  '--vn-text-sub':          '#374151',
+  '--vn-text-muted':        'rgba(16,24,32,0.48)',
+  '--vn-card':              '#FFFFFF',
+  '--vn-card-border':       'rgba(16,24,32,0.10)',
+  '--vn-nav-bg':            'rgba(255,255,255,0.97)',
+  '--vn-nav-border':        'rgba(16,24,32,0.10)',
+  '--vn-section-alt':       '#F7F1E3',
+  '--vn-divider':           'rgba(16,24,32,0.10)',
 };
 
 function applyVars(isDark) {

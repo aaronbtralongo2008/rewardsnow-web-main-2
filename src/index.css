@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
+/* ── Veniar brand tokens (static — never change with theme) ─────────────── */
+:root {
+  --vn-flight-blue:   #0B5CAD;
+  --vn-deep-flight:   #07243A;
+  --vn-sunset-gold:   #F2B84B;
+  --vn-sunset-orange: #E86F2E;
+  --vn-obi-teal:      #25B7C8;
+  --vn-ivory:         #FFF8EA;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
