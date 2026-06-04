@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
-import { useTheme } from './ThemeContext';
 
-const ROYAL = '#1565C4';
+const ROYAL = '#2040C8';
 
 function AdminDashboard() {
   const isMobile = useIsMobile();
-  const { isDark, toggleTheme } = useTheme();
   const [token, setToken] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -176,44 +174,27 @@ function AdminDashboard() {
     } catch { showMsg('Error saving ranking.', 'error'); }
   };
 
-  // Theme-aware values
-  const rootBg = isDark ? '#061A2A' : '#FFF8EA';
-  const cardBg = isDark ? '#0C2640' : '#ffffff';
-  const textColor = isDark ? '#ffffff' : '#101820';
-  const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
-  const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
-  const inputBg = isDark ? 'rgba(255,255,255,0.07)' : '#ffffff';
-  const inputBorder = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)';
-  const inputText = isDark ? '#ffffff' : '#101820';
-  const skeletonBg = isDark ? 'rgba(255,255,255,0.06)' : '#f0f0f0';
-  const sidebarBg = isDark ? '#0C2640' : '#ffffff';
-  const navActiveBg = isDark ? 'rgba(11,92,173,0.25)' : 'rgba(11,92,173,0.08)';
-  const mobileTabsBg = isDark ? '#0C2640' : '#ffffff';
-  const tableBorder = `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}`;
-
   if (!token) {
     return (
-      <div style={{ minHeight: '100vh', background: '#061A2A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
-        <div style={{ background: '#0C2640', border: '1px solid rgba(255,255,255,0.1)', width: isMobile ? '100%' : '400px', padding: isMobile ? '40px 24px' : '48px', borderRadius: isMobile ? '0' : '16px', minHeight: isMobile ? '100vh' : 'auto', boxSizing: 'border-box' }}>
-          {/* Teal top line on login card */}
-          <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <span style={{ background: '#F2B84B', color: '#061A2A', fontSize: '10px', fontWeight: '700', letterSpacing: '3px', padding: '4px 12px', borderRadius: '20px' }}>ADMIN</span>
-            <h1 className="vn-fade-up" style={{ color: '#fff', fontSize: '1.8rem', fontWeight: '800', margin: '12px 0 4px 0' }}>Veniar Admin</h1>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px', margin: 0 }}>Restricted access — authorized personnel only</p>
+        <div style={s.loginContainer}>
+          <div style={{ ...s.loginBox, width: isMobile ? '100%' : '400px', padding: isMobile ? '40px 24px' : '48px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxSizing: 'border-box', boxShadow: isMobile ? 'none' : '0 8px 40px rgba(0,0,0,0.1)' }}>
+            <div style={s.loginHeader}>
+              <span style={s.loginBadge}>ADMIN</span>
+              <h1 style={s.loginTitle}>RewardsNow Admin</h1>
+              <p style={s.loginSub}>Restricted access — authorized personnel only</p>
+            </div>
+            <label style={s.label}>Email</label>
+            <input style={s.input} type="email" value={email}
+                   onChange={e => setEmail(e.target.value)}
+                   onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            <label style={s.label}>Password</label>
+            <input style={s.input} type="password" value={password}
+                   onChange={e => setPassword(e.target.value)}
+                   onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            {error && <p style={s.error}>{error}</p>}
+            <button style={s.btn} onClick={handleLogin}>Sign In</button>
           </div>
-          <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Email</label>
-          <input className="vn-input" style={{ padding: '13px 16px', borderRadius: '10px', border: '1.5px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.08)', color: '#fff', fontSize: '14px', marginBottom: '16px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" value={email}
-                 onChange={e => setEmail(e.target.value)}
-                 onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-          <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Password</label>
-          <input className="vn-input" style={{ padding: '13px 16px', borderRadius: '10px', border: '1.5px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.08)', color: '#fff', fontSize: '14px', marginBottom: '16px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" value={password}
-                 onChange={e => setPassword(e.target.value)}
-                 onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-          {error && <p style={{ color: '#e03434', fontSize: '13px', background: 'rgba(224,52,52,0.15)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(224,52,52,0.3)', margin: '0 0 14px 0' }}>{error}</p>}
-          <button style={{ padding: '14px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%' }} onClick={handleLogin}>Sign In</button>
         </div>
-      </div>
     );
   }
 
@@ -223,210 +204,252 @@ function AdminDashboard() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: rootBg, fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' }}>
-      {/* Teal accent bar */}
-      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#061A2A', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800' }}>Veniar</span>
-          <span style={{ background: '#F2B84B', color: '#061A2A', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' }}>ADMIN</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button
-            onClick={toggleTheme}
-            style={{
-              padding: '5px 10px',
-              background: 'none',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'rgba(255,255,255,0.7)',
-              borderRadius: '6px',
-              fontSize: '11px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-            }}
-          >
-            {isDark ? '○' : '●'}
-          </button>
-          <button style={{ padding: '7px 14px', borderRadius: '8px', border: '1.5px solid rgba(255,255,255,0.2)', background: 'transparent', color: '#fff', cursor: 'pointer', fontSize: '13px', fontWeight: '600' }} onClick={() => setToken(null)}>Sign Out</button>
-        </div>
-      </div>
-
-      {isMobile ? (
-        <div style={{ display: 'flex', background: mobileTabsBg, borderBottom: `1px solid ${borderColor}`, paddingLeft: '0' }}>
-          {TABS.map(({ key, label }) => (
-            <button key={key} style={{ flex: 1, padding: '12px 8px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'center', borderBottom: tab === key ? `2px solid ${ROYAL}` : '2px solid transparent', color: tab === key ? ROYAL : mutedColor, fontWeight: tab === key ? '700' : '400' }}
-                    onClick={() => setTab(key)}>
-              {label}
-            </button>
-          ))}
-        </div>
-      ) : null}
-
-      <div style={{ display: 'flex', flex: 1, flexDirection: isMobile ? 'column' : 'row' }}>
-        {!isMobile && (
-          <div style={{ width: '200px', background: sidebarBg, borderRight: `1px solid ${borderColor}`, padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {TABS.map(({ key, label }) => (
-              <button key={key}
-                      style={{ padding: '10px 14px', borderRadius: '10px', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'left', width: '100%', background: tab === key ? navActiveBg : 'transparent', color: tab === key ? ROYAL : mutedColor, fontWeight: tab === key ? '700' : '400' }}
-                      onClick={() => setTab(key)}>
-                {label}
-              </button>
-            ))}
+      <div style={s.container}>
+        <div style={s.topBar}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={s.logo}>RewardsNow</span>
+            <span style={s.adminBadge}>ADMIN</span>
           </div>
-        )}
+          <button style={s.logoutBtn} onClick={() => setToken(null)}>Sign Out</button>
+        </div>
 
-        <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '16px' : '28px 32px' }}>
-          {actionMsg && (
-            <div style={{ padding: '12px 16px', borderRadius: '10px', fontSize: '13px', fontWeight: '600', marginBottom: '20px', background: actionType === 'error' ? '#fdeaea' : '#e8f4ed', color: actionType === 'error' ? '#c0392b' : '#2e7d52' }}>
-              {actionMsg}
+        {isMobile ? (
+            <div style={s.mobileTabs}>
+              {TABS.map(({ key, label }) => (
+                  <button key={key} style={{ ...s.mobileTab, borderBottom: tab === key ? `2px solid ${ROYAL}` : '2px solid transparent', color: tab === key ? ROYAL : '#888', fontWeight: tab === key ? '700' : '400' }}
+                          onClick={() => setTab(key)}>
+                    {label}
+                  </button>
+              ))}
             </div>
+        ) : null}
+
+        <div style={{ ...s.body, flexDirection: isMobile ? 'column' : 'row' }}>
+          {!isMobile && (
+              <div style={s.sidebar}>
+                {TABS.map(({ key, label }) => (
+                    <button key={key}
+                            style={{ ...s.navBtn, background: tab === key ? '#f0f4ff' : 'transparent', color: tab === key ? ROYAL : '#555', fontWeight: tab === key ? '700' : '400' }}
+                            onClick={() => setTab(key)}>
+                      {label}
+                    </button>
+                ))}
+              </div>
           )}
 
-          {tab === 'pending' && (
-            <>
-              <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: '0 0 16px 0' }}>Pending Requests</h2>
-              {loading ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {[1, 2, 3].map(i => <div key={i} style={{ height: '140px', borderRadius: '16px', marginBottom: '12px', background: skeletonBg }} />)}
+          <div style={{ ...s.content, padding: isMobile ? '16px' : '28px 32px' }}>
+            {actionMsg && (
+                <div style={{ ...s.banner, background: actionType === 'error' ? '#fdeaea' : '#e8f4ed', color: actionType === 'error' ? '#c0392b' : '#2e7d52' }}>
+                  {actionMsg}
                 </div>
-              ) : pending.length === 0 ? (
-                <div style={{ background: cardBg, borderRadius: '16px', padding: '48px', textAlign: 'center', border: `1px solid ${borderColor}` }}><p style={{ color: mutedColor, margin: 0 }}>No pending requests — all clear.</p></div>
-              ) : (
-                pending.map(req => (
-                  <div key={req.id} className="vn-card" style={{ background: cardBg, borderRadius: '16px', padding: '16px', border: `1px solid ${borderColor}`, marginBottom: '14px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', flexDirection: isMobile ? 'column' : 'row' }}>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <h3 style={{ color: textColor, fontSize: '1rem', fontWeight: '700', margin: '0 0 4px 0' }}>{req.businessName}</h3>
-                        <p style={{ color: mutedColor, fontSize: '12px', margin: '0 0 3px 0' }}>{req.contactEmail} · {req.contactPhone}</p>
-                        {req.address && <p style={{ color: mutedColor, fontSize: '12px', margin: '0 0 3px 0' }}>{req.address}</p>}
-                        <div style={{ display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' }}>
-                          {req.requestingPaidPartner && <span style={{ background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' }}>Featured Partner</span>}
-                          {req.requestingUniqueRewardsPoint && <span style={{ background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' }}>Custom Rewards</span>}
-                        </div>
-                        <p style={{ color: isDark ? 'rgba(255,255,255,0.3)' : '#aaa', fontSize: '11px', margin: '8px 0 0 0' }}>
-                          Submitted: {new Date(req.submittedAt).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })}
-                        </p>
-                        <div style={{ marginTop: '12px' }}>
-                          <input className="vn-input" style={{ padding: '8px 12px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '12px', outline: 'none', width: '100%', boxSizing: 'border-box' }} placeholder="Rejection reason (optional)"
-                                 value={rejectNotes[req.id] || ''}
-                                 onChange={e => setRejectNotes({ ...rejectNotes, [req.id]: e.target.value })} />
-                        </div>
-                      </div>
-                      <div style={{ display: 'flex', gap: '8px', flexShrink: 0, flexDirection: isMobile ? 'row' : 'column', marginTop: isMobile ? '12px' : '0' }}>
-                        <button className="vn-btn" style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#2e7d52', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', opacity: acting === req.id + '-approve' ? 0.7 : 1, flex: isMobile ? 1 : 'none' }}
-                                onClick={() => handleApprove(req.id)} disabled={!!acting}>
-                          {acting === req.id + '-approve' ? 'Approving...' : 'Approve'}
-                        </button>
-                        <button className="vn-btn" style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#c0392b', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', opacity: acting === req.id + '-reject' ? 0.7 : 1, flex: isMobile ? 1 : 'none' }}
-                                onClick={() => handleReject(req.id)} disabled={!!acting}>
-                          {acting === req.id + '-reject' ? 'Rejecting...' : 'Reject'}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              )}
-            </>
-          )}
+            )}
 
-          {tab === 'businesses' && (
-            <>
-              <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: '0 0 16px 0' }}>All Businesses ({businesses.length})</h2>
-              {loading ? (
-                <div style={{ display: 'grid', gap: '14px' }}>
-                  {[1, 2, 3, 4].map(i => <div key={i} style={{ height: '100px', borderRadius: '14px', background: skeletonBg }} />)}
-                </div>
-              ) : businesses.length === 0 ? (
-                <div style={{ background: cardBg, borderRadius: '16px', padding: '48px', textAlign: 'center', border: `1px solid ${borderColor}` }}><p style={{ color: mutedColor, margin: 0 }}>No businesses yet.</p></div>
-              ) : (
-                <div style={{ display: 'grid', gap: '14px', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))' }}>
-                  {businesses.map(biz => (
-                    <div key={biz.id} className="vn-card" style={{ background: cardBg, borderRadius: '14px', padding: '16px', border: `1px solid ${borderColor}`, display: 'flex', flexDirection: 'column', gap: '0' }}>
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: ROYAL, color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{biz.name.charAt(0).toUpperCase()}</div>
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <p style={{ color: textColor, fontSize: '13px', fontWeight: '700', margin: '0 0 3px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{biz.name}</p>
-                          <p style={{ color: isDark ? 'rgba(255,255,255,0.35)' : '#aaa', fontSize: '11px', margin: '0 0 6px 0' }}>{biz.address || 'No address'}</p>
-                          <div style={{ display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' }}>
-                            {biz.featured && <span style={{ background: '#F2B84B', color: '#061A2A', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' }}>⭐ Featured</span>}
-                            {biz.paidPartner && <span style={{ background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' }}>Partner</span>}
-                            {biz.uniqueRewardsPoint && <span style={{ background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' }}>Custom Points</span>}
-                            {biz.category && <span style={{ background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' }}>{biz.category}</span>}
-                            {biz.priceRange > 0 && <span style={{ background: '#f0fdf4', color: '#166534', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' }}>{'$'.repeat(biz.priceRange)}</span>}
-                          </div>
-                          <div style={{ display: 'flex', gap: '6px', marginTop: '8px', flexWrap: 'wrap' }}>
-                            <button style={{ padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #e0a020', background: 'transparent', color: '#e0a020', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }} onClick={() => handleSuspend(biz.id)}>Suspend</button>
-                            <button style={{ padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #c0392b', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }} onClick={() => handleTerminate(biz.id)}>Terminate</button>
-                            <button style={{ padding: '5px 10px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '11px', fontWeight: '600', cursor: 'pointer' }} onClick={() => editingId === biz.id ? setEditingId(null) : openEdit(biz)}>
-                              {editingId === biz.id ? 'Close' : 'Edit'}
-                            </button>
-                          </div>
-                        </div>
+            {tab === 'pending' && (
+                <>
+                  <h2 style={s.pageTitle}>Pending Requests</h2>
+                  {loading ? (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {[1, 2, 3].map(i => <div key={i} style={s.skeleton} />)}
                       </div>
-                      {editingId === biz.id && (
-                        <div style={{ borderTop: tableBorder, marginTop: '12px', paddingTop: '14px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <p style={{ color: mutedColor, fontSize: '11px', fontWeight: '700', margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Profile Details</p>
-                            <div style={{ display: 'flex', gap: '10px' }}>
-                              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                <label style={{ color: mutedColor, fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' }}>Category</label>
-                                <select style={{ padding: '7px 10px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box' }} value={editForm.category} onChange={e => setEditForm({ ...editForm, category: e.target.value })}>
-                                  <option value="">— None —</option>
-                                  <option value="food">Food &amp; Drink</option>
-                                  <option value="retail">Retail</option>
-                                  <option value="services">Services</option>
-                                  <option value="health">Health &amp; Wellness</option>
-                                  <option value="entertainment">Entertainment</option>
-                                  <option value="travel">Travel</option>
-                                  <option value="other">Other</option>
-                                </select>
+                  ) : pending.length === 0 ? (
+                      <div style={s.empty}><p style={{ color: '#888', margin: 0 }}>No pending requests — all clear.</p></div>
+                  ) : (
+                      pending.map(req => (
+                          <div key={req.id} style={s.card}>
+                            <div style={{ ...s.cardTop, flexDirection: isMobile ? 'column' : 'row' }}>
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <h3 style={s.cardTitle}>{req.businessName}</h3>
+                                <p style={s.cardSub}>{req.contactEmail} · {req.contactPhone}</p>
+                                {req.address && <p style={s.cardSub}>{req.address}</p>}
+                                <div style={s.badgeRow}>
+                                  {req.requestingPaidPartner && <span style={s.tag}>Featured Partner</span>}
+                                  {req.requestingUniqueRewardsPoint && <span style={s.tag}>Custom Rewards</span>}
+                                </div>
+                                <p style={s.cardDate}>
+                                  Submitted: {new Date(req.submittedAt).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })}
+                                </p>
+                                <div style={s.rejectRow}>
+                                  <input style={s.notesInput} placeholder="Rejection reason (optional)"
+                                         value={rejectNotes[req.id] || ''}
+                                         onChange={e => setRejectNotes({ ...rejectNotes, [req.id]: e.target.value })} />
+                                </div>
                               </div>
-                              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                <label style={{ color: mutedColor, fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' }}>Price Range</label>
-                                <select style={{ padding: '7px 10px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box' }} value={editForm.priceRange} onChange={e => setEditForm({ ...editForm, priceRange: e.target.value })}>
-                                  <option value={0}>— None —</option>
-                                  <option value={1}>$ (Budget)</option>
-                                  <option value={2}>$$ (Moderate)</option>
-                                  <option value={3}>$$$ (Expensive)</option>
-                                  <option value={4}>$$$$ (Very Expensive)</option>
-                                </select>
-                              </div>
-                            </div>
-                            <label style={{ color: mutedColor, fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' }}>Tags (comma-separated)</label>
-                            <input className="vn-input" style={{ padding: '7px 10px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box', fontFamily: 'inherit', marginBottom: '2px' }} placeholder="e.g. coffee, wifi, vegan" value={editForm.tags} onChange={e => setEditForm({ ...editForm, tags: e.target.value })} />
-                            <button style={{ padding: '7px 14px', borderRadius: '8px', border: 'none', background: ROYAL, color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', alignSelf: 'flex-start' }} onClick={() => handleSaveDetails(biz.id)}>Save Details</button>
-                          </div>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <p style={{ color: mutedColor, fontSize: '11px', fontWeight: '700', margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Ranking &amp; Featured</p>
-                            <div style={{ display: 'flex', gap: '10px' }}>
-                              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                <label style={{ color: mutedColor, fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' }}>Rank Score</label>
-                                <input className="vn-input" style={{ padding: '7px 10px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box', fontFamily: 'inherit', marginBottom: '2px' }} type="number" step="0.1" value={editForm.rankScore} onChange={e => setEditForm({ ...editForm, rankScore: e.target.value })} />
-                              </div>
-                              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                <label style={{ color: mutedColor, fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' }}>Featured Until</label>
-                                <input className="vn-input" style={{ padding: '7px 10px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box', fontFamily: 'inherit', marginBottom: '2px' }} type="date" value={editForm.featuredUntil} onChange={e => setEditForm({ ...editForm, featuredUntil: e.target.value })} />
+                              <div style={{ ...s.actionBtns, flexDirection: isMobile ? 'row' : 'column', marginTop: isMobile ? '12px' : '0' }}>
+                                <button style={{ ...s.approveBtn, opacity: acting === req.id + '-approve' ? 0.7 : 1, flex: isMobile ? 1 : 'none' }}
+                                        onClick={() => handleApprove(req.id)} disabled={!!acting}>
+                                  {acting === req.id + '-approve' ? 'Approving...' : 'Approve'}
+                                </button>
+                                <button style={{ ...s.rejectBtn, opacity: acting === req.id + '-reject' ? 0.7 : 1, flex: isMobile ? 1 : 'none' }}
+                                        onClick={() => handleReject(req.id)} disabled={!!acting}>
+                                  {acting === req.id + '-reject' ? 'Rejecting...' : 'Reject'}
+                                </button>
                               </div>
                             </div>
-                            <label style={{ color: mutedColor, fontSize: '11px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '10px' }}>
-                              <input type="checkbox" checked={editForm.featured} onChange={e => setEditForm({ ...editForm, featured: e.target.checked })} />
-                              Mark as Featured
-                            </label>
-                            <button style={{ padding: '7px 14px', borderRadius: '8px', border: 'none', background: ROYAL, color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', alignSelf: 'flex-start' }} onClick={() => handleSaveRank(biz.id)}>Save Ranking</button>
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </>
-          )}
+                      ))
+                  )}
+                </>
+            )}
+
+            {tab === 'businesses' && (
+                <>
+                  <h2 style={s.pageTitle}>All Businesses ({businesses.length})</h2>
+                  {loading ? (
+                      <div style={s.bizGrid}>
+                        {[1, 2, 3, 4].map(i => <div key={i} style={{ ...s.skeleton, height: '100px' }} />)}
+                      </div>
+                  ) : businesses.length === 0 ? (
+                      <div style={s.empty}><p style={{ color: '#888', margin: 0 }}>No businesses yet.</p></div>
+                  ) : (
+                      <div style={{ ...s.bizGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+                        {businesses.map(biz => (
+                            <div key={biz.id} style={s.bizCard}>
+                              <div style={s.bizCardRow}>
+                                <div style={s.bizInitial}>{biz.name.charAt(0).toUpperCase()}</div>
+                                <div style={s.bizInfo}>
+                                  <p style={s.bizName}>{biz.name}</p>
+                                  <p style={s.bizAddr}>{biz.address || 'No address'}</p>
+                                  <div style={s.badgeRow}>
+                                    {biz.featured && <span style={s.tag}>⭐ Featured</span>}
+                                    {biz.paidPartner && <span style={s.tag}>Partner</span>}
+                                    {biz.uniqueRewardsPoint && <span style={s.tag}>Custom Points</span>}
+                                    {biz.category && <span style={s.tagPurple}>{biz.category}</span>}
+                                    {biz.priceRange > 0 && <span style={s.tagGreen}>{'$'.repeat(biz.priceRange)}</span>}
+                                  </div>
+                                  <div style={s.bizActions}>
+                                    <button style={s.suspendBtn} onClick={() => handleSuspend(biz.id)}>Suspend</button>
+                                    <button style={s.terminateBtn} onClick={() => handleTerminate(biz.id)}>Terminate</button>
+                                    <button style={s.editBtn} onClick={() => editingId === biz.id ? setEditingId(null) : openEdit(biz)}>
+                                      {editingId === biz.id ? 'Close' : 'Edit'}
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              {editingId === biz.id && (
+                                  <div style={s.editPanel}>
+                                    <div style={s.editSection}>
+                                      <p style={s.editSectionTitle}>Profile Details</p>
+                                      <div style={s.editRow}>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Category</label>
+                                          <select style={s.editSelect} value={editForm.category} onChange={e => setEditForm({ ...editForm, category: e.target.value })}>
+                                            <option value="">— None —</option>
+                                            <option value="food">Food & Drink</option>
+                                            <option value="retail">Retail</option>
+                                            <option value="services">Services</option>
+                                            <option value="health">Health & Wellness</option>
+                                            <option value="entertainment">Entertainment</option>
+                                            <option value="travel">Travel</option>
+                                            <option value="other">Other</option>
+                                          </select>
+                                        </div>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Price Range</label>
+                                          <select style={s.editSelect} value={editForm.priceRange} onChange={e => setEditForm({ ...editForm, priceRange: e.target.value })}>
+                                            <option value={0}>— None —</option>
+                                            <option value={1}>$ (Budget)</option>
+                                            <option value={2}>$$ (Moderate)</option>
+                                            <option value={3}>$$$ (Expensive)</option>
+                                            <option value={4}>$$$$ (Very Expensive)</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <label style={s.editLabel}>Tags (comma-separated)</label>
+                                      <input style={s.editInput} placeholder="e.g. coffee, wifi, vegan" value={editForm.tags} onChange={e => setEditForm({ ...editForm, tags: e.target.value })} />
+                                      <button style={s.saveBtn} onClick={() => handleSaveDetails(biz.id)}>Save Details</button>
+                                    </div>
+                                    <div style={s.editSection}>
+                                      <p style={s.editSectionTitle}>Ranking & Featured</p>
+                                      <div style={s.editRow}>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Rank Score</label>
+                                          <input style={s.editInput} type="number" step="0.1" value={editForm.rankScore} onChange={e => setEditForm({ ...editForm, rankScore: e.target.value })} />
+                                        </div>
+                                        <div style={s.editField}>
+                                          <label style={s.editLabel}>Featured Until</label>
+                                          <input style={s.editInput} type="date" value={editForm.featuredUntil} onChange={e => setEditForm({ ...editForm, featuredUntil: e.target.value })} />
+                                        </div>
+                                      </div>
+                                      <label style={{ ...s.editLabel, display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '10px' }}>
+                                        <input type="checkbox" checked={editForm.featured} onChange={e => setEditForm({ ...editForm, featured: e.target.checked })} />
+                                        Mark as Featured
+                                      </label>
+                                      <button style={s.saveBtn} onClick={() => handleSaveRank(biz.id)}>Save Ranking</button>
+                                    </div>
+                                  </div>
+                              )}
+                            </div>
+                        ))}
+                      </div>
+                  )}
+                </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
   );
 }
+
+const s = {
+  loginContainer: { minHeight: '100vh', background: '#F4F6FB', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Segoe UI', system-ui, sans-serif" },
+  loginBox: { background: '#fff' },
+  loginHeader: { textAlign: 'center', marginBottom: '32px' },
+  loginBadge: { background: '#1a2f9e', color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '3px', padding: '4px 12px', borderRadius: '20px' },
+  loginTitle: { color: ROYAL, fontSize: '1.8rem', fontWeight: '800', margin: '12px 0 4px 0' },
+  loginSub: { color: '#888', fontSize: '13px', margin: 0 },
+  label: { color: '#444', fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' },
+  input: { padding: '13px 16px', borderRadius: '10px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '14px', marginBottom: '16px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  btn: { padding: '14px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%' },
+  error: { color: '#e03434', fontSize: '13px', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0', margin: '0 0 14px 0' },
+  container: { minHeight: '100vh', background: '#F4F6FB', fontFamily: "'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' },
+  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800' },
+  adminBadge: { background: '#1a2f9e', color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
+  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
+  mobileTabs: { display: 'flex', background: '#fff', borderBottom: '1px solid #eee', paddingLeft: '0' },
+  mobileTab: { flex: 1, padding: '12px 8px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'center' },
+  body: { display: 'flex', flex: 1 },
+  sidebar: { width: '200px', background: '#fff', borderRight: '1px solid #eee', padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px' },
+  navBtn: { padding: '10px 14px', borderRadius: '10px', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'left', width: '100%', transition: 'all 0.15s' },
+  content: { flex: 1, overflowY: 'auto' },
+  banner: { padding: '12px 16px', borderRadius: '10px', fontSize: '13px', fontWeight: '600', marginBottom: '20px' },
+  pageTitle: { color: '#111', fontSize: '1.2rem', fontWeight: '700', margin: '0 0 16px 0' },
+  skeleton: { height: '140px', borderRadius: '16px', marginBottom: '12px', background: 'linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
+  empty: { background: '#fff', borderRadius: '16px', padding: '48px', textAlign: 'center', border: '1px solid #eee' },
+  card: { background: '#fff', borderRadius: '16px', padding: '16px', border: '1px solid #eee', marginBottom: '14px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' },
+  cardTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' },
+  cardTitle: { color: '#111', fontSize: '1rem', fontWeight: '700', margin: '0 0 4px 0' },
+  cardSub: { color: '#888', fontSize: '12px', margin: '0 0 3px 0' },
+  cardDate: { color: '#bbb', fontSize: '11px', margin: '8px 0 0 0' },
+  badgeRow: { display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' },
+  tag: { background: '#f0f4ff', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  rejectRow: { marginTop: '12px' },
+  notesInput: { padding: '8px 12px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '12px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  actionBtns: { display: 'flex', gap: '8px', flexShrink: 0 },
+  approveBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#2e7d52', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' },
+  rejectBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#c0392b', color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' },
+  bizGrid: { display: 'grid', gap: '14px' },
+  bizCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid #eee', display: 'flex', flexDirection: 'column', gap: '0' },
+  bizCardRow: { display: 'flex', alignItems: 'flex-start', gap: '12px' },
+  bizInitial: { width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #152a9e, #1e35b5)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  bizInfo: { flex: 1, minWidth: 0 },
+  bizName: { color: '#111', fontSize: '13px', fontWeight: '700', margin: '0 0 3px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  bizAddr: { color: '#aaa', fontSize: '11px', margin: '0 0 6px 0' },
+  bizActions: { display: 'flex', gap: '6px', marginTop: '8px', flexWrap: 'wrap' },
+  suspendBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #e0a020', background: 'transparent', color: '#e0a020', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  terminateBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #c0392b', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  editBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #2040C8', background: 'transparent', color: '#2040C8', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  tagPurple: { background: '#f5f3ff', color: '#7c3aed', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  tagGreen: { background: '#f0fdf4', color: '#166534', fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  editPanel: { borderTop: '1px solid #f0f0f0', marginTop: '12px', paddingTop: '14px', display: 'flex', flexDirection: 'column', gap: '16px' },
+  editSection: { display: 'flex', flexDirection: 'column', gap: '8px' },
+  editSectionTitle: { color: '#555', fontSize: '11px', fontWeight: '700', margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' },
+  editRow: { display: 'flex', gap: '10px' },
+  editField: { flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' },
+  editLabel: { color: '#666', fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '4px' },
+  editSelect: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  editInput: { padding: '7px 10px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: '#fafafa', color: '#111', fontSize: '13px', outline: 'none', width: '100%', boxSizing: 'border-box', fontFamily: 'inherit', marginBottom: '2px' },
+  saveBtn: { padding: '7px 14px', borderRadius: '8px', border: 'none', background: ROYAL, color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', alignSelf: 'flex-start' },
+};
 
 export default AdminDashboard;

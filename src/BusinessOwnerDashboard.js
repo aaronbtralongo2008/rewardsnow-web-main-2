@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
-import { useTheme } from './ThemeContext';
 
-const ROYAL = '#1565C4';
+const ROYAL = '#2563eb';
 
 function BusinessOwnerDashboard() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
-  const { isDark, toggleTheme } = useTheme();
   const [token, setToken] = useState(null);
   const [account, setAccount] = useState(null);
   const [email, setEmail] = useState('');
@@ -160,53 +158,39 @@ function BusinessOwnerDashboard() {
     } catch { showMsg('Could not delete service.', 'error'); }
   };
 
-  // Theme-aware values
-  const rootBg = isDark ? '#061A2A' : '#FFF8EA';
-  const cardBg = isDark ? '#0C2640' : '#ffffff';
-  const textColor = isDark ? '#ffffff' : '#101820';
-  const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
-  const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
-  const inputBg = isDark ? 'rgba(255,255,255,0.07)' : '#ffffff';
-  const inputBorder = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)';
-  const inputText = isDark ? '#ffffff' : '#101820';
-  const skeletonBg = isDark ? 'rgba(255,255,255,0.06)' : '#f0f0f0';
-  const sidebarBg = isDark ? '#0C2640' : '#ffffff';
-  const navActiveBg = isDark ? 'rgba(11,92,173,0.25)' : '#eff6ff';
-  const mobileTabsBg = isDark ? '#0C2640' : '#ffffff';
-  const tableBorder = `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}`;
-
   const Skeleton = ({ h = 72 }) => (
-    <div style={{ height: h, borderRadius: 12, marginBottom: 12, background: skeletonBg }} />
+      <div style={{ height: h, borderRadius: 12, marginBottom: 12, background: 'linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' }} />
   );
 
   if (!token) {
     return (
-      <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", background: '#061A2A' }}>
-        {!isMobile && (
-          <div style={{ flex: 1, background: '#061A2A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ color: '#F2B84B', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' }}>REWARDSNOW</div>
-              <div style={{ width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' }} />
-              <h1 className="vn-fade-up" style={{ color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' }}>Run your business.<br />Reward your customers.</h1>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' }}>Manage employees, services, and analytics from your business portal.</p>
-            </div>
+        <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
+          {!isMobile && (
+              <div style={s.loginLeft}>
+                <div style={s.loginOrb1} />
+                <div style={s.loginOrb2} />
+                <div style={s.loginOrb3} />
+                <div style={s.loginLeftContent}>
+                  <div style={s.loginBrandBadge}>REWARDSNOW</div>
+                  <div style={s.loginGoldLine} />
+                  <h1 style={s.loginHeadline}>Run your business.<br />Reward your customers.</h1>
+                  <p style={s.loginDesc}>Manage employees, services, and analytics from your business portal.</p>
+                </div>
+              </div>
+          )}
+          <div style={{ ...s.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
+            {isMobile && <div style={s.mobileLoginBrand}>RewardsNow</div>}
+            <span style={s.loginPortalTag}>BUSINESS PORTAL</span>
+            <h2 style={s.loginTitle}>Owner Dashboard</h2>
+            <p style={s.loginSub}>Sign in with your business account</p>
+            <label style={s.loginLabel}>Email</label>
+            <input style={s.loginInput} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            <label style={s.loginLabel}>Password</label>
+            <input style={s.loginInput} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            {error && <p style={s.loginError}>{error}</p>}
+            <button style={s.loginBtn} onClick={handleLogin}>Sign In</button>
           </div>
-        )}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0C2640', width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-          {/* Teal top line on login card */}
-          <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
-          {isMobile && <div style={{ color: '#F2B84B', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' }}>Veniar</div>}
-          <span style={{ display: 'inline-block', background: 'rgba(11,92,173,0.3)', color: '#F2B84B', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' }}>BUSINESS PORTAL</span>
-          <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Owner Dashboard</h2>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', margin: '0 0 36px 0' }}>Sign in with your business account</p>
-          <label style={{ color: '#F2B84B', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' }}>Email</label>
-          <input className="vn-input" style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-          <label style={{ color: '#F2B84B', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' }}>Password</label>
-          <input className="vn-input" style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-          {error && <p style={{ color: '#e03434', fontSize: '13px', background: 'rgba(224,52,52,0.15)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(224,52,52,0.3)', margin: '0 0 14px 0' }}>{error}</p>}
-          <button style={{ padding: '16px', borderRadius: '12px', border: 'none', background: ROYAL, color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%' }} onClick={handleLogin}>Sign In</button>
         </div>
-      </div>
     );
   }
 
@@ -219,266 +203,323 @@ function BusinessOwnerDashboard() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: rootBg, fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' }}>
-      {/* Teal accent bar */}
-      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#061A2A', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <button style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }} onClick={() => navigate('/')}>Veniar</button>
-          {!isMobile && <span style={{ background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' }}>BUSINESS</span>}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {!isMobile && <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', fontWeight: '600' }}>{account?.username}</span>}
-          <button
-            onClick={toggleTheme}
-            style={{
-              padding: '5px 10px',
-              background: 'none',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'rgba(255,255,255,0.7)',
-              borderRadius: '6px',
-              fontSize: '11px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-            }}
-          >
-            {isDark ? '○' : '●'}
-          </button>
-          <button style={{ padding: '7px 14px', borderRadius: '8px', border: '1.5px solid rgba(255,255,255,0.2)', background: 'transparent', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', fontSize: '13px', fontWeight: '600' }} onClick={() => { setToken(null); setAccount(null); }}>Sign Out</button>
-        </div>
-      </div>
-
-      {isMobile && (
-        <div style={{ display: 'flex', background: mobileTabsBg, borderBottom: `1px solid ${borderColor}`, overflowX: 'auto', flexShrink: 0 }}>
-          {TABS.map(({ key, label }) => (
-            <button key={key} style={{ flexShrink: 0, padding: '12px 16px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', whiteSpace: 'nowrap', borderBottom: tab === key ? `2px solid ${ROYAL}` : '2px solid transparent', color: tab === key ? ROYAL : mutedColor, fontWeight: tab === key ? '700' : '400' }}
-                    onClick={() => setTab(key)}>
-              {label}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div style={{ display: 'flex', flex: 1, flexDirection: isMobile ? 'column' : 'row' }}>
-        {!isMobile && (
-          <div style={{ width: '190px', background: sidebarBg, borderRight: `1px solid ${borderColor}`, padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px', flexShrink: 0 }}>
-            {TABS.map(({ key, label }) => (
-              <button key={key}
-                      style={{ padding: '10px 14px', borderRadius: '10px', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'left', width: '100%', background: tab === key ? navActiveBg : 'transparent', color: tab === key ? ROYAL : mutedColor, fontWeight: tab === key ? '700' : '400' }}
-                      onClick={() => setTab(key)}>
-                {label}
-              </button>
-            ))}
+      <div style={s.container}>
+        <div style={s.topBar}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <button style={s.logo} onClick={() => navigate('/')}>RewardsNow</button>
+            {!isMobile && <span style={s.portalBadge}>BUSINESS</span>}
           </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {!isMobile && <span style={s.userName}>{account?.username}</span>}
+            <button style={s.logoutBtn} onClick={() => { setToken(null); setAccount(null); }}>Sign Out</button>
+          </div>
+        </div>
+
+        {isMobile && (
+            <div style={s.mobileTabs}>
+              {TABS.map(({ key, label }) => (
+                  <button key={key} style={{ ...s.mobileTab, borderBottom: tab === key ? `2px solid ${ROYAL}` : '2px solid transparent', color: tab === key ? ROYAL : '#888', fontWeight: tab === key ? '700' : '400' }}
+                          onClick={() => setTab(key)}>
+                    {label}
+                  </button>
+              ))}
+            </div>
         )}
 
-        <div style={{ flex: 1, overflowY: 'auto', minWidth: 0, padding: isMobile ? '16px' : '28px 32px' }}>
-          {msg && (
-            <div style={{ padding: '12px 16px', borderRadius: '10px', fontSize: '13px', fontWeight: '600', marginBottom: '20px', background: msgType === 'error' ? '#fdeaea' : '#e8f4ed', color: msgType === 'error' ? '#c0392b' : '#2e7d52' }}>
-              {msg}
-            </div>
-          )}
-
-          {tab === 'overview' && (
-            <>
-              <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: '0 0 16px 0' }}>Overview</h2>
-              <div style={{ background: cardBg, borderRadius: '16px', padding: '18px', border: `1px solid ${borderColor}`, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', gap: '12px', flexDirection: isMobile ? 'column' : 'row' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: ROYAL, color: '#fff', fontSize: '1.1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{account?.username?.charAt(0).toUpperCase()}</div>
-                  <div>
-                    <p style={{ color: textColor, fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' }}>{account?.username}</p>
-                    <p style={{ color: mutedColor, fontSize: '12px', margin: 0 }}>{account?.email}</p>
-                  </div>
-                </div>
-                <div style={{ padding: '7px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: '700', background: isApproved ? '#e8f4ed' : '#fff8e1', color: isApproved ? '#2e7d52' : '#e0a020', alignSelf: isMobile ? 'flex-start' : 'center' }}>
-                  {isApproved ? 'Active' : 'Pending Approval'}
-                </div>
+        <div style={{ ...s.body, flexDirection: isMobile ? 'column' : 'row' }}>
+          {!isMobile && (
+              <div style={s.sidebar}>
+                {TABS.map(({ key, label }) => (
+                    <button key={key}
+                            style={{ ...s.navBtn, background: tab === key ? '#eff6ff' : 'transparent', color: tab === key ? ROYAL : '#555', fontWeight: tab === key ? '700' : '400' }}
+                            onClick={() => setTab(key)}>
+                      {label}
+                    </button>
+                ))}
               </div>
-              {!isApproved ? (
-                <div style={{ background: isDark ? 'rgba(255,248,225,0.08)' : '#fff8e1', borderRadius: '14px', padding: '16px 18px', border: `1px solid ${isDark ? 'rgba(255,224,130,0.2)' : '#ffe082'}`, marginBottom: '16px' }}>
-                  <p style={{ color: isDark ? '#F2B84B' : '#7a5500', fontSize: '13px', fontWeight: '700', margin: '0 0 4px 0' }}>Your application is under review</p>
-                  <p style={{ color: isDark ? 'rgba(242,184,75,0.7)' : '#7a5500', fontSize: '12px', margin: 0, lineHeight: 1.6 }}>Our team will contact you by email once approved.</p>
-                </div>
-              ) : (
-                <div style={{ display: 'grid', gap: '12px', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
-                  {[
-                    { label: 'Analytics', sub: 'View points activity', key: 'stats' },
-                    { label: 'Employees', sub: 'Manage staff', key: 'employees' },
-                    { label: 'Services', sub: 'Manage menu', key: 'services' },
-                  ].map(item => (
-                    <div key={item.key} style={{ background: cardBg, borderRadius: '14px', padding: '18px', border: `1px solid ${borderColor}`, cursor: 'pointer' }} onClick={() => setTab(item.key)}>
-                      <p style={{ color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 4px 0' }}>{item.label}</p>
-                      <p style={{ color: mutedColor, fontSize: '12px', margin: 0 }}>{item.sub}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </>
           )}
 
-          {tab === 'stats' && (
-            <>
-              <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: '0 0 16px 0' }}>Analytics</h2>
-              {loading ? (
-                <div style={{ display: 'grid', gap: '12px', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
-                  {[1, 2, 3, 4].map(i => <Skeleton key={i} h={110} />)}
+          <div style={{ ...s.content, padding: isMobile ? '16px' : '28px 32px' }}>
+            {msg && (
+                <div style={{ ...s.banner, background: msgType === 'error' ? '#fdeaea' : '#e8f4ed', color: msgType === 'error' ? '#c0392b' : '#2e7d52' }}>
+                  {msg}
                 </div>
-              ) : !stats ? (
-                <div style={{ background: cardBg, borderRadius: '16px', padding: '40px 24px', textAlign: 'center', border: `1px solid ${borderColor}`, color: mutedColor }}><p>No data yet.</p></div>
-              ) : (
-                <div style={{ display: 'grid', gap: '12px', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
-                  {[
-                    { label: 'Points Issued Today', value: stats.pointsIssuedToday ?? 0, color: '#2e7d52', bg: isDark ? 'rgba(46,125,82,0.15)' : '#e8f4ed' },
-                    { label: 'Points Redeemed Today', value: stats.pointsRedeemedToday ?? 0, color: '#c0392b', bg: isDark ? 'rgba(192,57,43,0.15)' : '#fdeaea' },
-                    { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: isDark ? 'rgba(11,92,173,0.2)' : '#eff6ff' },
-                    { label: 'Total Customers', value: stats.totalCustomers ?? 0, color: isDark ? '#F2B84B' : '#7a5500', bg: isDark ? 'rgba(242,184,75,0.12)' : '#fff8e1' },
-                  ].map(stat => (
-                    <div key={stat.label} className="vn-stat vn-card" style={{ borderRadius: '14px', padding: '18px', border: `1px solid ${borderColor}`, background: stat.bg }}>
-                      <p style={{ fontWeight: '800', margin: '0 0 6px 0', lineHeight: 1, color: stat.color, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>{stat.value.toLocaleString()}</p>
-                      <p style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', margin: 0 }}>{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </>
-          )}
+            )}
 
-          {tab === 'employees' && (
-            <>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: 0 }}>Employees</h2>
-                {isApproved && (
-                  <button className="vn-btn" style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 }} onClick={() => setShowEmpForm(!showEmpForm)}>
-                    {showEmpForm ? 'Cancel' : '+ Add'}
-                  </button>
-                )}
-              </div>
-              {showEmpForm && (
-                <div style={{ background: isDark ? 'rgba(11,92,173,0.12)' : '#f0f4ff', borderRadius: '14px', padding: '18px', border: `1.5px solid rgba(11,92,173,0.2)`, marginBottom: '16px' }}>
-                  <h3 style={{ color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 14px 0' }}>New Employee</h3>
-                  <div style={{ display: 'flex', gap: '12px' }}>
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>First name</label>
-                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} autoComplete="given-name" value={empForm.firstName} onChange={e => setEmpForm({ ...empForm, firstName: e.target.value })} />
-                    </div>
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Last name</label>
-                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} autoComplete="family-name" value={empForm.lastName} onChange={e => setEmpForm({ ...empForm, lastName: e.target.value })} />
-                    </div>
-                  </div>
-                  <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Email</label>
-                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="off" value={empForm.email} onChange={e => setEmpForm({ ...empForm, email: e.target.value })} />
-                  <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Temporary password</label>
-                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="new-password" value={empForm.password} onChange={e => setEmpForm({ ...empForm, password: e.target.value })} />
-                  <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Role</label>
-                  <select style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} value={empForm.role} onChange={e => setEmpForm({ ...empForm, role: e.target.value })}>
-                    <option value="STAFF">Staff</option>
-                    <option value="MANAGER">Manager</option>
-                  </select>
-                  <button className="vn-btn" style={{ padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: saving ? 0.7 : 1 }} onClick={handleAddEmployee} disabled={saving}>
-                    {saving ? 'Adding...' : 'Add Employee'}
-                  </button>
-                </div>
-              )}
-              {loading ? [1, 2, 3].map(i => <Skeleton key={i} h={80} />) : employees.length === 0 ? (
-                <div style={{ background: cardBg, borderRadius: '16px', padding: '40px 24px', textAlign: 'center', border: `1px solid ${borderColor}`, color: mutedColor }}><p>No employees yet.</p></div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  {employees.map(emp => (
-                    <div key={emp.id} className="vn-card" style={{ background: cardBg, borderRadius: '14px', padding: '14px 16px', border: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: ROYAL, color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{emp.firstName?.charAt(0)?.toUpperCase()}</div>
-                      <div style={{ flex: 1, minWidth: '80px' }}>
-                        <p style={{ color: textColor, fontSize: '13px', fontWeight: '700', margin: '0 0 2px 0' }}>{emp.firstName} {emp.lastName}</p>
-                        <p style={{ color: mutedColor, fontSize: '11px', margin: '0 0 4px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{emp.email}</p>
-                        <span style={{ fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: emp.role === 'MANAGER' ? (isDark ? 'rgba(37,183,200,0.2)' : '#dbeafe') : (isDark ? 'rgba(11,92,173,0.2)' : '#eff6ff'), color: emp.role === 'MANAGER' ? '#25B7C8' : ROYAL }}>
-                          {emp.role}
-                        </span>
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px', flexShrink: 0 }}>
-                        <span style={{ fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px', background: emp.active ? '#e8f4ed' : '#fdeaea', color: emp.active ? '#2e7d52' : '#c0392b' }}>
-                          {emp.active ? 'Active' : 'Inactive'}
-                        </span>
-                        {emp.active && (
-                          <button style={{ padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }} onClick={() => handleDeactivate(emp.id)}>Deactivate</button>
-                        )}
+            {tab === 'overview' && (
+                <>
+                  <h2 style={s.pageTitle}>Overview</h2>
+                  <div style={{ ...s.statusCard, flexDirection: isMobile ? 'column' : 'row' }}>
+                    <div style={s.statusLeft}>
+                      <div style={s.bizInitial}>{account?.username?.charAt(0).toUpperCase()}</div>
+                      <div>
+                        <p style={s.statusName}>{account?.username}</p>
+                        <p style={s.statusEmail}>{account?.email}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </>
-          )}
-
-          {tab === 'services' && (
-            <>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: 0 }}>Services</h2>
-                {isApproved && (
-                  <button className="vn-btn" style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 }} onClick={() => { setEditingSvc(null); setSvcForm({ name: '', description: '', rewardsCost: '', rewardsGrant: '' }); setShowSvcForm(!showSvcForm); }}>
-                    {showSvcForm ? 'Cancel' : '+ Add'}
-                  </button>
-                )}
-              </div>
-              {showSvcForm && (
-                <div style={{ background: isDark ? 'rgba(11,92,173,0.12)' : '#f0f4ff', borderRadius: '14px', padding: '18px', border: `1.5px solid rgba(11,92,173,0.2)`, marginBottom: '16px' }}>
-                  <h3 style={{ color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 14px 0' }}>{editingSvc ? 'Edit Service' : 'New Service'}</h3>
-                  <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Service name</label>
-                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} placeholder="Large Latte" value={svcForm.name} onChange={e => setSvcForm({ ...svcForm, name: e.target.value })} />
-                  <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Description</label>
-                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} placeholder="16oz latte any flavor" value={svcForm.description} onChange={e => setSvcForm({ ...svcForm, description: e.target.value })} />
-                  <div style={{ display: 'flex', gap: '12px' }}>
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Points earned</label>
-                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="number" min="0" value={svcForm.rewardsGrant} onChange={e => setSvcForm({ ...svcForm, rewardsGrant: e.target.value })} />
-                    </div>
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Points to redeem</label>
-                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="number" min="0" value={svcForm.rewardsCost} onChange={e => setSvcForm({ ...svcForm, rewardsCost: e.target.value })} />
+                    <div style={{ padding: '7px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: '700', background: isApproved ? '#e8f4ed' : '#fff8e1', color: isApproved ? '#2e7d52' : '#e0a020', alignSelf: isMobile ? 'flex-start' : 'center' }}>
+                      {isApproved ? 'Active' : 'Pending Approval'}
                     </div>
                   </div>
-                  <button className="vn-btn" style={{ padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: saving ? 0.7 : 1 }} onClick={handleSaveService} disabled={saving}>
-                    {saving ? 'Saving...' : editingSvc ? 'Save Changes' : 'Add Service'}
-                  </button>
-                </div>
-              )}
-              {!isApproved && (
-                <div style={{ background: isDark ? 'rgba(255,248,225,0.08)' : '#fff8e1', borderRadius: '14px', padding: '16px 18px', border: `1px solid ${isDark ? 'rgba(255,224,130,0.2)' : '#ffe082'}`, marginBottom: '16px' }}>
-                  <p style={{ color: isDark ? '#F2B84B' : '#7a5500', fontSize: '13px', fontWeight: '700', margin: 0 }}>Business approval required before adding services.</p>
-                </div>
-              )}
-              {loading ? (
-                <div style={{ display: 'grid', gap: '12px', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>
-                  {[1, 2, 3].map(i => <Skeleton key={i} h={140} />)}
-                </div>
-              ) : services.length === 0 ? (
-                <div style={{ background: cardBg, borderRadius: '16px', padding: '40px 24px', textAlign: 'center', border: `1px solid ${borderColor}`, color: mutedColor }}><p>No services yet. Add your first menu item above.</p></div>
-              ) : (
-                <div style={{ display: 'grid', gap: '12px', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>
-                  {services.map(svc => (
-                    <div key={svc.id} style={{ background: cardBg, borderRadius: '14px', padding: '16px', border: `1px solid ${borderColor}` }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '6px' }}>
-                        <h3 style={{ color: textColor, fontSize: '14px', fontWeight: '700', margin: 0, wordBreak: 'break-word' }}>{svc.name}</h3>
-                        <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
-                          <button style={{ padding: '5px 10px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '11px', fontWeight: '600', cursor: 'pointer' }} onClick={() => handleEditService(svc)}>Edit</button>
-                          <button style={{ padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' }} onClick={() => handleDeleteService(svc.id)}>Delete</button>
+                  {!isApproved ? (
+                      <div style={s.pendingNote}>
+                        <p style={s.pendingTitle}>Your application is under review</p>
+                        <p style={s.pendingSub}>Our team typically responds within 24-48 hours.</p>
+                      </div>
+                  ) : (
+                      <div style={{ ...s.quickGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
+                        {[
+                          { label: 'Analytics', sub: 'View points activity', key: 'stats' },
+                          { label: 'Employees', sub: 'Manage staff', key: 'employees' },
+                          { label: 'Services', sub: 'Manage menu', key: 'services' },
+                        ].map(item => (
+                            <div key={item.key} style={s.quickCard} onClick={() => setTab(item.key)}>
+                              <p style={s.quickLabel}>{item.label}</p>
+                              <p style={s.quickSub}>{item.sub}</p>
+                            </div>
+                        ))}
+                      </div>
+                  )}
+                </>
+            )}
+
+            {tab === 'stats' && (
+                <>
+                  <h2 style={s.pageTitle}>Analytics</h2>
+                  {loading ? (
+                      <div style={{ ...s.statsGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
+                        {[1, 2, 3, 4].map(i => <Skeleton key={i} h={110} />)}
+                      </div>
+                  ) : !stats ? (
+                      <div style={s.empty}><p>No data yet.</p></div>
+                  ) : (
+                      <div style={{ ...s.statsGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(180px, 1fr))' }}>
+                        {[
+                          { label: 'Points Issued Today', value: stats.pointsIssuedToday ?? 0, color: '#2e7d52', bg: '#e8f4ed' },
+                          { label: 'Points Redeemed Today', value: stats.pointsRedeemedToday ?? 0, color: '#c0392b', bg: '#fdeaea' },
+                          { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: '#eff6ff' },
+                          { label: 'Total Customers', value: stats.totalCustomers ?? 0, color: '#7a5500', bg: '#fff8e1' },
+                        ].map(stat => (
+                            <div key={stat.label} style={{ ...s.statCard, background: stat.bg }}>
+                              <p style={{ ...s.statValue, color: stat.color, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>{stat.value.toLocaleString()}</p>
+                              <p style={s.statLabel}>{stat.label}</p>
+                            </div>
+                        ))}
+                      </div>
+                  )}
+                </>
+            )}
+
+            {tab === 'employees' && (
+                <>
+                  <div style={s.tabHeader}>
+                    <h2 style={s.pageTitle}>Employees</h2>
+                    {isApproved && (
+                        <button style={s.addBtn} onClick={() => setShowEmpForm(!showEmpForm)}>
+                          {showEmpForm ? 'Cancel' : '+ Add'}
+                        </button>
+                    )}
+                  </div>
+                  {showEmpForm && (
+                      <div style={s.formCard}>
+                        <h3 style={s.formTitle}>New Employee</h3>
+                        <div style={s.formRow}>
+                          <div style={s.formHalf}>
+                            <label style={s.label}>First name</label>
+                            <input style={s.input} autoComplete="given-name" value={empForm.firstName} onChange={e => setEmpForm({ ...empForm, firstName: e.target.value })} />
+                          </div>
+                          <div style={s.formHalf}>
+                            <label style={s.label}>Last name</label>
+                            <input style={s.input} autoComplete="family-name" value={empForm.lastName} onChange={e => setEmpForm({ ...empForm, lastName: e.target.value })} />
+                          </div>
                         </div>
+                        <label style={s.label}>Email</label>
+                        <input style={s.input} type="email" autoComplete="off" value={empForm.email} onChange={e => setEmpForm({ ...empForm, email: e.target.value })} />
+                        <label style={s.label}>Temporary password</label>
+                        <input style={s.input} type="password" autoComplete="new-password" value={empForm.password} onChange={e => setEmpForm({ ...empForm, password: e.target.value })} />
+                        <label style={s.label}>Role</label>
+                        <select style={s.input} value={empForm.role} onChange={e => setEmpForm({ ...empForm, role: e.target.value })}>
+                          <option value="STAFF">Staff</option>
+                          <option value="MANAGER">Manager</option>
+                        </select>
+                        <button style={{ ...s.btn, opacity: saving ? 0.7 : 1 }} onClick={handleAddEmployee} disabled={saving}>
+                          {saving ? 'Adding...' : 'Add Employee'}
+                        </button>
                       </div>
-                      <p style={{ color: mutedColor, fontSize: '12px', margin: '0 0 12px 0', lineHeight: 1.5 }}>{svc.description}</p>
-                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', borderTop: tableBorder, paddingTop: '10px' }}>
-                        <span style={{ background: '#e8f4ed', color: '#2e7d52', fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' }}>+{svc.rewardsGrant} pts earned</span>
-                        <span style={{ background: isDark ? 'rgba(11,92,173,0.2)' : '#eff6ff', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' }}>{svc.rewardsCost} pts to redeem</span>
+                  )}
+                  {loading ? [1, 2, 3].map(i => <Skeleton key={i} h={80} />) : employees.length === 0 ? (
+                      <div style={s.empty}><p>No employees yet.</p></div>
+                  ) : (
+                      <div style={s.empList}>
+                        {employees.map(emp => (
+                            <div key={emp.id} style={s.empCard}>
+                              <div style={s.empAvatar}>{emp.firstName?.charAt(0)?.toUpperCase()}</div>
+                              <div style={s.empInfo}>
+                                <p style={s.empName}>{emp.firstName} {emp.lastName}</p>
+                                <p style={s.empEmail}>{emp.email}</p>
+                                <span style={{ ...s.roleBadge, background: emp.role === 'MANAGER' ? '#dbeafe' : '#eff6ff', color: emp.role === 'MANAGER' ? '#6b21a8' : ROYAL }}>
+                                  {emp.role}
+                                </span>
+                              </div>
+                              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px', flexShrink: 0 }}>
+                                <span style={{ fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px', background: emp.active ? '#e8f4ed' : '#fdeaea', color: emp.active ? '#2e7d52' : '#c0392b' }}>
+                                  {emp.active ? 'Active' : 'Inactive'}
+                                </span>
+                                {emp.active && (
+                                    <button style={s.deactivateBtn} onClick={() => handleDeactivate(emp.id)}>Deactivate</button>
+                                )}
+                              </div>
+                            </div>
+                        ))}
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </>
-          )}
+                  )}
+                </>
+            )}
+
+            {tab === 'services' && (
+                <>
+                  <div style={s.tabHeader}>
+                    <h2 style={s.pageTitle}>Services</h2>
+                    {isApproved && (
+                        <button style={s.addBtn} onClick={() => { setEditingSvc(null); setSvcForm({ name: '', description: '', rewardsCost: '', rewardsGrant: '' }); setShowSvcForm(!showSvcForm); }}>
+                          {showSvcForm ? 'Cancel' : '+ Add'}
+                        </button>
+                    )}
+                  </div>
+                  {showSvcForm && (
+                      <div style={s.formCard}>
+                        <h3 style={s.formTitle}>{editingSvc ? 'Edit Service' : 'New Service'}</h3>
+                        <label style={s.label}>Service name</label>
+                        <input style={s.input} placeholder="Large Latte" value={svcForm.name} onChange={e => setSvcForm({ ...svcForm, name: e.target.value })} />
+                        <label style={s.label}>Description</label>
+                        <input style={s.input} placeholder="16oz latte any flavor" value={svcForm.description} onChange={e => setSvcForm({ ...svcForm, description: e.target.value })} />
+                        <div style={s.formRow}>
+                          <div style={s.formHalf}>
+                            <label style={s.label}>Points earned</label>
+                            <input style={s.input} type="number" min="0" value={svcForm.rewardsGrant} onChange={e => setSvcForm({ ...svcForm, rewardsGrant: e.target.value })} />
+                          </div>
+                          <div style={s.formHalf}>
+                            <label style={s.label}>Points to redeem</label>
+                            <input style={s.input} type="number" min="0" value={svcForm.rewardsCost} onChange={e => setSvcForm({ ...svcForm, rewardsCost: e.target.value })} />
+                          </div>
+                        </div>
+                        <button style={{ ...s.btn, opacity: saving ? 0.7 : 1 }} onClick={handleSaveService} disabled={saving}>
+                          {saving ? 'Saving...' : editingSvc ? 'Save Changes' : 'Add Service'}
+                        </button>
+                      </div>
+                  )}
+                  {!isApproved && <div style={s.pendingNote}><p style={s.pendingTitle}>Business approval required before adding services.</p></div>}
+                  {loading ? (
+                      <div style={{ ...s.svcGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>
+                        {[1, 2, 3].map(i => <Skeleton key={i} h={140} />)}
+                      </div>
+                  ) : services.length === 0 ? (
+                      <div style={s.empty}><p>No services yet. Add your first menu item above.</p></div>
+                  ) : (
+                      <div style={{ ...s.svcGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>
+                        {services.map(svc => (
+                            <div key={svc.id} style={s.svcCard}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '6px' }}>
+                                <h3 style={s.svcName}>{svc.name}</h3>
+                                <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
+                                  <button style={s.editBtn} onClick={() => handleEditService(svc)}>Edit</button>
+                                  <button style={s.deleteBtn} onClick={() => handleDeleteService(svc.id)}>Delete</button>
+                                </div>
+                              </div>
+                              <p style={s.svcDesc}>{svc.description}</p>
+                              <div style={s.svcFooter}>
+                                <span style={s.earnPill}>+{svc.rewardsGrant} pts earned</span>
+                                <span style={s.redeemPill}>{svc.rewardsCost} pts to redeem</span>
+                              </div>
+                            </div>
+                        ))}
+                      </div>
+                  )}
+                </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
   );
 }
+
+const s = {
+  loginLeft: { flex: 1, background: '#08011a', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
+  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.55)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
+  loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.3)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
+  loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'rgba(217, 70, 239, 0.25)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  loginLeftContent: { position: 'relative', zIndex: 2 },
+  loginBrandBadge: { color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
+  loginGoldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
+  loginHeadline: { color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
+  loginDesc: { color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
+  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#f0f7ff' },
+  mobileLoginBrand: { color: '#2563eb', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
+  loginPortalTag: { display: 'inline-block', background: '#bfdbfe', color: '#2563eb', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' },
+  loginTitle: { color: '#0f172a', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  loginSub: { color: '#64748b', fontSize: '1rem', margin: '0 0 36px 0' },
+  loginLabel: { color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid #bfdbfe', background: '#fff', color: '#0f172a', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
+  loginError: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
+  label: { color: '#374151', fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' },
+  input: { padding: '10px 14px', borderRadius: '8px', border: '1.5px solid #e5e7eb', background: '#fff', color: '#0f172a', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  btn: { padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%' },
+  error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
+  container: { minHeight: '100vh', background: '#f0f7ff', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #eee', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
+  logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
+  portalBadge: { background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
+  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #e0e0e0', background: 'transparent', color: '#666', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
+  userName: { color: '#555', fontSize: '13px', fontWeight: '600' },
+  mobileTabs: { display: 'flex', background: '#fff', borderBottom: '1px solid #eee', overflowX: 'auto', flexShrink: 0 },
+  mobileTab: { flexShrink: 0, padding: '12px 16px', background: 'none', border: 'none', fontSize: '13px', cursor: 'pointer', whiteSpace: 'nowrap' },
+  body: { display: 'flex', flex: 1 },
+  sidebar: { width: '190px', background: '#fff', borderRight: '1px solid #eee', padding: '20px 10px', display: 'flex', flexDirection: 'column', gap: '4px', flexShrink: 0 },
+  navBtn: { padding: '10px 14px', borderRadius: '10px', border: 'none', fontSize: '13px', cursor: 'pointer', textAlign: 'left', width: '100%', transition: 'all 0.15s' },
+  content: { flex: 1, overflowY: 'auto', minWidth: 0 },
+  banner: { padding: '12px 16px', borderRadius: '10px', fontSize: '13px', fontWeight: '600', marginBottom: '20px' },
+  pageTitle: { color: '#111', fontSize: '1.2rem', fontWeight: '700', margin: 0 },
+  tabHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' },
+  addBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 },
+  empty: { background: '#fff', borderRadius: '16px', padding: '40px 24px', textAlign: 'center', border: '1px solid #eee', color: '#888' },
+  statusCard: { background: '#fff', borderRadius: '16px', padding: '18px', border: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', gap: '12px' },
+  statusLeft: { display: 'flex', alignItems: 'center', gap: '12px' },
+  bizInitial: { width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  statusName: { color: '#111', fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' },
+  statusEmail: { color: '#888', fontSize: '12px', margin: 0 },
+  pendingNote: { background: '#fff8e1', borderRadius: '14px', padding: '16px 18px', border: '1px solid #ffe082', marginBottom: '16px' },
+  pendingTitle: { color: '#7a5500', fontSize: '13px', fontWeight: '700', margin: '0 0 4px 0' },
+  pendingSub: { color: '#7a5500', fontSize: '12px', margin: 0, lineHeight: 1.6 },
+  quickGrid: { display: 'grid', gap: '12px' },
+  quickCard: { background: '#fff', borderRadius: '14px', padding: '18px', border: '1px solid #eee', cursor: 'pointer' },
+  quickLabel: { color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 4px 0' },
+  quickSub: { color: '#888', fontSize: '12px', margin: 0 },
+  statsGrid: { display: 'grid', gap: '12px' },
+  statCard: { borderRadius: '14px', padding: '18px', border: '1px solid #eee' },
+  statValue: { fontWeight: '800', margin: '0 0 6px 0', lineHeight: 1 },
+  statLabel: { color: '#555', fontSize: '12px', fontWeight: '600', margin: 0 },
+  formCard: { background: '#eff6ff', borderRadius: '14px', padding: '18px', border: '1.5px solid #e8ecff', marginBottom: '16px' },
+  formTitle: { color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 14px 0' },
+  formRow: { display: 'flex', gap: '12px' },
+  formHalf: { flex: 1, display: 'flex', flexDirection: 'column' },
+  empList: { display: 'flex', flexDirection: 'column', gap: '10px' },
+  empCard: { background: '#fff', borderRadius: '14px', padding: '14px 16px', border: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '12px' },
+  empAvatar: { width: '38px', height: '38px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  empInfo: { flex: 1, minWidth: '80px' },
+  empName: { color: '#111', fontSize: '13px', fontWeight: '700', margin: '0 0 2px 0' },
+  empEmail: { color: '#888', fontSize: '11px', margin: '0 0 4px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  roleBadge: { fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
+  deactivateBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  svcGrid: { display: 'grid', gap: '12px' },
+  svcCard: { background: '#fff', borderRadius: '14px', padding: '16px', border: '1px solid #eee' },
+  svcName: { color: '#111', fontSize: '14px', fontWeight: '700', margin: 0, wordBreak: 'break-word' },
+  svcDesc: { color: '#888', fontSize: '12px', margin: '0 0 12px 0', lineHeight: 1.5 },
+  svcFooter: { display: 'flex', gap: '8px', flexWrap: 'wrap' },
+  earnPill: { background: '#e8f4ed', color: '#2e7d52', fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' },
+  redeemPill: { background: '#eff6ff', color: ROYAL, fontSize: '11px', fontWeight: '700', padding: '4px 10px', borderRadius: '20px' },
+  editBtn: { padding: '5px 10px', borderRadius: '8px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+  deleteBtn: { padding: '5px 10px', borderRadius: '8px', border: '1.5px solid #ffd0d0', background: 'transparent', color: '#c0392b', fontSize: '11px', fontWeight: '600', cursor: 'pointer' },
+};
 
 export default BusinessOwnerDashboard;

@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
-import { useTheme } from './ThemeContext';
+
+const BLUE = '#2563eb';
 
 const CATEGORY_LABELS = {
   food: 'Food & Drink',
@@ -17,7 +18,6 @@ const PRICE_SYMBOLS = ['', '$', '$$', '$$$', '$$$$'];
 
 export default function BusinessList({ customer, onLogout, onSelectBusiness, onNavigate }) {
   const isMobile = useIsMobile();
-  const { isDark, toggleTheme } = useTheme();
   const [businesses, setBusinesses] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
@@ -112,438 +112,153 @@ export default function BusinessList({ customer, onLogout, onSelectBusiness, onN
     fetchAll();
   };
 
-  const s = getStyles(isDark);
-
   return (
-    <div style={s.root}>
-      {/* 3px teal accent bar */}
-      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
+      <div style={s.root}>
+        <div style={s.orb1} />
+        <div style={s.orb2} />
 
-      <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
-        <button style={s.navBrand} onClick={() => onNavigate('/home')}>Veniar</button>
-        <div style={s.navRight}>
-          <button style={s.navLink} onClick={() => onNavigate('/home')}>Home</button>
-          <button style={s.navLink} onClick={() => onNavigate('/map')}>Map</button>
-          <button
-            onClick={toggleTheme}
-            style={{
-              padding: '5px 10px',
-              background: 'none',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'rgba(255,255,255,0.7)',
-              borderRadius: '6px',
-              fontSize: '11px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-            }}
-          >
-            {isDark ? '○' : '●'}
-          </button>
-          <button style={s.navLogout} onClick={onLogout}>Sign out</button>
-        </div>
-      </nav>
-
-      <div style={{ ...s.body, padding: isMobile ? '20px 16px' : '40px 24px' }}>
-        <div style={s.header}>
-          <div>
-            <h1 className="vn-fade-up" style={{ ...s.title, fontSize: isMobile ? '1.3rem' : '1.5rem' }}>Partner businesses</h1>
-            <p style={s.subtitle}>
-              {aiSummary || 'Earn points at every location below'}
-            </p>
+        <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
+          <button style={s.navBrand} onClick={() => onNavigate('/home')}>RewardsNow</button>
+          <div style={s.navRight}>
+            <button style={s.navLink} onClick={() => onNavigate('/home')}>Home</button>
+            <button style={s.navLink} onClick={() => onNavigate('/map')}>Map</button>
+            <button style={s.navLogout} onClick={onLogout}>Sign out</button>
           </div>
-        </div>
+        </nav>
 
-        {/* Horizontal accent line */}
-        <div style={s.accentLine} />
-
-        <div style={s.searchWrap}>
-          <span style={s.searchIcon}>⌕</span>
-          <input
-            style={s.searchInput}
-            type="text"
-            placeholder={aiMode ? "Describe what you're looking for…" : 'Search businesses…'}
-            value={search}
-            onChange={handleSearch}
-            onKeyDown={e => aiMode && e.key === 'Enter' && handleAiSearch()}
-            autoComplete="off"
-          />
-          {searching && (
-            <span style={s.searchSpinner}>{aiMode ? 'AI searching…' : 'Searching…'}</span>
-          )}
-          {aiMode && !searching && search && (
-            <button style={s.aiSearchBtn} onClick={handleAiSearch}>Search</button>
-          )}
-          {search && !searching && (
-            <button style={s.clearBtn} onClick={clearSearch}>Clear</button>
-          )}
-          <button
-            style={{ ...s.aiToggleBtn, ...(aiMode ? s.aiToggleBtnActive : {}) }}
-            onClick={toggleAiMode}
-            title="Toggle AI natural language search"
-          >
-            AI
-          </button>
-        </div>
-
-        {loading ? (
-          <div style={{ ...s.grid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))' }}>
-            {[1, 2, 3, 4, 5, 6].map(i => <div key={i} style={s.skeleton} />)}
+        <div style={{ ...s.body, padding: isMobile ? '20px 16px' : '40px 24px' }}>
+          <div style={s.header}>
+            <div>
+              <h1 style={{ ...s.title, fontSize: isMobile ? '1.3rem' : '1.5rem' }}>Partner businesses</h1>
+              <p style={s.subtitle}>
+                {aiSummary || 'Earn points at every location below'}
+              </p>
+            </div>
           </div>
-        ) : businesses.length === 0 ? (
-          <div style={s.empty}>
-            <p style={s.emptyTitle}>No businesses found</p>
-            {search && (
-              <button style={s.emptyAction} onClick={clearSearch}>Clear search</button>
+
+          <div style={s.searchWrap}>
+            <span style={s.searchIcon}>⌕</span>
+            <input
+                style={s.searchInput}
+                type="text"
+                placeholder={aiMode ? "Describe what you're looking for…" : 'Search businesses…'}
+                value={search}
+                onChange={handleSearch}
+                onKeyDown={e => aiMode && e.key === 'Enter' && handleAiSearch()}
+                autoComplete="off"
+            />
+            {searching && <span style={s.searchSpinner}>{aiMode ? 'AI searching…' : 'Searching…'}</span>}
+            {aiMode && !searching && search && (
+                <button style={s.aiSearchBtn} onClick={handleAiSearch}>Search</button>
             )}
+            {search && !searching && (
+                <button style={s.clearBtn} onClick={clearSearch}>Clear</button>
+            )}
+            <button
+                style={{ ...s.aiToggleBtn, ...(aiMode ? s.aiToggleBtnActive : {}) }}
+                onClick={toggleAiMode}
+                title="Toggle AI natural language search"
+            >
+              AI
+            </button>
           </div>
-        ) : (
-          <div style={{ ...s.grid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(280px, 1fr))' }}>
-            {businesses.map(biz => (
-              <BizCard
-                key={biz.id}
-                biz={biz}
-                isMobile={isMobile}
-                s={s}
-                onSelectBusiness={onSelectBusiness}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
-function BizCard({ biz, isMobile, s, onSelectBusiness }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      className="vn-card"
-      style={{
-        ...s.card,
-        ...(biz.featured ? s.cardFeatured : {}),
-        borderColor: hovered
-          ? '#25B7C8'
-          : biz.featured
-          ? '#F2B84B'
-          : s.card.borderColor,
-      }}
-      onClick={() => onSelectBusiness(biz)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div style={s.cardHeader}>
-        <div style={s.avatar}>{biz.name.charAt(0).toUpperCase()}</div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
-          {biz.featured
-            ? <span style={s.featuredTag}>⭐ Featured</span>
-            : biz.paidPartner
-            ? <span style={s.featuredTag}>Featured</span>
-            : null}
-          {biz.priceRange > 0 && (
-            <span style={s.priceTag}>{PRICE_SYMBOLS[biz.priceRange] || ''}</span>
+          {loading ? (
+              <div style={{ ...s.grid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+                {[1, 2, 3, 4, 5, 6].map(i => <div key={i} style={s.skeleton} />)}
+              </div>
+          ) : businesses.length === 0 ? (
+              <div style={s.empty}>
+                <p style={s.emptyTitle}>No businesses found</p>
+                {search && <button style={s.emptyAction} onClick={clearSearch}>Clear search</button>}
+              </div>
+          ) : (
+              <div style={{ ...s.grid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+                {businesses.map(biz => (
+                    <div key={biz.id}
+                         style={{ ...s.card, ...(biz.featured ? s.cardFeatured : {}) }}
+                         onClick={() => onSelectBusiness(biz)}>
+                      <div style={s.cardHeader}>
+                        <div style={s.avatar}>{biz.name.charAt(0).toUpperCase()}</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+                          {biz.featured
+                              ? <span style={s.featuredTag}>⭐ Featured</span>
+                              : biz.paidPartner
+                                  ? <span style={s.featuredTag}>Featured</span>
+                                  : null}
+                          {biz.priceRange > 0 && (
+                              <span style={s.priceTag}>{PRICE_SYMBOLS[biz.priceRange] || ''}</span>
+                          )}
+                        </div>
+                      </div>
+                      <h3 style={{ ...s.bizName, fontSize: isMobile ? '14px' : '15px' }}>{biz.name}</h3>
+                      <p style={s.bizAddr}>{biz.address || 'Address not listed'}</p>
+                      <div style={s.cardFooter}>
+                        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', flex: 1 }}>
+                          {biz.category && (
+                              <span style={s.categoryTag}>{CATEGORY_LABELS[biz.category] || biz.category}</span>
+                          )}
+                          <span style={{ ...s.typeTag, ...(biz.uniqueRewardsPoint ? s.typeTagCustom : {}) }}>
+                            {biz.uniqueRewardsPoint ? 'Custom' : 'RN Points'}
+                          </span>
+                        </div>
+                        <span style={s.arrow}>→</span>
+                      </div>
+                      {biz.tags && (
+                          <div style={s.tagsRow}>
+                            {biz.tags.split(',').map(t => t.trim()).filter(Boolean).slice(0, 3).map(t => (
+                                <span key={t} style={s.tagChip}>{t}</span>
+                            ))}
+                          </div>
+                      )}
+                    </div>
+                ))}
+              </div>
           )}
         </div>
       </div>
-      <h3 style={{ ...s.bizName, fontSize: isMobile ? '14px' : '15px' }}>{biz.name}</h3>
-      <p style={s.bizAddr}>{biz.address || 'Address not listed'}</p>
-      <div style={s.cardFooter}>
-        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', flex: 1 }}>
-          {biz.category && (
-            <span style={s.categoryTag}>{CATEGORY_LABELS[biz.category] || biz.category}</span>
-          )}
-          <span style={{ ...s.typeTag, ...(biz.uniqueRewardsPoint ? s.typeTagCustom : {}) }}>
-            {biz.uniqueRewardsPoint ? 'Custom' : 'RN Points'}
-          </span>
-        </div>
-        <span style={s.arrow}>→</span>
-      </div>
-      {biz.tags && (
-        <div style={s.tagsRow}>
-          {biz.tags.split(',').map(t => t.trim()).filter(Boolean).slice(0, 3).map(t => (
-            <span key={t} style={s.tagChip}>{t}</span>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
 
-function getStyles(isDark) {
-  return {
-    root: {
-      minHeight: '100vh',
-      background: isDark ? '#061A2A' : '#FFF8EA',
-      fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-      position: 'relative',
-    },
-    nav: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      height: '60px',
-      background: '#061A2A',
-      borderBottom: '1px solid rgba(255,255,255,0.08)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-    },
-    navBrand: {
-      color: '#F2B84B',
-      fontSize: '15px',
-      fontWeight: '800',
-      letterSpacing: '-0.01em',
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      padding: 0,
-      fontFamily: 'inherit',
-    },
-    navRight: { display: 'flex', alignItems: 'center', gap: '4px' },
-    navLink: {
-      background: 'none',
-      border: 'none',
-      color: 'rgba(255,255,255,0.65)',
-      fontSize: '14px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      padding: '6px 8px',
-      borderRadius: '6px',
-      fontFamily: 'inherit',
-    },
-    navLogout: {
-      background: 'none',
-      border: '1px solid rgba(255,255,255,0.2)',
-      color: '#fff',
-      fontSize: '13px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      padding: '6px 12px',
-      borderRadius: '6px',
-      fontFamily: 'inherit',
-    },
-    body: { maxWidth: '1100px', margin: '0 auto', boxSizing: 'border-box' },
-    header: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-end',
-      marginBottom: '12px',
-    },
-    title: {
-      color: isDark ? '#ffffff' : '#061A2A',
-      fontWeight: '800',
-      margin: '0 0 4px',
-      letterSpacing: '-0.02em',
-    },
-    subtitle: {
-      color: isDark ? 'rgba(255,255,255,0.55)' : '#5F6B73',
-      fontSize: '14px',
-      margin: 0,
-    },
-    accentLine: {
-      height: '1px',
-      background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)',
-      margin: '0 0 20px',
-    },
-    searchWrap: {
-      position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      background: isDark ? 'rgba(255,255,255,0.07)' : '#ffffff',
-      border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'}`,
-      borderRadius: '10px',
-      padding: '0 14px',
-      marginBottom: '20px',
-      gap: '8px',
-    },
-    searchIcon: { color: '#1565C4', fontSize: '18px', lineHeight: 1 },
-    searchInput: {
-      flex: 1,
-      border: 'none',
-      outline: 'none',
-      padding: '11px 0',
-      fontSize: '14px',
-      color: isDark ? '#ffffff' : '#101820',
-      background: 'transparent',
-    },
-    searchSpinner: {
-      color: isDark ? 'rgba(255,255,255,0.4)' : '#9ca3af',
-      fontSize: '12px',
-      whiteSpace: 'nowrap',
-    },
-    clearBtn: {
-      background: 'none',
-      border: 'none',
-      color: isDark ? 'rgba(255,255,255,0.4)' : '#9ca3af',
-      fontSize: '12px',
-      cursor: 'pointer',
-      padding: '4px 8px',
-      borderRadius: '4px',
-      fontFamily: 'inherit',
-    },
-    aiSearchBtn: {
-      background: '#25B7C8',
-      border: 'none',
-      color: '#fff',
-      fontSize: '12px',
-      fontWeight: '700',
-      cursor: 'pointer',
-      padding: '5px 10px',
-      borderRadius: '6px',
-      fontFamily: 'inherit',
-      whiteSpace: 'nowrap',
-    },
-    aiToggleBtn: {
-      background: 'none',
-      border: `1.5px solid ${isDark ? 'rgba(255,255,255,0.2)' : '#d1d5db'}`,
-      color: isDark ? 'rgba(255,255,255,0.45)' : '#9ca3af',
-      fontSize: '11px',
-      fontWeight: '700',
-      cursor: 'pointer',
-      padding: '4px 8px',
-      borderRadius: '6px',
-      fontFamily: 'inherit',
-      letterSpacing: '0.05em',
-      flexShrink: 0,
-    },
-    aiToggleBtnActive: {
-      background: '#25B7C8',
-      border: '1.5px solid #25B7C8',
-      color: '#fff',
-    },
-    grid: { display: 'grid', gap: '12px' },
-    skeleton: {
-      height: '180px',
-      borderRadius: '8px',
-      background: isDark ? 'rgba(255,255,255,0.06)' : '#f0f0f0',
-    },
-    card: {
-      background: isDark ? '#0C2640' : '#ffffff',
-      border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
-      borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
-      borderRadius: '8px',
-      padding: '16px',
-      cursor: 'pointer',
-      transition: 'border-color 0.15s',
-      boxShadow: 'none',
-    },
-    cardFeatured: {
-      border: '2px solid #F2B84B',
-      borderColor: '#F2B84B',
-    },
-    cardHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      marginBottom: '12px',
-    },
-    avatar: {
-      width: '40px',
-      height: '40px',
-      borderRadius: '10px',
-      background: '#1565C4',
-      color: '#fff',
-      fontSize: '1.1rem',
-      fontWeight: '700',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    featuredTag: {
-      background: '#F2B84B',
-      color: '#061A2A',
-      fontSize: '10px',
-      fontWeight: '700',
-      padding: '3px 6px',
-      borderRadius: '6px',
-    },
-    priceTag: {
-      background: isDark ? 'rgba(255,255,255,0.08)' : '#f0fdf4',
-      color: isDark ? 'rgba(255,255,255,0.6)' : '#166534',
-      fontSize: '11px',
-      fontWeight: '700',
-      padding: '2px 6px',
-      borderRadius: '6px',
-    },
-    bizName: {
-      color: isDark ? '#ffffff' : '#101820',
-      fontWeight: '700',
-      margin: '0 0 4px',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
-    },
-    bizAddr: {
-      color: isDark ? 'rgba(255,255,255,0.4)' : '#9ca3af',
-      fontSize: '12px',
-      margin: '0 0 12px',
-      overflow: 'hidden',
-      display: '-webkit-box',
-      WebkitLineClamp: 2,
-      WebkitBoxOrient: 'vertical',
-    },
-    cardFooter: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    typeTag: {
-      background: 'rgba(37,183,200,0.15)',
-      color: '#25B7C8',
-      border: '1px solid rgba(37,183,200,0.25)',
-      fontSize: '11px',
-      fontWeight: '600',
-      padding: '3px 8px',
-      borderRadius: '6px',
-    },
-    typeTagCustom: {
-      background: isDark ? 'rgba(242,184,75,0.15)' : '#fef3c7',
-      color: isDark ? '#F2B84B' : '#b45309',
-      border: isDark ? '1px solid rgba(242,184,75,0.25)' : '1px solid #fcd34d',
-    },
-    categoryTag: {
-      background: 'rgba(37,183,200,0.15)',
-      color: '#25B7C8',
-      border: '1px solid rgba(37,183,200,0.25)',
-      fontSize: '11px',
-      fontWeight: '600',
-      padding: '3px 8px',
-      borderRadius: '6px',
-    },
-    tagsRow: { display: 'flex', gap: '4px', flexWrap: 'wrap', marginTop: '8px' },
-    tagChip: {
-      background: isDark ? 'rgba(255,255,255,0.07)' : '#f1f5f9',
-      color: isDark ? 'rgba(255,255,255,0.5)' : '#475569',
-      fontSize: '10px',
-      padding: '2px 6px',
-      borderRadius: '4px',
-    },
-    arrow: { color: '#1565C4', fontSize: '14px' },
-    empty: {
-      background: isDark ? '#0C2640' : '#ffffff',
-      border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
-      borderRadius: '12px',
-      padding: '60px 24px',
-      textAlign: 'center',
-    },
-    emptyTitle: {
-      color: isDark ? '#ffffff' : '#061A2A',
-      fontSize: '15px',
-      fontWeight: '600',
-      margin: '0 0 12px',
-    },
-    emptyAction: {
-      background: 'none',
-      border: `1px solid ${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)'}`,
-      color: isDark ? '#fff' : '#061A2A',
-      fontSize: '13px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      padding: '8px 16px',
-      borderRadius: '8px',
-      fontFamily: 'inherit',
-    },
-  };
-}
+const s = {
+  root: { minHeight: '100vh', background: 'linear-gradient(160deg, #0f172a 0%, #1e3a8a 100%)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", position: 'relative', overflow: 'hidden' },
+  orb1: { position: 'fixed', top: '-80px', right: '10%', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(37, 99, 235, 0.3)', filter: 'blur(80px)', zIndex: 0, pointerEvents: 'none' },
+  orb2: { position: 'fixed', bottom: '-60px', left: '15%', width: '350px', height: '350px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.15)', filter: 'blur(70px)', zIndex: 0, pointerEvents: 'none' },
+  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: 'rgba(15,23,42,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 12px rgba(0,0,0,0.2)' },
+  navBrand: { color: '#f59e0b', fontSize: '15px', fontWeight: '800', letterSpacing: '-0.01em', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
+  navRight: { display: 'flex', alignItems: 'center', gap: '4px' },
+  navLink: { background: 'none', border: 'none', color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontWeight: '500', cursor: 'pointer', padding: '6px 8px', borderRadius: '6px', fontFamily: 'inherit' },
+  navLogout: { background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px', fontFamily: 'inherit' },
+  body: { maxWidth: '1100px', margin: '0 auto', boxSizing: 'border-box' },
+  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px' },
+  title: { color: '#fff', fontWeight: '800', margin: '0 0 4px', letterSpacing: '-0.02em' },
+  subtitle: { color: 'rgba(255,255,255,0.6)', fontSize: '14px', margin: 0 },
+  searchWrap: { position: 'relative', display: 'flex', alignItems: 'center', background: '#fff', border: 'none', borderRadius: '10px', padding: '0 14px', marginBottom: '20px', gap: '8px', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' },
+  searchIcon: { color: '#60a5fa', fontSize: '18px', lineHeight: 1 },
+  searchInput: { flex: 1, border: 'none', outline: 'none', padding: '11px 0', fontSize: '14px', color: '#0f172a', background: 'transparent' },
+  searchSpinner: { color: '#9ca3af', fontSize: '12px', whiteSpace: 'nowrap' },
+  clearBtn: { background: 'none', border: 'none', color: '#9ca3af', fontSize: '12px', cursor: 'pointer', padding: '4px 8px', borderRadius: '4px', fontFamily: 'inherit' },
+  aiSearchBtn: { background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', color: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', padding: '5px 10px', borderRadius: '6px', fontFamily: 'inherit', whiteSpace: 'nowrap' },
+  aiToggleBtn: { background: 'none', border: '1.5px solid #d1d5db', color: '#9ca3af', fontSize: '11px', fontWeight: '700', cursor: 'pointer', padding: '4px 8px', borderRadius: '6px', fontFamily: 'inherit', letterSpacing: '0.05em', flexShrink: 0 },
+  aiToggleBtnActive: { background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: '1.5px solid transparent', color: '#fff' },
+  grid: { display: 'grid', gap: '12px' },
+  skeleton: { height: '180px', borderRadius: '12px', background: 'linear-gradient(90deg, rgba(255,255,255,0.07) 25%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.07) 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite' },
+  card: { background: '#fff', border: '2px solid transparent', borderRadius: '12px', padding: '16px', cursor: 'pointer', transition: 'box-shadow 0.15s', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' },
+  cardFeatured: { border: '2px solid #f59e0b', boxShadow: '0 4px 24px rgba(245,158,11,0.25)' },
+  cardHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' },
+  avatar: { width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.1rem', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  featuredTag: { background: '#fffbeb', color: '#92400e', fontSize: '10px', fontWeight: '600', padding: '3px 6px', borderRadius: '6px', border: '1px solid #fde68a' },
+  priceTag: { background: '#f0fdf4', color: '#166534', fontSize: '11px', fontWeight: '700', padding: '2px 6px', borderRadius: '6px' },
+  bizName: { color: '#0f172a', fontWeight: '700', margin: '0 0 4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  bizAddr: { color: '#9ca3af', fontSize: '12px', margin: '0 0 12px', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' },
+  cardFooter: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+  typeTag: { background: '#eff6ff', color: BLUE, fontSize: '11px', fontWeight: '600', padding: '3px 8px', borderRadius: '6px' },
+  typeTagCustom: { background: '#fef3c7', color: '#b45309' },
+  categoryTag: { background: '#f5f3ff', color: '#7c3aed', fontSize: '11px', fontWeight: '600', padding: '3px 8px', borderRadius: '6px' },
+  tagsRow: { display: 'flex', gap: '4px', flexWrap: 'wrap', marginTop: '8px' },
+  tagChip: { background: '#f1f5f9', color: '#475569', fontSize: '10px', padding: '2px 6px', borderRadius: '4px' },
+  arrow: { color: '#60a5fa', fontSize: '14px' },
+  empty: { background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '60px 24px', textAlign: 'center' },
+  emptyTitle: { color: '#fff', fontSize: '15px', fontWeight: '600', margin: '0 0 12px' },
+  emptyAction: { background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '8px 16px', borderRadius: '8px', fontFamily: 'inherit' },
+};
