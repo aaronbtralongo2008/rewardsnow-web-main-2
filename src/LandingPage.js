@@ -6,6 +6,22 @@ import FadeInSection from './FadeInSection';
 
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
+// Wraps every occurrence of "Veniar" in <em> for italic rendering
+function vn(text) {
+  const parts = text.split('Veniar');
+  if (parts.length === 1) return text;
+  return (
+    <>
+      {parts.map((part, i) => (
+        <span key={i}>
+          {part}
+          {i < parts.length - 1 && <em>Veniar</em>}
+        </span>
+      ))}
+    </>
+  );
+}
+
 const HOW_IT_WORKS = [
   { n: 'VN·01', title: 'Create a free account', desc: 'Sign up in under a minute with your name and email. No card required.' },
   { n: 'VN·02', title: 'Earn Veniar Points locally', desc: 'Give your phone number at checkout at any participating Veniar business.' },
@@ -32,19 +48,6 @@ const TRUST = [
   { n: '04', label: 'Local-first', desc: 'Built for independent restaurants, cafés, and neighborhood businesses.' },
 ];
 
-const DASH_TXS = [
-  { name: 'Café Soleil', pts: '+120 pts', up: true, time: 'Today' },
-  { name: 'The Grain Market', pts: '+80 pts', up: true, time: 'Yesterday' },
-  { name: 'Blue Plate Kitchen', pts: '−200 pts', up: false, time: '3 days ago' },
-];
-
-const MERCHANT_STATS = [
-  { v: '1,240', l: 'Points issued today' },
-  { v: '28', l: 'Customer visits' },
-  { v: '4', l: 'Redemptions' },
-  { v: '94%', l: 'Return rate' },
-];
-
 export default function LandingPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -54,114 +57,58 @@ export default function LandingPage() {
     <div style={s.root}>
       <AnimatedStripes count={isMobile ? 2 : 4} />
 
-      {/* ── Teal top accent bar ── */}
-      <div className="vn-top-bar" style={s.topBar} />
-
-      {/* ── Navigation ── */}
-      <header style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
-        <button style={s.brandBtn} onClick={() => navigate('/')} aria-label="Veniar home">
-          <img src={LOGO} alt="Veniar" style={s.brandLogo} />
-        </button>
-        <nav style={s.navRight} aria-label="Site navigation">
-          {!isMobile && (
-            <button className="vn-nav-link" style={s.navLink} onClick={() => navigate('/business-overview')}>
-              For Businesses
-            </button>
-          )}
-          <button className="vn-btn-ghost" style={s.navBtn} onClick={() => navigate('/signin')}>Sign in</button>
-          <button className="vn-btn" style={s.navBtnPrimary} onClick={() => navigate('/register')}>Join Veniar</button>
-          <button style={s.themeBtn} onClick={toggleTheme} aria-label="Toggle theme">
-            {isDark ? 'LIGHT' : 'DARK'}
+      {/* ── Sticky header: teal bar + nav together ── */}
+      <div style={s.stickyHeader}>
+        <div className="vn-top-bar" style={s.topBar} />
+        <header style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
+          <button style={s.brandBtn} onClick={() => navigate('/')} aria-label="Veniar home">
+            <img src={LOGO} alt="Veniar" style={s.brandLogo} />
           </button>
-        </nav>
-      </header>
+          <nav style={s.navRight} aria-label="Site navigation">
+            {!isMobile && (
+              <button className="vn-nav-link" style={s.navLink} onClick={() => navigate('/business-overview')}>
+                For Businesses
+              </button>
+            )}
+            <button className="vn-btn-ghost" style={s.navBtn} onClick={() => navigate('/signin')}>Sign in</button>
+            <button className="vn-btn" style={s.navBtnPrimary} onClick={() => navigate('/register')}>
+              Join <em>Veniar</em>
+            </button>
+            <button style={s.themeBtn} onClick={toggleTheme} aria-label="Toggle theme">
+              {isDark ? 'LIGHT' : 'DARK'}
+            </button>
+          </nav>
+        </header>
+      </div>
 
       <main>
         {/* ── Hero ── */}
-        <section style={{ ...s.hero, padding: isMobile ? '72px 24px 64px' : '100px 64px 80px' }}>
-          <div style={{ ...s.heroInner, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '48px' : '40px' }}>
-            <div style={{ ...s.heroLeft, maxWidth: isMobile ? '100%' : '520px' }}>
-              <FadeInSection delay={0}>
-                <p style={s.eyebrow}>LOCAL REWARDS NETWORK</p>
-                <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.8rem' : '4.4rem' }}>
-                  Shared rewards<br />for local favorites.
-                </h1>
-                <div className="vn-bar-animate" style={s.goldBar} />
-                <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '440px' }}>
-                  Earn Veniar Points when you visit participating restaurants, cafés, and local businesses.
-                  Redeem them anywhere in the Veniar Network.
-                </p>
-                <div style={s.heroCtas}>
-                  <button className="vn-btn" style={s.ctaPrimary} onClick={() => navigate('/register')}>
-                    Get started free
-                  </button>
-                  <button className="vn-btn-ghost" style={s.ctaGhost} onClick={() => navigate('/business-overview')}>
-                    For businesses
-                  </button>
-                </div>
-              </FadeInSection>
-            </div>
-
-            {!isMobile && (
-              <FadeInSection delay={180} style={s.heroRight}>
-                <div style={s.dashCard}>
-                  <div style={s.dashHeader}>
-                    <div>
-                      <p style={s.dashLabel}>VENIAR POINTS</p>
-                      <p className="vn-gold-glow" style={s.dashBalance}>2,840</p>
-                    </div>
-                    <div style={s.dashBadge}>ACTIVE</div>
-                  </div>
-                  <div style={s.dashDivider} />
-                  <div style={s.dashStats}>
-                    {[{ n: '14', l: 'Visits' }, { n: '3', l: 'Partners' }, { n: '580', l: 'Redeemed' }].map(st => (
-                      <div key={st.l} style={s.dashStat}>
-                        <p style={s.dashStatNum}>{st.n}</p>
-                        <p style={s.dashStatLbl}>{st.l}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div style={s.dashDivider} />
-                  <p style={s.dashActivityLabel}>RECENT ACTIVITY</p>
-                  {DASH_TXS.map((tx, i) => (
-                    <div key={i} className="vn-row" style={s.dashTx}>
-                      <div>
-                        <p style={s.dashTxName}>{tx.name}</p>
-                        <p style={s.dashTxTime}>{tx.time}</p>
-                      </div>
-                      <p style={{ ...s.dashTxPts, color: tx.up ? '#25B7C8' : '#F2B84B' }}>{tx.pts}</p>
-                    </div>
-                  ))}
-                </div>
-              </FadeInSection>
-            )}
+        <section style={{ ...s.hero, padding: isMobile ? '72px 24px 80px' : '112px 64px 96px' }}>
+          <div style={{ maxWidth: '680px' }}>
+            <FadeInSection delay={0}>
+              <p style={s.eyebrow}>LOCAL REWARDS NETWORK</p>
+              <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.8rem' : '4.6rem' }}>
+                Shared rewards<br />for local favorites.
+              </h1>
+              <div className="vn-bar-animate" style={s.goldBar} />
+              <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '500px' }}>
+                Earn <em>Veniar</em> Points when you visit participating restaurants, cafés, and local
+                businesses. Redeem them anywhere in the <em>Veniar</em> Network.
+              </p>
+              <div style={s.heroCtas}>
+                <button className="vn-btn" style={s.ctaPrimary} onClick={() => navigate('/register')}>
+                  Get started free
+                </button>
+                <button className="vn-btn-ghost" style={s.ctaGhost} onClick={() => navigate('/business-overview')}>
+                  For businesses
+                </button>
+              </div>
+            </FadeInSection>
           </div>
         </section>
 
-        {/* ── Stats band ── */}
-        <FadeInSection>
-          <div style={{ ...s.statsBand, padding: isMobile ? '36px 24px' : '44px 64px' }}>
-            <div style={{ ...s.statsRow, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '28px' : '0' }}>
-              {[
-                { value: '60%', label: 'Repeat visit rate among Veniar customers' },
-                { value: '4.8×', label: 'Higher lifetime value vs. non-loyalty customers' },
-                { value: '25×', label: 'Return on investment for partner merchants' },
-              ].map((st, i) => (
-                <div key={i} style={{
-                  ...s.statItem,
-                  borderLeft: i > 0 && !isMobile ? '1px solid rgba(255,255,255,0.12)' : 'none',
-                  paddingLeft: i > 0 && !isMobile ? '52px' : '0',
-                }}>
-                  <p style={s.statValue}>{st.value}</p>
-                  <p style={s.statLabel}>{st.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeInSection>
-
         {/* ── How it works ── */}
-        <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '96px 64px' }}>
+        <section style={{ ...s.sectionAlt, padding: isMobile ? '64px 24px' : '96px 64px' }}>
           <FadeInSection>
             <p style={s.sectionTag}>HOW IT WORKS</p>
             <h2 style={{ ...s.h2, fontSize: isMobile ? '2rem' : '2.8rem', maxWidth: '560px' }}>
@@ -174,8 +121,8 @@ export default function LandingPage() {
               <FadeInSection key={step.n} delay={i * 110}>
                 <div className="vn-card" style={s.stepCard}>
                   <span className="vn-teal-glow" style={s.stepNum}>{step.n}</span>
-                  <p style={s.stepTitle}>{step.title}</p>
-                  <p style={s.stepDesc}>{step.desc}</p>
+                  <p style={s.stepTitle}>{vn(step.title)}</p>
+                  <p style={s.stepDesc}>{vn(step.desc)}</p>
                 </div>
               </FadeInSection>
             ))}
@@ -183,7 +130,7 @@ export default function LandingPage() {
         </section>
 
         {/* ── For Customers ── */}
-        <section style={{ ...s.sectionAlt, padding: isMobile ? '64px 24px' : '96px 64px' }}>
+        <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '96px 64px' }}>
           <FadeInSection>
             <p style={s.sectionTag}>FOR CUSTOMERS</p>
             <h2 style={{ ...s.h2, fontSize: isMobile ? '2rem' : '2.6rem', maxWidth: '480px' }}>
@@ -196,8 +143,8 @@ export default function LandingPage() {
               <FadeInSection key={f.tag} delay={i * 80}>
                 <div className="vn-card" style={s.featureCard}>
                   <p style={s.featureTag}>{f.tag}</p>
-                  <p style={s.featureTitle}>{f.title}</p>
-                  <p style={s.featureDesc}>{f.desc}</p>
+                  <p style={s.featureTitle}>{vn(f.title)}</p>
+                  <p style={s.featureDesc}>{vn(f.desc)}</p>
                 </div>
               </FadeInSection>
             ))}
@@ -213,9 +160,9 @@ export default function LandingPage() {
             </h2>
             <div className="vn-bar-animate" style={s.goldLine} />
             <p style={{ ...s.body, color: 'rgba(255,255,255,0.58)', maxWidth: '560px', marginBottom: '52px' }}>
-              Veniar gives independent restaurants and local businesses a complete loyalty program,
-              merchant dashboard, and access to a shared customer network — without the cost or
-              complexity of building it alone.
+              <em>Veniar</em> gives independent restaurants and local businesses a complete loyalty
+              program, merchant dashboard, and access to a shared customer network — without the
+              cost or complexity of building it alone.
             </p>
           </FadeInSection>
           <div style={{ ...s.threeGrid, gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr' }}>
@@ -223,37 +170,21 @@ export default function LandingPage() {
               <FadeInSection key={f.tag} delay={i * 90}>
                 <div className="vn-card" style={s.bizCard}>
                   <p style={{ ...s.featureTag, color: '#F2B84B', borderTopColor: '#F2B84B' }}>{f.tag}</p>
-                  <p style={{ ...s.featureTitle, color: '#ffffff' }}>{f.title}</p>
-                  <p style={{ ...s.featureDesc, color: 'rgba(255,255,255,0.54)' }}>{f.desc}</p>
+                  <p style={{ ...s.featureTitle, color: '#ffffff' }}>{vn(f.title)}</p>
+                  <p style={{ ...s.featureDesc, color: 'rgba(255,255,255,0.54)' }}>{vn(f.desc)}</p>
                 </div>
               </FadeInSection>
             ))}
           </div>
-
-          {/* Merchant mock dashboard */}
           <FadeInSection delay={200}>
-            <div style={{ ...s.merchantMock, marginTop: isMobile ? '48px' : '64px' }}>
-              <p style={s.merchantMockLabel}>MERCHANT VIEW — VENIAR DASHBOARD</p>
-              <div style={{ ...s.fourGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : '1fr 1fr 1fr 1fr' }}>
-                {MERCHANT_STATS.map((m, i) => (
-                  <div key={i} className="vn-stat" style={s.merchantStat}>
-                    <p style={s.merchantStatNum}>{m.v}</p>
-                    <p style={s.merchantStatLbl}>{m.l}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </FadeInSection>
-
-          <FadeInSection delay={280}>
             <button className="vn-btn" style={s.bizCta} onClick={() => navigate('/business-overview')}>
-              Learn about Veniar for Business →
+              Learn about <em>Veniar</em> for Business →
             </button>
           </FadeInSection>
         </section>
 
         {/* ── Trust / Network ── */}
-        <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '96px 64px' }}>
+        <section style={{ ...s.sectionAlt, padding: isMobile ? '64px 24px' : '96px 64px' }}>
           <FadeInSection>
             <p style={s.sectionTag}>NETWORK INFRASTRUCTURE</p>
             <h2 style={{ ...s.h2, fontSize: isMobile ? '2rem' : '2.6rem', maxWidth: '480px' }}>
@@ -266,8 +197,8 @@ export default function LandingPage() {
               <FadeInSection key={t.label} delay={i * 75}>
                 <div className="vn-card" style={s.trustCard}>
                   <p className="vn-teal-glow" style={s.trustNum}>{t.n}</p>
-                  <p style={s.trustLabel}>{t.label}</p>
-                  <p style={s.trustDesc}>{t.desc}</p>
+                  <p style={s.trustLabel}>{vn(t.label)}</p>
+                  <p style={s.trustDesc}>{vn(t.desc)}</p>
                 </div>
               </FadeInSection>
             ))}
@@ -275,16 +206,16 @@ export default function LandingPage() {
         </section>
 
         {/* ── Final CTA ── */}
-        <section style={{ ...s.sectionAlt, padding: isMobile ? '72px 24px' : '100px 64px', textAlign: 'center' }}>
+        <section style={{ ...s.section, padding: isMobile ? '72px 24px' : '100px 64px', textAlign: 'center' }}>
           <FadeInSection>
             <p style={s.eyebrow}>GET STARTED</p>
             <h2 style={{ ...s.h2, fontSize: isMobile ? '2rem' : '2.8rem', margin: '0 auto 16px', maxWidth: '540px' }}>
-              Join the Veniar rewards network.
+              Join the <em>Veniar</em> rewards network.
             </h2>
             <div className="vn-bar-animate" style={{ ...s.goldLine, margin: '0 auto 32px' }} />
             <p style={{ ...s.body, maxWidth: '460px', margin: '0 auto 40px' }}>
-              Free to join. No credit card required. Start earning Veniar Points at your favorite
-              local businesses.
+              Free to join. No credit card required. Start earning <em>Veniar</em> Points at your
+              favorite local businesses.
             </p>
             <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="vn-btn" style={s.ctaPrimary} onClick={() => navigate('/register')}>
@@ -302,7 +233,7 @@ export default function LandingPage() {
       <footer style={{ ...s.footer, padding: isMobile ? '48px 24px 32px' : '64px 64px 36px' }}>
         <div style={{ ...s.footerTop, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '0' }}>
           <div style={s.footerBrand}>
-            <p style={s.footerBrandName}>Veniar</p>
+            <p style={s.footerBrandName}><em>Veniar</em></p>
             <p style={s.footerBrandTagline}>Shared rewards for local favorites.</p>
           </div>
           <div style={{ ...s.footerCols, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '32px' : '72px' }}>
@@ -320,7 +251,7 @@ export default function LandingPage() {
           </div>
         </div>
         <div style={s.footerBottom}>
-          <p style={s.footerCopy}>© {new Date().getFullYear()} Veniar. All rights reserved.</p>
+          <p style={s.footerCopy}>© {new Date().getFullYear()} <em>Veniar</em>. All rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -337,11 +268,15 @@ const s = {
     overflowX: 'hidden',
   },
 
+  stickyHeader: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+  },
+
   topBar: {
     height: '4px',
     background: '#25B7C8',
-    position: 'relative',
-    zIndex: 10,
     flexShrink: 0,
   },
 
@@ -350,9 +285,6 @@ const s = {
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '64px',
-    position: 'sticky',
-    top: 0,
-    zIndex: 100,
     background: 'var(--rn-nav-bg)',
     borderBottom: '1px solid var(--rn-nav-border)',
     backdropFilter: 'blur(14px)',
@@ -416,15 +348,6 @@ const s = {
   },
 
   hero: { position: 'relative', zIndex: 1 },
-  heroInner: {
-    display: 'flex',
-    alignItems: 'center',
-    maxWidth: '1200px',
-    margin: '0 auto',
-  },
-  heroLeft: { flex: '0 0 auto' },
-  heroRight: { flex: 1, display: 'flex', justifyContent: 'flex-end' },
-
   eyebrow: {
     color: '#F2B84B',
     fontSize: '11px',
@@ -485,136 +408,6 @@ const s = {
     cursor: 'pointer',
     fontFamily: 'inherit',
     lineHeight: 1,
-  },
-
-  // ── Mock dashboard card (always dark for visual contrast) ──
-  dashCard: {
-    background: '#07243A',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '16px',
-    padding: '28px 24px',
-    width: '320px',
-    boxShadow: '0 24px 64px rgba(0,0,0,0.28)',
-    position: 'relative',
-    zIndex: 1,
-  },
-  dashHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: '20px',
-  },
-  dashLabel: {
-    color: 'rgba(255,255,255,0.45)',
-    fontSize: '9px',
-    fontWeight: '700',
-    letterSpacing: '3px',
-    textTransform: 'uppercase',
-    margin: '0 0 6px',
-  },
-  dashBalance: {
-    color: '#F2B84B',
-    fontSize: '2.6rem',
-    fontWeight: '900',
-    letterSpacing: '-0.03em',
-    lineHeight: 1,
-    margin: 0,
-  },
-  dashBadge: {
-    background: 'rgba(37,183,200,0.15)',
-    border: '1px solid rgba(37,183,200,0.3)',
-    color: '#25B7C8',
-    fontSize: '9px',
-    fontWeight: '800',
-    letterSpacing: '2px',
-    padding: '5px 10px',
-    borderRadius: '6px',
-    marginTop: '4px',
-  },
-  dashDivider: {
-    height: '1px',
-    background: 'rgba(255,255,255,0.08)',
-    margin: '16px 0',
-  },
-  dashStats: {
-    display: 'flex',
-    gap: '0',
-    justifyContent: 'space-around',
-    textAlign: 'center',
-  },
-  dashStat: { flex: 1 },
-  dashStatNum: {
-    color: '#ffffff',
-    fontSize: '1.4rem',
-    fontWeight: '800',
-    letterSpacing: '-0.02em',
-    margin: '0 0 3px',
-  },
-  dashStatLbl: {
-    color: 'rgba(255,255,255,0.45)',
-    fontSize: '10px',
-    fontWeight: '600',
-    letterSpacing: '0.04em',
-    margin: 0,
-  },
-  dashActivityLabel: {
-    color: 'rgba(255,255,255,0.38)',
-    fontSize: '9px',
-    fontWeight: '700',
-    letterSpacing: '3px',
-    textTransform: 'uppercase',
-    margin: '0 0 12px',
-  },
-  dashTx: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '9px 8px',
-    borderRadius: '8px',
-    cursor: 'default',
-  },
-  dashTxName: {
-    color: 'rgba(255,255,255,0.82)',
-    fontSize: '13px',
-    fontWeight: '600',
-    margin: '0 0 2px',
-  },
-  dashTxTime: {
-    color: 'rgba(255,255,255,0.38)',
-    fontSize: '11px',
-    margin: 0,
-  },
-  dashTxPts: {
-    fontSize: '13px',
-    fontWeight: '700',
-  },
-
-  // ── Stats band (always dark) ──
-  statsBand: {
-    background: '#07243A',
-    position: 'relative',
-    zIndex: 1,
-  },
-  statsRow: {
-    display: 'flex',
-    maxWidth: '1200px',
-    margin: '0 auto',
-  },
-  statItem: { flex: 1, paddingRight: '52px' },
-  statValue: {
-    color: '#F2B84B',
-    fontSize: '2.4rem',
-    fontWeight: '900',
-    letterSpacing: '-0.04em',
-    margin: '0 0 6px',
-    lineHeight: 1,
-  },
-  statLabel: {
-    color: 'rgba(255,255,255,0.55)',
-    fontSize: '13px',
-    lineHeight: 1.5,
-    margin: 0,
-    maxWidth: '200px',
   },
 
   // ── Sections ──
@@ -736,45 +529,8 @@ const s = {
     height: '100%',
   },
 
-  // ── Merchant mock panel ──
-  merchantMock: {
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '14px',
-    padding: '28px 24px',
-  },
-  merchantMockLabel: {
-    color: 'rgba(255,255,255,0.35)',
-    fontSize: '9px',
-    fontWeight: '700',
-    letterSpacing: '3px',
-    textTransform: 'uppercase',
-    margin: '0 0 20px',
-  },
-  merchantStat: {
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: '10px',
-    padding: '18px 16px',
-    textAlign: 'center',
-  },
-  merchantStatNum: {
-    color: '#25B7C8',
-    fontSize: '1.6rem',
-    fontWeight: '900',
-    letterSpacing: '-0.03em',
-    margin: '0 0 4px',
-    lineHeight: 1,
-  },
-  merchantStatLbl: {
-    color: 'rgba(255,255,255,0.45)',
-    fontSize: '11px',
-    lineHeight: 1.4,
-    margin: 0,
-  },
-
   bizCta: {
-    marginTop: '36px',
+    marginTop: '40px',
     display: 'inline-flex',
     alignItems: 'center',
     padding: '14px 26px',
@@ -837,6 +593,7 @@ const s = {
     color: '#F2B84B',
     fontSize: '1.1rem',
     fontWeight: '900',
+    fontStyle: 'normal',
     margin: '0 0 8px',
     letterSpacing: '-0.02em',
   },
