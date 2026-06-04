@@ -47,7 +47,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
   return (
     <div style={s.container}>
       {/* 3px teal accent bar */}
-      <div style={{ height: '3px', background: '#25B7C8', flexShrink: 0 }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', flexShrink: 0 }} />
 
       <div style={s.topBar}>
         <span style={s.logo}>Veniar</span>
@@ -136,7 +136,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
                     <div style={s.popup}>
                       <strong style={s.popupName}>{biz.name}</strong>
                       {biz.address && <p style={s.popupAddress}>{biz.address}</p>}
-                      <button style={s.popupBtn} onClick={() => onSelectBusiness(biz)}>
+                      <button className="vn-btn" style={s.popupBtn} onClick={() => onSelectBusiness(biz)}>
                         View Rewards →
                       </button>
                     </div>
@@ -159,7 +159,7 @@ function BusinessMap({ customer, onLogout, onNavigate, onSelectBusiness }) {
         <div style={s.mobileBottomNav}>
           <button style={s.mobileNavBtn} onClick={() => onNavigate('/home')}>🏠 Home</button>
           <button style={s.mobileNavBtn} onClick={() => onNavigate('/businesses')}>📋 List</button>
-          <button style={{ ...s.mobileNavBtn, color: '#0B5CAD', fontWeight: '700' }}>🗺️ Map</button>
+          <button style={{ ...s.mobileNavBtn, color: '#1565C4', fontWeight: '700' }}>🗺️ Map</button>
         </div>
       )}
     </div>
@@ -194,7 +194,7 @@ function getStyles(isDark) {
   return {
     container: {
       height: '100vh',
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
       fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
       display: 'flex',
       flexDirection: 'column',
@@ -206,7 +206,7 @@ function getStyles(isDark) {
       alignItems: 'center',
       padding: '0 16px',
       height: '56px',
-      background: '#07243A',
+      background: '#061A2A',
       borderBottom: '1px solid rgba(255,255,255,0.1)',
       zIndex: 1000,
       position: 'relative',
@@ -242,13 +242,13 @@ function getStyles(isDark) {
     },
     body: { display: 'flex', flex: 1, overflow: 'hidden' },
     sidebar: {
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       padding: '16px',
       overflowY: 'auto',
       zIndex: 10,
     },
     sidebarTitle: {
-      color: '#0B5CAD',
+      color: '#1565C4',
       fontSize: '1.1rem',
       fontWeight: '800',
       margin: '0 0 4px 0',
@@ -286,7 +286,7 @@ function getStyles(isDark) {
       width: '36px',
       height: '36px',
       borderRadius: '9px',
-      background: '#0B5CAD',
+      background: '#1565C4',
       color: '#ffffff',
       fontSize: '1rem',
       fontWeight: '800',
@@ -315,7 +315,7 @@ function getStyles(isDark) {
     },
     featuredPill: {
       background: '#F2B84B',
-      color: '#07243A',
+      color: '#061A2A',
       fontSize: '10px',
       fontWeight: '700',
       padding: '2px 8px',
@@ -330,7 +330,7 @@ function getStyles(isDark) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
     },
     popup: {
       fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
@@ -338,7 +338,7 @@ function getStyles(isDark) {
       maxWidth: '220px',
     },
     popupName: {
-      color: '#0B5CAD',
+      color: '#1565C4',
       fontSize: '14px',
       display: 'block',
       marginBottom: '4px',
@@ -349,7 +349,7 @@ function getStyles(isDark) {
       padding: '7px 12px',
       borderRadius: '8px',
       border: 'none',
-      background: '#0B5CAD',
+      background: '#1565C4',
       color: '#ffffff',
       fontSize: '12px',
       fontWeight: '700',
@@ -360,7 +360,7 @@ function getStyles(isDark) {
     mobileBottomNav: {
       display: 'flex',
       borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
-      background: isDark ? '#07243A' : '#ffffff',
+      background: isDark ? '#061A2A' : '#ffffff',
       flexShrink: 0,
     },
     mobileNavBtn: {

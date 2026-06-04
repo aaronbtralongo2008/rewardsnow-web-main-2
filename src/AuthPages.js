@@ -37,7 +37,7 @@ export function ForgotPassword() {
   return (
     <div style={styles.container}>
       {/* Teal accent line at top */}
-      <div style={{ height: '3px', background: '#25B7C8', flexShrink: 0 }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', flexShrink: 0 }} />
       <div style={styles.wrapper}>
 
         {!isMobile && (
@@ -88,18 +88,18 @@ export function ForgotPassword() {
               <button style={styles.backLink} onClick={() => navigate('/signin')}>
                 &larr; Back to sign in
               </button>
-              <h1 style={styles.title}>Reset your password</h1>
+              <h1 className="vn-fade-up" style={styles.title}>Reset your password</h1>
               <div style={styles.goldAccentBar} />
               <p style={styles.sub}>
                 Enter the email address on your account and we&apos;ll send a reset link.
               </p>
               <label style={styles.label}>Email address</label>
-              <input style={styles.input} type="email" autoComplete="email"
+              <input className="vn-input" style={styles.input} type="email" autoComplete="email"
                      placeholder="you@email.com" value={email}
                      onChange={e => setEmail(e.target.value)}
                      onKeyDown={e => e.key === 'Enter' && handleSubmit()} />
               {error && <p style={styles.error}>{error}</p>}
-              <button style={{ ...styles.btn, opacity: loading ? 0.7 : 1 }}
+              <button className="vn-btn" style={{ ...styles.btn, opacity: loading ? 0.7 : 1 }}
                       onClick={handleSubmit} disabled={loading}>
                 {loading ? 'Sending…' : 'Send reset link'}
               </button>
@@ -107,7 +107,7 @@ export function ForgotPassword() {
           ) : (
             <div style={styles.success}>
               <div style={styles.successIcon}>&#10003;</div>
-              <h1 style={styles.title}>Check your email</h1>
+              <h1 className="vn-fade-up" style={styles.title}>Check your email</h1>
               <div style={styles.goldAccentBar} />
               <p style={styles.sub}>
                 If an account exists for <strong>{email}</strong>, you&apos;ll receive a reset link shortly.
@@ -160,7 +160,7 @@ export function ResetPassword() {
   return (
     <div style={styles.container}>
       {/* Teal accent line at top */}
-      <div style={{ height: '3px', background: '#25B7C8', flexShrink: 0 }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', flexShrink: 0 }} />
       <div style={styles.wrapper}>
 
         {!isMobile && (
@@ -208,20 +208,20 @@ export function ResetPassword() {
 
           {!done ? (
             <>
-              <h1 style={styles.title}>Choose a new password</h1>
+              <h1 className="vn-fade-up" style={styles.title}>Choose a new password</h1>
               <div style={styles.goldAccentBar} />
               <p style={styles.sub}>Pick something strong that you haven&apos;t used before.</p>
               <label style={styles.label}>New password</label>
-              <input style={styles.input} type="password" autoComplete="new-password"
+              <input className="vn-input" style={styles.input} type="password" autoComplete="new-password"
                      placeholder="At least 8 characters" value={password}
                      onChange={e => setPassword(e.target.value)} />
               <label style={styles.label}>Confirm new password</label>
-              <input style={styles.input} type="password" autoComplete="new-password"
+              <input className="vn-input" style={styles.input} type="password" autoComplete="new-password"
                      placeholder="••••••••" value={confirm}
                      onChange={e => setConfirm(e.target.value)}
                      onKeyDown={e => e.key === 'Enter' && handleReset()} />
               {error && <p style={styles.error}>{error}</p>}
-              <button style={{ ...styles.btn, opacity: loading ? 0.7 : 1 }}
+              <button className="vn-btn" style={{ ...styles.btn, opacity: loading ? 0.7 : 1 }}
                       onClick={handleReset} disabled={loading}>
                 {loading ? 'Updating password…' : 'Set new password'}
               </button>
@@ -229,7 +229,7 @@ export function ResetPassword() {
           ) : (
             <div style={styles.success}>
               <div style={styles.successIcon}>&#10003;</div>
-              <h1 style={styles.title}>Password updated</h1>
+              <h1 className="vn-fade-up" style={styles.title}>Password updated</h1>
               <div style={styles.goldAccentBar} />
               <p style={styles.sub}>
                 Your password has been changed. You can now sign in with your new password.
@@ -247,7 +247,7 @@ function makeStyles(isDark, isMobile) {
   return {
     container: {
       minHeight: '100vh',
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
       fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
       display: 'flex',
       flexDirection: 'column',
@@ -258,7 +258,7 @@ function makeStyles(isDark, isMobile) {
       flexDirection: isMobile ? 'column' : 'row',
     },
     mobileHeader: {
-      background: '#07243A',
+      background: '#061A2A',
       padding: '28px 24px',
       display: 'flex',
       flexDirection: 'column',
@@ -276,7 +276,7 @@ function makeStyles(isDark, isMobile) {
     },
     leftPanel: {
       flex: 1,
-      background: '#07243A',
+      background: '#061A2A',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -354,7 +354,7 @@ function makeStyles(isDark, isMobile) {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       boxSizing: 'border-box',
       overflowY: 'auto',
       position: 'relative',
@@ -384,7 +384,7 @@ function makeStyles(isDark, isMobile) {
       marginBottom: '8px',
     },
     brandLabel: {
-      color: '#0B5CAD',
+      color: '#1565C4',
       fontSize: '15px',
       fontWeight: '800',
       letterSpacing: '-0.01em',
@@ -392,7 +392,7 @@ function makeStyles(isDark, isMobile) {
     backLink: {
       background: 'none',
       border: 'none',
-      color: '#0B5CAD',
+      color: '#1565C4',
       fontSize: '13px',
       fontWeight: '600',
       cursor: 'pointer',
@@ -453,7 +453,7 @@ function makeStyles(isDark, isMobile) {
     btn: {
       width: '100%',
       padding: '15px',
-      background: '#0B5CAD',
+      background: '#1565C4',
       color: '#ffffff',
       border: 'none',
       borderRadius: '12px',
@@ -472,7 +472,7 @@ function makeStyles(isDark, isMobile) {
       width: '60px',
       height: '60px',
       borderRadius: '50%',
-      background: '#0B5CAD',
+      background: '#1565C4',
       color: '#fff',
       fontSize: '1.5rem',
       fontWeight: '800',

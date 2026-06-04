@@ -31,7 +31,7 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
   return (
     <div style={s.root}>
       {/* 3px teal accent bar */}
-      <div style={{ height: '3px', background: '#25B7C8' }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
 
       <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
         <button style={s.navBrand} onClick={() => onNavigate('/home')}>Veniar</button>
@@ -60,11 +60,11 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
 
       <div style={{ ...s.body, padding: isMobile ? '20px 16px' : '40px 24px' }}>
         {/* Balance hero */}
-        <div style={{ ...s.hero, padding: isMobile ? '28px 24px' : '40px 44px' }}>
+        <div className="vn-fade-up" style={{ ...s.hero, padding: isMobile ? '28px 24px' : '40px 44px' }}>
           <p style={s.heroGreeting}>Good to see you, {customer.username}.</p>
           <p style={s.pointsLabel}>VENIAR POINTS</p>
           <div style={s.balanceRow}>
-            <span style={{ ...s.balanceNum, fontSize: isMobile ? '3rem' : '4rem' }}>
+            <span className="vn-gold-glow" style={{ ...s.balanceNum, fontSize: isMobile ? '3rem' : '4rem' }}>
               {loading ? '—' : balance.toLocaleString()}
             </span>
             <span style={s.balancePts}>pts</span>
@@ -72,12 +72,14 @@ export default function Home({ customer, onLogout, onNavigate, refreshKey }) {
           <p style={s.balanceSub}>Available to spend at any partner</p>
           <div style={{ ...s.heroActions, flexWrap: 'wrap' }}>
             <button
+              className="vn-btn"
               style={{ ...s.actionPrimary, flex: isMobile ? '1' : 'none' }}
               onClick={() => onNavigate('/businesses')}
             >
               Browse partners
             </button>
             <button
+              className="vn-btn vn-btn-ghost"
               style={{ ...s.actionSecondary, flex: isMobile ? '1' : 'none' }}
               onClick={() => onNavigate('/map')}
             >
@@ -120,6 +122,7 @@ function TxRow({ tx, idx, s }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
+      className="vn-row"
       style={{
         ...s.tx,
         borderColor: hovered ? '#25B7C8' : s.tx.borderColor,
@@ -157,7 +160,7 @@ function getStyles(isDark) {
   return {
     root: {
       minHeight: '100vh',
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
       fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
       position: 'relative',
     },
@@ -166,7 +169,7 @@ function getStyles(isDark) {
       justifyContent: 'space-between',
       alignItems: 'center',
       height: '60px',
-      background: '#07243A',
+      background: '#061A2A',
       borderBottom: '1px solid rgba(255,255,255,0.08)',
       position: 'sticky',
       top: 0,
@@ -208,7 +211,7 @@ function getStyles(isDark) {
     },
     body: { maxWidth: '720px', margin: '0 auto', boxSizing: 'border-box' },
     hero: {
-      background: '#0B5CAD',
+      background: '#1565C4',
       borderRadius: '20px',
       marginBottom: '0',
       boxShadow: 'none',
@@ -248,7 +251,7 @@ function getStyles(isDark) {
     heroActions: { display: 'flex', gap: '10px' },
     actionPrimary: {
       padding: '11px 22px',
-      background: '#0B5CAD',
+      background: '#1565C4',
       color: '#ffffff',
       border: '1.5px solid rgba(255,255,255,0.25)',
       borderRadius: '10px',
@@ -276,7 +279,7 @@ function getStyles(isDark) {
     },
     section: {},
     sectionTitle: {
-      color: isDark ? '#ffffff' : '#07243A',
+      color: isDark ? '#ffffff' : '#061A2A',
       fontSize: '15px',
       fontWeight: '700',
       margin: '0 0 16px',
@@ -289,14 +292,14 @@ function getStyles(isDark) {
       background: isDark ? 'rgba(255,255,255,0.06)' : '#f0f0f0',
     },
     empty: {
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
       borderRadius: '12px',
       padding: '40px 24px',
       textAlign: 'center',
     },
     emptyTitle: {
-      color: isDark ? '#ffffff' : '#07243A',
+      color: isDark ? '#ffffff' : '#061A2A',
       fontSize: '15px',
       fontWeight: '600',
       margin: '0 0 8px',
@@ -315,7 +318,7 @@ function getStyles(isDark) {
       alignItems: 'center',
       gap: '14px',
       padding: '14px 16px',
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       borderRadius: '8px',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
       borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',

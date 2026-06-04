@@ -37,7 +37,7 @@ export default function LandingPage() {
   return (
     <div style={s.root}>
       {/* ── Navigation ─────────────────────────────────────────────────── */}
-      <div style={{ height: '3px', background: '#25B7C8', position: 'sticky', top: 0, zIndex: 101 }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', position: 'sticky', top: 0, zIndex: 101 }} />
       <header style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
         <button
           style={s.brandBtn}
@@ -52,9 +52,9 @@ export default function LandingPage() {
         </button>
 
         <nav style={s.navRight} aria-label="Site navigation">
-          <button style={s.navBtn} onClick={() => navigate('/signin')}>Sign in</button>
-          <button style={s.navBtnPrimary} onClick={() => navigate('/register')}>Get started</button>
-          <button onClick={toggleTheme} style={s.themeToggle}>
+          <button className="vn-nav-link" style={s.navBtn} onClick={() => navigate('/signin')}>Sign in</button>
+          <button className="vn-btn-gold vn-nav-link" style={s.navBtnPrimary} onClick={() => navigate('/register')}>Get started</button>
+          <button className="vn-nav-link" onClick={toggleTheme} style={s.themeToggle}>
             {isDark ? '○ Light' : '● Dark'}
           </button>
         </nav>
@@ -68,23 +68,24 @@ export default function LandingPage() {
         >
           <p style={s.eyebrow}>LOCAL REWARDS NETWORK</p>
 
-          <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.5rem' : '4.2rem' }}>
+          <h1 className="vn-fade-up" style={{ ...s.heroTitle, fontSize: isMobile ? '2.5rem' : '4.2rem' }}>
             Earn rewards while<br />supporting local businesses.
           </h1>
 
-          <div style={s.goldBar} />
+          <div className="vn-bar-animate" style={s.goldBar} />
 
-          <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
+          <p className="vn-fade-up vn-delay-1" style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '520px' }}>
             Veniar helps you earn points when you shop at participating independent
             businesses in your community.
           </p>
 
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px', alignItems: 'center' }}>
+          <div className="vn-fade-up vn-delay-2" style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '40px', alignItems: 'center' }}>
             {/* TODO: replace href="#download" with your App Store / Google Play links */}
-            <a href="#download" style={s.ctaPrimary} aria-label="Download the Veniar app">
+            <a href="#download" className="vn-btn" style={s.ctaPrimary} aria-label="Download the Veniar app">
               Download App
             </a>
             <button
+              className="vn-btn-ghost"
               style={s.ctaGhost}
               onClick={() => navigate('/business-overview')}
               aria-label="Learn about partnering your business with Veniar"
@@ -97,7 +98,7 @@ export default function LandingPage() {
         {/* ── Hero logo panel ────────────────────────────────────────────── */}
         {!isMobile && (
           <div style={s.heroBadgeRow} aria-hidden="true">
-            <div style={s.heroBadgeCard}>
+            <div className="vn-card" style={s.heroBadgeCard}>
               <img src={LOGO_CARD} alt="Veniar" style={s.heroBadgeImg} />
               <p style={s.heroBadgeSub}>Community rewards, simplified.</p>
             </div>
@@ -105,13 +106,13 @@ export default function LandingPage() {
         )}
 
         {/* ── How it works — dark band ───────────────────────────────────── */}
-        <section style={{ background: '#07243A', padding: isMobile ? '64px 24px' : '80px 80px' }}>
+        <section style={{ background: '#061A2A', padding: isMobile ? '64px 24px' : '80px 80px' }}>
           <div style={s.contentMax}>
             <p style={s.tagOnDark}>HOW IT WORKS</p>
-            <h2 style={{ ...s.h2OnDark, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
+            <h2 className="vn-fade-up" style={{ ...s.h2OnDark, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
               Shop local. Earn points. Redeem anywhere.
             </h2>
-            <div style={s.goldLine} />
+            <div className="vn-bar-animate" style={s.goldLine} />
 
             {/* Step indicators */}
             <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', marginBottom: '36px' }}>
@@ -121,7 +122,7 @@ export default function LandingPage() {
                 { n: 'VN·03', label: 'Redeem across the network' },
               ].map(step => (
                 <div key={step.n} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <span style={s.stepIndicator}>{step.n}</span>
+                  <span className="vn-teal-glow" style={s.stepIndicator}>{step.n}</span>
                   <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', lineHeight: 1.4 }}>{step.label}</span>
                 </div>
               ))}
@@ -145,10 +146,10 @@ export default function LandingPage() {
         <section style={{ ...s.sectionAlt, padding: isMobile ? '64px 24px' : '80px 80px' }}>
           <div style={s.contentMax}>
             <p style={s.tag}>WHAT YOU GET</p>
-            <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
+            <h2 className="vn-fade-up" style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
               Everything in one app.
             </h2>
-            <div style={s.goldLine} />
+            <div className="vn-bar-animate" style={s.goldLine} />
             <div style={{ height: '1px', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)', marginBottom: '32px' }} />
             <div
               style={{
@@ -157,7 +158,7 @@ export default function LandingPage() {
               }}
             >
               {FEATURES.map((f) => (
-                <div key={f.title} style={s.featureCard}>
+                <div key={f.title} className="vn-card" style={s.featureCard}>
                   <p style={s.featureTitle}>{f.title}</p>
                   <p style={s.featureDesc}>{f.desc}</p>
                 </div>
@@ -170,10 +171,10 @@ export default function LandingPage() {
         <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '80px 80px' }}>
           <div style={s.contentMax}>
             <p style={s.tag}>THE DIRECTORY</p>
-            <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
+            <h2 className="vn-fade-up" style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.5rem' }}>
               Not sure where to use your points?
             </h2>
-            <div style={s.goldLine} />
+            <div className="vn-bar-animate" style={s.goldLine} />
             <div style={{ height: '1px', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)', marginBottom: '28px' }} />
             <p style={s.body}>
               The Veniar app includes a directory of participating businesses so you can
@@ -184,7 +185,7 @@ export default function LandingPage() {
         </section>
 
         {/* ── Bottom teal accent bar ─────────────────────────────────────── */}
-        <div style={{ height: '3px', background: '#25B7C8' }} />
+        <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
 
         {/* ── Footer CTA ─────────────────────────────────────────────────── */}
         <section
@@ -201,6 +202,7 @@ export default function LandingPage() {
           />
 
           <h2
+            className="vn-fade-up"
             style={{
               ...s.h2,
               fontSize: isMobile ? '1.9rem' : '2.4rem',
@@ -214,6 +216,7 @@ export default function LandingPage() {
           </h2>
 
           <p
+            className="vn-fade-up vn-delay-1"
             style={{
               ...s.body,
               maxWidth: '480px',
@@ -224,9 +227,9 @@ export default function LandingPage() {
             in your community.
           </p>
 
-          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="vn-fade-up vn-delay-2" style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
             {/* TODO: replace href="#download" with your App Store / Google Play links */}
-            <a href="#download" style={s.ctaPrimary} aria-label="Download the free Veniar app">
+            <a href="#download" className="vn-btn" style={s.ctaPrimary} aria-label="Download the free Veniar app">
               Download Now
             </a>
           </div>
@@ -249,7 +252,7 @@ function getStyles(isDark) {
   return {
     root: {
       minHeight: '100vh',
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
       fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
     },
 
@@ -260,9 +263,9 @@ function getStyles(isDark) {
       alignItems: 'center',
       height: '64px',
       position: 'sticky',
-      top: '3px',
+      top: '4px',
       zIndex: 100,
-      background: '#07243A',
+      background: '#061A2A',
       borderBottom: '1px solid rgba(255,255,255,0.08)',
     },
     brandBtn: {
@@ -290,7 +293,7 @@ function getStyles(isDark) {
       padding: '8px 18px',
       background: '#F2B84B',
       border: 'none',
-      color: '#07243A',
+      color: '#061A2A',
       borderRadius: '8px',
       fontSize: '13px',
       fontWeight: '700',
@@ -311,7 +314,7 @@ function getStyles(isDark) {
     },
 
     // Hero — always dark (deep flight)
-    hero: { background: '#07243A' },
+    hero: { background: '#061A2A' },
     eyebrow: {
       color: '#F2B84B',
       fontSize: '11px',
@@ -345,7 +348,7 @@ function getStyles(isDark) {
     ctaPrimary: {
       display: 'inline-block',
       padding: '14px 32px',
-      background: '#0B5CAD',
+      background: '#1565C4',
       border: 'none',
       color: '#ffffff',
       borderRadius: '12px',
@@ -358,8 +361,8 @@ function getStyles(isDark) {
     },
     ctaGhost: {
       padding: '14px 28px',
-      background: 'transparent',
-      border: '1.5px solid rgba(255,255,255,0.25)',
+      background: '#E86F2E',
+      border: '1.5px solid #E86F2E',
       color: '#fff',
       borderRadius: '12px',
       fontSize: '15px',
@@ -389,7 +392,7 @@ function getStyles(isDark) {
       display: 'flex',
       justifyContent: 'flex-start',
       padding: '0 80px 64px',
-      background: '#07243A',
+      background: '#061A2A',
     },
     heroBadgeCard: {
       display: 'flex',
@@ -397,7 +400,7 @@ function getStyles(isDark) {
       gap: '16px',
       borderRadius: '16px',
       padding: '18px 24px',
-      background: '#0D2E42',
+      background: '#0C2640',
       border: '1px solid rgba(255,255,255,0.1)',
     },
     heroBadgeImg: { width: '48px', height: '48px', objectFit: 'contain' },
@@ -409,7 +412,7 @@ function getStyles(isDark) {
 
     // Sections — theme-aware
     section: {
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
     },
     sectionAlt: {
       background: isDark ? '#0A2030' : '#F7F1E3',
@@ -417,7 +420,7 @@ function getStyles(isDark) {
       borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}`,
     },
     ctaFooter: {
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
     },
     contentMax: { maxWidth: '860px' },
 
@@ -440,7 +443,7 @@ function getStyles(isDark) {
       textTransform: 'uppercase',
     },
     h2: {
-      color: isDark ? '#ffffff' : '#07243A',
+      color: isDark ? '#ffffff' : '#061A2A',
       fontWeight: '900',
       lineHeight: 1.1,
       letterSpacing: '-0.03em',
@@ -479,6 +482,7 @@ function getStyles(isDark) {
       fontSize: '11px',
       fontWeight: '800',
       letterSpacing: '0.3em',
+      textShadow: '0 0 8px rgba(37,183,200,0.5)',
     },
 
     // Feature cards
@@ -486,12 +490,12 @@ function getStyles(isDark) {
     featureCard: {
       borderRadius: '14px',
       padding: '24px 22px',
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
-      borderLeft: '3px solid #0B5CAD',
+      borderLeft: '3px solid #1565C4',
     },
     featureTitle: {
-      color: isDark ? '#ffffff' : '#07243A',
+      color: isDark ? '#ffffff' : '#061A2A',
       fontSize: '15px',
       fontWeight: '700',
       margin: '0 0 8px',

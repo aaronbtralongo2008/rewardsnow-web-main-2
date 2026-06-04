@@ -4,7 +4,7 @@ import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 import { useTheme } from './ThemeContext';
 
-const ROYAL = '#0B5CAD';
+const ROYAL = '#1565C4';
 const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
 function EmployeeDashboard() {
@@ -160,8 +160,8 @@ function EmployeeDashboard() {
   };
 
   // Theme-aware values
-  const rootBg = isDark ? '#07243A' : '#FFF8EA';
-  const cardBg = isDark ? '#0D2E42' : '#ffffff';
+  const rootBg = isDark ? '#061A2A' : '#FFF8EA';
+  const cardBg = isDark ? '#0C2640' : '#ffffff';
   const textColor = isDark ? '#ffffff' : '#101820';
   const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
   const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
@@ -171,30 +171,30 @@ function EmployeeDashboard() {
 
   if (!token) {
     return (
-      <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", background: '#07243A' }}>
+      <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", background: '#061A2A' }}>
         {!isMobile && (
-          <div style={{ flex: 1, background: '#07243A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ flex: 1, background: '#061A2A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'relative', zIndex: 2 }}>
               <img src={LOGO} alt="Veniar" style={{ height: '48px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' }} />
               <div style={{ width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' }} />
-              <h1 style={{ color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' }}>Built for<br />your team.</h1>
+              <h1 className="vn-fade-up" style={{ color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' }}>Built for<br />your team.</h1>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' }}>Look up customers and manage reward transactions in seconds.</p>
             </div>
           </div>
         )}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0D2E42', width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0C2640', width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
           {/* Teal top line on login card */}
-          <div style={{ height: '3px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
+          <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
           {isMobile && <img src={LOGO} alt="Veniar" style={{ height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '28px' }} />}
           <span style={{ display: 'inline-block', background: 'rgba(37,183,200,0.15)', color: '#25B7C8', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' }}>EMPLOYEE PORTAL</span>
           <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Staff Login</h2>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', margin: '0 0 36px 0' }}>Sign in to issue customer points</p>
           <label style={{ color: 'rgba(255,255,255,0.6)', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' }}>Email</label>
-          <input style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+          <input className="vn-input" style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
           <label style={{ color: 'rgba(255,255,255,0.6)', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' }}>Password</label>
-          <input style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+          <input className="vn-input" style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
           {error && <p style={{ color: '#e03434', fontSize: '13px', background: 'rgba(224,52,52,0.15)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(224,52,52,0.3)', margin: '0 0 14px 0' }}>{error}</p>}
-          <button style={{ padding: '16px', borderRadius: '12px', border: 'none', background: ROYAL, color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: loading ? 0.7 : 1 }} onClick={handleLogin} disabled={loading}>
+          <button className="vn-btn" style={{ padding: '16px', borderRadius: '12px', border: 'none', background: ROYAL, color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: loading ? 0.7 : 1 }} onClick={handleLogin} disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
           <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '24px 0 16px' }} />
@@ -210,8 +210,8 @@ function EmployeeDashboard() {
   return (
     <div style={{ minHeight: '100vh', background: rootBg, fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' }}>
       {/* Teal accent bar */}
-      <div style={{ height: '3px', background: '#25B7C8' }} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: '#061A2A', borderBottom: '1px solid rgba(255,255,255,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }} onClick={() => navigate('/')}>Veniar</button>
           <span style={{ background: '#e8f4ed', color: '#2e7d52', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' }}>{employee?.role}</span>
@@ -250,7 +250,7 @@ function EmployeeDashboard() {
                 <p style={{ color: mutedColor, fontSize: '13px', margin: 0 }}>Enter the customer's phone number</p>
               </div>
             </div>
-            <div style={{ background: cardBg, borderRadius: '16px', padding: '20px', border: `1px solid ${borderColor}` }}>
+            <div className="vn-card" style={{ background: cardBg, borderRadius: '16px', padding: '20px', border: `1px solid ${borderColor}` }}>
               <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Customer phone number</label>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                 <input
@@ -260,7 +260,7 @@ function EmployeeDashboard() {
                   onKeyDown={e => e.key === 'Enter' && handleLookup()}
                   autoComplete="tel"
                 />
-                <button style={{ padding: '13px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, opacity: loading ? 0.7 : 1 }} onClick={handleLookup} disabled={loading}>
+                <button className="vn-btn" style={{ padding: '13px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, opacity: loading ? 0.7 : 1 }} onClick={handleLookup} disabled={loading}>
                   {loading ? '...' : 'Find →'}
                 </button>
               </div>
@@ -272,7 +272,7 @@ function EmployeeDashboard() {
 
         {step === 'menu' && customer && (
           <div style={{ width: '100%', maxWidth: '680px' }}>
-            <div style={{ background: cardBg, borderRadius: '14px', padding: '14px 16px', border: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
+            <div className="vn-card" style={{ background: cardBg, borderRadius: '14px', padding: '14px 16px', border: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
               <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: ROYAL, color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{customer.firstName?.charAt(0)?.toUpperCase()}</div>
               <div style={{ flex: 1, minWidth: '100px' }}>
                 <p style={{ color: textColor, fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' }}>{customer.firstName} {customer.lastName}</p>
@@ -358,7 +358,7 @@ function EmployeeDashboard() {
                 <p style={{ color: mutedColor, fontSize: '13px', margin: 0 }}>Review before {mode === 'issue' ? 'issuing' : 'redeeming'}</p>
               </div>
             </div>
-            <div style={{ background: cardBg, borderRadius: '16px', padding: '20px', border: `1px solid ${borderColor}` }}>
+            <div className="vn-card" style={{ background: cardBg, borderRadius: '16px', padding: '20px', border: `1px solid ${borderColor}` }}>
               <div style={{ marginBottom: '4px' }}>
                 <p style={{ color: isDark ? 'rgba(255,255,255,0.4)' : '#aaa', fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 6px 0' }}>Customer</p>
                 <p style={{ color: textColor, fontSize: '1rem', fontWeight: '700', margin: '0 0 14px 0' }}>{customer?.firstName} {customer?.lastName}</p>
@@ -391,7 +391,7 @@ function EmployeeDashboard() {
               {result && !result.success && <p style={{ color: '#e03434', fontSize: '13px', marginTop: '8px', marginBottom: 0 }}>{result.message}</p>}
               <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
                 <button style={{ padding: '12px 14px', borderRadius: '10px', border: `1.5px solid ${borderColor}`, background: 'transparent', color: mutedColor, fontSize: '13px', fontWeight: '600', cursor: 'pointer', flex: 1 }} onClick={() => { setResult(null); setStep('menu'); }}>← Back</button>
-                <button style={{ padding: '12px 14px', borderRadius: '10px', border: 'none', color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', flex: 2, background: mode === 'redeem' ? '#2e7d52' : ROYAL, opacity: submitting ? 0.7 : 1 }}
+                <button className="vn-btn" style={{ padding: '12px 14px', borderRadius: '10px', border: 'none', color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', flex: 2, background: mode === 'redeem' ? '#2e7d52' : ROYAL, opacity: submitting ? 0.7 : 1 }}
                         onClick={mode === 'issue' ? handleIssue : handleRedeem} disabled={submitting}>
                   {submitting ? 'Processing...' : mode === 'issue' ? `Issue ${totalPoints} pts` : `Redeem ${totalPoints} pts`}
                 </button>
@@ -402,14 +402,14 @@ function EmployeeDashboard() {
 
         {step === 'success' && result && (
           <div style={{ width: '100%', maxWidth: '680px' }}>
-            <div style={{ background: cardBg, borderRadius: '20px', padding: '36px 24px', textAlign: 'center', border: `1px solid ${borderColor}` }}>
+            <div className="vn-card" style={{ background: cardBg, borderRadius: '20px', padding: '36px 24px', textAlign: 'center', border: `1px solid ${borderColor}` }}>
               <div style={{ width: '60px', height: '60px', borderRadius: '50%', fontSize: '1.6rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto', background: mode === 'redeem' ? '#fdeaea' : '#e8f4ed', color: mode === 'redeem' ? '#c0392b' : '#2e7d52' }}>✓</div>
               <h2 style={{ color: textColor, fontSize: '1.5rem', fontWeight: '800', margin: '0 0 8px 0' }}>{mode === 'issue' ? 'Points Issued!' : 'Points Redeemed!'}</h2>
               <p style={{ color: mutedColor, fontSize: '14px', margin: '0 0 20px 0' }}>{result.message}</p>
               {result.newBalance !== undefined && (
-                <div style={{ background: '#0B5CAD', borderRadius: '14px', padding: '20px', marginBottom: '18px' }}>
+                <div style={{ background: '#1565C4', borderRadius: '14px', padding: '20px', marginBottom: '18px' }}>
                   <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '2px', margin: '0 0 4px 0' }}>{customer?.firstName}'s new balance</p>
-                  <p style={{ color: '#F2B84B', fontSize: '2.6rem', fontWeight: '800', margin: 0, lineHeight: 1 }}>{result.newBalance.toLocaleString()}</p>
+                  <p className="vn-gold-glow" style={{ color: '#F2B84B', fontSize: '2.6rem', fontWeight: '800', margin: 0, lineHeight: 1 }}>{result.newBalance.toLocaleString()}</p>
                   <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '3px', margin: '4px 0 0 0' }}>points</p>
                 </div>
               )}
@@ -419,7 +419,7 @@ function EmployeeDashboard() {
                   {result.items.map((item, i) => <p key={i} style={{ color: textColor, fontSize: '13px', margin: '0 0 3px 0' }}>· {item}</p>)}
                 </div>
               )}
-              <button style={{ padding: '13px 28px', borderRadius: '12px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={resetFlow}>New Transaction</button>
+              <button className="vn-btn" style={{ padding: '13px 28px', borderRadius: '12px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={resetFlow}>New Transaction</button>
             </div>
           </div>
         )}

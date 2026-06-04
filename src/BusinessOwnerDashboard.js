@@ -4,7 +4,7 @@ import { useIsMobile } from './useIsMobile';
 import { API } from './config';
 import { useTheme } from './ThemeContext';
 
-const ROYAL = '#0B5CAD';
+const ROYAL = '#1565C4';
 
 function BusinessOwnerDashboard() {
   const isMobile = useIsMobile();
@@ -161,8 +161,8 @@ function BusinessOwnerDashboard() {
   };
 
   // Theme-aware values
-  const rootBg = isDark ? '#07243A' : '#FFF8EA';
-  const cardBg = isDark ? '#0D2E42' : '#ffffff';
+  const rootBg = isDark ? '#061A2A' : '#FFF8EA';
+  const cardBg = isDark ? '#0C2640' : '#ffffff';
   const textColor = isDark ? '#ffffff' : '#101820';
   const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
   const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
@@ -170,9 +170,9 @@ function BusinessOwnerDashboard() {
   const inputBorder = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)';
   const inputText = isDark ? '#ffffff' : '#101820';
   const skeletonBg = isDark ? 'rgba(255,255,255,0.06)' : '#f0f0f0';
-  const sidebarBg = isDark ? '#0D2E42' : '#ffffff';
+  const sidebarBg = isDark ? '#0C2640' : '#ffffff';
   const navActiveBg = isDark ? 'rgba(11,92,173,0.25)' : '#eff6ff';
-  const mobileTabsBg = isDark ? '#0D2E42' : '#ffffff';
+  const mobileTabsBg = isDark ? '#0C2640' : '#ffffff';
   const tableBorder = `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}`;
 
   const Skeleton = ({ h = 72 }) => (
@@ -181,28 +181,28 @@ function BusinessOwnerDashboard() {
 
   if (!token) {
     return (
-      <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", background: '#07243A' }}>
+      <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", background: '#061A2A' }}>
         {!isMobile && (
-          <div style={{ flex: 1, background: '#07243A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ flex: 1, background: '#061A2A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'relative', zIndex: 2 }}>
               <div style={{ color: '#F2B84B', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' }}>REWARDSNOW</div>
               <div style={{ width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' }} />
-              <h1 style={{ color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' }}>Run your business.<br />Reward your customers.</h1>
+              <h1 className="vn-fade-up" style={{ color: '#fff', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' }}>Run your business.<br />Reward your customers.</h1>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' }}>Manage employees, services, and analytics from your business portal.</p>
             </div>
           </div>
         )}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0D2E42', width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0C2640', width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
           {/* Teal top line on login card */}
-          <div style={{ height: '3px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
+          <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', borderRadius: '2px 2px 0 0', marginBottom: '32px' }} />
           {isMobile && <div style={{ color: '#F2B84B', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' }}>Veniar</div>}
           <span style={{ display: 'inline-block', background: 'rgba(11,92,173,0.3)', color: '#F2B84B', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px' }}>BUSINESS PORTAL</span>
           <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Owner Dashboard</h2>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', margin: '0 0 36px 0' }}>Sign in with your business account</p>
           <label style={{ color: '#F2B84B', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' }}>Email</label>
-          <input style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+          <input className="vn-input" style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
           <label style={{ color: '#F2B84B', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' }}>Password</label>
-          <input style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+          <input className="vn-input" style={{ padding: '14px 16px', borderRadius: '10px', border: '2px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.07)', color: '#ffffff', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
           {error && <p style={{ color: '#e03434', fontSize: '13px', background: 'rgba(224,52,52,0.15)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(224,52,52,0.3)', margin: '0 0 14px 0' }}>{error}</p>}
           <button style={{ padding: '16px', borderRadius: '12px', border: 'none', background: ROYAL, color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%' }} onClick={handleLogin}>Sign In</button>
         </div>
@@ -221,8 +221,8 @@ function BusinessOwnerDashboard() {
   return (
     <div style={{ minHeight: '100vh', background: rootBg, fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' }}>
       {/* Teal accent bar */}
-      <div style={{ height: '3px', background: '#25B7C8' }} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100 }}>
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#061A2A', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <button style={{ color: '#F2B84B', fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }} onClick={() => navigate('/')}>Veniar</button>
           {!isMobile && <span style={{ background: ROYAL, color: '#fff', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' }}>BUSINESS</span>}
@@ -334,7 +334,7 @@ function BusinessOwnerDashboard() {
                     { label: 'Points This Month', value: stats.pointsIssuedThisMonth ?? 0, color: ROYAL, bg: isDark ? 'rgba(11,92,173,0.2)' : '#eff6ff' },
                     { label: 'Total Customers', value: stats.totalCustomers ?? 0, color: isDark ? '#F2B84B' : '#7a5500', bg: isDark ? 'rgba(242,184,75,0.12)' : '#fff8e1' },
                   ].map(stat => (
-                    <div key={stat.label} style={{ borderRadius: '14px', padding: '18px', border: `1px solid ${borderColor}`, background: stat.bg }}>
+                    <div key={stat.label} className="vn-stat vn-card" style={{ borderRadius: '14px', padding: '18px', border: `1px solid ${borderColor}`, background: stat.bg }}>
                       <p style={{ fontWeight: '800', margin: '0 0 6px 0', lineHeight: 1, color: stat.color, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>{stat.value.toLocaleString()}</p>
                       <p style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', margin: 0 }}>{stat.label}</p>
                     </div>
@@ -349,7 +349,7 @@ function BusinessOwnerDashboard() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: 0 }}>Employees</h2>
                 {isApproved && (
-                  <button style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 }} onClick={() => setShowEmpForm(!showEmpForm)}>
+                  <button className="vn-btn" style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 }} onClick={() => setShowEmpForm(!showEmpForm)}>
                     {showEmpForm ? 'Cancel' : '+ Add'}
                   </button>
                 )}
@@ -360,23 +360,23 @@ function BusinessOwnerDashboard() {
                   <div style={{ display: 'flex', gap: '12px' }}>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>First name</label>
-                      <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} autoComplete="given-name" value={empForm.firstName} onChange={e => setEmpForm({ ...empForm, firstName: e.target.value })} />
+                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} autoComplete="given-name" value={empForm.firstName} onChange={e => setEmpForm({ ...empForm, firstName: e.target.value })} />
                     </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Last name</label>
-                      <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} autoComplete="family-name" value={empForm.lastName} onChange={e => setEmpForm({ ...empForm, lastName: e.target.value })} />
+                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} autoComplete="family-name" value={empForm.lastName} onChange={e => setEmpForm({ ...empForm, lastName: e.target.value })} />
                     </div>
                   </div>
                   <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Email</label>
-                  <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="off" value={empForm.email} onChange={e => setEmpForm({ ...empForm, email: e.target.value })} />
+                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="email" autoComplete="off" value={empForm.email} onChange={e => setEmpForm({ ...empForm, email: e.target.value })} />
                   <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Temporary password</label>
-                  <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="new-password" value={empForm.password} onChange={e => setEmpForm({ ...empForm, password: e.target.value })} />
+                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="password" autoComplete="new-password" value={empForm.password} onChange={e => setEmpForm({ ...empForm, password: e.target.value })} />
                   <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Role</label>
                   <select style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} value={empForm.role} onChange={e => setEmpForm({ ...empForm, role: e.target.value })}>
                     <option value="STAFF">Staff</option>
                     <option value="MANAGER">Manager</option>
                   </select>
-                  <button style={{ padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: saving ? 0.7 : 1 }} onClick={handleAddEmployee} disabled={saving}>
+                  <button className="vn-btn" style={{ padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: saving ? 0.7 : 1 }} onClick={handleAddEmployee} disabled={saving}>
                     {saving ? 'Adding...' : 'Add Employee'}
                   </button>
                 </div>
@@ -386,7 +386,7 @@ function BusinessOwnerDashboard() {
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {employees.map(emp => (
-                    <div key={emp.id} style={{ background: cardBg, borderRadius: '14px', padding: '14px 16px', border: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div key={emp.id} className="vn-card" style={{ background: cardBg, borderRadius: '14px', padding: '14px 16px', border: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: ROYAL, color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{emp.firstName?.charAt(0)?.toUpperCase()}</div>
                       <div style={{ flex: 1, minWidth: '80px' }}>
                         <p style={{ color: textColor, fontSize: '13px', fontWeight: '700', margin: '0 0 2px 0' }}>{emp.firstName} {emp.lastName}</p>
@@ -415,7 +415,7 @@ function BusinessOwnerDashboard() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <h2 style={{ color: textColor, fontSize: '1.2rem', fontWeight: '700', margin: 0 }}>Services</h2>
                 {isApproved && (
-                  <button style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 }} onClick={() => { setEditingSvc(null); setSvcForm({ name: '', description: '', rewardsCost: '', rewardsGrant: '' }); setShowSvcForm(!showSvcForm); }}>
+                  <button className="vn-btn" style={{ padding: '9px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '13px', fontWeight: '700', cursor: 'pointer', flexShrink: 0 }} onClick={() => { setEditingSvc(null); setSvcForm({ name: '', description: '', rewardsCost: '', rewardsGrant: '' }); setShowSvcForm(!showSvcForm); }}>
                     {showSvcForm ? 'Cancel' : '+ Add'}
                   </button>
                 )}
@@ -424,20 +424,20 @@ function BusinessOwnerDashboard() {
                 <div style={{ background: isDark ? 'rgba(11,92,173,0.12)' : '#f0f4ff', borderRadius: '14px', padding: '18px', border: `1.5px solid rgba(11,92,173,0.2)`, marginBottom: '16px' }}>
                   <h3 style={{ color: ROYAL, fontSize: '14px', fontWeight: '700', margin: '0 0 14px 0' }}>{editingSvc ? 'Edit Service' : 'New Service'}</h3>
                   <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Service name</label>
-                  <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} placeholder="Large Latte" value={svcForm.name} onChange={e => setSvcForm({ ...svcForm, name: e.target.value })} />
+                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} placeholder="Large Latte" value={svcForm.name} onChange={e => setSvcForm({ ...svcForm, name: e.target.value })} />
                   <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Description</label>
-                  <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} placeholder="16oz latte any flavor" value={svcForm.description} onChange={e => setSvcForm({ ...svcForm, description: e.target.value })} />
+                  <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} placeholder="16oz latte any flavor" value={svcForm.description} onChange={e => setSvcForm({ ...svcForm, description: e.target.value })} />
                   <div style={{ display: 'flex', gap: '12px' }}>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Points earned</label>
-                      <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="number" min="0" value={svcForm.rewardsGrant} onChange={e => setSvcForm({ ...svcForm, rewardsGrant: e.target.value })} />
+                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="number" min="0" value={svcForm.rewardsGrant} onChange={e => setSvcForm({ ...svcForm, rewardsGrant: e.target.value })} />
                     </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <label style={{ color: mutedColor, fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' }}>Points to redeem</label>
-                      <input style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="number" min="0" value={svcForm.rewardsCost} onChange={e => setSvcForm({ ...svcForm, rewardsCost: e.target.value })} />
+                      <input className="vn-input" style={{ padding: '10px 14px', borderRadius: '8px', border: `1.5px solid ${inputBorder}`, background: inputBg, color: inputText, fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' }} type="number" min="0" value={svcForm.rewardsCost} onChange={e => setSvcForm({ ...svcForm, rewardsCost: e.target.value })} />
                     </div>
                   </div>
-                  <button style={{ padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: saving ? 0.7 : 1 }} onClick={handleSaveService} disabled={saving}>
+                  <button className="vn-btn" style={{ padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%', opacity: saving ? 0.7 : 1 }} onClick={handleSaveService} disabled={saving}>
                     {saving ? 'Saving...' : editingSvc ? 'Save Changes' : 'Add Service'}
                   </button>
                 </div>

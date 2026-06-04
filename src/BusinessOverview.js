@@ -12,7 +12,7 @@ export default function BusinessOverview() {
   return (
     <div style={s.root}>
       {/* ── Teal accent line ───────────────────────────────────────────── */}
-      <div style={{ height: '3px', background: '#25B7C8', position: 'sticky', top: 0, zIndex: 101 }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', position: 'sticky', top: 0, zIndex: 101 }} />
 
       {/* ── Navigation ─────────────────────────────────────────────────── */}
       <nav style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
@@ -27,16 +27,16 @@ export default function BusinessOverview() {
       </nav>
 
       {/* ── Hero — always deep flight dark band ────────────────────────── */}
-      <section style={{ background: '#07243A', padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
+      <section style={{ background: '#061A2A', padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
         <p style={s.eyebrow}>FOR BUSINESS PARTNERS</p>
-        <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
+        <h1 className="vn-fade-up" style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
           Veniar — Shared loyalty that brings new customers to your door.
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: '540px' }}>
           Independent restaurants and local businesses shouldn&apos;t need to build their own loyalty programs from scratch. Veniar gives them one — shared, connected, and stronger every time a new business joins.
         </p>
-        <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
+        <button className="vn-btn" style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
       </section>
 
       <main>
@@ -64,7 +64,7 @@ export default function BusinessOverview() {
                 { value: '25×', label: 'costlier to acquire new customers than retain existing' },
                 { value: '$50K-$200K', label: 'average launch cost for a small business loyalty program' },
               ].map(item => (
-                <div key={item.value} style={s.stat}>
+                <div key={item.value} className="vn-stat vn-card" style={s.stat}>
                   <p style={s.statValue}>{item.value}</p>
                   <p style={s.statLabel}>{item.label}</p>
                 </div>
@@ -100,7 +100,7 @@ export default function BusinessOverview() {
                 { problem: 'Complex integrations', solution: 'Your staff authenticates transactions via simple web interface.' },
                 { problem: 'Isolated loyalty', solution: 'Points work everywhere, making them more valuable to customers.' },
               ].map(p => (
-                <div key={p.problem} style={s.problemCard}>
+                <div key={p.problem} className="vn-card" style={s.problemCard}>
                   <p style={s.problem}>&#x2717; {p.problem}</p>
                   <p style={s.solution}>&#x2713; {p.solution}</p>
                 </div>
@@ -110,7 +110,7 @@ export default function BusinessOverview() {
         </section>
 
         {/* ── How it works — always dark band (Super Flight vibe) ────────── */}
-        <section style={{ background: '#07243A', padding: isMobile ? '56px 24px' : '80px 80px' }}>
+        <section style={{ background: '#061A2A', padding: isMobile ? '56px 24px' : '80px 80px' }}>
           <div style={s.contentMax}>
             <p style={s.tagOnDark}>HOW IT WORKS</p>
             <h2 style={{ ...s.h2OnDark, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Simple onboarding</h2>
@@ -124,7 +124,7 @@ export default function BusinessOverview() {
                 { n: 'VN·03', label: 'Start earning' },
               ].map(step => (
                 <div key={step.n} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <span style={s.stepIndicator}>{step.n}</span>
+                  <span className="vn-teal-glow" style={s.stepIndicator}>{step.n}</span>
                   <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', lineHeight: 1.4 }}>{step.label}</span>
                 </div>
               ))}
@@ -149,7 +149,7 @@ export default function BusinessOverview() {
                 { n: '02', title: 'Configure services', desc: 'Set point values and pricing.' },
                 { n: '03', title: 'Start earning', desc: 'Reward your customers immediately.' },
               ].map(step => (
-                <div key={step.n} style={s.stepCard}>
+                <div key={step.n} className="vn-card" style={s.stepCard}>
                   <span style={s.stepNum}>{step.n}</span>
                   <p style={s.stepTitle}>{step.title}</p>
                   <p style={s.stepDesc}>{step.desc}</p>
@@ -160,12 +160,12 @@ export default function BusinessOverview() {
         </section>
 
         {/* ── Bottom teal accent bar ─────────────────────────────────────── */}
-        <div style={{ height: '3px', background: '#25B7C8' }} />
+        <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
 
         {/* ── Footer CTA ─────────────────────────────────────────────────── */}
         <section
           style={{
-            background: '#07243A',
+            background: '#061A2A',
             padding: isMobile ? '56px 24px' : '80px 80px',
             textAlign: 'center',
           }}
@@ -175,8 +175,8 @@ export default function BusinessOverview() {
             Our team reviews every application and will contact you by email once approved.
           </p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply now</button>
-            <button style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
+            <button className="vn-btn" style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply now</button>
+            <button className="vn-btn vn-btn-ghost" style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
           </div>
         </section>
       </main>
@@ -189,7 +189,7 @@ function getStyles(isDark) {
   return {
     root: {
       minHeight: '100vh',
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
       fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
       position: 'relative',
     },
@@ -203,7 +203,7 @@ function getStyles(isDark) {
       position: 'sticky',
       top: '3px',
       zIndex: 100,
-      background: '#07243A',
+      background: '#061A2A',
       borderBottom: '1px solid rgba(255,255,255,0.08)',
     },
     backBtn: {
@@ -278,7 +278,7 @@ function getStyles(isDark) {
     // CTA buttons
     ctaPrimary: {
       padding: '14px 28px',
-      background: '#0B5CAD',
+      background: '#1565C4',
       border: 'none',
       color: '#ffffff',
       borderRadius: '6px',
@@ -301,7 +301,7 @@ function getStyles(isDark) {
 
     // Theme-aware sections
     section: {
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
       position: 'relative',
     },
     sectionAlt: {
@@ -332,7 +332,7 @@ function getStyles(isDark) {
 
     // Headings
     h2: {
-      color: isDark ? '#ffffff' : '#07243A',
+      color: isDark ? '#ffffff' : '#061A2A',
       fontWeight: '900',
       lineHeight: 1.1,
       letterSpacing: '-0.03em',
@@ -372,14 +372,14 @@ function getStyles(isDark) {
     // Stats — dashboard-style metric cards
     statsGrid: { display: 'grid' },
     stat: {
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
       borderLeft: '3px solid #0B5CAD',
       borderRadius: '8px',
       padding: '22px 18px',
     },
     statValue: {
-      color: isDark ? '#F2B84B' : '#0B5CAD',
+      color: isDark ? '#F2B84B' : '#1565C4',
       fontWeight: '900',
       letterSpacing: '-0.03em',
       margin: '0 0 8px',
@@ -396,7 +396,7 @@ function getStyles(isDark) {
     // Problem / solution cards
     grid: { display: 'grid' },
     problemCard: {
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
       borderLeft: '3px solid #0B5CAD',
       borderRadius: '8px',
@@ -418,7 +418,7 @@ function getStyles(isDark) {
     // Step cards — in the dark band section
     stepsGrid: { display: 'grid' },
     stepCard: {
-      background: '#0D2E42',
+      background: '#0C2640',
       border: '1px solid rgba(255,255,255,0.1)',
       borderLeft: '3px solid #0B5CAD',
       borderRadius: '8px',

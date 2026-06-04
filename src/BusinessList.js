@@ -117,7 +117,7 @@ export default function BusinessList({ customer, onLogout, onSelectBusiness, onN
   return (
     <div style={s.root}>
       {/* 3px teal accent bar */}
-      <div style={{ height: '3px', background: '#25B7C8' }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
 
       <nav style={{ ...s.nav, padding: isMobile ? '0 16px' : '0 40px' }}>
         <button style={s.navBrand} onClick={() => onNavigate('/home')}>Veniar</button>
@@ -147,7 +147,7 @@ export default function BusinessList({ customer, onLogout, onSelectBusiness, onN
       <div style={{ ...s.body, padding: isMobile ? '20px 16px' : '40px 24px' }}>
         <div style={s.header}>
           <div>
-            <h1 style={{ ...s.title, fontSize: isMobile ? '1.3rem' : '1.5rem' }}>Partner businesses</h1>
+            <h1 className="vn-fade-up" style={{ ...s.title, fontSize: isMobile ? '1.3rem' : '1.5rem' }}>Partner businesses</h1>
             <p style={s.subtitle}>
               {aiSummary || 'Earn points at every location below'}
             </p>
@@ -220,6 +220,7 @@ function BizCard({ biz, isMobile, s, onSelectBusiness }) {
 
   return (
     <div
+      className="vn-card"
       style={{
         ...s.card,
         ...(biz.featured ? s.cardFeatured : {}),
@@ -274,7 +275,7 @@ function getStyles(isDark) {
   return {
     root: {
       minHeight: '100vh',
-      background: isDark ? '#07243A' : '#FFF8EA',
+      background: isDark ? '#061A2A' : '#FFF8EA',
       fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
       position: 'relative',
     },
@@ -283,7 +284,7 @@ function getStyles(isDark) {
       justifyContent: 'space-between',
       alignItems: 'center',
       height: '60px',
-      background: '#07243A',
+      background: '#061A2A',
       borderBottom: '1px solid rgba(255,255,255,0.08)',
       position: 'sticky',
       top: 0,
@@ -331,7 +332,7 @@ function getStyles(isDark) {
       marginBottom: '12px',
     },
     title: {
-      color: isDark ? '#ffffff' : '#07243A',
+      color: isDark ? '#ffffff' : '#061A2A',
       fontWeight: '800',
       margin: '0 0 4px',
       letterSpacing: '-0.02em',
@@ -357,7 +358,7 @@ function getStyles(isDark) {
       marginBottom: '20px',
       gap: '8px',
     },
-    searchIcon: { color: '#0B5CAD', fontSize: '18px', lineHeight: 1 },
+    searchIcon: { color: '#1565C4', fontSize: '18px', lineHeight: 1 },
     searchInput: {
       flex: 1,
       border: 'none',
@@ -419,7 +420,7 @@ function getStyles(isDark) {
       background: isDark ? 'rgba(255,255,255,0.06)' : '#f0f0f0',
     },
     card: {
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
       borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
       borderRadius: '8px',
@@ -442,7 +443,7 @@ function getStyles(isDark) {
       width: '40px',
       height: '40px',
       borderRadius: '10px',
-      background: '#0B5CAD',
+      background: '#1565C4',
       color: '#fff',
       fontSize: '1.1rem',
       fontWeight: '700',
@@ -452,7 +453,7 @@ function getStyles(isDark) {
     },
     featuredTag: {
       background: '#F2B84B',
-      color: '#07243A',
+      color: '#061A2A',
       fontSize: '10px',
       fontWeight: '700',
       padding: '3px 6px',
@@ -519,16 +520,16 @@ function getStyles(isDark) {
       padding: '2px 6px',
       borderRadius: '4px',
     },
-    arrow: { color: '#0B5CAD', fontSize: '14px' },
+    arrow: { color: '#1565C4', fontSize: '14px' },
     empty: {
-      background: isDark ? '#0D2E42' : '#ffffff',
+      background: isDark ? '#0C2640' : '#ffffff',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
       borderRadius: '12px',
       padding: '60px 24px',
       textAlign: 'center',
     },
     emptyTitle: {
-      color: isDark ? '#ffffff' : '#07243A',
+      color: isDark ? '#ffffff' : '#061A2A',
       fontSize: '15px',
       fontWeight: '600',
       margin: '0 0 12px',
@@ -536,7 +537,7 @@ function getStyles(isDark) {
     emptyAction: {
       background: 'none',
       border: `1px solid ${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)'}`,
-      color: isDark ? '#fff' : '#07243A',
+      color: isDark ? '#fff' : '#061A2A',
       fontSize: '13px',
       fontWeight: '500',
       cursor: 'pointer',

@@ -70,7 +70,7 @@ function Register({ onRegister, onBack }) {
 
   const container = {
     minHeight: '100vh',
-    background: isDark ? '#07243A' : '#FFF8EA',
+    background: isDark ? '#061A2A' : '#FFF8EA',
     fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
     display: 'flex',
     flexDirection: 'column',
@@ -82,7 +82,7 @@ function Register({ onRegister, onBack }) {
   };
 
   const mobileHeader = {
-    background: '#07243A',
+    background: '#061A2A',
     padding: '28px 24px',
     display: 'flex',
     flexDirection: 'column',
@@ -103,7 +103,7 @@ function Register({ onRegister, onBack }) {
 
   const leftPanel = {
     flex: 1,
-    background: '#07243A',
+    background: '#061A2A',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -192,7 +192,7 @@ function Register({ onRegister, onBack }) {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    background: isDark ? '#0D2E42' : '#ffffff',
+    background: isDark ? '#0C2640' : '#ffffff',
     boxSizing: 'border-box',
     overflowY: 'auto',
     position: 'relative',
@@ -259,7 +259,7 @@ function Register({ onRegister, onBack }) {
     padding: '14px',
     borderRadius: '12px',
     border: 'none',
-    background: '#0B5CAD',
+    background: '#1565C4',
     color: '#ffffff',
     fontSize: '15px',
     fontWeight: '700',
@@ -311,7 +311,7 @@ function Register({ onRegister, onBack }) {
   return (
     <div style={container}>
       {/* Teal accent line at top */}
-      <div style={{ height: '3px', background: '#25B7C8', flexShrink: 0 }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', flexShrink: 0 }} />
       <div style={{ ...wrapper, flexDirection: isMobile ? 'column' : 'row' }}>
 
         {isMobile ? (
@@ -356,58 +356,58 @@ function Register({ onRegister, onBack }) {
           <button style={themeToggleSt} onClick={toggleTheme}>
             {isDark ? 'LIGHT' : 'DARK'}
           </button>
-          <h1 style={{ ...brandName, fontSize: isMobile ? '1.6rem' : '2rem' }}>Create Account</h1>
+          <h1 className="vn-fade-up" style={{ ...brandName, fontSize: isMobile ? '1.6rem' : '2rem' }}>Create Account</h1>
           <div style={goldAccentBar} />
           <p style={brandSub}>Join Veniar for free</p>
 
           <div style={row}>
             <div style={half}>
               <label style={inputLabel}>First Name</label>
-              <input style={input} placeholder="First name" value={form.firstName}
+              <input className="vn-input" style={input} placeholder="First name" value={form.firstName}
                      onChange={handleChange('firstName')} autoComplete="given-name"
                      onKeyDown={e => e.key === 'Enter' && handleRegister()} />
             </div>
             <div style={half}>
               <label style={inputLabel}>Last Name</label>
-              <input style={input} placeholder="Last name" value={form.lastName}
+              <input className="vn-input" style={input} placeholder="Last name" value={form.lastName}
                      onChange={handleChange('lastName')} autoComplete="family-name"
                      onKeyDown={e => e.key === 'Enter' && handleRegister()} />
             </div>
           </div>
 
           <label style={inputLabel}>Username</label>
-          <input style={input} placeholder="username" value={form.username}
+          <input className="vn-input" style={input} placeholder="username" value={form.username}
                  onChange={handleChange('username')} autoComplete="username"
                  onKeyDown={e => e.key === 'Enter' && handleRegister()} />
 
           <label style={inputLabel}>Email</label>
-          <input style={input} type="email" placeholder="you@email.com" value={form.email}
+          <input className="vn-input" style={input} type="email" placeholder="you@email.com" value={form.email}
                  onChange={handleChange('email')} autoComplete="email"
                  onKeyDown={e => e.key === 'Enter' && handleRegister()} />
 
           <div style={row}>
             <div style={half}>
               <label style={inputLabel}>Phone</label>
-              <input style={input} type="tel" placeholder="10-15 digits" value={form.phoneNumber}
+              <input className="vn-input" style={input} type="tel" placeholder="10-15 digits" value={form.phoneNumber}
                      onChange={handleChange('phoneNumber')} autoComplete="tel-national"
                      onKeyDown={e => e.key === 'Enter' && handleRegister()} />
             </div>
             <div style={half}>
               <label style={inputLabel}>Age</label>
-              <input style={input} type="number" placeholder="Age" value={form.age}
+              <input className="vn-input" style={input} type="number" placeholder="Age" value={form.age}
                      onChange={handleChange('age')} autoComplete="off" min="13" max="120"
                      onKeyDown={e => e.key === 'Enter' && handleRegister()} />
             </div>
           </div>
 
           <label style={inputLabel}>Password</label>
-          <input style={input} type="password" placeholder="At least 8 characters" value={form.password}
+          <input className="vn-input" style={input} type="password" placeholder="At least 8 characters" value={form.password}
                  onChange={handleChange('password')} autoComplete="new-password"
                  onKeyDown={e => e.key === 'Enter' && handleRegister()} />
 
           {error && <p style={errorSt}>{error}</p>}
 
-          <button style={{ ...registerBtn, opacity: loading ? 0.7 : 1 }}
+          <button className="vn-btn" style={{ ...registerBtn, opacity: loading ? 0.7 : 1 }}
                   onClick={handleRegister} disabled={loading}>
             {loading ? 'Creating account...' : 'Create Account'}
           </button>

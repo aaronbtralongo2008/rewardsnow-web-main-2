@@ -3,7 +3,7 @@ import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 import { useTheme } from './ThemeContext';
 
-const BLUE = '#0B5CAD';
+const BLUE = '#1565C4';
 
 const TIERS = [
   {
@@ -139,26 +139,26 @@ export default function BusinessRegister({ onBack, onSuccess }) {
   };
 
   // Theme-aware values
-  const rightBg = isDark ? '#07243A' : '#FFF8EA';
+  const rightBg = isDark ? '#061A2A' : '#FFF8EA';
   const textColor = isDark ? '#ffffff' : '#101820';
   const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
   const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
   const inputBg = isDark ? 'rgba(255,255,255,0.07)' : '#ffffff';
   const inputBorder = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)';
   const inputText = isDark ? '#ffffff' : '#101820';
-  const mobileTopBg = isDark ? '#07243A' : '#FFF8EA';
+  const mobileTopBg = isDark ? '#061A2A' : '#FFF8EA';
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", background: rightBg }}>
       {/* Left panel — desktop only, always dark */}
       {!isMobile && (
-        <div style={{ flex: 1, background: '#07243A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ flex: 1, background: '#061A2A', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' }}>
           <div style={{ maxWidth: '440px', width: '100%', position: 'relative', zIndex: 2 }}>
             <button style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: 0, marginBottom: '48px', display: 'block' }} onClick={onBack}>← Back to sign in</button>
             <div style={{ color: '#F2B84B', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px', textTransform: 'uppercase' }}>Veniar</div>
             {/* Gold accent bar */}
             <div style={{ width: '56px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' }} />
-            <h1 style={{ color: '#fff', fontSize: '3rem', fontWeight: '900', lineHeight: 1.06, letterSpacing: '-0.03em', margin: '0 0 20px' }}>Grow your business<br />with loyalty.</h1>
+            <h1 className="vn-fade-up" style={{ color: '#fff', fontSize: '3rem', fontWeight: '900', lineHeight: 1.06, letterSpacing: '-0.03em', margin: '0 0 20px' }}>Grow your business<br />with loyalty.</h1>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.7, margin: '0 0 48px' }}>
               Join the Veniar network and give your customers a reason to keep coming back.
             </p>
@@ -189,7 +189,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
         borderLeft: isMobile ? 'none' : `1px solid ${borderColor}`,
       }}>
         {/* Teal accent bar — top of right panel */}
-        <div style={{ height: '3px', background: '#25B7C8', flexShrink: 0 }} />
+        <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', flexShrink: 0 }} />
         {/* Mobile top bar */}
         {isMobile && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px', borderBottom: `1px solid ${borderColor}`, position: 'sticky', top: '3px', background: mobileTopBg, zIndex: 10 }}>
@@ -249,32 +249,32 @@ export default function BusinessRegister({ onBack, onSuccess }) {
               <p style={{ color: BLUE, fontSize: '13px', margin: '0 0 28px' }}>Step 1 of 2</p>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', color: mutedColor, fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' }}>Email</label>
-                <input style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} type="email" autoComplete="email"
+                <input className="vn-input" style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} type="email" autoComplete="email"
                        placeholder="owner@business.com"
                        value={form.email} onChange={set(setForm, 'email')}
                        onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
               </div>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', color: mutedColor, fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' }}>Username</label>
-                <input style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} autoComplete="username" placeholder="bizowner"
+                <input className="vn-input" style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} autoComplete="username" placeholder="bizowner"
                        value={form.username} onChange={set(setForm, 'username')}
                        onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
               </div>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', color: mutedColor, fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' }}>Phone</label>
-                <input style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} type="tel" autoComplete="tel-national" placeholder="5551234567"
+                <input className="vn-input" style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} type="tel" autoComplete="tel-national" placeholder="5551234567"
                        value={form.phoneNumber} onChange={set(setForm, 'phoneNumber')}
                        onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
               </div>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', color: mutedColor, fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' }}>Password</label>
-                <input style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} type="password" autoComplete="new-password"
+                <input className="vn-input" style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} type="password" autoComplete="new-password"
                        placeholder="8+ characters"
                        value={form.password} onChange={set(setForm, 'password')}
                        onKeyDown={e => e.key === 'Enter' && handleCreateAccount()} />
               </div>
               {error && <p style={{ color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 14px' }}>{error}</p>}
-              <button style={{ width: '100%', padding: '12px', background: BLUE, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', opacity: loading ? 0.7 : 1 }} onClick={handleCreateAccount} disabled={loading}>
+              <button className="vn-btn" style={{ width: '100%', padding: '12px', background: BLUE, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', opacity: loading ? 0.7 : 1 }} onClick={handleCreateAccount} disabled={loading}>
                 {loading ? 'Creating account…' : 'Continue →'}
               </button>
             </>
@@ -286,13 +286,13 @@ export default function BusinessRegister({ onBack, onSuccess }) {
               <p style={{ color: BLUE, fontSize: '13px', margin: '0 0 28px' }}>Step 2 of 2</p>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', color: mutedColor, fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' }}>Business Name</label>
-                <input style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} autoComplete="organization" placeholder="Joe's Coffee"
+                <input className="vn-input" style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0 }} autoComplete="organization" placeholder="Joe's Coffee"
                        value={bizForm.businessName} onChange={set(setBizForm, 'businessName')} />
               </div>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', color: mutedColor, fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' }}>Business Address</label>
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                  <input style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0, flex: 1 }}
+                  <input className="vn-input" style={{ width: '100%', padding: '11px 14px', border: `2px solid ${inputBorder}`, borderRadius: '8px', fontSize: '14px', color: inputText, background: inputBg, outline: 'none', boxSizing: 'border-box', marginBottom: 0, flex: 1 }}
                          autoComplete="street-address" placeholder="123 Main St, Boca Raton FL 33431"
                          value={bizForm.address} onChange={set(setBizForm, 'address')} />
                   <button style={{ padding: '11px 14px', background: 'rgba(37,183,200,0.12)', border: '2px solid rgba(37,183,200,0.3)', borderRadius: '8px', color: '#25B7C8', fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, opacity: geocoding ? 0.6 : 1 }}
@@ -334,7 +334,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
               {error && <p style={{ color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 14px' }}>{error}</p>}
               <div style={{ display: 'flex', gap: '10px' }}>
                 {!isMobile && <button style={{ padding: '12px 16px', background: isDark ? 'rgba(255,255,255,0.07)' : '#fff', color: isDark ? '#fff' : '#374151', border: `2px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(11,92,173,0.2)'}`, borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }} onClick={() => setStep(1)}>← Back</button>}
-                <button style={{ width: '100%', padding: '12px', background: BLUE, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', flex: 1, opacity: loading ? 0.7 : 1 }} onClick={handleSubmitRequest} disabled={loading}>
+                <button className="vn-btn" style={{ width: '100%', padding: '12px', background: BLUE, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', flex: 1, opacity: loading ? 0.7 : 1 }} onClick={handleSubmitRequest} disabled={loading}>
                   {loading ? 'Submitting…' : 'Submit application'}
                 </button>
               </div>
@@ -350,7 +350,7 @@ export default function BusinessRegister({ onBack, onSuccess }) {
                 Our team reviews every application and will contact you by email once approved.
               </p>
               <p style={{ color: mutedColor, fontSize: '13px', margin: 0 }}>Plan selected: <strong style={{ color: textColor }}>{TIERS.find(t => t.key === tier)?.name}</strong></p>
-              <button style={{ width: '100%', padding: '12px', background: BLUE, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={onBack}>Back to sign in</button>
+              <button className="vn-btn" style={{ width: '100%', padding: '12px', background: BLUE, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }} onClick={onBack}>Back to sign in</button>
             </div>
           )}
         </div>

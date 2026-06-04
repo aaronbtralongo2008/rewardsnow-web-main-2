@@ -55,7 +55,7 @@ function Login({ onLogin }) {
 
   const container = {
     minHeight: '100vh',
-    background: isDark ? '#07243A' : '#FFF8EA',
+    background: isDark ? '#061A2A' : '#FFF8EA',
     fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
     display: 'flex',
     flexDirection: 'column',
@@ -68,7 +68,7 @@ function Login({ onLogin }) {
   };
 
   const mobileHeader = {
-    background: '#07243A',
+    background: '#061A2A',
     padding: '24px',
     display: 'flex',
     flexDirection: 'column',
@@ -89,7 +89,7 @@ function Login({ onLogin }) {
 
   const leftPanel = {
     flex: 1,
-    background: '#07243A',
+    background: '#061A2A',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -114,7 +114,7 @@ function Login({ onLogin }) {
 
   const goldLine = {
     width: '56px',
-    height: '3px',
+    height: '4px',
     background: '#F2B84B',
     marginBottom: '32px',
     borderRadius: '2px',
@@ -178,11 +178,11 @@ function Login({ onLogin }) {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    background: isDark ? '#0D2E42' : '#ffffff',
+    background: isDark ? '#061A2A' : '#ffffff',
     boxSizing: 'border-box',
     position: 'relative',
-    borderLeft: isDark ? '3px solid #0B5CAD' : 'none',
-    borderTop: isDark ? 'none' : '3px solid #0B5CAD',
+    borderLeft: isDark ? '3px solid #1565C4' : 'none',
+    borderTop: isDark ? 'none' : '3px solid #1565C4',
   };
 
   const brandName = {
@@ -194,7 +194,7 @@ function Login({ onLogin }) {
 
   const goldAccentBar = {
     width: '40px',
-    height: '3px',
+    height: '4px',
     background: '#F2B84B',
     borderRadius: '2px',
     margin: '0 0 16px 0',
@@ -233,7 +233,7 @@ function Login({ onLogin }) {
     padding: '16px',
     borderRadius: '12px',
     border: 'none',
-    background: '#0B5CAD',
+    background: '#1565C4',
     color: '#ffffff',
     fontSize: '16px',
     fontWeight: '700',
@@ -243,7 +243,7 @@ function Login({ onLogin }) {
   };
 
   const forgotLink = {
-    color: '#0B5CAD',
+    color: '#1565C4',
     fontSize: '13px',
     fontWeight: '600',
     cursor: 'pointer',
@@ -311,14 +311,14 @@ function Login({ onLogin }) {
   };
 
   const link = {
-    color: '#0B5CAD',
+    color: '#1565C4',
     cursor: 'pointer',
   };
 
   return (
     <div style={container}>
       {/* Teal accent line at top */}
-      <div style={{ height: '3px', background: '#25B7C8', flexShrink: 0 }} />
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8', flexShrink: 0 }} />
       <div style={{ ...loginWrapper, flexDirection: isMobile ? 'column' : 'row' }}>
 
         {isMobile ? (
@@ -328,24 +328,24 @@ function Login({ onLogin }) {
           </div>
         ) : (
           <div style={leftPanel}>
-            <div style={leftContent}>
+            <div className="vn-slide-r" style={leftContent}>
               <div style={badge}>REWARDSNOW</div>
-              <div style={goldLine} />
+              <div className="vn-bar-animate" style={goldLine} />
               <p style={tagline}>One card.<br />Every business.</p>
               <p style={leftDesc}>Join customers earning rewards at local businesses across the city.</p>
               <div style={stepRow}>
                 <div style={stepItem}>
-                  <span style={stepNum}>01</span>
+                  <span className="vn-teal-glow" style={stepNum}>01</span>
                   <span style={stepText}>Sign in to your account</span>
                 </div>
                 <div style={tealConnector} />
                 <div style={stepItem}>
-                  <span style={stepNum}>02</span>
+                  <span className="vn-teal-glow" style={stepNum}>02</span>
                   <span style={stepText}>Scan at participating businesses</span>
                 </div>
                 <div style={tealConnector} />
                 <div style={stepItem}>
-                  <span style={stepNum}>03</span>
+                  <span className="vn-teal-glow" style={stepNum}>03</span>
                   <span style={stepText}>Earn and redeem rewards</span>
                 </div>
               </div>
@@ -353,29 +353,29 @@ function Login({ onLogin }) {
           </div>
         )}
 
-        <div style={{
+        <div className="vn-scale-in" style={{
           ...rightPanel,
           width: isMobile ? '100%' : '500px',
           padding: isMobile ? '32px 24px 48px' : '80px 64px',
           boxShadow: isMobile ? 'none' : '-8px 0 40px rgba(0,0,0,0.06)',
           flex: isMobile ? '1' : 'none',
         }}>
-          <button style={themeToggleSt} onClick={toggleTheme}>
+          <button className="vn-btn-ghost" style={themeToggleSt} onClick={toggleTheme}>
             {isDark ? 'LIGHT' : 'DARK'}
           </button>
-          <h1 style={{ ...brandName, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>Welcome back</h1>
+          <h1 className="vn-fade-up" style={{ ...brandName, fontSize: isMobile ? '1.8rem' : '2.2rem' }}>Welcome back</h1>
           <div style={goldAccentBar} />
           <p style={brandSub}>Sign in to your Veniar account</p>
           <label style={inputLabel}>Email</label>
-          <input style={input} type="email" placeholder="you@email.com"
+          <input className="vn-input" style={input} type="email" placeholder="you@email.com"
                  value={email} onChange={e => setEmail(e.target.value)}
                  onKeyDown={e => e.key === 'Enter' && handleLogin()} />
           <label style={inputLabel}>Password</label>
-          <input style={input} type="password" placeholder="••••••••"
+          <input className="vn-input" style={input} type="password" placeholder="••••••••"
                  value={password} onChange={e => setPassword(e.target.value)}
                  onKeyDown={e => e.key === 'Enter' && handleLogin()} />
           {error && <p style={errorSt}>{error}</p>}
-          <button style={{ ...loginBtn, opacity: loading ? 0.7 : 1 }}
+          <button className="vn-btn" style={{ ...loginBtn, opacity: loading ? 0.7 : 1 }}
                   onClick={handleLogin} disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
@@ -389,10 +389,10 @@ function Login({ onLogin }) {
             <span style={dividerText}>or</span>
             <div style={dividerLine} />
           </div>
-          <button style={registerBtn} onClick={() => navigate('/register')}>
+          <button className="vn-btn-ghost" style={registerBtn} onClick={() => navigate('/register')}>
             Create an Account
           </button>
-          <button style={bizRegisterBtn} onClick={() => navigate('/business-overview')}>
+          <button className="vn-btn-ghost" style={bizRegisterBtn} onClick={() => navigate('/business-overview')}>
             Own a business?
           </button>
           <p style={terms}>

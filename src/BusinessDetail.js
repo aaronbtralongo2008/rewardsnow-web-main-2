@@ -3,7 +3,7 @@ import { API } from './config';
 import { useIsMobile } from './useIsMobile';
 import { useTheme } from './ThemeContext';
 
-const BLUE = '#0B5CAD';
+const BLUE = '#1565C4';
 
 const CATEGORY_LABELS = {
   RESTAURANT: 'Restaurant', CAFE: 'Café', RETAIL: 'Retail', FITNESS: 'Fitness',
@@ -90,8 +90,8 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
 
   const tags = business.tags ? business.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
 
-  const rootBg = isDark ? '#07243A' : '#FFF8EA';
-  const cardBg = isDark ? '#0D2E42' : '#ffffff';
+  const rootBg = isDark ? '#061A2A' : '#FFF8EA';
+  const cardBg = isDark ? '#0C2640' : '#ffffff';
   const textColor = isDark ? '#ffffff' : '#101820';
   const mutedColor = isDark ? 'rgba(255,255,255,0.6)' : '#5F6B73';
   const borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
@@ -101,8 +101,8 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
   return (
     <div style={{ minHeight: '100vh', background: rootBg, fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
       {/* Teal accent bar */}
-      <div style={{ height: '3px', background: '#25B7C8' }} />
-      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#07243A', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100, padding: isMobile ? '0 16px' : '0 40px' }}>
+      <div className="vn-top-bar" style={{ height: '4px', background: '#25B7C8' }} />
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '60px', background: '#061A2A', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 100, padding: isMobile ? '0 16px' : '0 40px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <button style={{ background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '13px', fontWeight: '500', cursor: 'pointer', padding: '6px 12px', borderRadius: '6px' }} onClick={onBack}>← Back</button>
           {!isMobile && <span style={{ color: '#F2B84B', fontSize: '15px', fontWeight: '700' }}>Veniar</span>}
@@ -136,9 +136,9 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
           </div>
           <div style={{ flex: 1, minWidth: '200px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '6px' }}>
-              <h1 style={{ color: textColor, fontWeight: '700', margin: 0, letterSpacing: '-0.02em', fontSize: isMobile ? '1.2rem' : '1.4rem' }}>{business.name}</h1>
-              {business.featured && <span style={{ background: '#F2B84B', color: '#07243A', fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '6px' }}>⭐ Featured</span>}
-              {business.paidPartner && !business.featured && <span style={{ background: '#F2B84B', color: '#07243A', fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '6px' }}>Partner</span>}
+              <h1 className="vn-fade-up" style={{ color: textColor, fontWeight: '700', margin: 0, letterSpacing: '-0.02em', fontSize: isMobile ? '1.2rem' : '1.4rem' }}>{business.name}</h1>
+              {business.featured && <span style={{ background: '#F2B84B', color: '#061A2A', fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '6px' }}>⭐ Featured</span>}
+              {business.paidPartner && !business.featured && <span style={{ background: '#F2B84B', color: '#061A2A', fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '6px' }}>Partner</span>}
             </div>
             {business.address && <p style={{ color: mutedColor, fontSize: '13px', margin: '0 0 10px' }}>{business.address}</p>}
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '8px' }}>
@@ -170,7 +170,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
 
         {/* Compatibility score */}
         {compatibility && (
-          <div style={{ background: cardBg, border: `1.5px solid ${borderColor}`, borderRadius: '14px', padding: '18px', marginBottom: '20px' }}>
+          <div className="vn-card" style={{ background: cardBg, border: `1.5px solid ${borderColor}`, borderRadius: '14px', padding: '18px', marginBottom: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
               <div style={{ fontSize: '13px', fontWeight: '800', padding: '4px 12px', borderRadius: '20px', color: scoreColor(compatibility.score), background: scoreBg(compatibility.score) }}>
                 {compatibility.score}% match
@@ -196,7 +196,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
 
         {/* AI insight */}
         {aiInsight?.explanation && (
-          <div style={{ background: '#07243A', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '18px', marginBottom: '20px' }}>
+          <div style={{ background: '#061A2A', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '18px', marginBottom: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
               <span style={{ color: '#25B7C8', fontSize: '14px' }}>✦</span>
               <span style={{ color: '#e0e7ff', fontSize: '13px', fontWeight: '700' }}>Why this matches you</span>
@@ -235,7 +235,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
           ) : (
             <div style={{ display: 'grid', gap: '14px', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>
               {services.map(svc => (
-                <div key={svc.id} style={{ background: cardBg, border: `1px solid ${borderColor}`, borderRadius: '12px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div key={svc.id} className="vn-card" style={{ background: cardBg, border: `1px solid ${borderColor}`, borderRadius: '12px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
                     <h3 style={{ color: textColor, fontSize: '14px', fontWeight: '600', margin: 0, flex: 1 }}>{svc.name}</h3>
                     <span style={{ background: '#f0fdf4', color: '#16a34a', fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '6px', flexShrink: 0 }}>+{svc.rewardsGrant} pts</span>
@@ -247,6 +247,7 @@ export default function BusinessDetail({ business, customer, onBack, onLogout, o
                       <p style={{ color: BLUE, fontSize: '15px', fontWeight: '700', margin: 0 }}>{svc.rewardsCost} pts</p>
                     </div>
                     <button
+                      className="vn-btn"
                       style={{ background: BLUE, color: '#fff', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: '600', padding: '8px 16px', opacity: redeeming ? 0.6 : 1, cursor: redeeming ? 'not-allowed' : 'pointer' }}
                       onClick={() => handleRedeem(svc)}
                       disabled={!!redeeming}
