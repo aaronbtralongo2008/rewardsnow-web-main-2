@@ -329,7 +329,7 @@ function Login({ onLogin }) {
         ) : (
           <div style={leftPanel}>
             <div className="vn-slide-r" style={leftContent}>
-              <div style={badge}>REWARDSNOW</div>
+              <div style={badge}>VENIAR</div>
               <div className="vn-bar-animate" style={goldLine} />
               <p style={tagline}>One card.<br />Every business.</p>
               <p style={leftDesc}>Join customers earning rewards at local businesses across the city.</p>

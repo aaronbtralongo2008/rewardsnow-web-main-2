@@ -322,7 +322,7 @@ function Register({ onRegister, onBack }) {
         ) : (
           <div style={leftPanel}>
             <div style={leftContent}>
-              <div style={badge}>REWARDSNOW</div>
+              <div style={badge}>VENIAR</div>
               <div style={goldLine} />
               <p style={tagline}>Join customers earning rewards every day.</p>
               <p style={leftDesc}>It only takes a minute to get started.</p>

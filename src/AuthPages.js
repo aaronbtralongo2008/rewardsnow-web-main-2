@@ -43,7 +43,7 @@ export function ForgotPassword() {
         {!isMobile && (
           <div style={styles.leftPanel}>
             <div style={styles.leftContent}>
-              <div style={styles.badge}>REWARDSNOW</div>
+              <div style={styles.badge}>VENIAR</div>
               <div style={styles.goldLine} />
               <p style={styles.tagline}>Reset your<br />password.</p>
               <p style={styles.leftDesc}>We'll send a secure link to get you back into your account.</p>
@@ -166,7 +166,7 @@ export function ResetPassword() {
         {!isMobile && (
           <div style={styles.leftPanel}>
             <div style={styles.leftContent}>
-              <div style={styles.badge}>REWARDSNOW</div>
+              <div style={styles.badge}>VENIAR</div>
               <div style={styles.goldLine} />
               <p style={styles.tagline}>Choose a new<br />password.</p>
               <p style={styles.leftDesc}>Pick something strong that you haven&apos;t used before.</p>
