@@ -4,9 +4,9 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const BLUE  = '#0B5CAD';
-const GOLD  = '#F2B84B';
-const MUTED = '#5F6B73';
+const LAGOON = '#1677B8';
+const YELLOW = '#F5C84B';
+const MUTED  = '#5F6B73';
 
 export default function PricingPage() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function PricingPage() {
       <main>
         <section
           style={{
-            padding: isMobile ? '80px 24px' : '120px 80px',
+            padding: isMobile ? '80px 24px' : '120px 8%',
             textAlign: 'center',
             maxWidth: '720px',
             margin: '0 auto',
@@ -103,7 +103,7 @@ export default function PricingPage() {
 
 const s = {
   eyebrow: {
-    color: GOLD,
+    color: YELLOW,
     fontSize: '11px',
     fontWeight: '700',
     letterSpacing: '4px',
@@ -120,7 +120,7 @@ const s = {
   goldBar: {
     width: '48px',
     height: '3px',
-    background: GOLD,
+    background: YELLOW,
     borderRadius: '2px',
     margin: '0 auto 28px',
   },
@@ -133,7 +133,7 @@ const s = {
   },
   btnPrimary: {
     padding: '14px 30px',
-    background: BLUE,
+    background: LAGOON,
     border: 'none',
     color: '#FFFFFF',
     borderRadius: '10px',
@@ -163,7 +163,7 @@ const s = {
     background: 'none',
     border: 'none',
     padding: 0,
-    color: BLUE,
+    color: LAGOON,
     fontSize: '13px',
     fontWeight: '600',
     cursor: 'pointer',

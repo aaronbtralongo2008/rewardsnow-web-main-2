@@ -4,9 +4,10 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const BLUE = '#0B5CAD';
-const GOLD = '#F2B84B';
-const MUTED = '#5F6B73';
+const CYAN   = '#00A9C8';
+const LAGOON = '#1677B8';
+const YELLOW = '#F5C84B';
+const MUTED  = '#5F6B73';
 
 const CATEGORIES = [
   {
@@ -88,7 +89,7 @@ export default function SupportPage() {
           style={{
             maxWidth: '760px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 80px',
+            padding: isMobile ? '80px 24px' : '120px 8%',
           }}
         >
           {/* Gold eyebrow */}
@@ -158,7 +159,7 @@ export default function SupportPage() {
                     style={{
                       ...s.triggerBtn,
                       background: isOpen
-                        ? 'var(--vn-card, #fff)'
+                        ? 'rgba(0,169,200,0.07)'
                         : 'var(--vn-bg, var(--rn-bg))',
                     }}
                   >
@@ -224,7 +225,7 @@ export default function SupportPage() {
 
 const s = {
   eyebrow: {
-    color: GOLD,
+    color: YELLOW,
     fontSize: '11px',
     fontWeight: '700',
     letterSpacing: '4px',
@@ -241,7 +242,7 @@ const s = {
   goldBar: {
     width: '48px',
     height: '3px',
-    background: GOLD,
+    background: YELLOW,
     borderRadius: '2px',
     marginBottom: '32px',
   },
@@ -254,7 +255,7 @@ const s = {
   btnPrimary: {
     display: 'inline-block',
     padding: '12px 24px',
-    background: BLUE,
+    background: LAGOON,
     border: 'none',
     color: '#FFFFFF',
     borderRadius: '9px',
@@ -299,7 +300,7 @@ const s = {
     letterSpacing: '-0.01em',
   },
   triggerIndicator: {
-    color: GOLD,
+    color: CYAN,
     fontSize: '20px',
     fontWeight: '400',
     lineHeight: 1,

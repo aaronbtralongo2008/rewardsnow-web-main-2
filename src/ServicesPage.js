@@ -3,8 +3,8 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const GOLD  = '#F2B84B';
-const TEAL  = '#25B7C8';
+const CYAN   = '#00A9C8';
+const YELLOW = '#F5C84B';
 
 const SERVICES = [
   {
@@ -64,7 +64,7 @@ export default function ServicesPage() {
           style={{
             maxWidth: '1080px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px 80px' : '120px 80px 100px',
+            padding: isMobile ? '80px 24px 80px' : '120px 8% 100px',
           }}
         >
           {/* Gold eyebrow */}
@@ -105,8 +105,8 @@ export default function ServicesPage() {
                   style={{
                     display: 'inline-block',
                     alignSelf: 'flex-start',
-                    background: 'rgba(37,183,200,0.12)',
-                    color: TEAL,
+                    background: 'rgba(0,169,200,0.12)',
+                    color: CYAN,
                     fontSize: '11px',
                     fontWeight: '700',
                     letterSpacing: '2px',
@@ -156,7 +156,7 @@ export default function ServicesPage() {
 
 const s = {
   eyebrow: {
-    color: GOLD,
+    color: YELLOW,
     fontSize: '11px',
     fontWeight: '700',
     letterSpacing: '4px',
@@ -173,7 +173,7 @@ const s = {
   goldBar: {
     width: '48px',
     height: '3px',
-    background: GOLD,
+    background: YELLOW,
     borderRadius: '2px',
     marginBottom: '28px',
   },

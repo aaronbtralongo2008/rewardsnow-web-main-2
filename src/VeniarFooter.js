@@ -1,49 +1,38 @@
 import { useNavigate } from 'react-router-dom';
 
+const CYAN   = '#00A9C8';
+const NIGHT  = '#07131A';
+const YELLOW = '#F5C84B';
+const CREAM  = '#FFF8EA';
+
 const COLUMNS = [
-  {
-    title: 'Product',
-    items: [
-      { label: 'Veniar',              path: '/veniar' },
-      { label: 'Veniar Network',      path: '/network' },
-      { label: 'Customer App',        path: '/customer-app' },
-      { label: 'Merchant Dashboard',  path: '/merchant-dashboard' },
-    ],
-  },
-  {
-    title: 'Business',
-    items: [
-      { label: 'Veniar for Business', path: '/business-overview' },
-      { label: 'Pricing',             path: '/pricing' },
-      { label: 'Join Veniar',         path: '/join' },
-      { label: 'Merchant Tools',      path: '/merchant-dashboard' },
-    ],
-  },
-  {
-    title: 'Support',
-    items: [
-      { label: 'Support Center',      path: '/support' },
-      { label: 'Contact',             path: '/contact' },
-      { label: 'Account Access',      path: '/signin' },
-      { label: 'Log in to Veniar',    path: '/signin' },
-    ],
-  },
-  {
-    title: 'Company',
-    items: [
-      { label: 'RewardsNow',          href: 'https://rewards-now.net', external: true },
-      { label: 'Mission',             path: '/mission' },
-      { label: 'Partners',            path: '/partners' },
-      { label: 'News',                path: '/news' },
-    ],
-  },
-  {
-    title: 'Legal',
-    items: [
-      { label: 'Privacy',             path: '/privacy' },
-      { label: 'Terms',               path: '/terms' },
-    ],
-  },
+  { title: 'Product', items: [
+    { label: 'Veniar',             path: '/veniar' },
+    { label: 'Veniar Network',     path: '/network' },
+    { label: 'Customer App',       path: '/customer-app' },
+    { label: 'Merchant Dashboard', path: '/merchant-dashboard' },
+  ]},
+  { title: 'Business', items: [
+    { label: 'For Business',   path: '/business-overview' },
+    { label: 'Pricing',        path: '/pricing' },
+    { label: 'Join',           path: '/join' },
+    { label: 'Merchant Tools', path: '/merchant-dashboard' },
+  ]},
+  { title: 'Support', items: [
+    { label: 'Help Center', path: '/support' },
+    { label: 'Contact',     path: '/contact' },
+    { label: 'Sign in',     path: '/signin' },
+  ]},
+  { title: 'Company', items: [
+    { label: 'RewardsNow', href: 'https://rewards-now.net', external: true },
+    { label: 'Mission',    path: '/mission' },
+    { label: 'Partners',   path: '/partners' },
+    { label: 'News',       path: '/news' },
+  ]},
+  { title: 'Legal', items: [
+    { label: 'Privacy', path: '/privacy' },
+    { label: 'Terms',   path: '/terms' },
+  ]},
 ];
 
 export default function VeniarFooter() {
@@ -52,9 +41,9 @@ export default function VeniarFooter() {
   /* ── Styles ─────────────────────────────────────────────────────────── */
 
   const footerStyle = {
-    background: '#07243A',
-    color: '#F5F0E8',
-    paddingTop: '56px',
+    background: NIGHT,
+    color: CREAM,
+    paddingTop: '60px',
     paddingBottom: '0',
   };
 
@@ -71,20 +60,20 @@ export default function VeniarFooter() {
   const wordmarkStyle = {
     fontSize: '16px',
     fontWeight: 800,
-    color: '#ffffff',
+    color: CYAN,
     letterSpacing: '-0.3px',
     marginBottom: '6px',
   };
 
   const taglineStyle = {
     fontSize: '13px',
-    color: 'rgba(245,240,232,0.62)',
+    color: 'rgba(255,248,234,0.55)',
     marginBottom: '3px',
   };
 
   const productOfStyle = {
     fontSize: '12px',
-    color: 'rgba(245,240,232,0.38)',
+    color: 'rgba(255,248,234,0.35)',
   };
 
   const columnsWrapStyle = {
@@ -102,7 +91,7 @@ export default function VeniarFooter() {
   const columnTitleStyle = {
     fontSize: '10px',
     fontWeight: 700,
-    color: '#F2B84B',
+    color: YELLOW,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
     marginBottom: '12px',
@@ -115,7 +104,7 @@ export default function VeniarFooter() {
     padding: '3px 0',
     fontSize: '13px',
     fontWeight: 400,
-    color: 'rgba(245,240,232,0.58)',
+    color: 'rgba(255,248,234,0.55)',
     cursor: 'pointer',
     fontFamily: 'inherit',
     textAlign: 'left',
@@ -127,14 +116,14 @@ export default function VeniarFooter() {
     padding: '3px 0',
     fontSize: '13px',
     fontWeight: 400,
-    color: 'rgba(245,240,232,0.58)',
+    color: 'rgba(255,248,234,0.55)',
     textDecoration: 'none',
     marginBottom: '2px',
   };
 
   const dividerStyle = {
     height: '1px',
-    background: 'rgba(255,255,255,0.08)',
+    background: 'rgba(255,248,234,0.08)',
     margin: '0 0 20px',
   };
 
@@ -150,12 +139,12 @@ export default function VeniarFooter() {
 
   const copyrightStyle = {
     fontSize: '12px',
-    color: 'rgba(245,240,232,0.32)',
+    color: 'rgba(255,248,234,0.28)',
   };
 
   const bottomLinkStyle = {
     fontSize: '12px',
-    color: 'rgba(245,240,232,0.32)',
+    color: 'rgba(255,248,234,0.28)',
     textDecoration: 'none',
   };
 
@@ -165,8 +154,8 @@ export default function VeniarFooter() {
         {/* Brand section */}
         <div style={brandSectionStyle}>
           <div style={wordmarkStyle}>Veniar</div>
-          <div style={taglineStyle}>Shared rewards for local favorites.</div>
-          <div style={productOfStyle}>A product of RewardsNow.</div>
+          <div style={taglineStyle}>Shared rewards for local businesses.</div>
+          <div style={productOfStyle}>A RewardsNow product.</div>
         </div>
 
         {/* Columns */}
@@ -202,8 +191,10 @@ export default function VeniarFooter() {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div style={dividerStyle} />
+      {/* Divider + bottom bar outside inner container for full-width divider */}
+      <div style={innerStyle}>
+        <div style={dividerStyle} />
+      </div>
       <div style={bottomBarStyle}>
         <span style={copyrightStyle}>
           © 2026 RewardsNow. Veniar is a product of RewardsNow.

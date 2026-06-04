@@ -1,13 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-/* ── Veniar brand tokens (static — never change with theme) ─────────────── */
+/* ── Veniar Ocean Breeze — static brand tokens (never change with theme) ── */
 :root {
-  --vn-flight-blue:   #0B5CAD;
-  --vn-deep-flight:   #07243A;
-  --vn-sunset-gold:   #F2B84B;
-  --vn-sunset-orange: #E86F2E;
-  --vn-obi-teal:      #25B7C8;
-  --vn-ivory:         #FFF8EA;
+  /* Core identity */
+  --vn-ocean-cyan:         #00A9C8;
+  --vn-ocean-cyan-hover:   #008FB0;
+  --vn-ocean-cyan-active:  #007895;
+
+  --vn-lagoon-blue:        #1677B8;
+  --vn-lagoon-blue-hover:  #105F95;
+  --vn-lagoon-blue-active: #0B4C78;
+
+  --vn-deep-water:         #06445E;
+  --vn-night-window:       #07131A;
+  --vn-ink:                #101820;
+
+  /* Reward / conversion accents */
+  --vn-sunset-yellow:      #F5C84B;
+  --vn-sunset-gold:        #F2B84B;
+  --vn-sunset-orange:      #E86F2E;
+  --vn-coral-red:          #D94A3A;
+
+  /* Secondary accents */
+  --vn-palm-green:         #2F8A5B;
+  --vn-palm-deep:          #1F6B46;
+  --vn-seafoam:            #BEEDE8;
+  --vn-surf-mist:          #E6F8F6;
+
+  /* Light surfaces */
+  --vn-cream:              #FFF8EA;
+  --vn-sand:               #F3E4C5;
+  --vn-soft-sand:          #F8EED8;
+  --vn-shell:              #FFFCF4;
+  --vn-white:              #FFFFFF;
+
+  /* Light text */
+  --vn-text-static:        #101820;
+  --vn-muted-static:       #5F6B73;
+  --vn-muted-blue:         #627887;
+
+  /* Borders */
+  --vn-border:             rgba(16,24,32,0.14);
+  --vn-border-strong:      rgba(16,24,32,0.24);
+  --vn-focus:              #00A9C8;
+
+  /* Dark surfaces */
+  --vn-dark-bg:            #06141C;
+  --vn-dark-surface:       #082232;
+  --vn-dark-panel:         #0B3045;
+  --vn-dark-panel-strong:  #0E3D58;
+
+  /* Dark text */
+  --vn-dark-text:          #FFF8EA;
+  --vn-dark-muted:         #B8C7CC;
+
+  /* Dark accents */
+  --vn-dark-cyan:          #3DD6E8;
+  --vn-dark-lagoon:        #4AA3DF;
+  --vn-dark-yellow:        #F5C84B;
+  --vn-dark-orange:        #F08A52;
+  --vn-dark-palm:          #72B98A;
+
+  /* Dark borders */
+  --vn-border-dark:        rgba(255,248,234,0.14);
+  --vn-border-dark-strong: rgba(255,248,234,0.26);
 }
 
 body {
@@ -24,15 +80,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* ── Veniar Design System — hover states, animations ─────────────────── */
+/* ── Ocean Breeze component classes ─────────────────────────────────────── */
 
 .vn-card {
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.22s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.22s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.22s ease;
 }
 .vn-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(16, 24, 32, 0.11) !important;
+  box-shadow: 0 14px 40px rgba(0,169,200,0.10) !important;
+  border-color: var(--vn-ocean-cyan-hover) !important;
 }
 
 .vn-cta-primary {
@@ -40,28 +98,42 @@ code {
   cursor: pointer;
 }
 .vn-cta-primary:hover {
-  background-color: #0a52a0 !important;
+  background-color: var(--vn-lagoon-blue-hover) !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(11, 92, 173, 0.30) !important;
+  box-shadow: 0 6px 24px rgba(22,119,184,0.32) !important;
 }
 .vn-cta-primary:active {
   transform: translateY(0);
 }
 
+.vn-cta-cyan {
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.vn-cta-cyan:hover {
+  background-color: var(--vn-ocean-cyan-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(0,169,200,0.30) !important;
+}
+.vn-cta-cyan:active {
+  transform: translateY(0);
+}
+
 .vn-cta-ghost {
-  transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
   cursor: pointer;
 }
 .vn-cta-ghost:hover {
-  background-color: var(--rn-ghost-hover-bg, rgba(11, 92, 173, 0.06)) !important;
+  background-color: var(--vn-surf-mist) !important;
+  border-color: var(--vn-ocean-cyan) !important;
 }
 
 .vn-nav-btn {
-  transition: background-color 0.12s ease;
+  transition: background-color 0.12s ease, color 0.12s ease;
   cursor: pointer;
 }
 .vn-nav-btn:hover {
-  background-color: var(--rn-nav-hover-bg, rgba(16, 24, 32, 0.06)) !important;
+  background-color: var(--vn-surf-mist, rgba(230,248,246,0.7)) !important;
 }
 
 .vn-footer-link {
@@ -69,21 +141,21 @@ code {
   cursor: pointer;
 }
 .vn-footer-link:hover {
-  color: rgba(245, 240, 232, 0.9) !important;
+  color: var(--vn-dark-cyan, #3DD6E8) !important;
 }
 
 /* Dashboard mock card — slide in from right on mount */
 .vn-dash-card {
-  animation: vnSlideRight 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: vnSlideRight 0.75s cubic-bezier(0.16,1,0.3,1) 0.2s both;
 }
 @keyframes vnSlideRight {
   from { opacity: 0; transform: translateX(28px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* Route line draw animation */
+/* Route accent line draw */
 .vn-route-line {
-  animation: vnLineDraw 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  animation: vnLineDraw 1.4s cubic-bezier(0.16,1,0.3,1) 0.6s both;
   transform-origin: left;
 }
 @keyframes vnLineDraw {
@@ -97,7 +169,7 @@ code {
 }
 @keyframes vnDotPulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
+  50%       { opacity: 0.4; }
 }
 
 /* Skeleton shimmer */

@@ -4,8 +4,8 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const BLUE  = '#0B5CAD';
-const GOLD  = '#F2B84B';
+const LAGOON = '#1677B8';
+const YELLOW = '#F5C84B';
 
 export default function NetworkPage() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function NetworkPage() {
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px 100px' : '120px 80px 120px',
+            padding: isMobile ? '80px 24px 100px' : '120px 8% 120px',
           }}
         >
           {/* Gold eyebrow */}
@@ -81,7 +81,7 @@ export default function NetworkPage() {
 
 const s = {
   eyebrow: {
-    color: GOLD,
+    color: YELLOW,
     fontSize: '11px',
     fontWeight: '700',
     letterSpacing: '4px',
@@ -98,7 +98,7 @@ const s = {
   goldBar: {
     width: '48px',
     height: '3px',
-    background: GOLD,
+    background: YELLOW,
     borderRadius: '2px',
     marginBottom: '28px',
   },
@@ -109,13 +109,13 @@ const s = {
     margin: '0 0 20px',
   },
   link: {
-    color: BLUE,
+    color: LAGOON,
     fontWeight: '600',
     textDecoration: 'none',
   },
   btnPrimary: {
     padding: '13px 26px',
-    background: BLUE,
+    background: LAGOON,
     border: 'none',
     color: '#FFFFFF',
     borderRadius: '9px',

@@ -4,9 +4,9 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const BLUE  = '#0B5CAD';
-const GOLD  = '#F2B84B';
-const MUTED = '#5F6B73';
+const LAGOON = '#1677B8';
+const YELLOW = '#F5C84B';
+const MUTED  = '#5F6B73';
 
 export default function ContactPage() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function ContactPage() {
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 80px',
+            padding: isMobile ? '80px 24px' : '120px 8%',
           }}
         >
           {/* Gold eyebrow */}
@@ -131,7 +131,7 @@ export default function ContactPage() {
 
 const s = {
   eyebrow: {
-    color: GOLD,
+    color: YELLOW,
     fontSize: '11px',
     fontWeight: '700',
     letterSpacing: '4px',
@@ -148,7 +148,7 @@ const s = {
   goldBar: {
     width: '48px',
     height: '3px',
-    background: GOLD,
+    background: YELLOW,
     borderRadius: '2px',
     marginBottom: '40px',
   },
@@ -164,7 +164,7 @@ const s = {
     margin: 0,
   },
   emailLink: {
-    color: BLUE,
+    color: LAGOON,
     fontSize: '16px',
     fontWeight: '600',
     textDecoration: 'none',
@@ -198,7 +198,7 @@ const s = {
   },
   btnPrimary: {
     padding: '12px 24px',
-    background: BLUE,
+    background: LAGOON,
     border: 'none',
     color: '#FFFFFF',
     borderRadius: '9px',
@@ -214,7 +214,7 @@ const s = {
     marginTop: '32px',
   },
   externalLink: {
-    color: BLUE,
+    color: LAGOON,
     fontWeight: '600',
     textDecoration: 'none',
   },

@@ -3,11 +3,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { useTheme } from './ThemeContext';
 
+const CYAN   = '#00A9C8';
+const LAGOON = '#1677B8';
+
 const NAV_LINKS = [
-  { label: 'Services',            path: '/services' },
-  { label: 'Veniar',              path: '/veniar' },
-  { label: 'For Business',        path: '/business-overview' },
-  { label: 'Network',             path: '/network' },
+  { label: 'Services',     path: '/services' },
+  { label: 'Veniar',       path: '/veniar' },
+  { label: 'For Business', path: '/business-overview' },
+  { label: 'Network',      path: '/network' },
 ];
 
 const ALL_NAV_ITEMS = [
@@ -31,7 +34,8 @@ export default function VeniarNav() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const closeButtonRef = useRef(null);
 
-  const logoColor = isDark ? '#4C9CE8' : '#0B5CAD';
+  const logoColor = isDark ? '#3DD6E8' : CYAN;
+  const activeColor = isDark ? '#3DD6E8' : LAGOON;
 
   // Scroll detection
   useEffect(() => {
@@ -86,10 +90,10 @@ export default function VeniarNav() {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0 24px',
-    background: 'var(--rn-nav-bg)',
+    background: 'var(--vn-nav-bg)',
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
-    borderBottom: '1px solid var(--rn-nav-border)',
+    borderBottom: '1px solid var(--vn-nav-border)',
   };
 
   const logoWrapStyle = {
@@ -145,9 +149,7 @@ export default function VeniarNav() {
     borderRadius: '6px',
     fontSize: '14px',
     fontWeight: isActive(path) ? 600 : 500,
-    color: isActive(path)
-      ? (isDark ? '#4C9CE8' : '#0B5CAD')
-      : 'var(--rn-text)',
+    color: isActive(path) ? activeColor : 'var(--vn-text)',
     cursor: 'pointer',
     fontFamily: 'inherit',
     whiteSpace: 'nowrap',
@@ -160,14 +162,14 @@ export default function VeniarNav() {
     borderRadius: '6px',
     fontSize: '14px',
     fontWeight: 500,
-    color: 'var(--rn-text)',
+    color: 'var(--vn-text)',
     cursor: 'pointer',
     fontFamily: 'inherit',
     whiteSpace: 'nowrap',
   };
 
   const joinBtnStyle = {
-    background: '#0B5CAD',
+    background: LAGOON,
     border: 'none',
     padding: '8px 16px',
     borderRadius: '7px',
@@ -197,14 +199,14 @@ export default function VeniarNav() {
     width: '22px',
     height: '2px',
     borderRadius: '2px',
-    background: 'var(--rn-text)',
+    background: 'var(--vn-text)',
   };
 
   const overlayStyle = {
     position: 'fixed',
     inset: 0,
     zIndex: 1100,
-    background: 'rgba(7,36,58,0.54)',
+    background: 'rgba(7,19,26,0.60)',
     opacity: drawerOpen ? 1 : 0,
     pointerEvents: drawerOpen ? 'all' : 'none',
     transition: 'opacity 0.25s ease',
@@ -218,8 +220,8 @@ export default function VeniarNav() {
     zIndex: 1200,
     width: '280px',
     maxWidth: '85vw',
-    background: isDark ? '#07243A' : '#ffffff',
-    boxShadow: '-8px 0 40px rgba(7,36,58,0.28)',
+    background: isDark ? '#06141C' : '#FFFFFF',
+    boxShadow: '-8px 0 40px rgba(7,19,26,0.28)',
     display: 'flex',
     flexDirection: 'column',
     transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
@@ -247,7 +249,7 @@ export default function VeniarNav() {
     padding: '6px',
     borderRadius: '6px',
     cursor: 'pointer',
-    color: 'var(--rn-text)',
+    color: 'var(--vn-text)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -267,21 +269,18 @@ export default function VeniarNav() {
     width: '100%',
     textAlign: 'left',
     background: isActive(path)
-      ? (isDark ? 'rgba(76,156,232,0.10)' : 'rgba(11,92,173,0.07)')
+      ? (isDark ? 'rgba(61,214,232,0.10)' : 'rgba(0,169,200,0.07)')
       : 'none',
     border: 'none',
     padding: '11px 12px',
     borderRadius: '7px',
     fontSize: '15px',
     fontWeight: isActive(path) ? 600 : 500,
-    color: isActive(path)
-      ? (isDark ? '#4C9CE8' : '#0B5CAD')
-      : 'var(--rn-text)',
+    color: isActive(path) ? activeColor : 'var(--vn-text)',
     cursor: 'pointer',
     fontFamily: 'inherit',
     marginBottom: '2px',
   });
-
 
   const drawerAuthStyle = {
     padding: '12px 12px 4px',
@@ -293,19 +292,19 @@ export default function VeniarNav() {
 
   const drawerLoginStyle = {
     background: 'none',
-    border: `1px solid ${isDark ? 'rgba(245,240,232,0.18)' : 'rgba(16,24,32,0.14)'}`,
+    border: `1px solid ${isDark ? 'rgba(255,248,234,0.18)' : 'rgba(16,24,32,0.14)'}`,
     padding: '10px 16px',
     borderRadius: '7px',
     fontSize: '14px',
     fontWeight: 500,
-    color: 'var(--rn-text)',
+    color: 'var(--vn-text)',
     cursor: 'pointer',
     fontFamily: 'inherit',
     textAlign: 'center',
   };
 
   const drawerJoinStyle = {
-    background: '#0B5CAD',
+    background: LAGOON,
     border: 'none',
     padding: '10px 16px',
     borderRadius: '7px',

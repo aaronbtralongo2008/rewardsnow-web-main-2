@@ -4,10 +4,10 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const BLUE  = '#0B5CAD';
-const GOLD  = '#F2B84B';
-const TEAL  = '#25B7C8';
-const MUTED = '#5F6B73';
+const CYAN   = '#00A9C8';
+const LAGOON = '#1677B8';
+const YELLOW = '#F5C84B';
+const MUTED  = '#5F6B73';
 
 const FEATURES = [
   {
@@ -67,7 +67,7 @@ export default function CustomerAppPage() {
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px 64px' : '120px 80px 80px',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
           }}
         >
           {/* Gold eyebrow */}
@@ -87,7 +87,7 @@ export default function CustomerAppPage() {
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '0 24px 64px' : '0 80px 80px',
+            padding: isMobile ? '0 24px 64px' : '0 8% 80px',
             display: 'flex',
             flexDirection: 'column',
             gap: '48px',
@@ -119,7 +119,7 @@ export default function CustomerAppPage() {
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '0 24px 100px' : '0 80px 120px',
+            padding: isMobile ? '0 24px 100px' : '0 8% 120px',
           }}
         >
           <div
@@ -163,7 +163,7 @@ export default function CustomerAppPage() {
 
 const s = {
   eyebrow: {
-    color: GOLD,
+    color: YELLOW,
     fontSize: '11px',
     fontWeight: '700',
     letterSpacing: '4px',
@@ -180,7 +180,7 @@ const s = {
   goldBar: {
     width: '48px',
     height: '3px',
-    background: GOLD,
+    background: YELLOW,
     borderRadius: '2px',
     marginBottom: '28px',
   },
@@ -192,8 +192,8 @@ const s = {
   numBadge: {
     display: 'inline-block',
     alignSelf: 'flex-start',
-    background: 'rgba(37,183,200,0.12)',
-    color: TEAL,
+    background: 'rgba(0,169,200,0.12)',
+    color: CYAN,
     fontSize: '11px',
     fontWeight: '800',
     letterSpacing: '2px',
@@ -216,7 +216,7 @@ const s = {
   },
   btnPrimary: {
     padding: '13px 26px',
-    background: BLUE,
+    background: LAGOON,
     border: 'none',
     color: '#FFFFFF',
     borderRadius: '9px',
@@ -225,7 +225,7 @@ const s = {
     fontFamily: 'inherit',
   },
   inlineLink: {
-    color: BLUE,
+    color: LAGOON,
     fontWeight: '600',
     textDecoration: 'none',
   },

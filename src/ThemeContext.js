@@ -2,9 +2,8 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeCtx = createContext({ isDark: true, toggleTheme: () => {} });
 
-// ── Casiopea Super Flight palette ─────────────────────────────────────────
-// Flight Blue #0B5CAD · Deep Flight #07243A · Sunset Gold #F2B84B
-// Sunset Orange #E86F2E · Obi Teal #25B7C8 · Ivory #FFF8EA
+// ── Veniar Ocean Breeze — existing --rn-* vars kept for app pages ─────────
+// New --vn-* contextual vars follow the Ocean Breeze palette
 
 const DARK = {
   '--rn-bg':                '#07243A',
@@ -51,20 +50,25 @@ const DARK = {
   '--rn-outline-btn-border':'rgba(255,255,255,0.18)',
   '--rn-outline-btn-color': 'rgba(245,240,232,0.85)',
   '--rn-divider':           'rgba(255,255,255,0.10)',
-  '--rn-beam-mid':          'rgba(37,183,200,0.22)',
+  '--rn-beam-mid':          'rgba(0,169,200,0.18)',
   '--rn-rail':              'rgba(255,255,255,0.04)',
-  '--rn-dark-band':         'rgba(0,0,0,0.38)',
-  // VN contextual vars (dark)
-  '--vn-bg':                '#07243A',
-  '--vn-text':              '#F5F0E8',
-  '--vn-text-sub':          'rgba(245,240,232,0.66)',
-  '--vn-text-muted':        'rgba(245,240,232,0.42)',
-  '--vn-card':              'rgba(255,255,255,0.06)',
-  '--vn-card-border':       'rgba(255,255,255,0.10)',
-  '--vn-nav-bg':            'rgba(7,36,58,0.97)',
-  '--vn-nav-border':        'rgba(255,255,255,0.07)',
-  '--vn-section-alt':       'rgba(0,0,0,0.22)',
-  '--vn-divider':           'rgba(255,255,255,0.10)',
+  '--rn-dark-band':         '#07131A',
+  // Ocean Breeze VN contextual vars — dark mode
+  '--vn-bg':                '#06141C',
+  '--vn-surface':           '#082232',
+  '--vn-panel':             '#0B3045',
+  '--vn-text':              '#FFF8EA',
+  '--vn-text-sub':          '#B8C7CC',
+  '--vn-text-muted':        'rgba(184,199,204,0.60)',
+  '--vn-card':              '#0B3045',
+  '--vn-card-border':       'rgba(255,248,234,0.12)',
+  '--vn-nav-bg':            'rgba(6,20,28,0.97)',
+  '--vn-nav-border':        'rgba(255,248,234,0.10)',
+  '--vn-section-alt':       '#082232',
+  '--vn-divider':           'rgba(255,248,234,0.10)',
+  '--vn-accent':            '#3DD6E8',
+  '--vn-accent-hover':      '#00A9C8',
+  '--vn-gold':              '#F5C84B',
 };
 
 const LIGHT = {
@@ -80,9 +84,9 @@ const LIGHT = {
   '--rn-card-border-lg':    'rgba(16,24,32,0.13)',
   '--rn-section-alt':       '#F7F1E3',
   '--rn-section-border':    'rgba(16,24,32,0.08)',
-  '--rn-ghost-border':      '#0B5CAD',
-  '--rn-ghost-color':       '#0B5CAD',
-  '--rn-ghost-hover-bg':    'rgba(11,92,173,0.06)',
+  '--rn-ghost-border':      '#1677B8',
+  '--rn-ghost-color':       '#1677B8',
+  '--rn-ghost-hover-bg':    'rgba(22,119,184,0.06)',
   '--rn-nav-btn-border':    'rgba(16,24,32,0.14)',
   '--rn-nav-btn-color':     '#101820',
   '--rn-nav-hover-bg':      'rgba(16,24,32,0.05)',
@@ -91,7 +95,7 @@ const LIGHT = {
   '--rn-orb2':              'transparent',
   '--rn-orb3':              'transparent',
   '--rn-emp-orb2':          'transparent',
-  '--rn-callout-title':     '#07243A',
+  '--rn-callout-title':     '#06445E',
   '--rn-portal-bg':         '#FFF8EA',
   '--rn-portal-surface':    '#FFFFFF',
   '--rn-portal-topbar':     '#FFFFFF',
@@ -102,30 +106,35 @@ const LIGHT = {
   '--rn-portal-input-bg':   '#FFFFFF',
   '--rn-portal-input-border':'rgba(16,24,32,0.18)',
   '--rn-portal-input-color':'#101820',
-  '--rn-form-bg':           '#E8F0FB',
+  '--rn-form-bg':           '#E6F8F6',
   '--rn-form-text':         '#101820',
-  '--rn-form-sub':          '#0B5CAD',
+  '--rn-form-sub':          '#1677B8',
   '--rn-input-bg':          '#FFFFFF',
-  '--rn-input-border':      'rgba(11,92,173,0.28)',
+  '--rn-input-border':      'rgba(22,119,184,0.28)',
   '--rn-input-color':       '#101820',
-  '--rn-outline-btn-bg':    'rgba(11,92,173,0.05)',
-  '--rn-outline-btn-border':'rgba(11,92,173,0.32)',
-  '--rn-outline-btn-color': '#0B5CAD',
+  '--rn-outline-btn-bg':    'rgba(22,119,184,0.05)',
+  '--rn-outline-btn-border':'rgba(22,119,184,0.30)',
+  '--rn-outline-btn-color': '#1677B8',
   '--rn-divider':           'rgba(16,24,32,0.10)',
-  '--rn-beam-mid':          'rgba(11,92,173,0.09)',
-  '--rn-rail':              'rgba(11,92,173,0.04)',
-  '--rn-dark-band':         '#07243A',
-  // VN contextual vars (light)
+  '--rn-beam-mid':          'rgba(0,169,200,0.09)',
+  '--rn-rail':              'rgba(0,169,200,0.04)',
+  '--rn-dark-band':         '#06445E',
+  // Ocean Breeze VN contextual vars — light mode
   '--vn-bg':                '#FFF8EA',
+  '--vn-surface':           '#FFFCF4',
+  '--vn-panel':             '#F8EED8',
   '--vn-text':              '#101820',
-  '--vn-text-sub':          '#374151',
+  '--vn-text-sub':          '#5F6B73',
   '--vn-text-muted':        'rgba(16,24,32,0.48)',
   '--vn-card':              '#FFFFFF',
-  '--vn-card-border':       'rgba(16,24,32,0.10)',
+  '--vn-card-border':       'rgba(16,24,32,0.12)',
   '--vn-nav-bg':            'rgba(255,255,255,0.97)',
   '--vn-nav-border':        'rgba(16,24,32,0.10)',
-  '--vn-section-alt':       '#F7F1E3',
+  '--vn-section-alt':       '#FFFCF4',
   '--vn-divider':           'rgba(16,24,32,0.10)',
+  '--vn-accent':            '#00A9C8',
+  '--vn-accent-hover':      '#008FB0',
+  '--vn-gold':              '#F2B84B',
 };
 
 function applyVars(isDark) {
