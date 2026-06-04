@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,6 +11,87 @@ body {
   box-sizing: border-box;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ── Veniar Design System — hover states, animations ─────────────────── */
+
+.vn-card {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vn-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(16, 24, 32, 0.11) !important;
+}
+
+.vn-cta-primary {
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.vn-cta-primary:hover {
+  background-color: #0a52a0 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(11, 92, 173, 0.30) !important;
+}
+.vn-cta-primary:active {
+  transform: translateY(0);
+}
+
+.vn-cta-ghost {
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+.vn-cta-ghost:hover {
+  background-color: var(--rn-ghost-hover-bg, rgba(11, 92, 173, 0.06)) !important;
+}
+
+.vn-nav-btn {
+  transition: background-color 0.12s ease;
+  cursor: pointer;
+}
+.vn-nav-btn:hover {
+  background-color: var(--rn-nav-hover-bg, rgba(16, 24, 32, 0.06)) !important;
+}
+
+.vn-footer-link {
+  transition: color 0.14s ease;
+  cursor: pointer;
+}
+.vn-footer-link:hover {
+  color: rgba(245, 240, 232, 0.9) !important;
+}
+
+/* Dashboard mock card — slide in from right on mount */
+.vn-dash-card {
+  animation: vnSlideRight 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+@keyframes vnSlideRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Route line draw animation */
+.vn-route-line {
+  animation: vnLineDraw 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  transform-origin: left;
+}
+@keyframes vnLineDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Network dot pulse */
+.vn-dot-pulse {
+  animation: vnDotPulse 2.4s ease-in-out infinite;
+}
+@keyframes vnDotPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }

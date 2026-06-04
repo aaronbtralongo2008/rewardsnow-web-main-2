@@ -4,13 +4,6 @@ const noMotion =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/**
- * Wraps children in a div that fades + slides up on scroll into view.
- *
- * Props:
- *   delay  – transition delay in ms (stagger cards with 0, 80, 160, 240)
- *   style  – merged onto the wrapper (lets FadeInSection act as a grid child)
- */
 export default function FadeInSection({ children, delay = 0, style = {} }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(noMotion);
@@ -19,8 +12,6 @@ export default function FadeInSection({ children, delay = 0, style = {} }) {
     if (noMotion) return;
     const el = ref.current;
     if (!el) return;
-
-    // threshold: 0.01 fires immediately for elements already in the viewport
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -39,10 +30,10 @@ export default function FadeInSection({ children, delay = 0, style = {} }) {
       ref={ref}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(28px)',
+        transform: visible ? 'translateY(0)' : 'translateY(20px)',
         transition: noMotion
           ? 'none'
-          : `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
+          : `opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
         ...style,
       }}
     >
