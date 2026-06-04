@@ -1,40 +1,35 @@
-// Keyframes injected at module load — must exist before first render
+import { useIsMobile } from './useIsMobile';
+
 ;(() => {
   if (typeof document === 'undefined') return;
-  if (document.getElementById('rn-stripe-styles')) return;
+  if (document.getElementById('vn-stripe-styles')) return;
   const el = document.createElement('style');
-  el.id = 'rn-stripe-styles';
+  el.id = 'vn-stripe-styles';
   el.textContent = `
-    @keyframes rnBeam {
-      0%   { transform: translateY(-220px); opacity: 0; }
-      8%   { opacity: 1; }
-      92%  { opacity: 1; }
-      100% { transform: translateY(calc(100vh + 220px)); opacity: 0; }
+    @keyframes vnBeam {
+      0%   { transform: translateY(-240px); opacity: 0; }
+      6%   { opacity: 1; }
+      94%  { opacity: 1; }
+      100% { transform: translateY(calc(100vh + 240px)); opacity: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .rn-beam { animation: none !important; opacity: 0 !important; }
+      .vn-beam { animation: none !important; opacity: 0 !important; }
     }
   `;
   document.head.appendChild(el);
 })();
 
-// 4 stripes — well-spaced, not cramped
-// Slow durations (22–30s) feel premium and unobtrusive
 const STRIPES = [
-  { left: '15%', dur: 24, delay:  0  },
-  { left: '38%', dur: 30, delay: -9  },
-  { left: '63%', dur: 22, delay: -15 },
-  { left: '84%', dur: 27, delay: -5  },
+  { left: '12%', dur: 26, delay:  0   },
+  { left: '36%', dur: 32, delay: -10  },
+  { left: '64%', dur: 24, delay: -17  },
+  { left: '86%', dur: 29, delay: -6   },
 ];
 
-/**
- * Ultra-subtle vertical light stripes — sleek AI-startup / Spotify dark UI feel.
- * Fixed to viewport, completely non-interactive.
- *
- * Props:
- *   count – stripes to render (default 4; use 2–3 for narrow panels)
- */
 export default function AnimatedStripes({ count = 4 }) {
+  const isMobile = useIsMobile();
+  const railOpacity = isMobile ? 0.06 : 0.1;
+
   return (
     <div
       aria-hidden="true"
@@ -44,15 +39,10 @@ export default function AnimatedStripes({ count = 4 }) {
         overflow: 'hidden',
         pointerEvents: 'none',
         zIndex: 0,
-        // Horizontal accent — single hairline at very bottom of viewport only,
-        // gives the page a subtle "floor" without a busy grid
-        backgroundImage:
-          'linear-gradient(to bottom, transparent 94%, rgba(255,255,255,0.03) 100%)',
       }}
     >
       {STRIPES.slice(0, count).map((st, i) => (
         <span key={i}>
-          {/* 1px column guide — barely there */}
           <div
             style={{
               position: 'absolute',
@@ -60,22 +50,21 @@ export default function AnimatedStripes({ count = 4 }) {
               top: 0,
               bottom: 0,
               width: '1px',
-              background: 'rgba(255,255,255,0.05)',
+              background: `rgba(37,183,200,${railOpacity})`,
             }}
           />
-          {/* Light beam — almost white, whisper-level opacity */}
           <div
-            className="rn-beam"
+            className="vn-beam"
             style={{
               position: 'absolute',
-              left: `calc(${st.left} - 8px)`,
+              left: `calc(${st.left} - 10px)`,
               top: 0,
-              width: '17px',
-              height: '220px',
+              width: '21px',
+              height: '240px',
               background:
-                'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.18) 40%, rgba(255,255,255,0.18) 60%, transparent 100%)',
-              filter: 'blur(6px)',
-              animation: `rnBeam ${st.dur}s linear ${st.delay}s infinite both`,
+                'linear-gradient(to bottom, transparent 0%, rgba(37,183,200,0.16) 35%, rgba(37,183,200,0.22) 50%, rgba(37,183,200,0.16) 65%, transparent 100%)',
+              filter: 'blur(7px)',
+              animation: `vnBeam ${st.dur}s linear ${st.delay}s infinite both`,
             }}
           />
         </span>

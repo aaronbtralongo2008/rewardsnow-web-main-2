@@ -194,3 +194,16 @@ code {
 .vn-divider {
   animation: vn-bar-grow 0.8s 0.2s ease both;
 }
+
+/* ── Animated stripe beams (AnimatedStripes.js) ─────────────────────── */
+.vn-beam {
+  /* animation injected dynamically by AnimatedStripes.js */
+}
+
+/* ── Footer / nav link color transitions ────────────────────────────── */
+.vn-footer-link {
+  transition: color 0.15s ease;
+}
+.vn-footer-link:hover {
+  color: #25B7C8 !important;
+}
