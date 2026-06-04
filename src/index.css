@@ -1,16 +1,196 @@
+/* ── Base reset ────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ── Keyframes ─────────────────────────────────────────────────────── */
+@keyframes vn-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vn-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes vn-slide-right {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes vn-slide-left {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes vn-scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes vn-top-bar-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.72; }
+}
+
+@keyframes vn-gold-pulse {
+  0%, 100% { text-shadow: 0 0 16px rgba(242,184,75,0.45); }
+  50%       { text-shadow: 0 0 28px rgba(242,184,75,0.75); }
+}
+
+@keyframes vn-teal-pulse {
+  0%, 100% { text-shadow: 0 0 12px rgba(37,183,200,0.5); }
+  50%       { text-shadow: 0 0 22px rgba(37,183,200,0.85); }
+}
+
+@keyframes vn-bar-grow {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* ── Animation utility classes ─────────────────────────────────────── */
+.vn-fade-up   { animation: vn-fade-up   0.55s ease both; }
+.vn-fade-in   { animation: vn-fade-in   0.45s ease both; }
+.vn-slide-r   { animation: vn-slide-right 0.5s ease both; }
+.vn-slide-l   { animation: vn-slide-left  0.5s ease both; }
+.vn-scale-in  { animation: vn-scale-in  0.45s ease both; }
+
+.vn-delay-1   { animation-delay: 0.08s; }
+.vn-delay-2   { animation-delay: 0.16s; }
+.vn-delay-3   { animation-delay: 0.24s; }
+.vn-delay-4   { animation-delay: 0.34s; }
+.vn-delay-5   { animation-delay: 0.44s; }
+
+/* ── Top accent bar ────────────────────────────────────────────────── */
+.vn-top-bar {
+  animation: vn-top-bar-pulse 3.5s ease-in-out infinite;
+}
+
+/* ── Card hover lift ───────────────────────────────────────────────── */
+.vn-card {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.vn-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(11, 92, 173, 0.22);
+  border-color: rgba(37, 183, 200, 0.55) !important;
+}
+
+.vn-card-gold:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(242, 184, 75, 0.2);
+  border-color: rgba(242, 184, 75, 0.5) !important;
+}
+
+/* ── Stat / metric card ────────────────────────────────────────────── */
+.vn-stat {
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+.vn-stat:hover {
+  transform: translateY(-3px);
+  border-color: #25B7C8 !important;
+}
+
+/* ── Primary CTA button ────────────────────────────────────────────── */
+.vn-btn {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  cursor: pointer;
+}
+.vn-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(11, 92, 173, 0.38);
+}
+.vn-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.vn-btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(242, 184, 75, 0.4);
+  background: #F5C842 !important;
+}
+
+.vn-btn-orange:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232, 111, 46, 0.4);
+}
+
+/* ── Ghost / outline button ────────────────────────────────────────── */
+.vn-btn-ghost {
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  cursor: pointer;
+}
+.vn-btn-ghost:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.08) !important;
+}
+
+/* ── Nav links ─────────────────────────────────────────────────────── */
+.vn-nav-link {
+  transition: color 0.15s ease;
+}
+.vn-nav-link:hover {
+  color: #25B7C8 !important;
+}
+
+/* ── Gold glow numbers (metric displays) ───────────────────────────── */
+.vn-gold-glow {
+  animation: vn-gold-pulse 2.8s ease-in-out infinite;
+}
+
+/* ── Teal glow step numbers ────────────────────────────────────────── */
+.vn-teal-glow {
+  animation: vn-teal-pulse 2.8s ease-in-out infinite;
+}
+
+/* ── Accent bar grow-in ────────────────────────────────────────────── */
+.vn-bar-animate {
+  animation: vn-bar-grow 0.6s ease both;
+}
+
+/* ── Input focus ────────────────────────────────────────────────────── */
+.vn-input {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  outline: none;
+}
+.vn-input:focus {
+  border-color: #25B7C8 !important;
+  box-shadow: 0 0 0 3px rgba(37, 183, 200, 0.2) !important;
+}
+
+/* ── Tab / nav item ─────────────────────────────────────────────────── */
+.vn-tab {
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+/* ── Business / list row ────────────────────────────────────────────── */
+.vn-row {
+  transition: background 0.15s ease;
+}
+.vn-row:hover {
+  background: rgba(37, 183, 200, 0.05) !important;
+}
+
+/* ── Tag / badge ────────────────────────────────────────────────────── */
+.vn-tag {
+  transition: transform 0.15s ease;
+}
+.vn-tag:hover {
+  transform: translateY(-1px);
+}
+
+/* ── Section divider line ───────────────────────────────────────────── */
+.vn-divider {
+  animation: vn-bar-grow 0.8s 0.2s ease both;
 }
