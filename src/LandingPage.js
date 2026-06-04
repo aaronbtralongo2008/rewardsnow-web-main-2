@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
 import { useTheme } from './ThemeContext';
 import AnimatedStripes from './AnimatedStripes';
 import FadeInSection from './FadeInSection';
-
-const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
 // Wraps every occurrence of "Veniar" in <em> for italic rendering
 function vn(text) {
@@ -52,6 +51,13 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const { isDark, toggleTheme } = useTheme();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <div style={s.root}>
@@ -62,7 +68,21 @@ export default function LandingPage() {
         <div className="vn-top-bar" style={s.topBar} />
         <header style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
           <button style={s.brandBtn} onClick={() => navigate('/')} aria-label="Veniar home">
-            <img src={LOGO} alt="Veniar" style={s.brandLogo} />
+            <span style={{
+              color: '#F2B84B',
+              fontStyle: 'italic',
+              fontWeight: '900',
+              fontSize: scrolled ? '1.5rem' : '1.35rem',
+              letterSpacing: '-0.03em',
+              lineHeight: 1,
+              transition: 'font-size 0.22s ease',
+              display: 'block',
+              minWidth: scrolled ? 0 : '68px',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }}>
+              {scrolled ? 'V' : 'Veniar'}
+            </span>
           </button>
           <nav style={s.navRight} aria-label="Site navigation">
             {!isMobile && (
@@ -265,7 +285,7 @@ const s = {
     background: 'var(--rn-bg)',
     fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
     position: 'relative',
-    overflowX: 'hidden',
+    overflowX: 'clip',
   },
 
   stickyHeader: {
@@ -299,7 +319,6 @@ const s = {
     alignItems: 'center',
     lineHeight: 0,
   },
-  brandLogo: { height: '34px', width: 'auto', display: 'block' },
   navRight: { display: 'flex', gap: '8px', alignItems: 'center' },
   navLink: {
     padding: '8px 14px',
