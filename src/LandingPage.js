@@ -138,20 +138,20 @@ export default function LandingPage() {
 
           {/* H1 */}
           <h1 style={{
-            fontSize:      isMobile ? '3.4rem' : '6.5rem',
+            fontSize:      isMobile ? '2.2rem' : '4rem',
             fontWeight:    900,
-            letterSpacing: '-0.05em',
-            lineHeight:    0.93,
+            letterSpacing: '-0.04em',
+            lineHeight:    1.05,
             color:         '#FFF8EA',
             margin:        0,
-            maxWidth:      780,
+            maxWidth:      680,
           }}>
             Earn rewards while supporting local businesses.
           </h1>
 
           {/* Subheadline */}
           <p style={{
-            fontSize:     isMobile ? 17 : 21,
+            fontSize:     isMobile ? 15 : 17,
             color:        'rgba(255,248,234,0.68)',
             lineHeight:   1.7,
             maxWidth:     520,
