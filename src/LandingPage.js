@@ -9,10 +9,10 @@ import { useIsMobile } from './useIsMobile';
 /* ── Brand palette ────────────────────────────────────────────────────── */
 const CYAN    = '#1692A2';
 const LAGOON  = '#0E96CD';
-const DEEP    = '#06445E';
-const NIGHT   = '#07131A';
+const DEEP    = '#0F6356';
+const NIGHT   = '#0A1211';
 const YELLOW  = '#F8C922';
-const ORANGE  = '#E86F2E';
+const ORANGE  = '#D66024';
 const MUTED   = '#5F6B73';
 
 /* ── DashboardMock ────────────────────────────────────────────────────── */
@@ -138,14 +138,14 @@ function DashboardMock() {
 }
 
 /* ── StepItem ─────────────────────────────────────────────────────────── */
-function StepItem({ num, title, body, delay }) {
+function StepItem({ num, title, body, delay, numColor }) {
   return (
     <FadeInBoth delay={delay}>
       <div style={{ flex: '1 1 0', minWidth: 0 }}>
         <div style={{
           fontSize:      '3.5rem',
           fontWeight:    900,
-          color:         CYAN,
+          color:         numColor || CYAN,
           lineHeight:    1,
           marginBottom:  14,
           letterSpacing: '-0.04em',
@@ -173,7 +173,7 @@ function StepItem({ num, title, body, delay }) {
 }
 
 /* ── ServiceCard ──────────────────────────────────────────────────────── */
-function ServiceCard({ title, body, delay }) {
+function ServiceCard({ title, body, accent, delay }) {
   return (
     <FadeInBoth delay={delay}>
       <div
@@ -181,25 +181,33 @@ function ServiceCard({ title, body, delay }) {
         style={{
           background:   'var(--vn-card)',
           border:       '1px solid var(--vn-card-border)',
-          borderLeft:   `3px solid ${CYAN}`,
+          borderTop:    `3px solid ${accent}`,
           borderRadius: 14,
-          padding:      '28px 24px',
+          padding:      '40px 36px',
           height:       '100%',
         }}
       >
         <div style={{
-          fontSize:      16,
+          width:        32,
+          height:       3,
+          background:   accent,
+          borderRadius: 2,
+          marginBottom: 20,
+          opacity:      0.5,
+        }} />
+        <div style={{
+          fontSize:      17,
           fontWeight:    700,
           color:         'var(--vn-text)',
-          marginBottom:  10,
+          marginBottom:  12,
           letterSpacing: '-0.01em',
         }}>
           {title}
         </div>
         <div style={{
-          fontSize:   14,
+          fontSize:   15,
           color:      'var(--vn-text-sub)',
-          lineHeight: 1.65,
+          lineHeight: 1.75,
         }}>
           {body}
         </div>
@@ -347,7 +355,7 @@ export default function LandingPage() {
   /* ── SECTION 2 — HOW IT WORKS ─────────────────────────────────────── */
   const howSection = (
     <section style={{
-      background:    'var(--vn-section-alt)',
+      background:    'var(--vn-panel)',
       paddingTop:    isMobile ? 80  : 120,
       paddingBottom: isMobile ? 80  : 120,
       paddingLeft:   isMobile ? 24  : '8%',
@@ -400,6 +408,7 @@ export default function LandingPage() {
             num="01"
             title="Visit any partner"
             body={<>Give your phone number at checkout at any <em>Veniar</em> partner location.</>}
+            numColor="#1692A2"
             delay={0}
           />
 
@@ -419,6 +428,7 @@ export default function LandingPage() {
             num="02"
             title="Earn points"
             body={<>Points are added to your <em>Veniar</em> balance instantly. No card needed.</>}
+            numColor="#0E96CD"
             delay={120}
           />
 
@@ -438,6 +448,7 @@ export default function LandingPage() {
             num="03"
             title="Redeem anywhere"
             body="Spend at any partner in the network, not just where you earned."
+            numColor="#648D62"
             delay={240}
           />
         </div>
@@ -599,26 +610,30 @@ export default function LandingPage() {
         <div style={{
           display:             'grid',
           gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-          gap:                 16,
+          gap:                 isMobile ? 20 : 36,
         }}>
           <ServiceCard
             title="Shared Points Network"
             body="Customers earn at any partner and spend anywhere in the network."
+            accent="#1692A2"
             delay={0}
           />
           <ServiceCard
             title="Merchant Dashboard"
             body="Real-time activity, redemption management, and staff tools."
+            accent="#0E96CD"
             delay={80}
           />
           <ServiceCard
             title="Customer App"
             body="Balance, transaction history, and partner locations in one place."
+            accent="#5CB2C9"
             delay={160}
           />
           <ServiceCard
             title="Onboarding & Support"
             body="RewardsNow handles setup and ongoing support for every partner."
+            accent="#D66024"
             delay={240}
           />
         </div>
