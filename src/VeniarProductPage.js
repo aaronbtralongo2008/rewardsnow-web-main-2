@@ -4,9 +4,9 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const CYAN   = '#00A9C8';
-const LAGOON = '#1677B8';
-const YELLOW = '#F5C84B';
+const CYAN   = '#1692A2';
+const LAGOON = '#0E96CD';
+const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
 
 const FEATURES = [
@@ -221,7 +221,7 @@ const s = {
   numBadge: {
     display: 'inline-block',
     alignSelf: 'flex-start',
-    background: 'rgba(0,169,200,0.12)',
+    background: 'rgba(22,146,162,0.12)',
     color: CYAN,
     fontSize: '11px',
     fontWeight: '800',

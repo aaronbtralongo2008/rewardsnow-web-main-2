@@ -7,11 +7,11 @@ import FadeInBoth from './FadeInBoth';
 import { useIsMobile } from './useIsMobile';
 
 /* ── Brand palette ────────────────────────────────────────────────────── */
-const CYAN    = '#00A9C8';
-const LAGOON  = '#1677B8';
+const CYAN    = '#1692A2';
+const LAGOON  = '#0E96CD';
 const DEEP    = '#06445E';
 const NIGHT   = '#07131A';
-const YELLOW  = '#F5C84B';
+const YELLOW  = '#F8C922';
 const ORANGE  = '#E86F2E';
 const MUTED   = '#5F6B73';
 
@@ -33,7 +33,7 @@ function DashboardMock() {
         padding:      '32px 28px',
         maxWidth:     400,
         width:        '100%',
-        boxShadow:    '0 32px 80px rgba(0,169,200,0.12), 0 8px 24px rgba(7,19,26,0.28)',
+        boxShadow:    '0 32px 80px rgba(22,146,162,0.12), 0 8px 24px rgba(7,19,26,0.28)',
         overflow:     'hidden',
       }}
     >
@@ -407,7 +407,7 @@ export default function LandingPage() {
           {!isMobile && (
             <div style={{
               width:          1,
-              background:     'rgba(0,169,200,0.25)',
+              background:     'rgba(22,146,162,0.25)',
               height:         60,
               alignSelf:      'center',
               flexShrink:     0,
@@ -426,7 +426,7 @@ export default function LandingPage() {
           {!isMobile && (
             <div style={{
               width:      1,
-              background: 'rgba(0,169,200,0.25)',
+              background: 'rgba(22,146,162,0.25)',
               height:     60,
               alignSelf:  'center',
               flexShrink: 0,

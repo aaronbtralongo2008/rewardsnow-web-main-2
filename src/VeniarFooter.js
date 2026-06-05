@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-const CYAN   = '#00A9C8';
-const NIGHT  = '#07131A';
-const YELLOW = '#F5C84B';
+const CYAN   = '#1692A2';
+const NIGHT  = '#0A1211';
+const YELLOW = '#F8C922';
 const CREAM  = '#FFF8EA';
 
 const COLUMNS = [

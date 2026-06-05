@@ -4,9 +4,9 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const CYAN   = '#00A9C8';
-const LAGOON = '#1677B8';
-const YELLOW = '#F5C84B';
+const CYAN   = '#1692A2';
+const LAGOON = '#0E96CD';
+const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
 
 const CATEGORIES = [
@@ -159,7 +159,7 @@ export default function SupportPage() {
                     style={{
                       ...s.triggerBtn,
                       background: isOpen
-                        ? 'rgba(0,169,200,0.07)'
+                        ? 'rgba(22,146,162,0.07)'
                         : 'var(--vn-bg, var(--rn-bg))',
                     }}
                   >

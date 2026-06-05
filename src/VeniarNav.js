@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { useTheme } from './ThemeContext';
 
-const CYAN   = '#00A9C8';
-const LAGOON = '#1677B8';
+const CYAN   = '#1692A2';
+const LAGOON = '#0E96CD';
 
 const NAV_LINKS = [
   { label: 'Services',     path: '/services' },

@@ -2,68 +2,76 @@
 
 /* ── Veniar Ocean Breeze — static brand tokens (never change with theme) ── */
 :root {
-  /* Core identity */
-  --vn-ocean-cyan:         #00A9C8;
-  --vn-ocean-cyan-hover:   #008FB0;
-  --vn-ocean-cyan-active:  #007895;
+  /* Core Ocean Breeze product identity */
+  --vn-ocean-cyan:         #1692A2;
+  --vn-ocean-cyan-hover:   #0F7F8F;
+  --vn-ocean-cyan-active:  #0A6C78;
 
-  --vn-lagoon-blue:        #1677B8;
-  --vn-lagoon-blue-hover:  #105F95;
-  --vn-lagoon-blue-active: #0B4C78;
+  --vn-lagoon-blue:        #0E96CD;
+  --vn-lagoon-blue-hover:  #077FAF;
+  --vn-lagoon-blue-active: #06698F;
 
-  --vn-deep-water:         #06445E;
-  --vn-night-window:       #07131A;
+  --vn-deep-teal:          #0F6356;
+  --vn-tropical-teal:      #0F8966;
+  --vn-sea-glass:          #5CB2C9;
+
+  /* Deep frame / serious product contrast */
+  --vn-night-frame:        #0A1211;
+  --vn-deep-water:         #07131A;
   --vn-ink:                #101820;
 
-  /* Reward / conversion accents */
-  --vn-sunset-yellow:      #F5C84B;
-  --vn-sunset-gold:        #F2B84B;
-  --vn-sunset-orange:      #E86F2E;
-  --vn-coral-red:          #D94A3A;
+  /* Sunset and reward colors */
+  --vn-sunset-yellow:      #F8C922;
+  --vn-sunset-gold:        #EDA81B;
+  --vn-sunset-orange:      #D66024;
+  --vn-coral-red:          #AA382F;
 
-  /* Secondary accents */
-  --vn-palm-green:         #2F8A5B;
-  --vn-palm-deep:          #1F6B46;
-  --vn-seafoam:            #BEEDE8;
-  --vn-surf-mist:          #E6F8F6;
+  /* Tropical greens */
+  --vn-palm-green:         #185035;
+  --vn-palm-bright:        #648D62;
+  --vn-reef-green:         #0A6C58;
 
-  /* Light surfaces */
+  /* Warm natural supports */
+  --vn-sand:               #D99B67;
+  --vn-earth-brown:        #573128;
+  --vn-olive-shadow:       #586755;
+
+  /* Light mode surfaces */
   --vn-cream:              #FFF8EA;
-  --vn-sand:               #F3E4C5;
-  --vn-soft-sand:          #F8EED8;
-  --vn-shell:              #FFFCF4;
+  --vn-shell:              #F5F5F4;
+  --vn-soft-sand:          #F7E8CF;
   --vn-white:              #FFFFFF;
 
-  /* Light text */
+  /* Text */
   --vn-text-static:        #101820;
   --vn-muted-static:       #5F6B73;
-  --vn-muted-blue:         #627887;
+  --vn-muted-teal:         #627887;
 
-  /* Borders */
+  /* Borders and focus */
   --vn-border:             rgba(16,24,32,0.14);
   --vn-border-strong:      rgba(16,24,32,0.24);
-  --vn-focus:              #00A9C8;
+  --vn-focus:              #1692A2;
 
-  /* Dark surfaces */
-  --vn-dark-bg:            #06141C;
-  --vn-dark-surface:       #082232;
-  --vn-dark-panel:         #0B3045;
-  --vn-dark-panel-strong:  #0E3D58;
+  /* Dark mode surfaces */
+  --vn-dark-bg:            #0A1211;
+  --vn-dark-surface:       #07131A;
+  --vn-dark-panel:         #0B2B30;
+  --vn-dark-panel-strong:  #0F3F45;
 
-  /* Dark text */
+  /* Dark mode text */
   --vn-dark-text:          #FFF8EA;
   --vn-dark-muted:         #B8C7CC;
 
-  /* Dark accents */
-  --vn-dark-cyan:          #3DD6E8;
-  --vn-dark-lagoon:        #4AA3DF;
-  --vn-dark-yellow:        #F5C84B;
-  --vn-dark-orange:        #F08A52;
-  --vn-dark-palm:          #72B98A;
+  /* Dark mode accents */
+  --vn-dark-cyan:          #5CB2C9;
+  --vn-dark-lagoon:        #0E96CD;
+  --vn-dark-yellow:        #F8C922;
+  --vn-dark-orange:        #D66024;
+  --vn-dark-green:         #648D62;
 
-  /* Dark borders */
-  --vn-border-dark:        rgba(255,248,234,0.14);
-  --vn-border-dark-strong: rgba(255,248,234,0.26);
+  /* Dark mode borders */
+  --vn-border-dark:        rgba(255,248,234,0.16);
+  --vn-border-dark-strong: rgba(255,248,234,0.28);
 }
 
 body {
@@ -89,7 +97,7 @@ code {
 }
 .vn-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 40px rgba(0,169,200,0.10) !important;
+  box-shadow: 0 14px 40px rgba(22,146,162,0.12) !important;
   border-color: var(--vn-ocean-cyan-hover) !important;
 }
 
@@ -100,7 +108,7 @@ code {
 .vn-cta-primary:hover {
   background-color: var(--vn-lagoon-blue-hover) !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(22,119,184,0.32) !important;
+  box-shadow: 0 6px 24px rgba(14,150,205,0.30) !important;
 }
 .vn-cta-primary:active {
   transform: translateY(0);
@@ -113,7 +121,7 @@ code {
 .vn-cta-cyan:hover {
   background-color: var(--vn-ocean-cyan-hover) !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(0,169,200,0.30) !important;
+  box-shadow: 0 6px 24px rgba(22,146,162,0.28) !important;
 }
 .vn-cta-cyan:active {
   transform: translateY(0);
@@ -124,7 +132,7 @@ code {
   cursor: pointer;
 }
 .vn-cta-ghost:hover {
-  background-color: var(--vn-surf-mist) !important;
+  background-color: var(--vn-shell) !important;
   border-color: var(--vn-ocean-cyan) !important;
 }
 
@@ -133,7 +141,7 @@ code {
   cursor: pointer;
 }
 .vn-nav-btn:hover {
-  background-color: var(--vn-surf-mist, rgba(230,248,246,0.7)) !important;
+  background-color: var(--vn-shell, rgba(245,245,244,0.7)) !important;
 }
 
 .vn-footer-link {
@@ -141,7 +149,7 @@ code {
   cursor: pointer;
 }
 .vn-footer-link:hover {
-  color: var(--vn-dark-cyan, #3DD6E8) !important;
+  color: var(--vn-dark-cyan, #5CB2C9) !important;
 }
 
 /* Dashboard mock card — slide in from right on mount */

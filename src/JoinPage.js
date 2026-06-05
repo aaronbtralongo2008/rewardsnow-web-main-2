@@ -4,8 +4,8 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const LAGOON = '#1677B8';
-const YELLOW = '#F5C84B';
+const LAGOON = '#0E96CD';
+const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
 
 export default function JoinPage() {
