@@ -106,12 +106,14 @@ export default function LandingPage() {
   const CONTENT_MAX = 1040;
   const inner = { maxWidth: CONTENT_MAX, margin: '0 auto' };
 
+  const heroBg = isDark ? NIGHT : '#1295AA';
+
   /* ── SECTION 1 — HERO ─────────────────────────────────────────────── */
   const heroSection = (
     <section
       style={{
         minHeight:     '100vh',
-        background:    NIGHT,
+        background:    heroBg,
         paddingTop:    isMobile ? 100 : 64,
         paddingBottom: isMobile ? 72  : 96,
         paddingLeft:   isMobile ? 24  : '8%',
