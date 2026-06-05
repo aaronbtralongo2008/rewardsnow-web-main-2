@@ -122,7 +122,7 @@ export default function VeniarNav() {
     display: 'inline-block',
     opacity: scrolled ? 0 : 1,
     maxWidth: scrolled ? '0px' : '80px',
-    transition: 'opacity 0.3s ease, max-width 0.35s cubic-bezier(0.16,1,0.3,1)',
+    transition: 'opacity 0.65s ease, max-width 0.75s cubic-bezier(0.16,1,0.3,1)',
     whiteSpace: 'nowrap',
   };
 

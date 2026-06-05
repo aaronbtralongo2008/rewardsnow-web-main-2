@@ -61,7 +61,6 @@ function ServiceCard({ title, body, accent, delay }) {
           borderTop:    `3px solid ${accent}`,
           borderRadius: 14,
           padding:      '40px 36px',
-          height:       '100%',
         }}
       >
         <div style={{
@@ -112,9 +111,9 @@ export default function LandingPage() {
     <section
       style={{
         minHeight:     '100vh',
-        background:    'var(--vn-bg)',
+        background:    NIGHT,
         paddingTop:    isMobile ? 100 : 64,
-        paddingBottom: isMobile ? 60  : 80,
+        paddingBottom: isMobile ? 72  : 96,
         paddingLeft:   isMobile ? 24  : '8%',
         paddingRight:  isMobile ? 24  : '8%',
         display:       'flex',
@@ -130,30 +129,30 @@ export default function LandingPage() {
             letterSpacing: '0.3em',
             textTransform: 'uppercase',
             color:         YELLOW,
-            marginBottom:  20,
+            marginBottom:  24,
           }}>
             SHARED REWARDS PLATFORM
           </div>
 
           {/* H1 */}
           <h1 style={{
-            fontSize:      isMobile ? '3.2rem' : '6rem',
+            fontSize:      isMobile ? '3.4rem' : '6.5rem',
             fontWeight:    900,
             letterSpacing: '-0.05em',
-            lineHeight:    0.95,
-            color:         'var(--vn-text)',
+            lineHeight:    0.93,
+            color:         '#FFF8EA',
             margin:        0,
-            maxWidth:      720,
+            maxWidth:      780,
           }}>
             One card.<br />Every business.
           </h1>
 
           {/* Subheadline */}
           <p style={{
-            fontSize:     isMobile ? 17 : 20,
-            color:        'var(--vn-text-sub)',
+            fontSize:     isMobile ? 17 : 21,
+            color:        'rgba(255,248,234,0.68)',
             lineHeight:   1.7,
-            maxWidth:     500,
+            maxWidth:     520,
             marginBottom: 48,
             marginTop:    32,
           }}>
@@ -167,6 +166,7 @@ export default function LandingPage() {
             flexWrap:   'wrap',
             gap:        12,
             alignItems: 'center',
+            marginBottom: 64,
           }}>
             <button
               className="vn-cta-primary"
@@ -174,7 +174,7 @@ export default function LandingPage() {
                 background:   LAGOON,
                 color:        '#fff',
                 border:       'none',
-                padding:      '16px 32px',
+                padding:      '16px 36px',
                 borderRadius: 9,
                 fontSize:     16,
                 fontWeight:   700,
@@ -186,12 +186,11 @@ export default function LandingPage() {
               Join Veniar
             </button>
             <button
-              className="vn-cta-ghost"
               style={{
                 background:   'transparent',
-                color:        'var(--vn-text)',
-                border:       '1.5px solid var(--vn-card-border)',
-                padding:      '16px 32px',
+                color:        'rgba(255,248,234,0.75)',
+                border:       '1.5px solid rgba(255,248,234,0.22)',
+                padding:      '16px 36px',
                 borderRadius: 9,
                 fontSize:     16,
                 fontWeight:   700,
@@ -202,6 +201,53 @@ export default function LandingPage() {
             >
               For businesses
             </button>
+          </div>
+
+          {/* Mission strip */}
+          <div style={{
+            display:       'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap:           isMobile ? 20 : 0,
+            borderTop:     '1px solid rgba(255,248,234,0.10)',
+            paddingTop:    32,
+          }}>
+            {[
+              { label: 'Earn everywhere',  sub: 'Points pooled across the whole network — not per business.', accent: CYAN   },
+              { label: 'Spend anywhere',   sub: 'Redeem at any partner, not just where you earned.',           accent: '#5CB2C9' },
+              { label: 'No card needed',   sub: 'Just a phone number at checkout.',                            accent: '#648D62' },
+            ].map((item, i) => (
+              <div
+                key={item.label}
+                style={{
+                  flex:        1,
+                  paddingLeft: isMobile ? 0 : (i > 0 ? 40 : 0),
+                  borderLeft:  (!isMobile && i > 0) ? '1px solid rgba(255,248,234,0.08)' : 'none',
+                }}
+              >
+                <div style={{
+                  width:        28,
+                  height:       3,
+                  background:   item.accent,
+                  borderRadius: 2,
+                  marginBottom: 12,
+                }} />
+                <div style={{
+                  fontSize:     15,
+                  fontWeight:   700,
+                  color:        '#FFF8EA',
+                  marginBottom: 6,
+                }}>
+                  {item.label}
+                </div>
+                <div style={{
+                  fontSize:   14,
+                  color:      'rgba(255,248,234,0.50)',
+                  lineHeight: 1.6,
+                }}>
+                  {item.sub}
+                </div>
+              </div>
+            ))}
           </div>
         </FadeInBoth>
       </div>
@@ -466,7 +512,8 @@ export default function LandingPage() {
         <div style={{
           display:             'grid',
           gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-          gap:                 isMobile ? 20 : 36,
+          gap:                 isMobile ? 20 : 32,
+          alignItems:          'start',
         }}>
           <ServiceCard
             title="Shared Points Network"
