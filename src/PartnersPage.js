@@ -4,7 +4,7 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
-const LAGOON = '#0E96CD';
+const CYAN   = '#1692A2';
 const YELLOW = '#F8C922';
 
 export default function PartnersPage() {
@@ -27,11 +27,12 @@ export default function PartnersPage() {
       <VeniarNav />
 
       <main>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 8%',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
           }}
         >
           {/* Gold eyebrow */}
@@ -49,18 +50,34 @@ export default function PartnersPage() {
 
           {/* Gold accent bar */}
           <div style={s.goldBar} />
+        </section>
 
-          {/* Body */}
-          <p style={s.body}>
-            Currently Building... Check back in! Any questions,{' '}
-            <button
-              style={s.inlineLink}
-              onClick={() => navigate('/contact')}
-            >
-              contact support
-            </button>
-            .
-          </p>
+        {/* ── Body section ─────────────────────────────────────────────── */}
+        <section
+          style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
+          <div
+            style={{
+              maxWidth: '720px',
+              margin: '0 auto',
+              padding: isMobile ? '0 24px' : '0 8%',
+            }}
+          >
+            {/* Body */}
+            <p style={s.body}>
+              Currently Building... Check back in! Any questions,{' '}
+              <button
+                style={s.inlineLink}
+                onClick={() => navigate('/contact')}
+              >
+                contact support
+              </button>
+              .
+            </p>
+          </div>
         </section>
       </main>
 
@@ -102,7 +119,7 @@ const s = {
     background: 'none',
     border: 'none',
     padding: 0,
-    color: LAGOON,
+    color: CYAN,
     fontSize: '17px',
     fontWeight: '600',
     cursor: 'pointer',

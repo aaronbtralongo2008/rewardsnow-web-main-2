@@ -4,6 +4,7 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
+const CYAN   = '#1692A2';
 const LAGOON = '#0E96CD';
 const YELLOW = '#F8C922';
 
@@ -27,11 +28,12 @@ export default function NetworkPage() {
       <VeniarNav />
 
       <main>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px 100px' : '120px 8% 120px',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
           }}
         >
           {/* Gold eyebrow */}
@@ -45,31 +47,47 @@ export default function NetworkPage() {
           {/* Gold accent bar */}
           <div style={s.goldBar} />
 
-          {/* Body paragraphs */}
+          {/* Body */}
           <p style={s.body}>
             The <em>Veniar</em> network is a group of independent local businesses that
             share a single rewards system. When you earn points at one location, you can
             spend them at any other location in the network.
           </p>
+        </section>
 
-          <p style={s.body}>
-            Currently Building... Check back in for a full partner directory and
-            interactive map. Any questions,{' '}
-            <Link to="/contact" style={s.link}>
-              contact support
-            </Link>
-            .
-          </p>
+        {/* ── Info + CTA ───────────────────────────────────────────────── */}
+        <section
+          style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
+          <div
+            style={{
+              maxWidth: '720px',
+              margin: '0 auto',
+              padding: isMobile ? '0 24px' : '0 8%',
+            }}
+          >
+            <p style={s.body}>
+              Currently Building... Check back in for a full partner directory and
+              interactive map. Any questions,{' '}
+              <Link to="/contact" style={s.link}>
+                contact support
+              </Link>
+              .
+            </p>
 
-          {/* CTA */}
-          <div style={{ marginTop: '40px' }}>
-            <button
-              className="vn-cta-primary"
-              style={s.btnPrimary}
-              onClick={() => navigate('/map')}
-            >
-              View the map
-            </button>
+            {/* CTA */}
+            <div style={{ marginTop: '40px' }}>
+              <button
+                className="vn-cta-primary"
+                style={s.btnPrimary}
+                onClick={() => navigate('/map')}
+              >
+                View the map
+              </button>
+            </div>
           </div>
         </section>
       </main>
@@ -109,7 +127,7 @@ const s = {
     margin: '0 0 20px',
   },
   link: {
-    color: LAGOON,
+    color: CYAN,
     fontWeight: '600',
     textDecoration: 'none',
   },

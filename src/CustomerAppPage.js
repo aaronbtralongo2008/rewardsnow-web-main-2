@@ -6,8 +6,15 @@ import VeniarFooter from './VeniarFooter';
 
 const CYAN   = '#1692A2';
 const LAGOON = '#0E96CD';
+const ORANGE = '#D66024';
 const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
+
+const NUM_COLORS = [
+  { bg: 'rgba(22,146,162,0.12)',  color: CYAN },
+  { bg: 'rgba(14,150,205,0.10)',  color: LAGOON },
+  { bg: 'rgba(214,96,36,0.10)',   color: ORANGE },
+];
 
 const FEATURES = [
   {
@@ -85,18 +92,26 @@ export default function CustomerAppPage() {
         {/* ── Feature blocks ───────────────────────────────────────────── */}
         <section
           style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 64px' : '64px 0 80px',
+          }}
+        >
+        <div
+          style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '0 24px 64px' : '0 8% 80px',
+            padding: isMobile ? '0 24px' : '0 8%',
             display: 'flex',
             flexDirection: 'column',
             gap: '48px',
           }}
         >
-          {FEATURES.map((f) => (
+          {FEATURES.map((f, i) => {
+            const nc = NUM_COLORS[i % NUM_COLORS.length];
+            return (
             <div key={f.num} style={s.featureBlock}>
-              {/* Teal number badge */}
-              <span style={s.numBadge}>{f.num}</span>
+              {/* Number badge — alternating color */}
+              <span style={{ ...s.numBadge, background: nc.bg, color: nc.color }}>{f.num}</span>
 
               {/* Feature heading */}
               <h2
@@ -111,15 +126,23 @@ export default function CustomerAppPage() {
               {/* Feature body */}
               <p style={s.featureBody}>{f.body}</p>
             </div>
-          ))}
+            );
+          })}
+        </div>
         </section>
 
         {/* ── CTA section ──────────────────────────────────────────────── */}
         <section
           style={{
+            background: 'var(--vn-section-alt, #F5F5F4)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
+        <div
+          style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '0 24px 100px' : '0 8% 120px',
+            padding: isMobile ? '0 24px' : '0 8%',
           }}
         >
           <div
@@ -153,6 +176,7 @@ export default function CustomerAppPage() {
               </Link>
             </p>
           </div>
+        </div>
         </section>
       </main>
 

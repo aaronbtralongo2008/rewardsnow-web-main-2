@@ -5,6 +5,7 @@ import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
 const LAGOON = '#0E96CD';
+const ORANGE = '#D66024';
 const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
 
@@ -28,9 +29,10 @@ export default function PricingPage() {
       <VeniarNav />
 
       <main>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            padding: isMobile ? '80px 24px' : '120px 8%',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
             textAlign: 'center',
             maxWidth: '720px',
             margin: '0 auto',
@@ -57,42 +59,58 @@ export default function PricingPage() {
             Clear, direct pricing is coming soon. In the meantime, reach out to
             discuss your business needs and get early access details.
           </p>
+        </section>
 
-          {/* CTA buttons */}
+        {/* ── CTA section ──────────────────────────────────────────────── */}
+        <section
+          style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
           <div
             style={{
-              display: 'flex',
-              gap: '12px',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              marginTop: '40px',
+              maxWidth: '720px',
+              margin: '0 auto',
+              padding: isMobile ? '0 24px' : '0 8%',
+              textAlign: 'center',
             }}
           >
-            <button
-              style={s.btnPrimary}
-              onClick={() => navigate('/contact')}
+            {/* CTA buttons */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '12px',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+              }}
             >
-              Contact us
-            </button>
-            <button
-              style={s.btnGhost}
-              onClick={() => navigate('/join')}
-            >
-              Join Veniar
-            </button>
-          </div>
+              <button
+                style={s.btnPrimary}
+                onClick={() => navigate('/contact')}
+              >
+                Contact us
+              </button>
+              <button
+                style={s.btnGhost}
+                onClick={() => navigate('/join')}
+              >
+                Join Veniar
+              </button>
+            </div>
 
-          {/* Status note */}
-          <p style={s.mutedNote}>
-            Currently Building... Check back in! Any questions,{' '}
-            <button
-              style={s.inlineLink}
-              onClick={() => navigate('/contact')}
-            >
-              contact support
-            </button>
-            .
-          </p>
+            {/* Status note */}
+            <p style={s.mutedNote}>
+              Currently Building... Check back in! Any questions,{' '}
+              <button
+                style={s.inlineLink}
+                onClick={() => navigate('/contact')}
+              >
+                contact support
+              </button>
+              .
+            </p>
+          </div>
         </section>
       </main>
 
@@ -133,7 +151,7 @@ const s = {
   },
   btnPrimary: {
     padding: '14px 30px',
-    background: LAGOON,
+    background: ORANGE,
     border: 'none',
     color: '#FFFFFF',
     borderRadius: '10px',

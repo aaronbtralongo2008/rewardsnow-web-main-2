@@ -88,9 +88,15 @@ export default function ServicesPage() {
         {/* Service cards */}
         <section
           style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 120px' : '64px 0 140px',
+          }}
+        >
+        <div
+          style={{
             maxWidth: '1100px',
             margin: '0 auto',
-            padding: isMobile ? '0 24px 120px' : '0 8% 140px',
+            padding: isMobile ? '0 24px' : '0 8%',
           }}
         >
           <div
@@ -158,6 +164,7 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
+        </div>
         </section>
       </main>
 

@@ -4,9 +4,13 @@ import { useIsMobile } from './useIsMobile';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
+const CYAN   = '#1692A2';
 const LAGOON = '#0E96CD';
+const ORANGE = '#D66024';
 const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
+
+const ROW_ACCENTS = [CYAN, LAGOON, ORANGE];
 
 export default function ContactPage() {
   const navigate = useNavigate();
@@ -28,11 +32,12 @@ export default function ContactPage() {
       <VeniarNav />
 
       <main>
+        {/* ── Hero + contact rows ───────────────────────────────────────── */}
         <section
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 8%',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
           }}
         >
           {/* Gold eyebrow */}
@@ -60,67 +65,81 @@ export default function ContactPage() {
               marginBottom: '48px',
             }}
           >
-            <div style={s.contactRow}>
-              <p style={s.contactLabel}>For general questions and support:</p>
-              <a href="mailto:hello@veniar.com" style={s.emailLink}>
-                hello@veniar.com
-              </a>
-            </div>
-
-            <div style={s.contactRow}>
-              <p style={s.contactLabel}>For legal matters:</p>
-              <a href="mailto:legal@rewards-now.net" style={s.emailLink}>
-                legal@rewards-now.net
-              </a>
-            </div>
-
-            <div style={s.contactRow}>
-              <p style={s.contactLabel}>For business partnerships:</p>
-              <a href="mailto:hello@veniar.com" style={s.emailLink}>
-                hello@veniar.com
-              </a>
-            </div>
+            {[
+              { label: 'For general questions and support:', email: 'hello@veniar.com', href: 'mailto:hello@veniar.com' },
+              { label: 'For legal matters:', email: 'legal@rewards-now.net', href: 'mailto:legal@rewards-now.net' },
+              { label: 'For business partnerships:', email: 'hello@veniar.com', href: 'mailto:hello@veniar.com' },
+            ].map((row, i) => (
+              <div
+                key={row.label}
+                style={{
+                  ...s.contactRow,
+                  borderLeft: `3px solid ${ROW_ACCENTS[i]}`,
+                  paddingLeft: '14px',
+                }}
+              >
+                <p style={s.contactLabel}>{row.label}</p>
+                <a href={row.href} style={{ ...s.emailLink, color: ROW_ACCENTS[i] }}>
+                  {row.email}
+                </a>
+              </div>
+            ))}
           </div>
 
           {/* Response time note */}
           <p style={s.responseNote}>
             We respond within 1–2 business days.
           </p>
+        </section>
 
-          {/* Self-service support card */}
+        {/* ── Self-service card ─────────────────────────────────────────── */}
+        <section
+          style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
           <div
-            className="vn-card"
             style={{
-              ...s.supportCard,
-              padding: isMobile ? '24px 20px' : '28px 28px',
-              marginTop: '48px',
+              maxWidth: '720px',
+              margin: '0 auto',
+              padding: isMobile ? '0 24px' : '0 8%',
             }}
           >
-            <p style={s.cardTitle}>Looking for self-service support?</p>
-            <p style={s.cardDesc}>
-              Browse our help topics for quick answers to common questions.
-            </p>
-            <button
-              style={s.btnPrimary}
-              onClick={() => navigate('/support')}
+            {/* Self-service support card */}
+            <div
+              className="vn-card"
+              style={{
+                ...s.supportCard,
+                padding: isMobile ? '24px 20px' : '28px 28px',
+              }}
             >
-              Browse support topics
-            </button>
-          </div>
+              <p style={s.cardTitle}>Looking for self-service support?</p>
+              <p style={s.cardDesc}>
+                Browse our help topics for quick answers to common questions.
+              </p>
+              <button
+                style={s.btnPrimary}
+                onClick={() => navigate('/support')}
+              >
+                Browse support topics
+              </button>
+            </div>
 
-          {/* Parent company note */}
-          <p style={s.parentNote}>
-            Veniar is a product of{' '}
-            <a
-              href="https://rewards-now.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={s.externalLink}
-            >
-              RewardsNow
-            </a>
-            .
-          </p>
+            {/* Parent company note */}
+            <p style={s.parentNote}>
+              Veniar is a product of{' '}
+              <a
+                href="https://rewards-now.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={s.externalLink}
+              >
+                RewardsNow
+              </a>
+              .
+            </p>
+          </div>
         </section>
       </main>
 

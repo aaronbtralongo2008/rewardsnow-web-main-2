@@ -5,6 +5,7 @@ import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
 const LAGOON = '#0E96CD';
+const ORANGE = '#D66024';
 const YELLOW = '#F8C922';
 
 export default function MissionPage() {
@@ -27,11 +28,12 @@ export default function MissionPage() {
       <VeniarNav />
 
       <main>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 8%',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
           }}
         >
           {/* Gold eyebrow */}
@@ -61,9 +63,22 @@ export default function MissionPage() {
             </button>
             .
           </p>
+        </section>
 
-          {/* CTA */}
-          <div style={{ marginTop: '40px' }}>
+        {/* ── CTA section ──────────────────────────────────────────────── */}
+        <section
+          style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
+          <div
+            style={{
+              maxWidth: '720px',
+              margin: '0 auto',
+              padding: isMobile ? '0 24px' : '0 8%',
+            }}
+          >
             <button
               style={s.btnPrimary}
               onClick={() => navigate('/support')}
@@ -110,7 +125,7 @@ const s = {
   },
   btnPrimary: {
     padding: '14px 30px',
-    background: LAGOON,
+    background: ORANGE,
     border: 'none',
     color: '#FFFFFF',
     borderRadius: '10px',

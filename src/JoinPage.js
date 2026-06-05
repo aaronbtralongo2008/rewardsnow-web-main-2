@@ -5,6 +5,7 @@ import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
 const LAGOON = '#0E96CD';
+const ORANGE = '#D66024';
 const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
 
@@ -28,11 +29,12 @@ export default function JoinPage() {
       <VeniarNav />
 
       <main>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
             maxWidth: '820px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 8%',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
             textAlign: 'center',
           }}
         >
@@ -57,48 +59,66 @@ export default function JoinPage() {
             Create your free account and start earning rewards at participating
             local businesses. <em>Veniar</em> is free for customers.
           </p>
+        </section>
 
-          {/* Routing cards */}
+        {/* ── Cards section ────────────────────────────────────────────── */}
+        <section
+          style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
           <div
             style={{
-              display: 'flex',
-              flexDirection: isMobile ? 'column' : 'row',
-              gap: '16px',
-              marginTop: '48px',
-              justifyContent: 'center',
+              maxWidth: '820px',
+              margin: '0 auto',
+              padding: isMobile ? '0 24px' : '0 8%',
+              textAlign: 'center',
             }}
           >
-            {/* Customer card */}
-            <RoutingCard
-              title="I'm a customer"
-              description="Earn and redeem rewards at participating businesses."
-              buttonLabel="Create account"
-              buttonStyle="primary"
-              onButtonClick={() => navigate('/register')}
-              isMobile={isMobile}
-            />
-
-            {/* Business card */}
-            <RoutingCard
-              title="I own a business"
-              description="Apply to partner with Veniar and give your customers a shared rewards experience."
-              buttonLabel="Apply to partner"
-              buttonStyle="ghost"
-              onButtonClick={() => navigate('/business-overview')}
-              isMobile={isMobile}
-            />
-          </div>
-
-          {/* Sign-in link */}
-          <p style={s.signinRow}>
-            Already have an account?{' '}
-            <button
-              style={s.signinLink}
-              onClick={() => navigate('/signin')}
+            {/* Routing cards */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: '32px',
+                justifyContent: 'center',
+              }}
             >
-              Sign in →
-            </button>
-          </p>
+              {/* Customer card */}
+              <RoutingCard
+                title="I'm a customer"
+                description="Earn and redeem rewards at participating businesses."
+                buttonLabel="Create account"
+                buttonStyle="primary"
+                accentColor={LAGOON}
+                onButtonClick={() => navigate('/register')}
+                isMobile={isMobile}
+              />
+
+              {/* Business card */}
+              <RoutingCard
+                title="I own a business"
+                description="Apply to partner with Veniar and give your customers a shared rewards experience."
+                buttonLabel="Apply to partner"
+                buttonStyle="ghost"
+                accentColor={ORANGE}
+                onButtonClick={() => navigate('/business-overview')}
+                isMobile={isMobile}
+              />
+            </div>
+
+            {/* Sign-in link */}
+            <p style={s.signinRow}>
+              Already have an account?{' '}
+              <button
+                style={s.signinLink}
+                onClick={() => navigate('/signin')}
+              >
+                Sign in →
+              </button>
+            </p>
+          </div>
         </section>
       </main>
 
@@ -107,15 +127,16 @@ export default function JoinPage() {
   );
 }
 
-function RoutingCard({ title, description, buttonLabel, buttonStyle, onButtonClick, isMobile }) {
+function RoutingCard({ title, description, buttonLabel, buttonStyle, accentColor, onButtonClick, isMobile }) {
   return (
     <div
       className="vn-card"
       style={{
         background: 'var(--vn-card, #FFFFFF)',
         border: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
+        borderTop: `3px solid ${accentColor}`,
         borderRadius: '16px',
-        padding: '32px 28px',
+        padding: '40px 36px',
         textAlign: 'left',
         display: 'flex',
         flexDirection: 'column',
@@ -125,6 +146,7 @@ function RoutingCard({ title, description, buttonLabel, buttonStyle, onButtonCli
         flex: isMobile ? 'none' : 1,
       }}
     >
+      <div style={{ width: 32, height: 3, background: accentColor, borderRadius: 2, marginBottom: 4, opacity: 0.5 }} />
       <p
         style={{
           color: 'var(--vn-text, var(--rn-text))',
@@ -151,7 +173,7 @@ function RoutingCard({ title, description, buttonLabel, buttonStyle, onButtonCli
         <button
           style={{
             padding: '12px 24px',
-            background: LAGOON,
+            background: accentColor,
             border: 'none',
             color: '#FFFFFF',
             borderRadius: '9px',

@@ -4,6 +4,7 @@ import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
 const LAGOON = '#0E96CD';
+const PALM   = '#648D62';
 const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
 
@@ -26,11 +27,12 @@ export default function CompanyPage() {
       <VeniarNav />
 
       <main>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 8%',
+            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
           }}
         >
           {/* Gold eyebrow */}
@@ -58,34 +60,50 @@ export default function CompanyPage() {
           <p style={{ ...s.body, marginTop: '20px' }}>
             <em>Veniar</em> is built, operated, and maintained by RewardsNow.
           </p>
+        </section>
 
-          {/* External link card */}
+        {/* ── Link card section ─────────────────────────────────────────── */}
+        <section
+          style={{
+            background: 'var(--vn-panel, #F7E8CF)',
+            padding: isMobile ? '48px 0 80px' : '64px 0 100px',
+          }}
+        >
           <div
-            className="vn-card"
             style={{
-              ...s.linkCard,
-              padding: isMobile ? '24px 20px' : '28px 32px',
-              marginTop: '48px',
+              maxWidth: '720px',
+              margin: '0 auto',
+              padding: isMobile ? '0 24px' : '0 8%',
             }}
           >
-            <p style={s.cardTitle}>RewardsNow</p>
-            <p style={s.cardDesc}>
-              Learn more about the company behind Veniar.
-            </p>
-            <a
-              href="https://rewards-now.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={s.visitBtn}
+            {/* External link card */}
+            <div
+              className="vn-card"
+              style={{
+                ...s.linkCard,
+                borderTop: `3px solid ${PALM}`,
+                padding: isMobile ? '24px 20px' : '28px 32px',
+              }}
             >
-              Visit RewardsNow
-            </a>
-          </div>
+              <p style={s.cardTitle}>RewardsNow</p>
+              <p style={s.cardDesc}>
+                Learn more about the company behind Veniar.
+              </p>
+              <a
+                href="https://rewards-now.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={s.visitBtn}
+              >
+                Visit RewardsNow
+              </a>
+            </div>
 
-          {/* Footer note */}
-          <p style={s.footerNote}>
-            Veniar is a product of RewardsNow.
-          </p>
+            {/* Footer note */}
+            <p style={s.footerNote}>
+              Veniar is a product of RewardsNow.
+            </p>
+          </div>
         </section>
       </main>
 

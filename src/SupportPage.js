@@ -6,8 +6,18 @@ import VeniarFooter from './VeniarFooter';
 
 const CYAN   = '#1692A2';
 const LAGOON = '#0E96CD';
+const PALM   = '#648D62';
 const YELLOW = '#F8C922';
 const MUTED  = '#5F6B73';
+
+const BADGE_STYLES = [
+  { background: 'rgba(22,146,162,0.10)',  color: '#1692A2' },
+  { background: 'rgba(14,150,205,0.10)',  color: '#0E96CD' },
+  { background: 'rgba(237,168,27,0.12)',  color: '#EDA81B' },
+  { background: 'rgba(92,178,201,0.12)',  color: '#5CB2C9' },
+  { background: 'rgba(100,141,98,0.12)',  color: '#648D62' },
+  { background: 'rgba(214,96,36,0.10)',   color: '#D66024' },
+];
 
 const CATEGORIES = [
   {
@@ -139,10 +149,11 @@ export default function SupportPage() {
               borderTop: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
             }}
           >
-            {CATEGORIES.map((cat) => {
+            {CATEGORIES.map((cat, i) => {
               const isOpen = openId === cat.id;
               const panelId = `panel-${cat.id}`;
               const triggerId = `trigger-${cat.id}`;
+              const bs = BADGE_STYLES[i % BADGE_STYLES.length];
               return (
                 <div
                   key={cat.id}
@@ -165,7 +176,7 @@ export default function SupportPage() {
                   >
                     <span style={s.triggerTitle}>{cat.title}</span>
                     <span
-                      style={s.triggerIndicator}
+                      style={{ ...s.triggerIndicator, color: bs.color }}
                       aria-hidden="true"
                     >
                       {isOpen ? '−' : '+'}
@@ -197,8 +208,9 @@ export default function SupportPage() {
           <div
             className="vn-card"
             style={{
-              background: 'var(--vn-card, #FFFFFF)',
-              border: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
+              background: 'var(--vn-panel, #F7E8CF)',
+              border: `1px solid rgba(100,141,98,0.25)`,
+              borderTop: `3px solid ${PALM}`,
               borderRadius: '16px',
               padding: isMobile ? '24px 20px' : '28px',
               marginTop: '56px',
