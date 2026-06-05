@@ -59,25 +59,24 @@ export default function BusinessOverview() {
         </FadeInSection>
       </section>
 
-      {/* ── Research stats ─────────────────────────────────────────────── */}
+      {/* ── Business case ─────────────────────────────────────────────────── */}
       <section style={{ ...s.section, padding: isMobile ? '56px 24px' : '80px 80px' }}>
         <FadeInSection><div style={s.contentMax}>
-          <p style={s.tag}>THE RESEARCH</p>
-          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>What studies show</h2>
+          <p style={s.tag}>THE BUSINESS CASE</p>
+          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Independent businesses should not have to build loyalty infrastructure alone.</h2>
           <div style={s.goldLine} />
           <p style={s.body}>
-            Across the market, studies consistently show that businesses with loyalty and rewards programs outperform those without:
+            Large chains often benefit from scale, customer data, loyalty infrastructure, and distribution. Independent businesses usually operate with smaller teams, tighter budgets, and fewer tools. <em>Veniar</em> is designed to make rewards and local discovery more accessible through a shared network.
           </p>
-          <div style={{ ...s.statsGrid, gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: '12px', marginTop: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '14px', marginTop: '32px' }}>
             {[
-              { value: '60%', label: 'of small business customers are repeat customers' },
-              { value: '4.8–5.2×', label: 'ROI reported by 90% of loyalty program owners' },
-              { value: '25×', label: 'costlier to acquire new customers than retain existing ones' },
-              { value: '$50K–$200K', label: 'average launch cost for a small-business loyalty program' },
-            ].map(item => (
-              <div key={item.value} style={s.stat}>
-                <p style={s.statValue}>{item.value}</p>
-                <p style={s.statLabel}>{item.label}</p>
+              'Customer retention is often less expensive than customer acquisition.',
+              'Standalone loyalty programs can be costly to design, launch, and operate.',
+              'Independent businesses need practical tools for repeat visits, discovery, and clear reporting.',
+              'A shared network can help customers discover participating businesses beyond the place where they first earned rewards.',
+            ].map(point => (
+              <div key={point} style={{ background: 'var(--vn-card, #FFFFFF)', borderRadius: '12px', padding: '20px 22px', color: 'var(--vn-text-sub)', fontSize: '14px', lineHeight: 1.7 }}>
+                {point}
               </div>
             ))}
           </div>
@@ -88,20 +87,16 @@ export default function BusinessOverview() {
       <section style={{ ...s.sectionAlt, padding: isMobile ? '56px 24px' : '80px 80px' }}>
         <FadeInSection><div style={s.contentMax}>
           <p style={s.tag}>THE PROBLEM</p>
-          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>The loyalty program challenge</h2>
+          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Most loyalty tools are built for businesses with more scale.</h2>
           <div style={s.goldLine} />
-          <p style={s.body}>
-            Building your own loyalty program costs $50,000–$200,000 to launch. Add software operations, marketing, and customer acquisition, and traditional programs still don't help you find new customers — they only keep existing ones.
-          </p>
-          <p style={s.body}>
-            Veniar removes those barriers — we handle the infrastructure, bring a shared customer network, and give your staff a simple interface to manage everything.
-          </p>
+          <p style={s.body}>Traditional loyalty programs can be expensive to launch, difficult to operate, and limited to a single business. They may help retain existing customers, but they often do little to help independent businesses reach new local customers.</p>
           <div style={{ ...s.grid, gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '14px', marginTop: '32px' }}>
             {[
-              { problem: 'High launch costs', solution: 'We handle infrastructure. Zero software ops on your end.' },
-              { problem: 'No new customer discovery', solution: 'Our shared network exposes your business to every partner\'s customer base.' },
-              { problem: 'Complex integrations', solution: 'Staff manage transactions through a simple, browser-based interface.' },
-              { problem: 'Isolated loyalty silos', solution: 'Points work across every participating business, making them more valuable to customers.' },
+              { problem: 'High setup and software costs', solution: 'Veniar provides shared rewards infrastructure so each business does not have to build a system alone.' },
+              { problem: 'Limited customer discovery', solution: 'Participating businesses can be discovered inside the Veniar Network.' },
+              { problem: 'Isolated loyalty programs', solution: 'Customers can earn and redeem eligible rewards across participating businesses.' },
+              { problem: 'Hard-to-read results', solution: 'Merchant tools help businesses view redemptions, repeat visits, referrals, and offer activity.' },
+              { problem: 'Operational complexity', solution: 'The product is designed around practical merchant workflows, simple transaction handling, and clear reporting.' },
             ].map(p => (
               <div key={p.problem} style={s.problemCard}>
                 <p style={s.problem}>✗ {p.problem}</p>
@@ -116,10 +111,10 @@ export default function BusinessOverview() {
       <section style={{ ...s.section, padding: isMobile ? '56px 24px' : '80px 80px' }}>
         <FadeInSection><div style={s.contentMax}>
           <p style={s.tag}>HOW IT WORKS</p>
-          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>How Veniar works for your business</h2>
+          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Simple onboarding for participating businesses.</h2>
           <div style={s.goldLine} />
           <p style={s.body}>
-            Veniar gives local businesses a simple workflow for managing customer rewards. Owners control the business account, configure services and reward options, and give employees access to the tools they need to help customers earn and redeem points.
+            Businesses apply to join <em>Veniar</em>, configure eligible rewards and offers, and use merchant tools to manage customer activity. The goal is to make rewards practical for independent businesses without adding unnecessary operational burden.
           </p>
           <div style={{ ...s.workflowGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: '16px', marginTop: '40px' }}>
             {WORKFLOW.map((step, i) => (
@@ -130,6 +125,10 @@ export default function BusinessOverview() {
               </FadeInSection>
             ))}
           </div>
+
+          <p style={{ color: 'var(--vn-text-sub)', fontSize: '13px', lineHeight: 1.7, marginTop: '24px', fontStyle: 'italic' }}>
+            Applications are reviewed before onboarding. If accepted, the team will help your business understand setup, usage, and next steps.
+          </p>
 
           {/* Employee portal callout inside workflow section */}
           <div style={{ ...s.empCallout, marginTop: '32px' }}>
@@ -146,25 +145,24 @@ export default function BusinessOverview() {
         </div></FadeInSection>
       </section>
 
-      {/* ── Simple onboarding ──────────────────────────────────────────── */}
+      {/* ── Merchant tools ────────────────────────────────────────────────── */}
       <section style={{ ...s.sectionAlt, padding: isMobile ? '56px 24px' : '80px 80px' }}>
         <FadeInSection><div style={s.contentMax}>
-          <p style={s.tag}>GETTING STARTED</p>
-          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Up and running in days, not months</h2>
+          <p style={s.tag}>MERCHANT TOOLS</p>
+          <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Control your offers. Understand your activity.</h2>
           <div style={s.goldLine} />
-          <p style={s.body}>
-            Submit your application, connect with a Veniar team member, configure your services, and direct your staff to the employee portal. That's it.
-          </p>
-          <div style={{ ...s.stepsGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '16px', marginTop: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '14px', marginTop: '32px' }}>
             {[
-              { n: '01', title: 'Submit application', desc: 'Reviewed within 24–48 hours. No technical setup required.' },
-              { n: '02', title: 'Configure your rewards', desc: 'Set point values for your services and menu items.' },
-              { n: '03', title: 'Start rewarding', desc: 'Your customers earn and redeem points immediately.' },
-            ].map(step => (
-              <div key={step.n} style={s.stepCard}>
-                <span style={s.stepNum}>{step.n}</span>
-                <p style={s.stepTitle}>{step.title}</p>
-                <p style={s.stepDesc}>{step.desc}</p>
+              { title: 'Merchant-controlled offers', desc: 'Create and manage eligible rewards and redemption options for your business.' },
+              { title: 'Redemption tracking', desc: 'See when rewards are redeemed and how customers interact with your offers.' },
+              { title: 'Repeat visit visibility', desc: 'Understand customer return activity through merchant reporting.' },
+              { title: 'Network referrals', desc: 'View activity connected to customer discovery across the Veniar Network.' },
+              { title: 'Customer discovery', desc: 'Help nearby customers find your business through the app directory and map experience.' },
+              { title: 'Dashboard reporting', desc: 'Use clear product dashboards to review offers, rewards, redemptions, and customer activity.' },
+            ].map(card => (
+              <div key={card.title} style={{ ...s.workflowCard }}>
+                <p style={{ ...s.workflowTitle, marginBottom: 8 }}>{card.title}</p>
+                <p style={{ ...s.workflowDesc }}>{card.desc}</p>
               </div>
             ))}
           </div>
@@ -196,14 +194,17 @@ export default function BusinessOverview() {
 
       {/* ── Footer CTA ─────────────────────────────────────────────────── */}
       <section style={{ ...s.ctaFooter, padding: isMobile ? '56px 24px' : '80px 80px', textAlign: 'center' }}>
-        <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Ready to grow your business?</h2>
+        <h2 style={{ ...s.h2, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>Bring shared rewards to your business.</h2>
         <p style={{ ...s.body, marginBottom: '36px', maxWidth: '480px', marginLeft: 'auto', marginRight: 'auto' }}>
-          Applications are reviewed within 24–48 hours. No long-term contract required.
+          Join <em>Veniar</em> to access rewards tools, local discovery, and merchant reporting built for independent businesses.
         </p>
         <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-          <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply now</button>
+          <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to join</button>
           <button style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
         </div>
+        <button style={{ ...s.footerEmpLink, marginTop: '16px', display: 'block' }} onClick={() => navigate('/support')}>
+          Questions? Contact support.
+        </button>
         <button style={s.footerEmpLink} onClick={() => navigate(EMPLOYEE_ROUTE)}>
           Employee portal
         </button>
