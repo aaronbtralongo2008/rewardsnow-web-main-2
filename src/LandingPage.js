@@ -133,7 +133,7 @@ export default function LandingPage() {
             color:         YELLOW,
             marginBottom:  24,
           }}>
-            SHARED REWARDS PLATFORM
+            LOCAL REWARDS NETWORK
           </div>
 
           {/* H1 */}
@@ -146,7 +146,7 @@ export default function LandingPage() {
             margin:        0,
             maxWidth:      780,
           }}>
-            One card.<br />Every business.
+            Earn rewards while supporting local businesses.
           </h1>
 
           {/* Subheadline */}
@@ -158,8 +158,7 @@ export default function LandingPage() {
             marginBottom: 48,
             marginTop:    32,
           }}>
-            Earn <em>Veniar</em> Points at independent local businesses.
-            Redeem them anywhere in the network.
+            <em>Veniar</em> helps you earn rewards when you shop at participating independent businesses in your community. Discover nearby restaurants, cafés, shops, and local services, then use your rewards across the <em>Veniar</em> Network.
           </p>
 
           {/* CTA row */}
@@ -185,7 +184,7 @@ export default function LandingPage() {
               }}
               onClick={() => navigate('/join')}
             >
-              Join Veniar
+              Download app
             </button>
             <button
               style={{
@@ -201,7 +200,7 @@ export default function LandingPage() {
               }}
               onClick={() => navigate('/business-overview')}
             >
-              For businesses
+              For business owners
             </button>
           </div>
 
@@ -214,9 +213,9 @@ export default function LandingPage() {
             paddingTop:    32,
           }}>
             {[
-              { label: 'Earn everywhere',  sub: 'Points pooled across the whole network — not per business.', accent: CYAN   },
-              { label: 'Spend anywhere',   sub: 'Redeem at any partner, not just where you earned.',           accent: '#5CB2C9' },
-              { label: 'No card needed',   sub: 'Just a phone number at checkout.',                            accent: '#648D62' },
+              { label: 'Earn locally',                  sub: 'Earn rewards at participating businesses in your community.',             accent: CYAN      },
+              { label: 'Redeem across the network',     sub: 'Use eligible rewards at any participating Veniar business.',              accent: '#5CB2C9' },
+              { label: 'Community rewards, simplified.', sub: 'Find local restaurants, cafés, shops, and services through the app.',    accent: '#648D62' },
             ].map((item, i) => (
               <div
                 key={item.label}
@@ -288,7 +287,7 @@ export default function LandingPage() {
             color:         'var(--vn-text)',
             margin:        0,
           }}>
-            Simple by design.
+            Shop local. Earn rewards. Redeem across the network.
           </h2>
 
           {/* Gold accent bar */}
@@ -301,6 +300,12 @@ export default function LandingPage() {
           }} />
         </FadeInBoth>
 
+        <FadeInBoth delay={60}>
+          <p style={{ fontSize: 16, color: 'var(--vn-text-sub)', lineHeight: 1.75, maxWidth: 560, margin: '0 0 32px' }}>
+            Buy from a participating local business and earn rewards through <em>Veniar</em>. Later, redeem eligible rewards at participating businesses across the network — whether that is coffee, lunch, dessert, or another local favorite.
+          </p>
+        </FadeInBoth>
+
         {/* Step items row */}
         <div style={{
           display:       'flex',
@@ -310,8 +315,8 @@ export default function LandingPage() {
         }}>
           <StepItem
             num="01"
-            title="Visit any partner"
-            body={<>Give your phone number at checkout at any <em>Veniar</em> partner location.</>}
+            title="Shop with participating businesses"
+            body={<>Visit local restaurants, cafés, shops, and service providers that participate in <em>Veniar</em>.</>}
             numColor="#1692A2"
             delay={0}
           />
@@ -330,8 +335,8 @@ export default function LandingPage() {
 
           <StepItem
             num="02"
-            title="Earn points"
-            body={<>Points are added to your <em>Veniar</em> balance instantly. No card needed.</>}
+            title="Earn rewards on eligible purchases"
+            body={<>Earn rewards based on participating business rules and eligible activity.</>}
             numColor="#0E96CD"
             delay={120}
           />
@@ -350,12 +355,29 @@ export default function LandingPage() {
 
           <StepItem
             num="03"
-            title="Redeem anywhere"
-            body="Spend at any partner in the network, not just where you earned."
+            title="Redeem locally"
+            body="Use eligible rewards at participating businesses in the Veniar Network."
             numColor="#648D62"
             delay={240}
           />
+
+          {!isMobile && (
+            <div style={{ width: 1, background: 'rgba(22,146,162,0.25)', height: 60, alignSelf: 'center', flexShrink: 0, margin: '0 40px' }} />
+          )}
+          <StepItem
+            num="04"
+            title="Discover where to go next"
+            body="Find nearby businesses, view details, and plan your visit from the app."
+            numColor="#F2B84B"
+            delay={360}
+          />
         </div>
+
+        <FadeInBoth delay={400}>
+          <p style={{ fontSize: 13, color: 'var(--vn-text-muted, #8A9199)', lineHeight: 1.7, maxWidth: 600, marginTop: 32, fontStyle: 'italic' }}>
+            Rewards are connected to participating businesses in the <em>Veniar</em> Network. Availability, offers, and redemption options may vary by business.
+          </p>
+        </FadeInBoth>
       </div>
     </section>
   );
@@ -394,7 +416,7 @@ export default function LandingPage() {
             color:         '#FFF8EA',
             margin:        0,
           }}>
-            Give your customers a reason to return.
+            Shared rewards infrastructure for independent businesses.
           </h2>
 
           {/* Gold accent bar */}
@@ -414,8 +436,7 @@ export default function LandingPage() {
             maxWidth:     560,
             marginBottom: 44,
           }}>
-            Join the <em>Veniar</em> network and offer your customers a shared
-            rewards program that works across the entire city.
+            <em>Veniar</em> gives independent businesses access to shared rewards, merchant-controlled offers, and customer discovery tools — without requiring every business to build its own loyalty system from scratch.
           </p>
 
           {/* CTAs */}
@@ -440,7 +461,7 @@ export default function LandingPage() {
               }}
               onClick={() => navigate('/business-overview')}
             >
-              Apply to partner
+              Apply to join
             </button>
             <button
               className="vn-cta-ghost"
@@ -485,7 +506,7 @@ export default function LandingPage() {
             color:         YELLOW,
             marginBottom:  16,
           }}>
-            SERVICES
+            WHAT YOU GET
           </div>
 
           {/* H2 */}
@@ -497,7 +518,7 @@ export default function LandingPage() {
             color:         'var(--vn-text)',
             margin:        0,
           }}>
-            What Veniar offers.
+            Everything local rewards need, in one app.
           </h2>
 
           {/* Gold accent bar */}
@@ -517,30 +538,12 @@ export default function LandingPage() {
           gap:                 isMobile ? 20 : 32,
           alignItems:          'start',
         }}>
-          <ServiceCard
-            title="Shared Points Network"
-            body="Customers earn at any partner and spend anywhere in the network."
-            accent="#1692A2"
-            delay={0}
-          />
-          <ServiceCard
-            title="Merchant Dashboard"
-            body="Real-time activity, redemption management, and staff tools."
-            accent="#0E96CD"
-            delay={80}
-          />
-          <ServiceCard
-            title="Customer App"
-            body="Balance, transaction history, and partner locations in one place."
-            accent="#5CB2C9"
-            delay={160}
-          />
-          <ServiceCard
-            title="Onboarding & Support"
-            body="RewardsNow handles setup and ongoing support for every partner."
-            accent="#D66024"
-            delay={240}
-          />
+          <ServiceCard title="Earn on everyday visits" body="Collect rewards when you shop with participating local businesses." accent="#1692A2" delay={0} />
+          <ServiceCard title="Redeem across participating businesses" body={<>Use eligible rewards at participating <em>Veniar</em> businesses, not only where you earned them.</>} accent="#0E96CD" delay={80} />
+          <ServiceCard title="Discover nearby places" body="Find restaurants, cafés, shops, and services that are part of the network." accent="#5CB2C9" delay={160} />
+          <ServiceCard title="Plan your visit" body="View business details, menus or offerings when available, maps, and directions." accent="#648D62" delay={240} />
+          <ServiceCard title="Support independent businesses" body={<>Choose local businesses while participating in a shared rewards experience.</>} accent="#D66024" delay={320} />
+          <ServiceCard title="Keep it simple" body="See rewards, nearby businesses, and redemption options in one product experience." accent="#F2B84B" delay={400} />
         </div>
 
         {/* Text link below */}
@@ -595,6 +598,47 @@ export default function LandingPage() {
     </section>
   );
 
+  /* ── SECTION 5b — DIRECTORY ──────────────────────────────────────── */
+  const directorySection = (
+    <section style={{
+      background:    'var(--vn-panel)',
+      paddingTop:    isMobile ? 80  : 120,
+      paddingBottom: isMobile ? 80  : 120,
+      paddingLeft:   isMobile ? 24  : '8%',
+      paddingRight:  isMobile ? 24  : '8%',
+    }}>
+      <div style={inner}>
+        <FadeInBoth>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: YELLOW, marginBottom: 16 }}>
+            THE DIRECTORY
+          </div>
+          <h2 style={{ fontSize: isMobile ? '2.4rem' : '3.2rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.08, color: 'var(--vn-text)', margin: 0 }}>
+            Not sure where to use your rewards?
+          </h2>
+          <div style={{ width: 44, height: 3, background: YELLOW, borderRadius: 2, margin: '20px 0 24px' }} />
+          <p style={{ fontSize: isMobile ? 16 : 18, color: 'var(--vn-text-sub)', lineHeight: 1.75, maxWidth: 560, marginBottom: 36 }}>
+            The <em>Veniar</em> app includes a directory of participating businesses so customers can find places nearby. Browse restaurants, cafés, shops, and local services, then use maps and directions to plan your visit.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+            <button
+              className="vn-cta-primary"
+              style={{ background: LAGOON, color: '#fff', border: 'none', padding: '14px 28px', borderRadius: 9, fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
+              onClick={() => navigate('/join')}
+            >
+              Open directory
+            </button>
+            <button
+              style={{ background: 'transparent', color: 'var(--vn-text)', border: '1.5px solid var(--vn-card-border)', padding: '14px 28px', borderRadius: 9, fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
+              onClick={() => navigate('/join')}
+            >
+              Download app
+            </button>
+          </div>
+        </FadeInBoth>
+      </div>
+    </section>
+  );
+
   /* ── SECTION 6 — FINAL CTA ────────────────────────────────────────── */
   const finalCtaSection = (
     <section style={{
@@ -615,7 +659,7 @@ export default function LandingPage() {
             color:         'var(--vn-text)',
             margin:        0,
           }}>
-            Join the Veniar network.
+            Start earning rewards locally.
           </h2>
 
           <p style={{
@@ -625,7 +669,7 @@ export default function LandingPage() {
             marginBottom: 44,
             marginTop:    24,
           }}>
-            Free for customers. Built for local commerce.
+            Download <em>Veniar</em> to discover participating businesses, earn rewards on eligible purchases, and redeem across the local network.
           </p>
 
           <div style={{
@@ -650,7 +694,7 @@ export default function LandingPage() {
               }}
               onClick={() => navigate('/register')}
             >
-              Create account
+              Download app
             </button>
             <button
               className="vn-cta-ghost"
