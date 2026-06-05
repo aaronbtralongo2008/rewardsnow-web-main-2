@@ -7,26 +7,10 @@ const EMPLOYEE_PORTAL_URL = process.env.REACT_APP_EMPLOYEE_PORTAL_URL || '/emplo
 const EMPLOYEE_ROUTE = '/employee';
 
 const WORKFLOW = [
-  {
-    n: '01',
-    title: 'Set up your business',
-    desc: 'Create your business profile, add services or menu items, and configure your rewards program — all from the owner dashboard.',
-  },
-  {
-    n: '02',
-    title: 'Connect your employees',
-    desc: 'Send staff to the employee portal so they can support customer check-ins, purchases, and reward redemptions during the day.',
-  },
-  {
-    n: '03',
-    title: 'Reward your customers',
-    desc: 'Customers earn points when they spend with your business and can redeem rewards at any participating Veniar location.',
-  },
-  {
-    n: '04',
-    title: 'Track performance',
-    desc: 'Use the owner dashboard to monitor employees, services, activity, and customer engagement all in one place.',
-  },
+  { n: '01', title: 'Submit business information', desc: 'Share basic details about your business so the team can review fit and next steps.' },
+  { n: '02', title: 'Configure rewards and offers', desc: 'Set eligible offers, reward rules, and redemption options for your business.' },
+  { n: '03', title: 'Use merchant tools', desc: 'Track redemptions, repeat visits, customer activity, referrals, and active offers.' },
+  { n: '04', title: 'Participate in the network', desc: 'Become discoverable to customers using Veniar to find local businesses.' },
 ];
 
 export default function BusinessOverview() {
@@ -59,18 +43,19 @@ export default function BusinessOverview() {
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section style={{ ...s.hero, padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
         <FadeInSection>
-        <p style={s.eyebrow}>VENIAR FOR BUSINESS</p>
+        <p style={s.eyebrow}>FOR INDEPENDENT BUSINESSES</p>
         <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
-          A smarter way to keep customers coming back.
+          Shared rewards for customer retention and local discovery.
         </h1>
         <div style={s.goldBar} />
         <p style={{ ...s.heroSub, maxWidth: '560px' }}>
-          Veniar helps independent businesses compete with larger brands by giving customers a reason to come back, spend locally, and stay connected to your business.
+          <em>Veniar</em> gives independent businesses access to shared rewards, merchant-controlled offers, customer discovery, and reporting tools without requiring every business to build its own loyalty system from scratch.
         </p>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to partner</button>
+          <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to join</button>
           <button style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
         </div>
+        <p style={{ color: 'rgba(255,248,234,0.50)', fontSize: '14px', marginTop: '20px', marginBottom: 0 }}>Built for restaurants, cafés, shops, and local service businesses.</p>
         </FadeInSection>
       </section>
 
