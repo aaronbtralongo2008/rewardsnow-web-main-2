@@ -12,130 +12,7 @@ const LAGOON  = '#0E96CD';
 const DEEP    = '#0F6356';
 const NIGHT   = '#0A1211';
 const YELLOW  = '#F8C922';
-const ORANGE  = '#D66024';
 const MUTED   = '#5F6B73';
-
-/* ── DashboardMock ────────────────────────────────────────────────────── */
-function DashboardMock() {
-  const txRows = [
-    { sign: '+', pts: '120 pts', label: 'Café Sunrise',   color: CYAN   },
-    { sign: '−', pts: '80 pts',  label: 'The Taco Stand', color: ORANGE },
-    { sign: '+', pts: '200 pts', label: 'Corner Bakery',  color: CYAN   },
-  ];
-
-  return (
-    <div
-      className="vn-dash-card"
-      style={{
-        position:     'relative',
-        background:   NIGHT,
-        borderRadius: 20,
-        padding:      '32px 28px',
-        maxWidth:     400,
-        width:        '100%',
-        boxShadow:    '0 32px 80px rgba(22,146,162,0.12), 0 8px 24px rgba(7,19,26,0.28)',
-        overflow:     'hidden',
-      }}
-    >
-      {/* Top cyan accent band */}
-      <div style={{
-        position:     'absolute',
-        top:          0,
-        left:         0,
-        right:        0,
-        height:       4,
-        background:   CYAN,
-        borderRadius: '16px 16px 0 0',
-      }} />
-
-      {/* Balance label */}
-      <div style={{
-        fontSize:      10,
-        fontWeight:    700,
-        letterSpacing: '0.25em',
-        textTransform: 'uppercase',
-        color:         YELLOW,
-        marginBottom:  10,
-      }}>
-        YOUR VENIAR BALANCE
-      </div>
-
-      {/* Balance number */}
-      <div style={{
-        fontSize:      '3.2rem',
-        fontWeight:    900,
-        color:         '#fff',
-        letterSpacing: '-0.04em',
-        lineHeight:    1,
-      }}>
-        1,240<span style={{ fontSize: 18, fontWeight: 600, color: CYAN }}> pts</span>
-      </div>
-
-      {/* Available text */}
-      <div style={{
-        fontSize:     12,
-        color:        'rgba(255,248,234,0.45)',
-        marginTop:    6,
-        marginBottom: 24,
-      }}>
-        Available at any partner
-      </div>
-
-      {/* Divider */}
-      <div style={{
-        height:       1,
-        background:   'rgba(255,255,255,0.07)',
-        marginBottom: 20,
-      }} />
-
-      {/* Transaction rows */}
-      {txRows.map((tx, i) => (
-        <div
-          key={i}
-          style={{
-            display:      'flex',
-            alignItems:   'center',
-            gap:          12,
-            marginBottom: 10,
-          }}
-        >
-          <div style={{
-            width:        7,
-            height:       7,
-            borderRadius: '50%',
-            background:   tx.color,
-            flexShrink:   0,
-          }} />
-          <div style={{
-            fontSize: 13,
-            color:    'rgba(255,248,234,0.75)',
-            flex:     1,
-          }}>
-            {tx.label}
-          </div>
-          <div style={{
-            fontSize:   13,
-            fontWeight: 600,
-            color:      tx.color,
-          }}>
-            {tx.sign} {tx.pts}
-          </div>
-        </div>
-      ))}
-
-      {/* Route line */}
-      <div
-        className="vn-route-line"
-        style={{
-          height:       2,
-          background:   CYAN,
-          borderRadius: 1,
-          marginTop:    20,
-        }}
-      />
-    </div>
-  );
-}
 
 /* ── StepItem ─────────────────────────────────────────────────────────── */
 function StepItem({ num, title, body, delay, numColor }) {
@@ -245,109 +122,88 @@ export default function LandingPage() {
       }}
     >
       <div style={{ ...inner, width: '100%' }}>
-        <div style={{
-          display:       'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          alignItems:    isMobile ? 'flex-start' : 'center',
-          gap:           isMobile ? 52 : 72,
-        }}>
-
-          {/* Left: text */}
-          <div style={{ flex: '1 1 400px', maxWidth: 560 }}>
-            <FadeInBoth>
-              {/* Eyebrow */}
-              <div style={{
-                fontSize:      11,
-                fontWeight:    700,
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
-                color:         YELLOW,
-                marginBottom:  16,
-              }}>
-                SHARED REWARDS PLATFORM
-              </div>
-
-              {/* H1 */}
-              <h1 style={{
-                fontSize:      isMobile ? '3.2rem' : '6rem',
-                fontWeight:    900,
-                letterSpacing: '-0.05em',
-                lineHeight:    0.95,
-                color:         'var(--vn-text)',
-                margin:        0,
-              }}>
-                One card.<br />Every business.
-              </h1>
-
-              {/* Subheadline */}
-              <p style={{
-                fontSize:     isMobile ? 17 : 20,
-                color:        'var(--vn-text-sub)',
-                lineHeight:   1.7,
-                maxWidth:     460,
-                marginBottom: 40,
-                marginTop:    28,
-              }}>
-                Earn <em>Veniar</em> Points at independent local businesses.
-                Redeem them anywhere in the network.
-              </p>
-
-              {/* CTA row */}
-              <div style={{
-                display:    'flex',
-                flexWrap:   'wrap',
-                gap:        12,
-                alignItems: 'center',
-              }}>
-                <button
-                  className="vn-cta-primary"
-                  style={{
-                    background:   LAGOON,
-                    color:        '#fff',
-                    border:       'none',
-                    padding:      '14px 28px',
-                    borderRadius: 9,
-                    fontSize:     15,
-                    fontWeight:   700,
-                    cursor:       'pointer',
-                    fontFamily:   'inherit',
-                  }}
-                  onClick={() => navigate('/join')}
-                >
-                  Join Veniar
-                </button>
-                <button
-                  className="vn-cta-ghost"
-                  style={{
-                    background:   'transparent',
-                    color:        'var(--vn-text)',
-                    border:       '1.5px solid var(--vn-card-border)',
-                    padding:      '14px 28px',
-                    borderRadius: 9,
-                    fontSize:     15,
-                    fontWeight:   700,
-                    cursor:       'pointer',
-                    fontFamily:   'inherit',
-                  }}
-                  onClick={() => navigate('/business-overview')}
-                >
-                  For businesses
-                </button>
-              </div>
-            </FadeInBoth>
-          </div>
-
-          {/* Right: Dashboard mock */}
+        <FadeInBoth>
+          {/* Eyebrow */}
           <div style={{
-            flex:           '0 0 auto',
-            display:        'flex',
-            justifyContent: isMobile ? 'flex-start' : 'flex-end',
-            width:          isMobile ? '100%' : 'auto',
+            fontSize:      11,
+            fontWeight:    700,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color:         YELLOW,
+            marginBottom:  20,
           }}>
-            <DashboardMock />
+            SHARED REWARDS PLATFORM
           </div>
 
-        </div>
+          {/* H1 */}
+          <h1 style={{
+            fontSize:      isMobile ? '3.2rem' : '6rem',
+            fontWeight:    900,
+            letterSpacing: '-0.05em',
+            lineHeight:    0.95,
+            color:         'var(--vn-text)',
+            margin:        0,
+            maxWidth:      720,
+          }}>
+            One card.<br />Every business.
+          </h1>
+
+          {/* Subheadline */}
+          <p style={{
+            fontSize:     isMobile ? 17 : 20,
+            color:        'var(--vn-text-sub)',
+            lineHeight:   1.7,
+            maxWidth:     500,
+            marginBottom: 48,
+            marginTop:    32,
+          }}>
+            Earn <em>Veniar</em> Points at independent local businesses.
+            Redeem them anywhere in the network.
+          </p>
+
+          {/* CTA row */}
+          <div style={{
+            display:    'flex',
+            flexWrap:   'wrap',
+            gap:        12,
+            alignItems: 'center',
+          }}>
+            <button
+              className="vn-cta-primary"
+              style={{
+                background:   LAGOON,
+                color:        '#fff',
+                border:       'none',
+                padding:      '16px 32px',
+                borderRadius: 9,
+                fontSize:     16,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/join')}
+            >
+              Join Veniar
+            </button>
+            <button
+              className="vn-cta-ghost"
+              style={{
+                background:   'transparent',
+                color:        'var(--vn-text)',
+                border:       '1.5px solid var(--vn-card-border)',
+                padding:      '16px 32px',
+                borderRadius: 9,
+                fontSize:     16,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/business-overview')}
+            >
+              For businesses
+            </button>
+          </div>
+        </FadeInBoth>
       </div>
     </section>
   );
