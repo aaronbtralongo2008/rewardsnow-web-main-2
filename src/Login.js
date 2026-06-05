@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
-import AnimatedStripes from './AnimatedStripes';
-
-const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
 function Login({ onLogin }) {
   const navigate = useNavigate();
@@ -44,17 +41,13 @@ function Login({ onLogin }) {
 
           {isMobile ? (
               <div style={styles.mobileHeader}>
-                <img src={LOGO} alt="Veniar" style={{ ...styles.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#1692A2', letterSpacing:'-0.03em', cursor:'pointer'}} onClick={() => navigate('/')}>Veniar</span>
                 <span style={styles.mobileHeaderSub}>Earn rewards everywhere</span>
               </div>
           ) : (
               <div style={styles.leftPanel}>
-                <div style={styles.orb1} />
-                <div style={styles.orb2} />
-                <div style={styles.orb3} />
-                <AnimatedStripes count={4} />
               <div style={styles.leftContent}>
-                  <img src={LOGO} alt="Veniar" style={{ ...styles.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                  <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#FFF8EA', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/')}>Veniar</span>
                   <div style={styles.goldLine} />
                   <p style={styles.tagline}>One card.<br />Every business.</p>
                   <p style={styles.leftDesc}>Join thousands of customers earning rewards at local businesses across the city.</p>
@@ -112,35 +105,30 @@ function Login({ onLogin }) {
 }
 
 const styles = {
-  container: { minHeight: '100vh', background: 'var(--rn-bg)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  container: { minHeight: '100vh', background: 'var(--vn-bg, #FFF8EA)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   loginWrapper: { display: 'flex', flex: 1, minHeight: 0 },
-  mobileHeader: { background: 'var(--rn-bg)', padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
-  mobileLogoImg: { height: '44px', width: 'auto', objectFit: 'contain', marginBottom: '2px' },
-  mobileHeaderSub: { color: 'var(--rn-text-sub)', fontSize: '13px', marginTop: '4px' },
-  leftPanel: { flex: 1, background: 'var(--rn-bg)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'var(--rn-orb1)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  orb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'var(--rn-orb2)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  orb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'var(--rn-orb3)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  mobileHeader: { background: 'var(--vn-bg, #FFF8EA)', padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
+  mobileHeaderSub: { color: 'var(--vn-text-sub, #5F6B73)', fontSize: '13px', marginTop: '4px' },
+  leftPanel: { flex: 1, background: '#0A1211', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   leftContent: { position: 'relative', zIndex: 2 },
-  logoImg: { height: '52px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
   goldLine: { width: '48px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' },
-  tagline: { color: 'var(--rn-text)', fontSize: '3.6rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 20px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
-  leftDesc: { color: 'var(--rn-text-sub)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
-  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--rn-form-bg)', boxSizing: 'border-box' },
-  brandName: { color: 'var(--rn-form-text)', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
-  brandSub: { color: 'var(--rn-form-sub)', fontSize: '1rem', margin: '0 0 36px 0' },
-  inputLabel: { color: 'var(--rn-form-sub)', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
-  input: { padding: '14px 16px', borderRadius: '10px', border: '2px solid var(--rn-input-border)', background: 'var(--rn-input-bg)', color: 'var(--rn-input-color)', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  loginBtn: { padding: '16px', borderRadius: '10px', border: 'none', background: '#0B5CAD', color: '#ffffff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', letterSpacing: '0.01em', transition: 'background-color 0.15s ease' },
-  forgotLink: { color: '#0B5CAD', fontSize: '13px', fontWeight: '600', cursor: 'pointer' },
-  registerBtn: { padding: '15px', borderRadius: '12px', border: '2px solid var(--rn-outline-btn-border)', background: 'var(--rn-outline-btn-bg)', color: 'var(--rn-outline-btn-color)', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', transition: 'all 0.2s' },
-  bizRegisterBtn: { padding: '15px', borderRadius: '12px', border: '2px solid var(--rn-outline-btn-border)', background: 'var(--rn-outline-btn-bg)', color: 'var(--rn-outline-btn-color)', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', transition: 'all 0.2s', marginTop: '10px' },
+  tagline: { color: '#FFF8EA', fontSize: '3.6rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 20px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
+  leftDesc: { color: 'rgba(255,248,234,0.65)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
+  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--vn-card, #FFFFFF)', boxSizing: 'border-box' },
+  brandName: { color: 'var(--vn-text)', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  brandSub: { color: 'var(--vn-text-sub)', fontSize: '1rem', margin: '0 0 36px 0' },
+  inputLabel: { color: 'var(--vn-text-sub)', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  input: { padding: '14px 16px', borderRadius: '10px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.14))', background: 'var(--vn-bg, #FFF8EA)', color: 'var(--vn-text)', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginBtn: { padding: '16px', borderRadius: '10px', border: 'none', background: '#0E96CD', color: '#ffffff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', letterSpacing: '0.01em' },
+  forgotLink: { color: '#0E96CD', fontSize: '13px', fontWeight: '600', cursor: 'pointer' },
+  registerBtn: { padding: '15px', borderRadius: '12px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.18))', background: 'transparent', color: 'var(--vn-text)', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%' },
+  bizRegisterBtn: { padding: '15px', borderRadius: '12px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.18))', background: 'transparent', color: 'var(--vn-text)', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', marginTop: '10px' },
   divider: { display: 'flex', alignItems: 'center', gap: '12px', margin: '24px 0' },
-  dividerLine: { flex: 1, height: '1px', background: 'var(--rn-divider)' },
-  dividerText: { color: 'var(--rn-text-muted)', fontSize: '13px' },
+  dividerLine: { flex: 1, height: '1px', background: 'var(--vn-card-border, rgba(16,24,32,0.12))' },
+  dividerText: { color: 'var(--vn-text-sub)', fontSize: '13px' },
   error: { color: '#dc2626', fontSize: '13px', margin: '0 0 14px 0', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0' },
-  terms: { color: 'var(--rn-text-faint)', fontSize: '12px', textAlign: 'center', marginTop: '20px', lineHeight: 1.6 },
-  link: { color: '#0B5CAD', cursor: 'pointer' },
+  terms: { color: 'var(--vn-text-sub)', fontSize: '12px', textAlign: 'center', marginTop: '20px', lineHeight: 1.6 },
+  link: { color: '#0E96CD', cursor: 'pointer' },
 };
 
 export default Login;
