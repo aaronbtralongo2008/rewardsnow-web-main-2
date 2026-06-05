@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -15,6 +16,8 @@ const ROW_ACCENTS = [CYAN, LAGOON, ORANGE];
 export default function ContactPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
     document.title = 'Contact — Veniar';
@@ -35,11 +38,13 @@ export default function ContactPage() {
         {/* ── Hero + contact rows ───────────────────────────────────────── */}
         <section
           style={{
-            maxWidth: '720px',
-            margin: '0 auto',
-            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
           }}
         >
+          <div style={{ maxWidth: '720px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           {/* Gold eyebrow */}
           <p style={s.eyebrow}>SUPPORT</p>
 
@@ -47,14 +52,15 @@ export default function ContactPage() {
           <h1
             style={{
               ...s.h1,
-              fontSize: isMobile ? '2.4rem' : '3.4rem',
+              fontSize: isMobile ? '2.8rem' : '4.8rem',
+              color: '#FFF8EA',
             }}
           >
             Contact Veniar.
           </h1>
 
           {/* Gold accent bar */}
-          <div style={s.goldBar} />
+          <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
 
           {/* Contact info rows */}
           <div
@@ -90,6 +96,7 @@ export default function ContactPage() {
           <p style={s.responseNote}>
             We respond within 1–2 business days.
           </p>
+          </div>
         </section>
 
         {/* ── Self-service card ─────────────────────────────────────────── */}
@@ -196,7 +203,6 @@ const s = {
   },
   supportCard: {
     background: 'var(--vn-card, #FFFFFF)',
-    border: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
     borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',

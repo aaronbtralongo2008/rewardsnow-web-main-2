@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -73,6 +74,8 @@ const CATEGORIES = [
 export default function SupportPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
   const [openId, setOpenId] = useState(null);
 
   useEffect(() => {
@@ -94,14 +97,17 @@ export default function SupportPage() {
     >
       <VeniarNav />
 
-      <main style={{ paddingTop: 64 }}>
+      <main>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            maxWidth: '760px',
-            margin: '0 auto',
-            padding: isMobile ? '80px 24px' : '120px 8%',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
           }}
         >
+          <div style={{ maxWidth: '760px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           {/* Gold eyebrow */}
           <p style={s.eyebrow}>SUPPORT</p>
 
@@ -109,19 +115,30 @@ export default function SupportPage() {
           <h1
             style={{
               ...s.h1,
-              fontSize: isMobile ? '2.4rem' : '3.4rem',
+              fontSize: isMobile ? '2.8rem' : '4.8rem',
+              color: '#FFF8EA',
             }}
           >
             Help &amp; support.
           </h1>
 
           {/* Gold accent bar */}
-          <div style={s.goldBar} />
+          <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
 
           {/* Subtext */}
-          <p style={s.subtext}>
+          <p style={{ ...s.subtext, color: 'rgba(255,248,234,0.68)' }}>
             Find answers to common questions below, or contact us directly.
           </p>
+          </div>
+        </section>
+
+        <section
+          style={{
+            maxWidth: '760px',
+            margin: '0 auto',
+            padding: isMobile ? '48px 24px 80px' : '64px 8% 100px',
+          }}
+        >
 
           {/* Contact CTA row */}
           <div
@@ -144,11 +161,7 @@ export default function SupportPage() {
           </div>
 
           {/* Accordion */}
-          <div
-            style={{
-              borderTop: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
-            }}
-          >
+          <div>
             {CATEGORIES.map((cat, i) => {
               const isOpen = openId === cat.id;
               const panelId = `panel-${cat.id}`;
@@ -158,7 +171,9 @@ export default function SupportPage() {
                 <div
                   key={cat.id}
                   style={{
-                    borderBottom: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
+                    borderBottom: '1px solid rgba(255,248,234,0.10)',
+                    paddingBottom: '8px',
+                    marginBottom: '4px',
                   }}
                 >
                   {/* Trigger button */}
@@ -209,7 +224,6 @@ export default function SupportPage() {
             className="vn-card"
             style={{
               background: 'var(--vn-panel, #F7E8CF)',
-              border: `1px solid rgba(100,141,98,0.25)`,
               borderTop: `3px solid ${PALM}`,
               borderRadius: '16px',
               padding: isMobile ? '24px 20px' : '28px',

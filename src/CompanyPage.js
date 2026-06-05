@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -10,6 +11,8 @@ const MUTED  = '#5F6B73';
 
 export default function CompanyPage() {
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
     document.title = 'RewardsNow — Parent Company';
@@ -30,11 +33,13 @@ export default function CompanyPage() {
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            maxWidth: '720px',
-            margin: '0 auto',
-            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
           }}
         >
+          <div style={{ maxWidth: '720px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           {/* Gold eyebrow */}
           <p style={s.eyebrow}>COMPANY</p>
 
@@ -42,24 +47,26 @@ export default function CompanyPage() {
           <h1
             style={{
               ...s.h1,
-              fontSize: isMobile ? '2.4rem' : '3.4rem',
+              fontSize: isMobile ? '2.8rem' : '4.8rem',
+              color: '#FFF8EA',
             }}
           >
             About RewardsNow.
           </h1>
 
           {/* Gold accent bar */}
-          <div style={s.goldBar} />
+          <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
 
           {/* Body paragraphs */}
-          <p style={s.body}>
+          <p style={{ ...s.body, color: 'rgba(255,248,234,0.68)' }}>
             RewardsNow is the parent company behind <em>Veniar</em>, a shared
             rewards platform for independent businesses and local commerce.
           </p>
 
-          <p style={{ ...s.body, marginTop: '20px' }}>
+          <p style={{ ...s.body, color: 'rgba(255,248,234,0.68)', marginTop: '20px' }}>
             <em>Veniar</em> is built, operated, and maintained by RewardsNow.
           </p>
+          </div>
         </section>
 
         {/* ── Link card section ─────────────────────────────────────────── */}
@@ -143,7 +150,6 @@ const s = {
   },
   linkCard: {
     background: 'var(--vn-card, #FFFFFF)',
-    border: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
     borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',

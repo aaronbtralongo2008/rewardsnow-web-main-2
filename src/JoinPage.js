@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -12,6 +13,8 @@ const MUTED  = '#5F6B73';
 export default function JoinPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
     document.title = 'Join Veniar';
@@ -32,12 +35,14 @@ export default function JoinPage() {
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            maxWidth: '820px',
-            margin: '0 auto',
-            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
             textAlign: 'center',
           }}
         >
+          <div style={{ maxWidth: '820px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           {/* Gold eyebrow */}
           <p style={s.eyebrow}>JOIN</p>
 
@@ -45,20 +50,22 @@ export default function JoinPage() {
           <h1
             style={{
               ...s.h1,
-              fontSize: isMobile ? '2.4rem' : '3.4rem',
+              fontSize: isMobile ? '2.8rem' : '4.8rem',
+              color: '#FFF8EA',
             }}
           >
             Join the Veniar network.
           </h1>
 
           {/* Gold accent bar */}
-          <div style={s.goldBar} />
+          <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
 
           {/* Body */}
-          <p style={s.body}>
+          <p style={{ ...s.body, color: 'rgba(255,248,234,0.68)' }}>
             Create your free account and start earning rewards at participating
             local businesses. <em>Veniar</em> is free for customers.
           </p>
+          </div>
         </section>
 
         {/* ── Cards section ────────────────────────────────────────────── */}
@@ -133,7 +140,6 @@ function RoutingCard({ title, description, buttonLabel, buttonStyle, accentColor
       className="vn-card"
       style={{
         background: 'var(--vn-card, #FFFFFF)',
-        border: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
         borderTop: `3px solid ${accentColor}`,
         borderRadius: '16px',
         padding: '40px 36px',

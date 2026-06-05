@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -8,7 +9,6 @@ const CYAN   = '#1692A2';
 const LAGOON = '#0E96CD';
 const ORANGE = '#D66024';
 const YELLOW = '#F8C922';
-const MUTED  = '#5F6B73';
 
 const NUM_COLORS = [
   { bg: 'rgba(22,146,162,0.12)',  color: CYAN },
@@ -53,6 +53,8 @@ const FEATURES = [
 export default function VeniarProductPage() {
   const navigate  = useNavigate();
   const isMobile  = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
     document.title = 'Veniar — Shared Rewards';
@@ -73,26 +75,28 @@ export default function VeniarProductPage() {
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            maxWidth: '720px',
-            margin: '0 auto',
-            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
           }}
         >
+          <div style={{ maxWidth: '720px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           {/* Gold eyebrow */}
           <p style={s.eyebrow}>PRODUCT</p>
 
           {/* H1 */}
-          <h1 style={{ ...s.h1, fontSize: isMobile ? '3rem' : '4.2rem' }}>
+          <h1 style={{ ...s.h1, fontSize: isMobile ? '2.8rem' : '4.8rem', color: '#FFF8EA' }}>
             Veniar.
           </h1>
 
           {/* Gold accent bar */}
-          <div style={s.goldBar} />
+          <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
 
           {/* Subtitle */}
           <p
             style={{
-              color: MUTED,
+              color: 'rgba(255,248,234,0.68)',
               fontSize: isMobile ? '1.15rem' : '1.35rem',
               lineHeight: 1.55,
               margin: 0,
@@ -101,6 +105,7 @@ export default function VeniarProductPage() {
           >
             A shared rewards platform for independent businesses.
           </p>
+          </div>
         </section>
 
         {/* ── Feature blocks ───────────────────────────────────────────── */}
@@ -162,7 +167,6 @@ export default function VeniarProductPage() {
             className="vn-card"
             style={{
               background: 'var(--vn-card, #FFFFFF)',
-              border: '1px solid var(--vn-card-border, rgba(16,24,32,0.12))',
               borderRadius: '16px',
               padding: isMobile ? '32px 24px' : '44px 40px',
             }}

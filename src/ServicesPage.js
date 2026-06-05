@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -50,6 +51,8 @@ const SERVICES = [
 
 export default function ServicesPage() {
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
     document.title = 'Services — Veniar';
@@ -70,19 +73,22 @@ export default function ServicesPage() {
         {/* Header */}
         <section
           style={{
-            maxWidth: '860px',
-            margin: '0 auto',
-            padding: isMobile ? '96px 24px 64px' : '140px 8% 72px',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
           }}
         >
+          <div style={{ maxWidth: '860px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           <p style={s.eyebrow}>SERVICES</p>
-          <h1 style={{ ...s.h1, fontSize: isMobile ? '2.2rem' : '3rem' }}>
+          <h1 style={{ ...s.h1, fontSize: isMobile ? '2.8rem' : '4.8rem', color: '#FFF8EA' }}>
             What Veniar offers.
           </h1>
-          <div style={s.accentBar} />
-          <p style={{ ...s.lead, maxWidth: '520px' }}>
+          <div style={{ ...s.accentBar, background: 'rgba(255,248,234,0.30)' }} />
+          <p style={{ ...s.lead, maxWidth: '520px', color: 'rgba(255,248,234,0.68)' }}>
             A complete shared-loyalty infrastructure — one network, every partner, zero friction.
           </p>
+          </div>
         </section>
 
         {/* Service cards */}
@@ -112,7 +118,6 @@ export default function ServicesPage() {
                 className="vn-card"
                 style={{
                   background: 'var(--vn-card)',
-                  border: '1px solid var(--vn-card-border)',
                   borderRadius: '16px',
                   borderTop: `3px solid ${svc.accent}`,
                   padding: isMobile ? '32px 24px' : '44px 40px',

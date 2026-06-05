@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -11,6 +12,8 @@ const YELLOW = '#F8C922';
 export default function NetworkPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
     document.title = 'Network — Veniar';
@@ -31,28 +34,31 @@ export default function NetworkPage() {
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            maxWidth: '720px',
-            margin: '0 auto',
-            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
           }}
         >
+          <div style={{ maxWidth: '720px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           {/* Gold eyebrow */}
           <p style={s.eyebrow}>NETWORK</p>
 
           {/* H1 */}
-          <h1 style={{ ...s.h1, fontSize: isMobile ? '2.4rem' : '3.4rem' }}>
+          <h1 style={{ ...s.h1, fontSize: isMobile ? '2.8rem' : '4.8rem', color: '#FFF8EA' }}>
             The Veniar network.
           </h1>
 
           {/* Gold accent bar */}
-          <div style={s.goldBar} />
+          <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
 
           {/* Body */}
-          <p style={s.body}>
+          <p style={{ ...s.body, color: 'rgba(255,248,234,0.68)' }}>
             The <em>Veniar</em> network is a group of independent local businesses that
             share a single rewards system. When you earn points at one location, you can
             spend them at any other location in the network.
           </p>
+          </div>
         </section>
 
         {/* ── Info + CTA ───────────────────────────────────────────────── */}

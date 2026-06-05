@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
 
@@ -12,6 +13,8 @@ const MUTED  = '#5F6B73';
 export default function PricingPage() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
     document.title = 'Pricing — Veniar';
@@ -32,12 +35,14 @@ export default function PricingPage() {
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section
           style={{
-            padding: isMobile ? '80px 24px 64px' : '120px 8% 80px',
+            background: heroBg,
+            maxWidth: '100%',
+            paddingTop: isMobile ? 120 : 160,
+            paddingBottom: isMobile ? 72 : 100,
             textAlign: 'center',
-            maxWidth: '720px',
-            margin: '0 auto',
           }}
         >
+          <div style={{ maxWidth: '720px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
           {/* Gold eyebrow */}
           <p style={s.eyebrow}>PRICING</p>
 
@@ -45,20 +50,22 @@ export default function PricingPage() {
           <h1
             style={{
               ...s.h1,
-              fontSize: isMobile ? '2.4rem' : '3.4rem',
+              fontSize: isMobile ? '2.8rem' : '4.8rem',
+              color: '#FFF8EA',
             }}
           >
             Pricing for independent businesses.
           </h1>
 
           {/* Gold accent bar */}
-          <div style={s.goldBar} />
+          <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
 
           {/* Body copy */}
-          <p style={s.body}>
+          <p style={{ ...s.body, color: 'rgba(255,248,234,0.68)' }}>
             Clear, direct pricing is coming soon. In the meantime, reach out to
             discuss your business needs and get early access details.
           </p>
+          </div>
         </section>
 
         {/* ── CTA section ──────────────────────────────────────────────── */}
