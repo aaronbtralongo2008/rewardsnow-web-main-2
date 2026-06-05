@@ -49,8 +49,8 @@ function Login({ onLogin }) {
               <div style={styles.leftContent}>
                   <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#FFF8EA', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/')}>Veniar</span>
                   <div style={styles.goldLine} />
-                  <p style={styles.tagline}>One card.<br />Every business.</p>
-                  <p style={styles.leftDesc}>Join thousands of customers earning rewards at local businesses across the city.</p>
+                  <p style={styles.tagline}>Earn rewards while supporting local businesses.</p>
+                  <p style={styles.leftDesc}>Discover participating restaurants, cafés, shops, and local services. Earn and redeem rewards across the <em>Veniar</em> Network.</p>
                 </div>
               </div>
           )}
