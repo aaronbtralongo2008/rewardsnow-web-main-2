@@ -711,7 +711,7 @@ export default function LandingPage() {
               }}
               onClick={() => navigate('/business-overview')}
             >
-              I own a business
+              Business owner? Learn how to join
             </button>
           </div>
         </FadeInBoth>
@@ -727,6 +727,7 @@ export default function LandingPage() {
       {howSection}
       {businessSection}
       {servicesSection}
+      {directorySection}
       {trustSection}
       {finalCtaSection}
       <VeniarFooter />
