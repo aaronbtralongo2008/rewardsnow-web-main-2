@@ -184,8 +184,8 @@ code {
 .vn-network-card {
   position: relative;
   border-radius: 20px;
-  border: 1px solid var(--vn-card-border);
-  background: linear-gradient(145deg, rgba(92,178,201,0.16), var(--vn-card));
+  border: 1px solid rgba(255,248,234,0.14);
+  background: linear-gradient(145deg, #0F3F45, #0A1211);
   padding: 28px 24px 20px;
   overflow: hidden;
 }
@@ -197,7 +197,7 @@ code {
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--vn-ocean-cyan);
+  color: #5CB2C9;
   z-index: 2;
 }
 
