@@ -1,24 +1,35 @@
 import { useState } from 'react';
+import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 
 const nodes = [
-  { x: 70,  y: 60,  label: 'Merchants', delay: '0s' },
-  { x: 230, y: 36,  label: 'Customers', delay: '0.6s' },
-  { x: 350, y: 112, label: 'Rewards',   delay: '1.2s' },
-  { x: 108, y: 202, label: 'Discovery', delay: '0.3s' },
-  { x: 288, y: 232, label: 'Network',   delay: '0.9s' },
+  { x: 78,  y: 108, label: 'Merchants', delay: '0s' },
+  { x: 248, y: 78,  label: 'Customers', delay: '0.6s' },
+  { x: 362, y: 158, label: 'Rewards',   delay: '1.2s' },
+  { x: 118, y: 230, label: 'Discovery', delay: '0.3s' },
+  { x: 282, y: 258, label: 'Network',   delay: '0.9s' },
 ];
 
 const edges = [[0, 1], [1, 2], [0, 3], [3, 4], [1, 3], [2, 4], [1, 4]];
 
 export default function NetworkVisual() {
   const [hoveredNode, setHoveredNode] = useState(null);
+  const isWide = !useIsMobile(1100);
+  const { isDark } = useTheme();
+
+  if (!isWide) return null;
+
+  const lineColor   = isDark ? 'rgba(184,199,204,0.38)' : 'rgba(95,107,115,0.28)';
+  const ringFill    = isDark ? 'rgba(92,178,201,0.18)'  : 'rgba(22,146,162,0.10)';
+  const ringStroke  = isDark ? 'rgba(92,178,201,0.55)'  : 'rgba(22,146,162,0.40)';
+  const dotColor    = isDark ? '#5CB2C9' : '#1692A2';
+  const dotHover    = '#0E96CD';
 
   return (
     <div className="vn-network-card">
       <span className="vn-network-eyebrow">SHARED NETWORK</span>
-      <div className="vn-network-haze" />
 
-      <svg viewBox="0 0 420 280" width="100%" height="100%" onMouseLeave={() => setHoveredNode(null)}>
+      <svg viewBox="0 0 420 300" width="100%" height="100%" onMouseLeave={() => setHoveredNode(null)}>
         <defs>
           <filter id="vn-node-glow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="4" result="blur" />
@@ -47,10 +58,10 @@ export default function NetworkVisual() {
               className="vn-network-line"
               x1={nodes[a].x} y1={nodes[a].y}
               x2={nodes[b].x} y2={nodes[b].y}
-              stroke={active ? '#0E96CD' : 'rgba(95,107,115,0.28)'}
+              stroke={active ? '#0E96CD' : lineColor}
               strokeWidth={active ? 2 : 1}
               style={{
-                opacity: active ? 0.85 : 0.4,
+                opacity: active ? 0.9 : (isDark ? 0.6 : 0.4),
                 transition: 'stroke 0.18s ease, stroke-width 0.18s ease, opacity 0.18s ease',
               }}
             />
@@ -69,8 +80,8 @@ export default function NetworkVisual() {
               <circle
                 cx={node.x} cy={node.y}
                 r={hovered ? 24 : 20}
-                fill="rgba(22,146,162,0.10)"
-                stroke="rgba(22,146,162,0.40)"
+                fill={ringFill}
+                stroke={ringStroke}
                 strokeWidth="1"
                 filter={hovered ? 'url(#vn-node-glow-strong)' : 'url(#vn-node-glow)'}
                 style={{ transition: 'r 0.18s ease, fill 0.18s ease, stroke 0.18s ease' }}
@@ -78,7 +89,7 @@ export default function NetworkVisual() {
               <circle
                 cx={node.x} cy={node.y}
                 r={hovered ? 8 : 6}
-                fill={hovered ? '#0E96CD' : '#1692A2'}
+                fill={hovered ? dotHover : dotColor}
                 style={{ transition: 'r 0.18s ease, fill 0.18s ease' }}
               />
               <text
@@ -98,21 +109,6 @@ export default function NetworkVisual() {
           );
         })}
       </svg>
-
-      <div className="vn-network-stats">
-        <div>
-          <p className="vn-network-stat-label">Network</p>
-          <p className="vn-network-stat-value">Businesses</p>
-        </div>
-        <div>
-          <p className="vn-network-stat-label">Shared</p>
-          <p className="vn-network-stat-value">Customer flow</p>
-        </div>
-        <div>
-          <p className="vn-network-stat-label">Local</p>
-          <p className="vn-network-stat-value">Ownership</p>
-        </div>
-      </div>
     </div>
   );
 }
