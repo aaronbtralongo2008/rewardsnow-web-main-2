@@ -83,9 +83,9 @@ function Login({ onLogin }) {
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
             <div style={{ textAlign: 'right', marginTop: '8px' }}>
-              <span style={styles.forgotLink} onClick={() => navigate('/forgot-password')}>
+              <button type="button" style={styles.forgotLink} onClick={() => navigate('/forgot-password')}>
                 Forgot password?
-              </span>
+              </button>
             </div>
             <div style={styles.divider}>
               <div style={styles.dividerLine} />
@@ -125,7 +125,7 @@ const styles = {
   inputLabel: { color: 'var(--vn-text-sub)', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
   input: { padding: '14px 16px', borderRadius: '10px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.14))', background: 'var(--vn-bg, #FFF8EA)', color: 'var(--vn-text)', fontSize: '15px', marginBottom: '20px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   loginBtn: { padding: '16px', borderRadius: '10px', border: 'none', background: '#0E96CD', color: '#ffffff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', letterSpacing: '0.01em' },
-  forgotLink: { color: '#0E96CD', fontSize: '13px', fontWeight: '600', cursor: 'pointer' },
+  forgotLink: { background: 'none', border: 'none', padding: 0, color: '#0E96CD', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
   registerBtn: { padding: '15px', borderRadius: '12px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.18))', background: 'transparent', color: 'var(--vn-text)', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%' },
   bizRegisterBtn: { padding: '15px', borderRadius: '12px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.18))', background: 'transparent', color: 'var(--vn-text)', fontSize: '15px', fontWeight: '600', cursor: 'pointer', width: '100%', marginTop: '10px' },
   divider: { display: 'flex', alignItems: 'center', gap: '12px', margin: '24px 0' },
