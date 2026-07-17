@@ -54,7 +54,7 @@ export default function JoinPage() {
               color: '#FFF8EA',
             }}
           >
-            Join the Veniar network.
+            Join the Veniar Network.
           </h1>
 
           {/* Gold accent bar */}
@@ -62,8 +62,8 @@ export default function JoinPage() {
 
           {/* Body */}
           <p style={{ ...s.body, color: 'rgba(255,248,234,0.68)' }}>
-            Create your free account and start earning rewards at participating
-            local businesses. <em>Veniar</em> is free for customers.
+            Join as a customer to earn rewards at participating local businesses,
+            or apply as a business to offer shared rewards to your customers.
           </p>
           </div>
         </section>
@@ -94,9 +94,9 @@ export default function JoinPage() {
             >
               {/* Customer card */}
               <RoutingCard
-                title="I'm a customer"
+                title="I'm a Customer"
                 description="Earn and redeem rewards at participating businesses."
-                buttonLabel="Create account"
+                buttonLabel="Create Account"
                 buttonStyle="primary"
                 accentColor={LAGOON}
                 onButtonClick={() => navigate('/register')}
@@ -105,10 +105,10 @@ export default function JoinPage() {
 
               {/* Business card */}
               <RoutingCard
-                title="I own a business"
+                title="I Own a Business"
                 description="Apply to partner with Veniar and give your customers a shared rewards experience."
-                buttonLabel="Apply to partner"
-                buttonStyle="ghost"
+                buttonLabel="Apply to Partner"
+                buttonStyle="primary"
                 accentColor={ORANGE}
                 onButtonClick={() => navigate('/business-overview')}
                 isMobile={isMobile}
@@ -122,7 +122,7 @@ export default function JoinPage() {
                 style={s.signinLink}
                 onClick={() => navigate('/signin')}
               >
-                Sign in →
+                Sign In →
               </button>
             </p>
           </div>
@@ -156,7 +156,7 @@ function RoutingCard({ title, description, buttonLabel, buttonStyle, accentColor
       <p
         style={{
           color: 'var(--vn-text, var(--rn-text))',
-          fontSize: '17px',
+          fontSize: '20px',
           fontWeight: '800',
           margin: 0,
           letterSpacing: '-0.02em',
