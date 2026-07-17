@@ -13,18 +13,29 @@ export function ForgotPassword() {
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    if (!email) { setError('Enter your email address'); return; }
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail) { setError('Enter your email address'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setError('Enter a valid email address');
+      return;
+    }
     setError('');
     setLoading(true);
     try {
-      await fetch(`${API}/auth/forgot-password`, {
+      const res = await fetch(`${API}/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: normalizedEmail }),
       });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(data.error || data.message || 'We could not send the reset link. Please try again.');
+        return;
+      }
+      setEmail(normalizedEmail);
       setSent(true);
     } catch {
-      setError('Could not connect. Try again.');
+      setError('Could not connect to the server. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -68,12 +79,12 @@ export function ForgotPassword() {
 export function ResetPassword() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const token = new URLSearchParams(window.location.search).get('token');
+  const token = new URLSearchParams(window.location.search).get('token')?.trim() || '';
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(token ? '' : 'Invalid or expired reset link');
 
   const handleReset = async () => {
     if (!password || password.length < 8) { setError('Password must be at least 8 characters'); return; }
@@ -87,11 +98,14 @@ export function ResetPassword() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, newPassword: password }),
       });
-      const data = await res.json();
-      if (data.error) { setError(data.error); }
-      else { setDone(true); }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.error) {
+        setError(data.error || data.message || 'This reset link is invalid or has expired.');
+        return;
+      }
+      setDone(true);
     } catch {
-      setError('Could not connect. Try again.');
+      setError('Could not connect to the server. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -115,7 +129,7 @@ export function ResetPassword() {
                        onChange={e => setConfirm(e.target.value)}
                        onKeyDown={e => e.key === 'Enter' && handleReset()} />
                 {error && <p style={s.error}>{error}</p>}
-                <button style={{ ...s.btn, opacity: loading ? 0.7 : 1 }} onClick={handleReset} disabled={loading}>
+                <button style={{ ...s.btn, opacity: loading || !token ? 0.7 : 1 }} onClick={handleReset} disabled={loading || !token}>
                   {loading ? 'Updating password…' : 'Set new password'}
                 </button>
               </>
