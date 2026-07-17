@@ -155,7 +155,7 @@ export default function VeniarFooter() {
         <div style={brandSectionStyle}>
           <div style={wordmarkStyle}>Veniar</div>
           <div style={taglineStyle}>Shared rewards for local businesses.</div>
-          <div style={productOfStyle}>A RewardsNow product.</div>
+          <div style={productOfStyle}>A RewardsNow Service.</div>
         </div>
 
         {/* Columns */}

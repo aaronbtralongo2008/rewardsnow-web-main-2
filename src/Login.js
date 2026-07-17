@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import { API } from './config';
 
 function Login({ onLogin }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -45,12 +47,15 @@ function Login({ onLogin }) {
                 <span style={styles.mobileHeaderSub}>Earn rewards everywhere</span>
               </div>
           ) : (
-              <div style={styles.leftPanel}>
+              <div style={{
+                ...styles.leftPanel,
+                background: isDark ? '#0A1211' : 'var(--vn-section-alt, #F5F5F4)',
+              }}>
               <div style={styles.leftContent}>
-                  <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#FFF8EA', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/')}>Veniar</span>
+                  <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color: isDark ? '#FFF8EA' : '#1692A2', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/')}>Veniar</span>
                   <div style={styles.goldLine} />
-                  <p style={styles.tagline}>Earn rewards while supporting local businesses.</p>
-                  <p style={styles.leftDesc}>Discover participating restaurants, cafés, shops, and local services. Earn and redeem rewards across the <em>Veniar</em> Network.</p>
+                  <p style={{ ...styles.tagline, color: isDark ? '#FFF8EA' : 'var(--vn-text)' }}>Earn rewards while supporting local businesses.</p>
+                  <p style={{ ...styles.leftDesc, color: isDark ? 'rgba(255,248,234,0.65)' : 'var(--vn-text-sub)' }}>Discover participating restaurants, cafés, shops, and local services. Earn and redeem rewards across the <em>Veniar</em> Network.</p>
                 </div>
               </div>
           )}
