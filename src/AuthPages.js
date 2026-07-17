@@ -27,9 +27,8 @@ export function ForgotPassword() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: normalizedEmail }),
       });
-      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error || data.message || 'We could not send the reset link. Please try again.');
+        setError('We could not send the reset link. Please try again.');
         return;
       }
       setEmail(normalizedEmail);
