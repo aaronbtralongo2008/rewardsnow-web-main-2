@@ -37,9 +37,25 @@ export default function VeniarNav() {
   const logoColor = isDark ? '#3DD6E8' : CYAN;
   const activeColor = isDark ? '#3DD6E8' : LAGOON;
 
-  // Scroll detection
+  // Collapse the wordmark while scrolling down, and reveal it as soon as the
+  // user reverses direction. Keep it expanded near the top of the page.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    let lastScrollY = window.scrollY;
+
+    setScrolled(lastScrollY > 60);
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 60 || currentScrollY < lastScrollY) {
+        setScrolled(false);
+      } else if (currentScrollY > lastScrollY) {
+        setScrolled(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
