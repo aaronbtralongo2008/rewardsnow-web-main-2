@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import FadeInSection from './FadeInSection';
+import VeniarNav from './VeniarNav';
+import VeniarFooter from './VeniarFooter';
 
 const EMPLOYEE_PORTAL_URL = process.env.REACT_APP_EMPLOYEE_PORTAL_URL || '/employee';
 const EMPLOYEE_ROUTE = '/employee';
@@ -16,47 +19,35 @@ const WORKFLOW = [
 export default function BusinessOverview() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+  const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div style={s.root}>
 
-      {/* ── Navigation ─────────────────────────────────────────────────── */}
-      <nav style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
-        <button style={s.backBtn} onClick={() => navigate('/')}>← Back</button>
-
-        <button style={s.brandBtn} onClick={() => navigate('/')}>
-          <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#1692A2', letterSpacing:'-0.03em'}}>Veniar</span>
-        </button>
-
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          {!isMobile && (
-            <button style={s.empNavLink} onClick={() => navigate(EMPLOYEE_ROUTE)}>
-              Employee Portal
-            </button>
-          )}
-          <button style={s.navBtn} onClick={() => navigate('/business-owner')}>Business sign in</button>
-        </div>
-      </nav>
+      <VeniarNav />
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
-      <section style={{ ...s.hero, padding: isMobile ? '72px 24px 56px' : '100px 80px 64px' }}>
+      <section style={{ ...s.hero, background: heroBg, padding: isMobile ? '120px 24px 72px' : '160px 8% 100px' }}>
+        <div style={s.heroInner}>
         <FadeInSection>
         <p style={s.eyebrow}>FOR INDEPENDENT BUSINESSES</p>
-        <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.4rem' : '3.8rem' }}>
+        <h1 style={{ ...s.heroTitle, color: '#FFF8EA', fontSize: isMobile ? '2.8rem' : '4.8rem' }}>
           Shared rewards for customer retention and local discovery.
         </h1>
-        <div style={s.goldBar} />
-        <p style={{ ...s.heroSub, maxWidth: '560px' }}>
+        <div style={{ ...s.goldBar, background: 'rgba(255,248,234,0.30)' }} />
+        <p style={{ ...s.heroSub, color: 'rgba(255,248,234,0.68)', maxWidth: '680px' }}>
           <em>Veniar</em> gives independent businesses access to shared rewards, merchant-controlled offers, customer discovery, and reporting tools without requiring every business to build its own loyalty system from scratch.
         </p>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
           <button style={s.ctaPrimary} onClick={() => navigate('/business-register')}>Apply to join</button>
-          <button style={s.ctaGhost} onClick={() => navigate('/business-owner')}>Business sign in</button>
+          <button style={{ ...s.ctaGhost, borderColor: 'rgba(255,248,234,0.38)', color: '#FFF8EA' }} onClick={() => navigate('/business-owner')}>Business sign in</button>
         </div>
         <p style={{ color: 'rgba(255,248,234,0.50)', fontSize: '14px', marginTop: '20px', marginBottom: 0 }}>Built for restaurants, cafés, shops, and local service businesses.</p>
         </FadeInSection>
+        </div>
       </section>
 
       {/* ── Business case ─────────────────────────────────────────────────── */}
@@ -209,6 +200,8 @@ export default function BusinessOverview() {
           Employee portal
         </button>
       </section>
+
+      <VeniarFooter />
     </div>
   );
 }
@@ -216,13 +209,8 @@ export default function BusinessOverview() {
 const s = {
   root: { minHeight: '100vh', background: 'var(--vn-bg, #FFF8EA)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", position: 'relative', overflow: 'hidden' },
 
-  nav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px', position: 'sticky', top: 0, zIndex: 100, background: 'var(--vn-nav-bg, rgba(255,248,234,0.97))', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid var(--vn-nav-border, rgba(16,24,32,0.08))' },
-  backBtn: { background: 'none', border: 'none', color: 'var(--vn-text-sub)', fontSize: '13px', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
-  brandBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', lineHeight: 0 },
-  empNavLink: { padding: '7px 14px', background: 'rgba(242,184,75,0.12)', border: '1px solid rgba(242,184,75,0.28)', color: '#F2B84B', borderRadius: '8px', fontSize: '12px', fontWeight: '700', whiteSpace: 'nowrap', cursor: 'pointer', fontFamily: 'inherit' },
-  navBtn: { padding: '7px 14px', background: 'transparent', border: '1px solid var(--vn-card-border, rgba(16,24,32,0.18))', color: 'var(--vn-text)', borderRadius: '8px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' },
-
   hero: { position: 'relative', zIndex: 1 },
+  heroInner: { width: '100%', maxWidth: '900px', margin: '0 auto' },
   eyebrow: { color: '#F2B84B', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 20px', textTransform: 'uppercase' },
   heroTitle: { color: 'var(--vn-text)', fontWeight: '900', lineHeight: 1.06, letterSpacing: '-0.03em', margin: '0 0 24px' },
   goldBar: { width: '48px', height: '3px', background: '#F2B84B', borderRadius: '2px', marginBottom: '24px' },
@@ -233,7 +221,7 @@ const s = {
   section: { position: 'relative', zIndex: 1 },
   sectionAlt: { position: 'relative', zIndex: 1, background: 'var(--vn-panel, #F7E8CF)' },
   ctaFooter: { position: 'relative', zIndex: 1 },
-  contentMax: { maxWidth: '900px' },
+  contentMax: { maxWidth: '900px', margin: '0 auto' },
 
   tag: { color: '#F2B84B', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 14px', textTransform: 'uppercase' },
   h2: { color: 'var(--vn-text)', fontWeight: '900', lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 20px' },
@@ -267,7 +255,7 @@ const s = {
   stepTitle: { color: 'var(--vn-text)', fontSize: '15px', fontWeight: '700', margin: '0 0 8px' },
   stepDesc: { color: 'var(--vn-text-sub)', fontSize: '13px', lineHeight: 1.6, margin: 0 },
 
-  empSection: { display: 'flex', alignItems: 'flex-start', position: 'relative', zIndex: 1, maxWidth: '900px' },
+  empSection: { display: 'flex', alignItems: 'flex-start', position: 'relative', zIndex: 1, maxWidth: '900px', margin: '0 auto' },
   empBigBtn: { display: 'inline-block', padding: '15px 32px', background: '#0E96CD', border: 'none', color: '#FFFFFF', borderRadius: '10px', fontSize: '15px', fontWeight: '700', marginBottom: '10px', cursor: 'pointer', fontFamily: 'inherit' },
   empLinkNote: { color: 'var(--vn-text-sub)', fontSize: '12px', margin: 0 },
   empBadgeBox: { background: 'var(--vn-card, #FFFFFF)', borderRadius: '16px', padding: '24px 28px', minWidth: '240px', flexShrink: 0 },
