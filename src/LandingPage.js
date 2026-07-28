@@ -132,7 +132,7 @@ export default function LandingPage() {
           top:           isMobile ? '46%' : '45%',
           left:          '50%',
           width:         isMobile ? '105vw' : '116vw',
-          transform:     `translate(-50%, -50%) scaleX(${isMobile ? 1.02 : 1.08})`,
+          transform:     `translate(-50%, -50%) scaleX(${isMobile ? 1.02 : 1.04})`,
           color:         '#FFF8EA',
           opacity:       isMobile ? 0.07 : 0.09,
           fontFamily:    "'Segoe Script', 'Brush Script MT', 'Snell Roundhand', cursive",
