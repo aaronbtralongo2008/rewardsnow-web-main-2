@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from './ThemeContext';
 import VeniarNav from './VeniarNav';
 import VeniarFooter from './VeniarFooter';
-import NetworkVisual from './NetworkVisual';
 import FadeInBoth from './FadeInBoth';
 import { useIsMobile } from './useIsMobile';
 
@@ -124,13 +123,6 @@ export default function LandingPage() {
       }}
     >
       <div style={{ ...inner, width: '100%' }}>
-        <div style={{
-          display:       'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          gap:           isMobile ? 0 : 56,
-          alignItems:    isMobile ? 'stretch' : 'center',
-        }}>
-        <div style={{ flex: isMobile ? 'none' : '1 1 0', minWidth: 0 }}>
         <FadeInBoth>
           {/* Eyebrow */}
           <div style={{
@@ -259,20 +251,6 @@ export default function LandingPage() {
             ))}
           </div>
         </FadeInBoth>
-        </div>
-
-        <div style={{
-          flex:     isMobile ? 'none' : '0 1 440px',
-          width:    '100%',
-          maxWidth: isMobile ? 520 : 440,
-          minWidth: isMobile ? 0 : 360,
-          margin:   isMobile ? '44px auto 0' : 0,
-        }}>
-          <FadeInBoth delay={120}>
-            <NetworkVisual />
-          </FadeInBoth>
-        </div>
-        </div>
       </div>
     </section>
   );
