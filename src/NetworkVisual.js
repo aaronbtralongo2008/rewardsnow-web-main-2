@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useIsMobile } from './useIsMobile';
 
 const nodes = [
   { x: 78,  y: 108, label: 'Merchants', delay: '0s' },
@@ -22,15 +21,18 @@ const DOT_HOVER   = '#0E96CD';
 
 export default function NetworkVisual() {
   const [hoveredNode, setHoveredNode] = useState(null);
-  const isWide = !useIsMobile(1100);
-
-  if (!isWide) return null;
-
   return (
     <div className="vn-network-card">
       <span className="vn-network-eyebrow">SHARED NETWORK</span>
 
-      <svg viewBox="0 0 420 300" width="100%" height="100%" onMouseLeave={() => setHoveredNode(null)}>
+      <svg
+        viewBox="0 0 420 300"
+        width="100%"
+        role="img"
+        aria-label="Diagram showing merchants, customers, rewards, discovery, and the Veniar network connected together"
+        style={{ display: 'block', width: '100%', height: 'auto' }}
+        onMouseLeave={() => setHoveredNode(null)}
+      >
         <defs>
           <filter id="vn-node-glow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="4" result="blur" />
