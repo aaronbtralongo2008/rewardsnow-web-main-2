@@ -124,22 +124,22 @@ export default function LandingPage() {
         overflow:      'hidden',
       }}
     >
-      {/* Extra-wide all-caps Veniar watermark */}
+      {/* Full-width, legible script Veniar watermark */}
       <div
         aria-hidden="true"
         style={{
           position:      'absolute',
-          top:           '50%',
+          top:           isMobile ? '46%' : '45%',
           left:          '50%',
-          width:         isMobile ? '118vw' : '132vw',
-          transform:     'translate(-50%, -52%) scaleX(1.12)',
+          width:         isMobile ? '105vw' : '116vw',
+          transform:     `translate(-50%, -50%) scaleX(${isMobile ? 1.02 : 1.08})`,
           color:         '#FFF8EA',
           opacity:       isMobile ? 0.07 : 0.09,
-          fontFamily:    "'Inter', system-ui, sans-serif",
-          fontSize:      isMobile ? '25vw' : '22vw',
-          fontWeight:    900,
-          lineHeight:     0.8,
-          letterSpacing: isMobile ? '0.02em' : '0.08em',
+          fontFamily:    "'Segoe Script', 'Brush Script MT', 'Snell Roundhand', cursive",
+          fontSize:      isMobile ? '29vw' : '31vw',
+          fontWeight:    600,
+          lineHeight:     0.9,
+          letterSpacing: '-0.04em',
           textAlign:      'center',
           whiteSpace:     'nowrap',
           pointerEvents:  'none',
@@ -147,7 +147,7 @@ export default function LandingPage() {
           zIndex:         0,
         }}
       >
-        VENIAR
+        Veniar
       </div>
 
       <div style={{ ...inner, width: '100%', position: 'relative', zIndex: 1 }}>
