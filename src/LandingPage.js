@@ -132,6 +132,7 @@ export default function LandingPage() {
             textTransform: 'uppercase',
             color:         YELLOW,
             marginBottom:  24,
+            textAlign:     'center',
           }}>
             LOCAL REWARDS NETWORK
           </div>
@@ -143,8 +144,9 @@ export default function LandingPage() {
             letterSpacing: '-0.04em',
             lineHeight:    1.05,
             color:         '#FFF8EA',
-            margin:        0,
+            margin:        '0 auto',
             maxWidth:      680,
+            textAlign:     'center',
           }}>
             Earn rewards while supporting local businesses.
           </h1>
@@ -155,8 +157,8 @@ export default function LandingPage() {
             color:        'rgba(255,248,234,0.68)',
             lineHeight:   1.7,
             maxWidth:     520,
-            marginBottom: 48,
-            marginTop:    32,
+            margin:       '32px auto 48px',
+            textAlign:    'center',
           }}>
             <em>Veniar</em> helps you earn rewards when you shop at participating independent businesses in your community. Discover nearby restaurants, cafés, shops, and local services, then use your rewards across the <em>Veniar</em> Network.
           </p>
@@ -166,8 +168,9 @@ export default function LandingPage() {
             display:    'flex',
             flexWrap:   'wrap',
             gap:        12,
-            alignItems: 'center',
-            marginBottom: 64,
+            alignItems:     'center',
+            justifyContent: 'center',
+            marginBottom:   64,
           }}>
             <button
               className="vn-cta-primary"
