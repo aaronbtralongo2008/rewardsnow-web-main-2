@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import { API } from './config';
 
 const ROYAL = '#0E96CD';
@@ -8,6 +9,7 @@ const ROYAL = '#0E96CD';
 function EmployeeDashboard() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const { isDark } = useTheme();
   const [token, setToken] = useState(null);
   const [employee, setEmployee] = useState(null);
   const [email, setEmail] = useState('');
@@ -160,12 +162,15 @@ function EmployeeDashboard() {
     return (
         <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
           {!isMobile && (
-              <div style={st.loginLeft}>
+              <div style={{
+                ...st.loginLeft,
+                background: isDark ? '#0A1211' : 'var(--vn-section-alt, #F5F5F4)',
+              }}>
                 <div style={st.loginLeftContent}>
-                  <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.5rem', color:'#FFF8EA', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/business-overview')}>Veniar</span>
+                  <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.5rem', color: isDark ? '#FFF8EA' : '#1692A2', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/business-overview')}>Veniar</span>
                   <div style={st.loginGoldLine} />
-                  <h1 style={st.loginHeadline}>Built for<br />your team.</h1>
-                  <p style={st.loginDesc}>Look up customers and manage reward transactions in seconds.</p>
+                  <h1 style={{ ...st.loginHeadline, color: isDark ? '#FFF8EA' : 'var(--vn-text)' }}>Built for<br />your team.</h1>
+                  <p style={{ ...st.loginDesc, color: isDark ? 'rgba(255,248,234,0.65)' : 'var(--vn-text-sub)' }}>Look up customers and manage reward transactions in seconds.</p>
                 </div>
               </div>
           )}
