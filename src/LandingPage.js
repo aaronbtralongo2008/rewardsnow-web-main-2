@@ -120,9 +120,37 @@ export default function LandingPage() {
         paddingRight:  isMobile ? 24  : '8%',
         display:       'flex',
         alignItems:    'center',
+        position:      'relative',
+        overflow:      'hidden',
       }}
     >
-      <div style={{ ...inner, width: '100%' }}>
+      {/* Full-width cursive Veniar watermark */}
+      <div
+        aria-hidden="true"
+        style={{
+          position:      'absolute',
+          top:           '50%',
+          left:          '50%',
+          width:         '100vw',
+          transform:     'translate(-50%, -52%)',
+          color:         '#FFF8EA',
+          opacity:       isMobile ? 0.055 : 0.065,
+          fontFamily:    "'Snell Roundhand', 'Brush Script MT', 'Segoe Script', cursive",
+          fontSize:      isMobile ? '31vw' : '30vw',
+          fontWeight:    400,
+          lineHeight:     0.8,
+          letterSpacing: '-0.055em',
+          textAlign:      'center',
+          whiteSpace:     'nowrap',
+          pointerEvents:  'none',
+          userSelect:     'none',
+          zIndex:         0,
+        }}
+      >
+        Veniar
+      </div>
+
+      <div style={{ ...inner, width: '100%', position: 'relative', zIndex: 1 }}>
         <FadeInBoth>
           {/* Eyebrow */}
           <div style={{
