@@ -57,7 +57,7 @@ export default function VeniarProductPage() {
   const heroBg = isDark ? '#0A1211' : '#1295AA';
 
   useEffect(() => {
-    document.title = 'Veniar — Shared Rewards';
+    document.title = 'Veniar — About Us';
     window.scrollTo(0, 0);
   }, []);
 
@@ -82,6 +82,8 @@ export default function VeniarProductPage() {
           }}
         >
           <div style={{ maxWidth: '720px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
+          {/* Gold eyebrow */}
+          <p style={s.eyebrow}>ABOUT US</p>
 
           {/* H1 */}
           <h1 style={{ ...s.h1, fontSize: isMobile ? '2.8rem' : '4.8rem', color: '#FFF8EA' }}>
