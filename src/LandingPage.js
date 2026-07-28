@@ -124,22 +124,22 @@ export default function LandingPage() {
         overflow:      'hidden',
       }}
     >
-      {/* Full-width cursive Veniar watermark */}
+      {/* Extra-wide all-caps Veniar watermark */}
       <div
         aria-hidden="true"
         style={{
           position:      'absolute',
           top:           '50%',
           left:          '50%',
-          width:         '100vw',
-          transform:     'translate(-50%, -52%)',
+          width:         isMobile ? '118vw' : '132vw',
+          transform:     'translate(-50%, -52%) scaleX(1.12)',
           color:         '#FFF8EA',
-          opacity:       isMobile ? 0.055 : 0.065,
-          fontFamily:    "'Snell Roundhand', 'Brush Script MT', 'Segoe Script', cursive",
-          fontSize:      isMobile ? '31vw' : '30vw',
-          fontWeight:    400,
+          opacity:       isMobile ? 0.07 : 0.09,
+          fontFamily:    "'Inter', system-ui, sans-serif",
+          fontSize:      isMobile ? '25vw' : '22vw',
+          fontWeight:    900,
           lineHeight:     0.8,
-          letterSpacing: '-0.055em',
+          letterSpacing: isMobile ? '0.02em' : '0.08em',
           textAlign:      'center',
           whiteSpace:     'nowrap',
           pointerEvents:  'none',
@@ -147,7 +147,7 @@ export default function LandingPage() {
           zIndex:         0,
         }}
       >
-        Veniar
+        VENIAR
       </div>
 
       <div style={{ ...inner, width: '100%', position: 'relative', zIndex: 1 }}>
