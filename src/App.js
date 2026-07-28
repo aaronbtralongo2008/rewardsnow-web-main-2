@@ -162,7 +162,8 @@ function App() {
       {/* Public marketing pages */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/services" element={<ServicesPage />} />
-      <Route path="/veniar" element={<VeniarProductPage />} />
+      <Route path="/aboutus" element={<VeniarProductPage />} />
+      <Route path="/veniar" element={<Navigate to="/aboutus" replace />} />
       <Route path="/network" element={<NetworkPage />} />
       <Route path="/customer-app" element={<CustomerAppPage />} />
       <Route path="/merchant-dashboard" element={<MerchantDashboardPage />} />
