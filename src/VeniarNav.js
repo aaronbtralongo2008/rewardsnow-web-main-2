@@ -8,14 +8,14 @@ const LAGOON = '#0E96CD';
 
 const NAV_LINKS = [
   { label: 'Services',     path: '/services' },
-  { label: 'About Us',       path: '/veniar' },
+  { label: 'About Us',       path: '/aboutus' },
   { label: 'For Business', path: '/business-overview' },
   { label: 'Network',      path: '/network' },
 ];
 
 const ALL_NAV_ITEMS = [
   { label: 'Services',            path: '/services' },
-  { label: 'About Us',              path: '/veniar' },
+  { label: 'About Us',              path: '/aboutus' },
   { label: 'For Business',        path: '/business-overview' },
   { label: 'Network',             path: '/network' },
   { label: 'Merchant Dashboard',  path: '/merchant-dashboard' },
