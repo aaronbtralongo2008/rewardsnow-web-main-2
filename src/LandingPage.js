@@ -494,7 +494,7 @@ export default function LandingPage() {
                 cursor:       'pointer',
                 fontFamily:   'inherit',
               }}
-              onClick={() => navigate('/veniar')}
+              onClick={() => navigate('/aboutus')}
             >
               Learn more →
             </button>
