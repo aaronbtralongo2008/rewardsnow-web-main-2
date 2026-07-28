@@ -261,13 +261,17 @@ export default function LandingPage() {
         </FadeInBoth>
         </div>
 
-        {!isMobile && (
-          <div style={{ flex: '0 0 380px' }}>
-            <FadeInBoth delay={120}>
-              <NetworkVisual />
-            </FadeInBoth>
-          </div>
-        )}
+        <div style={{
+          flex:     isMobile ? 'none' : '0 1 440px',
+          width:    '100%',
+          maxWidth: isMobile ? 520 : 440,
+          minWidth: isMobile ? 0 : 360,
+          margin:   isMobile ? '44px auto 0' : 0,
+        }}>
+          <FadeInBoth delay={120}>
+            <NetworkVisual />
+          </FadeInBoth>
+        </div>
         </div>
       </div>
     </section>
