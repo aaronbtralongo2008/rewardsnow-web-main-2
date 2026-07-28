@@ -7,7 +7,7 @@ const CREAM  = '#FFF8EA';
 
 const COLUMNS = [
   { title: 'Product', items: [
-    { label: 'Veniar',             path: '/veniar' },
+    { label: 'Veniar',             path: '/aboutus' },
     { label: 'Veniar Network',     path: '/network' },
     { label: 'Customer App',       path: '/customer-app' },
     { label: 'Merchant Dashboard', path: '/merchant-dashboard' },
