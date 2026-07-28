@@ -82,12 +82,10 @@ export default function VeniarProductPage() {
           }}
         >
           <div style={{ maxWidth: '720px', margin: '0 auto', padding: isMobile ? '0 24px' : '0 8%' }}>
-          {/* Gold eyebrow */}
-          <p style={s.eyebrow}>PRODUCT</p>
 
           {/* H1 */}
           <h1 style={{ ...s.h1, fontSize: isMobile ? '2.8rem' : '4.8rem', color: '#FFF8EA' }}>
-            Veniar.
+            Veniar
           </h1>
 
           {/* Gold accent bar */}
