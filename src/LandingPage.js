@@ -1,379 +1,767 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from './ThemeContext';
+import VeniarNav from './VeniarNav';
+import VeniarFooter from './VeniarFooter';
+import FadeInBoth from './FadeInBoth';
 import { useIsMobile } from './useIsMobile';
-import AnimatedStripes from './AnimatedStripes';
-import FadeInSection from './FadeInSection';
 
-const LOGO_HEADER = process.env.PUBLIC_URL + '/logo514.png';
-const LOGO_FOOTER = process.env.PUBLIC_URL + '/logo514.png';
+/* ── Brand palette ────────────────────────────────────────────────────── */
+const CYAN    = '#1692A2';
+const LAGOON  = '#0E96CD';
+const DEEP    = '#0F6356';
+const NIGHT   = '#0A1211';
+const YELLOW  = '#F8C922';
+const MUTED   = '#5F6B73';
 
-const HOW_IT_WORKS = [
-  { num: '01', title: 'Create a free account', desc: 'Sign up in under a minute with your name and email address.' },
-  { num: '02', title: 'Earn Veniar Points locally', desc: 'Give your phone number at checkout at any participating Veniar business.' },
-  { num: '03', title: 'Redeem across the network', desc: 'Spend your points at any Veniar partner — not just where you earned them.' },
-];
-
-const FEATURES = [
-  {
-    title: 'Earn on every local visit',
-    desc: 'Collect Veniar Points when you visit participating restaurants, cafés, and local businesses.',
-  },
-  {
-    title: 'Redeem across the network',
-    desc: 'Your points work at every Veniar partner — one balance, the entire local network.',
-  },
-  {
-    title: 'Discover nearby businesses',
-    desc: 'Find participating restaurants, shops, cafés, and service providers near you.',
-  },
-  {
-    title: 'Plan your next visit',
-    desc: 'View menus, product offerings, maps, and directions from one convenient directory.',
-  },
-];
-
-export default function LandingPage() {
-  const navigate = useNavigate();
-  const isMobile = useIsMobile();
-
+/* ── StepItem ─────────────────────────────────────────────────────────── */
+function StepItem({ num, title, body, delay, numColor }) {
   return (
-    <div style={s.root}>
-      <div style={s.orb1} aria-hidden="true" />
-      <div style={s.orb2} aria-hidden="true" />
-      <div style={s.orb3} aria-hidden="true" />
-      <AnimatedStripes count={7} />
-
-      {/* ── Navigation ─────────────────────────────────────────────────── */}
-      <header style={{ ...s.nav, padding: isMobile ? '0 20px' : '0 64px' }}>
-        <button
-          style={s.brandBtn}
-          onClick={() => navigate('/')}
-          aria-label="Veniar — go to home"
-        >
-          <img src={LOGO_HEADER} alt="Veniar" style={{ height: '36px', width: 'auto', display: 'block' }} />
-        </button>
-
-        <nav style={s.navRight} aria-label="Site navigation">
-          {!isMobile && (
-            <button style={s.navBtn} onClick={() => navigate('/business-overview')}>For Businesses</button>
-          )}
-          <button style={s.navBtn} onClick={() => navigate('/signin')}>Sign in</button>
-          <button style={s.navBtnPrimary} onClick={() => navigate('/register')}>Get started</button>
-        </nav>
-      </header>
-
-      <main>
-        {/* ── Hero ───────────────────────────────────────────────────────── */}
-        <section
-          style={{ ...s.hero, padding: isMobile ? '84px 24px 72px' : '120px 80px 96px' }}
-          aria-label="Hero"
-        >
-          <FadeInSection delay={0}>
-            <p style={s.eyebrow}>VENIAR™ — LOCAL REWARDS NETWORK</p>
-
-            <h1 style={{ ...s.heroTitle, fontSize: isMobile ? '2.8rem' : '4.6rem' }}>
-              Shared rewards<br />for local favorites.
-            </h1>
-
-            <div style={s.goldBar} />
-
-            <p style={{ ...s.heroSub, maxWidth: isMobile ? '100%' : '540px' }}>
-              Earn Veniar Points when you visit participating restaurants, cafés, and local
-              businesses. Redeem them anywhere in the Veniar Network.
-            </p>
-
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '44px', alignItems: 'center' }}>
-              <a href="#download" style={s.ctaPrimary} aria-label="Download the Veniar app">
-                Get the app
-              </a>
-              <button
-                style={s.ctaGhost}
-                onClick={() => navigate('/business-overview')}
-                aria-label="Learn about Veniar for Business"
-              >
-                For Businesses
-              </button>
-            </div>
-          </FadeInSection>
-        </section>
-
-        {/* ── Hero badge ─────────────────────────────────────────────────── */}
-        {!isMobile && (
-          <FadeInSection delay={180}>
-            <div style={s.heroBadgeRow} aria-hidden="true">
-              <div style={s.heroBadgeCard}>
-                <img src={LOGO_FOOTER} alt="Veniar" style={s.heroBadgeImg} />
-                <p style={s.heroBadgeSub}>Local rewards. Every visit.</p>
-              </div>
-            </div>
-          </FadeInSection>
-        )}
-
-        {/* ── How it works ───────────────────────────────────────────────── */}
-        <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '88px 80px' }}>
-          <FadeInSection>
-            <div style={s.contentMax}>
-              <p style={s.tag}>HOW IT WORKS</p>
-              <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.6rem' }}>
-                Shop local. Earn points.<br />Redeem anywhere.
-              </h2>
-              <div style={s.goldLine} />
-              <div style={{ ...s.stepsGrid, gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr' }}>
-                {HOW_IT_WORKS.map((step, i) => (
-                  <FadeInSection key={step.num} delay={i * 80}>
-                    <div style={s.stepCard}>
-                      <span style={s.stepNum}>{step.num}</span>
-                      <p style={s.stepTitle}>{step.title}</p>
-                      <p style={s.stepDesc}>{step.desc}</p>
-                    </div>
-                  </FadeInSection>
-                ))}
-              </div>
-              <p style={{ ...s.body, marginTop: '32px' }}>
-                Your Veniar Points aren't tied to one store — they work across every participating
-                business in the Veniar Network.
-              </p>
-            </div>
-          </FadeInSection>
-        </section>
-
-        {/* ── Features ───────────────────────────────────────────────────── */}
-        <section style={{ ...s.sectionAlt, padding: isMobile ? '64px 24px' : '88px 80px' }}>
-          <FadeInSection>
-            <div style={s.contentMax}>
-              <p style={s.tag}>WHAT YOU GET</p>
-              <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.6rem' }}>
-                Everything in one app.
-              </h2>
-              <div style={s.goldLine} />
-              <div style={{ ...s.featureGrid, gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr' }}>
-                {FEATURES.map((f, i) => (
-                  <FadeInSection key={f.title} delay={i * 80} style={s.featureCard}>
-                    <p style={s.featureTitle}>{f.title}</p>
-                    <p style={s.featureDesc}>{f.desc}</p>
-                  </FadeInSection>
-                ))}
-              </div>
-            </div>
-          </FadeInSection>
-        </section>
-
-        {/* ── For Business Owners ────────────────────────────────────────── */}
-        <section style={{ ...s.section, padding: isMobile ? '64px 24px' : '88px 80px' }}>
-          <FadeInSection>
-            <div style={s.contentMax}>
-              <p style={s.tag}>VENIAR FOR BUSINESS</p>
-              <h2 style={{ ...s.h2, fontSize: isMobile ? '1.9rem' : '2.6rem' }}>
-                Loyalty works better when<br />local businesses are connected.
-              </h2>
-              <div style={s.goldLine} />
-              <p style={s.body}>
-                Veniar gives independent restaurants and local businesses a complete loyalty program,
-                merchant dashboard, and access to a shared customer network — without the cost or
-                complexity of building it alone.
-              </p>
-              <p style={s.body}>
-                Customers who earn points at another Veniar business can redeem them with you.
-                New foot traffic from the network, not just returning regulars.
-              </p>
-              <button style={s.bizCta} onClick={() => navigate('/business-overview')}>
-                Learn about Veniar for Business →
-              </button>
-            </div>
-          </FadeInSection>
-        </section>
-
-        {/* ── Download CTA ───────────────────────────────────────────────── */}
-        <section
-          id="download"
-          style={{ ...s.ctaFooter, padding: isMobile ? '72px 24px 88px' : '96px 80px 112px', textAlign: 'center' }}
-        >
-          <FadeInSection>
-            <img
-              src={LOGO_FOOTER}
-              alt="Veniar"
-              style={{ ...s.footerLogo, width: isMobile ? '72px' : '88px' }}
-            />
-
-            <h2
-              style={{
-                ...s.h2,
-                fontSize: isMobile ? '2rem' : '2.6rem',
-                marginTop: '28px',
-                maxWidth: '600px',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-              }}
-            >
-              Download the free Veniar app today.
-            </h2>
-
-            <p style={{ ...s.body, maxWidth: '480px', margin: '16px auto 40px' }}>
-              Start earning Veniar Points on everyday spending while supporting independent
-              businesses in your community.
-            </p>
-
-            <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '32px' }}>
-              <a href="#download" style={s.ctaPrimary} aria-label="Download the Veniar app">
-                Download Now
-              </a>
-              <button style={s.ctaGhost} onClick={() => navigate('/register')}>
-                Create free account
-              </button>
-            </div>
-          </FadeInSection>
-        </section>
-      </main>
-
-      {/* ── Site Footer ────────────────────────────────────────────────── */}
-      <footer style={{ ...s.siteFooter, padding: isMobile ? '28px 24px' : '28px 80px' }}>
-        <div style={{ ...s.footerInner, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '20px' : '0' }}>
-          <div style={s.footerLeft}>
-            <p style={s.footerBrand}>Veniar</p>
-            <p style={s.footerCredit}>Veniar is a product of RewardsNow.</p>
-          </div>
-          <nav
-            style={{ ...s.footerLinks, flexWrap: 'wrap', justifyContent: isMobile ? 'flex-start' : 'flex-end' }}
-            aria-label="Footer navigation"
-          >
-            <button style={s.footerLink} onClick={() => navigate('/business-overview')}>For Businesses</button>
-            <button style={s.footerLink} onClick={() => navigate('/signin')}>Sign In</button>
-            <button style={s.footerLink} onClick={() => navigate('/terms')}>Terms</button>
-            <button style={s.footerLink} onClick={() => navigate('/privacy')}>Privacy</button>
-          </nav>
+    <FadeInBoth delay={delay}>
+      <div style={{ flex: '1 1 0', minWidth: 0 }}>
+        <div style={{
+          fontSize:      '3.5rem',
+          fontWeight:    900,
+          color:         numColor || CYAN,
+          lineHeight:    1,
+          marginBottom:  14,
+          letterSpacing: '-0.04em',
+        }}>
+          {num}
         </div>
-        <p style={{ ...s.footerCopy, textAlign: isMobile ? 'left' : 'right', marginTop: '12px' }}>
-          © 2026 RewardsNow, Inc. All rights reserved.
-        </p>
-      </footer>
-    </div>
+        <div style={{
+          fontSize:     17,
+          fontWeight:   700,
+          color:        'var(--vn-text)',
+          marginBottom: 10,
+        }}>
+          {title}
+        </div>
+        <div style={{
+          fontSize:   14,
+          color:      MUTED,
+          lineHeight: 1.7,
+        }}>
+          {body}
+        </div>
+      </div>
+    </FadeInBoth>
   );
 }
 
-// ── Styles — colors use CSS custom properties set by ThemeContext ───────────
-const s = {
-  root: {
-    minHeight: '100vh',
-    background: 'var(--rn-bg)',
-    fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-    position: 'relative',
-    overflow: 'hidden',
-  },
+/* ── ServiceCard ──────────────────────────────────────────────────────── */
+function ServiceCard({ title, body, accent, delay }) {
+  return (
+    <FadeInBoth delay={delay}>
+      <div
+        className="vn-card"
+        style={{
+          background:   'var(--vn-card)',
+          border:       '1px solid var(--vn-card-border)',
+          borderTop:    `3px solid ${accent}`,
+          borderRadius: 14,
+          padding:      '40px 36px',
+        }}
+      >
+        <div style={{
+          width:        32,
+          height:       3,
+          background:   accent,
+          borderRadius: 2,
+          marginBottom: 20,
+          opacity:      0.5,
+        }} />
+        <div style={{
+          fontSize:      17,
+          fontWeight:    700,
+          color:         'var(--vn-text)',
+          marginBottom:  12,
+          letterSpacing: '-0.01em',
+        }}>
+          {title}
+        </div>
+        <div style={{
+          fontSize:   15,
+          color:      'var(--vn-text-sub)',
+          lineHeight: 1.75,
+        }}>
+          {body}
+        </div>
+      </div>
+    </FadeInBoth>
+  );
+}
 
-  orb1: { position: 'fixed', top: '-120px', left: '-100px', width: '600px', height: '600px', borderRadius: '50%', background: 'var(--rn-orb1)', filter: 'blur(120px)', zIndex: 0, pointerEvents: 'none' },
-  orb2: { position: 'fixed', bottom: '-100px', right: '-80px', width: '500px', height: '500px', borderRadius: '50%', background: 'var(--rn-orb2)', filter: 'blur(100px)', zIndex: 0, pointerEvents: 'none' },
-  orb3: { position: 'fixed', top: '40%', right: '20%', width: '300px', height: '300px', borderRadius: '50%', background: 'var(--rn-orb3)', filter: 'blur(80px)', zIndex: 0, pointerEvents: 'none' },
+/* ── LandingPage (main export) ────────────────────────────────────────── */
+export default function LandingPage() {
+  const navigate  = useNavigate();
+  const isMobile  = useIsMobile();
+  const { isDark } = useTheme();
 
-  nav: {
-    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-    height: '64px', position: 'sticky', top: 0, zIndex: 100,
-    background: 'var(--rn-nav-bg)',
-    borderBottom: '1px solid var(--rn-nav-border)',
-    backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-  },
-  brandBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', lineHeight: 0 },
-  navRight: { display: 'flex', gap: '8px', alignItems: 'center' },
-  navBtn: {
-    padding: '8px 16px', background: 'transparent',
-    border: '1px solid var(--rn-nav-btn-border)',
-    color: 'var(--rn-nav-btn-color)',
-    borderRadius: '8px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit',
-  },
-  navBtnPrimary: {
-    padding: '8px 18px',
-    background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)',
-    border: 'none', color: '#0f172a', borderRadius: '8px', fontSize: '13px', fontWeight: '700',
-    cursor: 'pointer', fontFamily: 'inherit', boxShadow: '0 2px 12px rgba(245,158,11,0.35)',
-  },
+  useEffect(() => {
+    document.title = 'Veniar | Shared Rewards for Local Businesses';
+    window.scrollTo(0, 0);
+  }, []);
 
-  hero: { position: 'relative', zIndex: 1 },
-  eyebrow: { color: '#f59e0b', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 20px', textTransform: 'uppercase' },
-  heroTitle: { color: 'var(--rn-text)', fontWeight: '900', lineHeight: 1.05, letterSpacing: '-0.035em', margin: '0 0 24px' },
-  goldBar: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', borderRadius: '2px', marginBottom: '24px' },
-  heroSub: { color: 'var(--rn-text-sub)', fontSize: '17px', lineHeight: 1.75, margin: '0 0 4px' },
+  const CONTENT_MAX = 1040;
+  const inner = { maxWidth: CONTENT_MAX, margin: '0 auto' };
 
-  ctaPrimary: {
-    display: 'inline-block', padding: '14px 32px',
-    background: 'linear-gradient(135deg, #f59e0b 0%, #fde68a 100%)',
-    border: 'none', color: '#0f172a', borderRadius: '12px', fontSize: '15px', fontWeight: '700',
-    cursor: 'pointer', boxShadow: '0 4px 20px rgba(245,158,11,0.4)',
-    fontFamily: 'inherit', textDecoration: 'none', lineHeight: 1,
-  },
-  ctaGhost: {
-    padding: '14px 28px', background: 'transparent',
-    border: '1.5px solid var(--rn-ghost-border)',
-    color: 'var(--rn-ghost-color)',
-    borderRadius: '12px', fontSize: '15px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit', lineHeight: 1,
-  },
+  const heroBg = isDark ? NIGHT : '#1295AA';
 
-  heroBadgeRow: { position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'flex-start', padding: '0 80px 64px' },
-  heroBadgeCard: {
-    display: 'flex', alignItems: 'center', gap: '16px',
-    background: 'var(--rn-card-bg)',
-    border: '1px solid var(--rn-card-border)',
-    borderRadius: '16px', padding: '18px 24px',
-  },
-  heroBadgeImg: { width: '48px', height: '48px', objectFit: 'contain' },
-  heroBadgeSub: { color: 'var(--rn-text-muted)', fontSize: '12px', margin: 0 },
+  /* ── SECTION 1 — HERO ─────────────────────────────────────────────── */
+  const heroSection = (
+    <section
+      style={{
+        minHeight:     '100vh',
+        background:    heroBg,
+        paddingTop:    isMobile ? 100 : 64,
+        paddingBottom: isMobile ? 72  : 96,
+        paddingLeft:   isMobile ? 24  : '8%',
+        paddingRight:  isMobile ? 24  : '8%',
+        display:       'flex',
+        alignItems:    'center',
+        position:      'relative',
+        overflow:      'hidden',
+      }}
+    >
+      {/* Full-width, legible script Veniar watermark */}
+      <div
+        aria-hidden="true"
+        style={{
+          position:      'absolute',
+          top:           isMobile ? '46%' : '45%',
+          left:          '50%',
+          width:         isMobile ? '105vw' : '116vw',
+          transform:     `translate(-50%, -50%) scaleX(${isMobile ? 1.02 : 0.96})`,
+          color:         '#FFF8EA',
+          opacity:       isMobile ? 0.07 : 0.09,
+          fontFamily:    "'Segoe Script', 'Brush Script MT', 'Snell Roundhand', cursive",
+          fontSize:      isMobile ? '29vw' : '31vw',
+          fontWeight:    600,
+          lineHeight:     0.9,
+          letterSpacing: '-0.04em',
+          textAlign:      'center',
+          whiteSpace:     'nowrap',
+          pointerEvents:  'none',
+          userSelect:     'none',
+          zIndex:         0,
+        }}
+      >
+        Veniar
+      </div>
 
-  section: { position: 'relative', zIndex: 1 },
-  sectionAlt: {
-    position: 'relative', zIndex: 1,
-    background: 'var(--rn-section-alt)',
-    borderTop: '1px solid var(--rn-section-border)',
-    borderBottom: '1px solid var(--rn-section-border)',
-  },
-  ctaFooter: { position: 'relative', zIndex: 1 },
-  contentMax: { maxWidth: '880px' },
+      <div style={{ ...inner, width: '100%', position: 'relative', zIndex: 1 }}>
+        <FadeInBoth>
+          {/* Eyebrow */}
+          <div style={{
+            fontSize:      11,
+            fontWeight:    700,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color:         YELLOW,
+            marginBottom:  24,
+            textAlign:     'center',
+          }}>
+            LOCAL REWARDS NETWORK
+          </div>
 
-  tag: { color: '#f59e0b', fontSize: '11px', fontWeight: '700', letterSpacing: '4px', margin: '0 0 14px', textTransform: 'uppercase' },
-  h2: { color: 'var(--rn-text)', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px' },
-  goldLine: { width: '40px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', borderRadius: '2px', marginBottom: '36px' },
-  body: { color: 'var(--rn-text-sub)', fontSize: '16px', lineHeight: 1.8, margin: '0 0 20px' },
+          {/* H1 */}
+          <h1 style={{
+            fontSize:      isMobile ? '2.2rem' : '4rem',
+            fontWeight:    900,
+            letterSpacing: '-0.04em',
+            lineHeight:    1.05,
+            color:         '#FFF8EA',
+            margin:        '0 auto',
+            maxWidth:      680,
+            textAlign:     'center',
+          }}>
+            Earn rewards while supporting local businesses.
+          </h1>
 
-  stepsGrid: { display: 'grid', gap: '16px', marginBottom: '8px' },
-  stepCard: {
-    background: 'var(--rn-card-bg)',
-    border: '1px solid var(--rn-card-border)',
-    borderRadius: '14px', padding: '28px 24px',
-  },
-  stepNum: { color: '#f59e0b', fontSize: '11px', fontWeight: '800', letterSpacing: '3px', display: 'block', marginBottom: '12px' },
-  stepTitle: { color: 'var(--rn-text)', fontSize: '16px', fontWeight: '700', margin: '0 0 8px', letterSpacing: '-0.01em' },
-  stepDesc: { color: 'var(--rn-text-muted)', fontSize: '14px', lineHeight: 1.65, margin: 0 },
+          {/* Subheadline */}
+          <p style={{
+            fontSize:     isMobile ? 15 : 17,
+            color:        'rgba(255,248,234,0.68)',
+            lineHeight:   1.7,
+            maxWidth:     520,
+            margin:       '32px auto 48px',
+            textAlign:    'center',
+          }}>
+            <em>Veniar</em> helps you earn rewards when you shop at participating independent businesses in your community. Discover nearby restaurants, cafés, shops, and local services, then use your rewards across the <em>Veniar</em> Network.
+          </p>
 
-  featureGrid: { display: 'grid', gap: '16px', marginTop: '40px' },
-  featureCard: {
-    background: 'var(--rn-card-bg)',
-    border: '1px solid var(--rn-card-border)',
-    borderRadius: '14px', padding: '26px 22px',
-  },
-  featureTitle: { color: 'var(--rn-text)', fontSize: '15px', fontWeight: '700', margin: '0 0 8px', letterSpacing: '-0.01em' },
-  featureDesc: { color: 'var(--rn-text-muted)', fontSize: '13px', lineHeight: 1.65, margin: 0 },
+          {/* CTA row */}
+          <div style={{
+            display:    'flex',
+            flexWrap:   'wrap',
+            gap:        12,
+            alignItems:     'center',
+            justifyContent: 'center',
+            marginBottom:   64,
+          }}>
+            <button
+              className="vn-cta-primary"
+              style={{
+                background:   LAGOON,
+                color:        '#fff',
+                border:       'none',
+                padding:      '16px 36px',
+                borderRadius: 9,
+                fontSize:     16,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/join')}
+            >
+              Download app
+            </button>
+            <button
+              style={{
+                background:   'transparent',
+                color:        'rgba(255,248,234,0.75)',
+                border:       '1.5px solid rgba(255,248,234,0.22)',
+                padding:      '16px 36px',
+                borderRadius: 9,
+                fontSize:     16,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/business-overview')}
+            >
+              For business owners
+            </button>
+          </div>
 
-  bizCta: {
-    marginTop: '12px', display: 'inline-flex', alignItems: 'center',
-    padding: '13px 24px', borderRadius: '10px',
-    border: '1.5px solid var(--rn-ghost-border)',
-    background: 'transparent',
-    color: 'var(--rn-ghost-color)',
-    fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit',
-  },
+          {/* Mission strip */}
+          <div style={{
+            display:       'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap:           isMobile ? 20 : 0,
+            borderTop:     '1px solid rgba(255,248,234,0.10)',
+            paddingTop:    32,
+          }}>
+            {[
+              { label: 'Earn locally',                  sub: 'Earn rewards at participating businesses in your community.',             accent: CYAN      },
+              { label: 'Redeem across the network',     sub: 'Use eligible rewards at any participating Veniar business.',              accent: '#5CB2C9' },
+              { label: 'Community rewards, simplified.', sub: 'Find local restaurants, cafés, shops, and services through the app.',    accent: '#648D62' },
+            ].map((item, i) => (
+              <div
+                key={item.label}
+                style={{
+                  flex:        1,
+                  paddingLeft: isMobile ? 0 : (i > 0 ? 40 : 0),
+                  borderLeft:  (!isMobile && i > 0) ? '1px solid rgba(255,248,234,0.08)' : 'none',
+                }}
+              >
+                <div style={{
+                  width:        28,
+                  height:       3,
+                  background:   item.accent,
+                  borderRadius: 2,
+                  marginBottom: 12,
+                }} />
+                <div style={{
+                  fontSize:     15,
+                  fontWeight:   700,
+                  color:        '#FFF8EA',
+                  marginBottom: 6,
+                }}>
+                  {item.label}
+                </div>
+                <div style={{
+                  fontSize:   14,
+                  color:      'rgba(255,248,234,0.50)',
+                  lineHeight: 1.6,
+                }}>
+                  {item.sub}
+                </div>
+              </div>
+            ))}
+          </div>
+        </FadeInBoth>
+      </div>
+    </section>
+  );
 
-  footerLogo: { height: 'auto', objectFit: 'contain', display: 'block', margin: '0 auto', opacity: 0.92 },
+  /* ── SECTION 2 — HOW IT WORKS ─────────────────────────────────────── */
+  const howSection = (
+    <section style={{
+      background:    'var(--vn-panel)',
+      paddingTop:    isMobile ? 80  : 120,
+      paddingBottom: isMobile ? 80  : 120,
+      paddingLeft:   isMobile ? 24  : '8%',
+      paddingRight:  isMobile ? 24  : '8%',
+    }}>
+      <div style={inner}>
+        <FadeInBoth>
+          {/* Eyebrow */}
+          <div style={{
+            fontSize:      11,
+            fontWeight:    700,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color:         YELLOW,
+            marginBottom:  16,
+          }}>
+            HOW IT WORKS
+          </div>
 
-  siteFooter: {
-    position: 'relative', zIndex: 1,
-    borderTop: '1px solid var(--rn-section-border)',
-    background: 'var(--rn-section-alt)',
-  },
-  footerInner: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' },
-  footerLeft: {},
-  footerBrand: { color: 'var(--rn-text)', fontSize: '14px', fontWeight: '800', margin: '0 0 4px', letterSpacing: '-0.01em' },
-  footerCredit: { color: 'var(--rn-text-muted)', fontSize: '12px', margin: 0, lineHeight: 1.5 },
-  footerLinks: { display: 'flex', gap: '4px', alignItems: 'center' },
-  footerLink: {
-    background: 'none', border: 'none', color: 'var(--rn-text-sub)',
-    fontSize: '13px', fontWeight: '500', cursor: 'pointer', fontFamily: 'inherit',
-    padding: '4px 8px', borderRadius: '6px',
-  },
-  footerCopy: { color: 'var(--rn-text-faint)', fontSize: '11px', margin: 0 },
-};
+          {/* H2 */}
+          <h2 style={{
+            fontSize:      isMobile ? '2.4rem' : '3.2rem',
+            fontWeight:    800,
+            letterSpacing: '-0.03em',
+            lineHeight:    1.08,
+            color:         'var(--vn-text)',
+            margin:        0,
+          }}>
+            Shop local. Earn rewards. Redeem across the network.
+          </h2>
+
+          {/* Gold accent bar */}
+          <div style={{
+            width:        44,
+            height:       3,
+            background:   YELLOW,
+            borderRadius: 2,
+            margin:       '20px 0 36px',
+          }} />
+        </FadeInBoth>
+
+        <FadeInBoth delay={60}>
+          <p style={{ fontSize: 16, color: 'var(--vn-text-sub)', lineHeight: 1.75, maxWidth: 560, margin: '0 0 32px' }}>
+            Buy from a participating local business and earn rewards through <em>Veniar</em>. Later, redeem eligible rewards at participating businesses across the network — whether that is coffee, lunch, dessert, or another local favorite.
+          </p>
+        </FadeInBoth>
+
+        {/* Step items row */}
+        <div style={{
+          display:       'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          gap:           isMobile ? 48 : 0,
+          alignItems:    isMobile ? 'stretch' : 'flex-start',
+        }}>
+          <StepItem
+            num="01"
+            title="Shop with participating businesses"
+            body={<>Visit local restaurants, cafés, shops, and service providers that participate in <em>Veniar</em>.</>}
+            numColor="#1692A2"
+            delay={0}
+          />
+
+          {/* Vertical divider — desktop only */}
+          {!isMobile && (
+            <div style={{
+              width:          1,
+              background:     'rgba(22,146,162,0.25)',
+              height:         60,
+              alignSelf:      'center',
+              flexShrink:     0,
+              margin:         '0 40px',
+            }} />
+          )}
+
+          <StepItem
+            num="02"
+            title="Earn rewards on eligible purchases"
+            body={<>Earn rewards based on participating business rules and eligible activity.</>}
+            numColor="#0E96CD"
+            delay={120}
+          />
+
+          {/* Vertical divider — desktop only */}
+          {!isMobile && (
+            <div style={{
+              width:      1,
+              background: 'rgba(22,146,162,0.25)',
+              height:     60,
+              alignSelf:  'center',
+              flexShrink: 0,
+              margin:     '0 40px',
+            }} />
+          )}
+
+          <StepItem
+            num="03"
+            title="Redeem locally"
+            body="Use eligible rewards at participating businesses in the Veniar Network."
+            numColor="#648D62"
+            delay={240}
+          />
+
+          {!isMobile && (
+            <div style={{ width: 1, background: 'rgba(22,146,162,0.25)', height: 60, alignSelf: 'center', flexShrink: 0, margin: '0 40px' }} />
+          )}
+          <StepItem
+            num="04"
+            title="Discover where to go next"
+            body="Find nearby businesses, view details, and plan your visit from the app."
+            numColor="#F2B84B"
+            delay={360}
+          />
+        </div>
+
+        <FadeInBoth delay={400}>
+          <p style={{ fontSize: 13, color: 'var(--vn-text-muted, #8A9199)', lineHeight: 1.7, maxWidth: 600, marginTop: 32, fontStyle: 'italic' }}>
+            Rewards are connected to participating businesses in the <em>Veniar</em> Network. Availability, offers, and redemption options may vary by business.
+          </p>
+        </FadeInBoth>
+      </div>
+    </section>
+  );
+
+  /* ── SECTION 3 — FOR BUSINESS ─────────────────────────────────────── */
+  const businessBg = isDark ? NIGHT : DEEP;
+
+  const businessSection = (
+    <section style={{
+      background:    businessBg,
+      paddingTop:    isMobile ? 80  : 120,
+      paddingBottom: isMobile ? 80  : 120,
+      paddingLeft:   isMobile ? 24  : '8%',
+      paddingRight:  isMobile ? 24  : '8%',
+    }}>
+      <div style={inner}>
+        <FadeInBoth>
+          {/* Eyebrow */}
+          <div style={{
+            fontSize:      11,
+            fontWeight:    700,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color:         YELLOW,
+            marginBottom:  16,
+          }}>
+            FOR BUSINESSES
+          </div>
+
+          {/* H2 */}
+          <h2 style={{
+            fontSize:      isMobile ? '2.4rem' : '3.2rem',
+            fontWeight:    800,
+            letterSpacing: '-0.03em',
+            lineHeight:    1.08,
+            color:         '#FFF8EA',
+            margin:        0,
+          }}>
+            Shared rewards infrastructure for independent businesses.
+          </h2>
+
+          {/* Gold accent bar */}
+          <div style={{
+            width:        44,
+            height:       3,
+            background:   YELLOW,
+            borderRadius: 2,
+            margin:       '20px 0 36px',
+          }} />
+
+          {/* Body */}
+          <p style={{
+            fontSize:     isMobile ? 16 : 18,
+            color:        'rgba(255,248,234,0.68)',
+            lineHeight:   1.75,
+            maxWidth:     560,
+            marginBottom: 44,
+          }}>
+            <em>Veniar</em> gives independent businesses access to shared rewards, merchant-controlled offers, and customer discovery tools — without requiring every business to build its own loyalty system from scratch.
+          </p>
+
+          {/* CTAs */}
+          <div style={{
+            display:    'flex',
+            flexWrap:   'wrap',
+            gap:        12,
+            alignItems: 'center',
+          }}>
+            <button
+              className="vn-cta-primary"
+              style={{
+                background:   CYAN,
+                color:        NIGHT,
+                border:       'none',
+                padding:      '14px 28px',
+                borderRadius: 9,
+                fontSize:     15,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/business-overview')}
+            >
+              Apply to join
+            </button>
+            <button
+              className="vn-cta-ghost"
+              style={{
+                background:   'transparent',
+                color:        'rgba(255,248,234,0.80)',
+                border:       '1.5px solid rgba(255,248,234,0.24)',
+                padding:      '14px 28px',
+                borderRadius: 9,
+                fontSize:     15,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/aboutus')}
+            >
+              Learn more →
+            </button>
+          </div>
+        </FadeInBoth>
+      </div>
+    </section>
+  );
+
+  /* ── SECTION 4 — SERVICES ─────────────────────────────────────────── */
+  const servicesSection = (
+    <section style={{
+      background:    'var(--vn-bg)',
+      paddingTop:    isMobile ? 80  : 120,
+      paddingBottom: isMobile ? 80  : 120,
+      paddingLeft:   isMobile ? 24  : '8%',
+      paddingRight:  isMobile ? 24  : '8%',
+    }}>
+      <div style={inner}>
+        <FadeInBoth>
+          {/* Eyebrow */}
+          <div style={{
+            fontSize:      11,
+            fontWeight:    700,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color:         YELLOW,
+            marginBottom:  16,
+          }}>
+            WHAT YOU GET
+          </div>
+
+          {/* H2 */}
+          <h2 style={{
+            fontSize:      isMobile ? '2.4rem' : '3.2rem',
+            fontWeight:    800,
+            letterSpacing: '-0.03em',
+            lineHeight:    1.08,
+            color:         'var(--vn-text)',
+            margin:        0,
+          }}>
+            Everything local rewards need, in one app.
+          </h2>
+
+          {/* Gold accent bar */}
+          <div style={{
+            width:        44,
+            height:       3,
+            background:   YELLOW,
+            borderRadius: 2,
+            margin:       '20px 0 36px',
+          }} />
+        </FadeInBoth>
+
+        {/* 2-col grid */}
+        <div style={{
+          display:             'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap:                 isMobile ? 20 : 32,
+          alignItems:          'start',
+        }}>
+          <ServiceCard title="Earn on everyday visits" body="Collect rewards when you shop with participating local businesses." accent="#1692A2" delay={0} />
+          <ServiceCard title="Redeem across participating businesses" body={<>Use eligible rewards at participating <em>Veniar</em> businesses, not only where you earned them.</>} accent="#0E96CD" delay={80} />
+          <ServiceCard title="Discover nearby places" body="Find restaurants, cafés, shops, and services that are part of the network." accent="#5CB2C9" delay={160} />
+          <ServiceCard title="Plan your visit" body="View business details, menus or offerings when available, maps, and directions." accent="#648D62" delay={240} />
+          <ServiceCard title="Support independent businesses" body={<>Choose local businesses while participating in a shared rewards experience.</>} accent="#D66024" delay={320} />
+          <ServiceCard title="Keep it simple" body="See rewards, nearby businesses, and redemption options in one product experience." accent="#F2B84B" delay={400} />
+        </div>
+
+        {/* Text link below */}
+        <div style={{ marginTop: 36 }}>
+          <FadeInBoth delay={280}>
+            <button
+              style={{
+                background:  'none',
+                border:      'none',
+                padding:     0,
+                fontSize:    15,
+                fontWeight:  600,
+                color:       LAGOON,
+                cursor:      'pointer',
+                fontFamily:  'inherit',
+              }}
+              onClick={() => navigate('/services')}
+            >
+              See all services →
+            </button>
+          </FadeInBoth>
+        </div>
+      </div>
+    </section>
+  );
+
+  /* ── SECTION 5 — TRUST / LEGAL ────────────────────────────────────── */
+  const trustSection = (
+    <section style={{
+      background:    'var(--vn-section-alt)',
+      paddingTop:    isMobile ? 56 : 72,
+      paddingBottom: isMobile ? 56 : 72,
+      paddingLeft:   isMobile ? 24 : '8%',
+      paddingRight:  isMobile ? 24 : '8%',
+    }}>
+      <div style={inner}>
+        <FadeInBoth>
+          <p style={{
+            fontSize:   13,
+            color:      'var(--vn-text-muted)',
+            lineHeight: 1.7,
+            textAlign:  'center',
+            maxWidth:   480,
+            margin:     '0 auto',
+          }}>
+            <em>Veniar</em> Points are a loyalty program. They are not cash,
+            currency, or stored value. They cannot be transferred or exchanged
+            for money. Subject to program terms.
+          </p>
+        </FadeInBoth>
+      </div>
+    </section>
+  );
+
+  /* ── SECTION 5b — DIRECTORY ──────────────────────────────────────── */
+  const directorySection = (
+    <section style={{
+      background:    'var(--vn-panel)',
+      paddingTop:    isMobile ? 80  : 120,
+      paddingBottom: isMobile ? 80  : 120,
+      paddingLeft:   isMobile ? 24  : '8%',
+      paddingRight:  isMobile ? 24  : '8%',
+    }}>
+      <div style={inner}>
+        <FadeInBoth>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: YELLOW, marginBottom: 16 }}>
+            THE DIRECTORY
+          </div>
+          <h2 style={{ fontSize: isMobile ? '2.4rem' : '3.2rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.08, color: 'var(--vn-text)', margin: 0 }}>
+            Not sure where to use your rewards?
+          </h2>
+          <div style={{ width: 44, height: 3, background: YELLOW, borderRadius: 2, margin: '20px 0 24px' }} />
+          <p style={{ fontSize: isMobile ? 16 : 18, color: 'var(--vn-text-sub)', lineHeight: 1.75, maxWidth: 560, marginBottom: 36 }}>
+            The <em>Veniar</em> app includes a directory of participating businesses so customers can find places nearby. Browse restaurants, cafés, shops, and local services, then use maps and directions to plan your visit.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+            <button
+              className="vn-cta-primary"
+              style={{ background: LAGOON, color: '#fff', border: 'none', padding: '14px 28px', borderRadius: 9, fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
+              onClick={() => navigate('/join')}
+            >
+              Open directory
+            </button>
+            <button
+              style={{ background: 'transparent', color: 'var(--vn-text)', border: '1.5px solid var(--vn-card-border)', padding: '14px 28px', borderRadius: 9, fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
+              onClick={() => navigate('/join')}
+            >
+              Download app
+            </button>
+          </div>
+        </FadeInBoth>
+      </div>
+    </section>
+  );
+
+  /* ── SECTION 6 — FINAL CTA ────────────────────────────────────────── */
+  const finalCtaSection = (
+    <section style={{
+      background:    'var(--vn-bg)',
+      paddingTop:    isMobile ? 80  : 120,
+      paddingBottom: isMobile ? 80  : 120,
+      paddingLeft:   isMobile ? 24  : '8%',
+      paddingRight:  isMobile ? 24  : '8%',
+      textAlign:     'center',
+    }}>
+      <div style={inner}>
+        <FadeInBoth>
+          <h2 style={{
+            fontSize:      isMobile ? '2.6rem' : '4rem',
+            fontWeight:    800,
+            letterSpacing: '-0.03em',
+            lineHeight:    1.08,
+            color:         'var(--vn-text)',
+            margin:        0,
+          }}>
+            Start earning rewards locally.
+          </h2>
+
+          <p style={{
+            fontSize:     isMobile ? 16 : 18,
+            color:        'var(--vn-text-sub)',
+            lineHeight:   1.75,
+            marginBottom: 44,
+            marginTop:    24,
+          }}>
+            Download <em>Veniar</em> to discover participating businesses, earn rewards on eligible purchases, and redeem across the local network.
+          </p>
+
+          <div style={{
+            display:        'flex',
+            flexWrap:       'wrap',
+            gap:            12,
+            justifyContent: 'center',
+            alignItems:     'center',
+          }}>
+            <button
+              className="vn-cta-primary"
+              style={{
+                background:   LAGOON,
+                color:        '#fff',
+                border:       'none',
+                padding:      '14px 28px',
+                borderRadius: 9,
+                fontSize:     15,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/register')}
+            >
+              Download app
+            </button>
+            <button
+              className="vn-cta-ghost"
+              style={{
+                background:   'transparent',
+                color:        'var(--vn-text)',
+                border:       '1.5px solid var(--vn-card-border)',
+                padding:      '14px 28px',
+                borderRadius: 9,
+                fontSize:     15,
+                fontWeight:   700,
+                cursor:       'pointer',
+                fontFamily:   'inherit',
+              }}
+              onClick={() => navigate('/business-overview')}
+            >
+              Business owner? Learn how to join
+            </button>
+          </div>
+        </FadeInBoth>
+      </div>
+    </section>
+  );
+
+  /* ── Render ───────────────────────────────────────────────────────── */
+  return (
+    <div style={{ background: 'var(--vn-bg)', fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <VeniarNav />
+      {heroSection}
+      {howSection}
+      {businessSection}
+      {servicesSection}
+      {directorySection}
+      {trustSection}
+      {finalCtaSection}
+      <VeniarFooter />
+    </div>
+  );
+}

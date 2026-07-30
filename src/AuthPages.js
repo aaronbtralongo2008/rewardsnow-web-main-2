@@ -3,9 +3,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from './config';
 import { useIsMobile } from './useIsMobile';
-import AnimatedStripes from './AnimatedStripes';
-
-const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
 export function ForgotPassword() {
   const navigate = useNavigate();
@@ -16,18 +13,28 @@ export function ForgotPassword() {
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    if (!email) { setError('Enter your email address'); return; }
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail) { setError('Enter your email address'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setError('Enter a valid email address');
+      return;
+    }
     setError('');
     setLoading(true);
     try {
-      await fetch(`${API}/auth/forgot-password`, {
+      const res = await fetch(`${API}/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: normalizedEmail }),
       });
+      if (!res.ok) {
+        setError('We could not send the reset link. Please try again.');
+        return;
+      }
+      setEmail(normalizedEmail);
       setSent(true);
     } catch {
-      setError('Could not connect. Try again.');
+      setError('Could not connect to the server. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -35,11 +42,8 @@ export function ForgotPassword() {
 
   return (
       <div style={s.root}>
-        <div style={s.orb1} />
-        <div style={s.orb2} />
-        <AnimatedStripes count={5} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
-          <img src={LOGO} alt="Veniar" style={{ ...s.brandLogo, cursor: 'pointer' }} onClick={() => navigate('/')} />
+          <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.5rem', color:'#1692A2', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'12px'}} onClick={() => navigate('/')}>Veniar</span>
           <button style={s.backLink} onClick={() => navigate('/signin')}>← Back to sign in</button>
           {!sent ? (
               <>
@@ -74,12 +78,12 @@ export function ForgotPassword() {
 export function ResetPassword() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const token = new URLSearchParams(window.location.search).get('token');
+  const token = new URLSearchParams(window.location.search).get('token')?.trim() || '';
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(token ? '' : 'Invalid or expired reset link');
 
   const handleReset = async () => {
     if (!password || password.length < 8) { setError('Password must be at least 8 characters'); return; }
@@ -93,11 +97,14 @@ export function ResetPassword() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, newPassword: password }),
       });
-      const data = await res.json();
-      if (data.error) { setError(data.error); }
-      else { setDone(true); }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.error) {
+        setError(data.error || data.message || 'This reset link is invalid or has expired.');
+        return;
+      }
+      setDone(true);
     } catch {
-      setError('Could not connect. Try again.');
+      setError('Could not connect to the server. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -105,11 +112,8 @@ export function ResetPassword() {
 
   return (
       <div style={s.root}>
-        <div style={s.orb1} />
-        <div style={s.orb2} />
-        <AnimatedStripes count={5} />
         <div style={{ ...s.card, padding: isMobile ? '32px 24px' : '48px', maxWidth: isMobile ? '100%' : '420px', borderRadius: isMobile ? '0' : '20px', minHeight: isMobile ? '100vh' : 'auto', boxShadow: isMobile ? 'none' : '0 24px 80px rgba(0,0,0,0.45)' }}>
-          <img src={LOGO} alt="Veniar" style={{ ...s.brandLogo, cursor: 'pointer' }} onClick={() => navigate('/')} />
+          <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.5rem', color:'#1692A2', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'12px'}} onClick={() => navigate('/')}>Veniar</span>
           {!done ? (
               <>
                 <h1 style={s.title}>Choose a new password</h1>
@@ -124,7 +128,7 @@ export function ResetPassword() {
                        onChange={e => setConfirm(e.target.value)}
                        onKeyDown={e => e.key === 'Enter' && handleReset()} />
                 {error && <p style={s.error}>{error}</p>}
-                <button style={{ ...s.btn, opacity: loading ? 0.7 : 1 }} onClick={handleReset} disabled={loading}>
+                <button style={{ ...s.btn, opacity: loading || !token ? 0.7 : 1 }} onClick={handleReset} disabled={loading || !token}>
                   {loading ? 'Updating password…' : 'Set new password'}
                 </button>
               </>
@@ -142,18 +146,15 @@ export function ResetPassword() {
 }
 
 const s = {
-  root: { minHeight: '100vh', background: 'var(--rn-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'var(--rn-orb1)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  orb2: { position: 'absolute', bottom: '-80px', right: '-60px', width: '420px', height: '420px', borderRadius: '50%', background: 'var(--rn-orb2)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  card: { background: 'var(--rn-form-bg)', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2 },
-  brandLogo: { height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '12px' },
-  backLink: { background: 'none', border: 'none', color: '#60a5fa', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
-  title: { color: 'var(--rn-form-text)', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 8px', letterSpacing: '-0.03em' },
-  sub: { color: 'var(--rn-form-sub)', fontSize: '14px', lineHeight: 1.6, margin: '0 0 28px' },
+  root: { minHeight: '100vh', background: 'var(--vn-bg, #FFF8EA)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", padding: '24px', position: 'relative' },
+  card: { background: 'var(--vn-card, #FFFFFF)', width: '100%', boxSizing: 'border-box', position: 'relative', zIndex: 2, border: '1px solid var(--vn-card-border, rgba(16,24,32,0.10))' },
+  backLink: { background: 'none', border: 'none', color: '#0E96CD', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: 0, marginBottom: '28px', display: 'block' },
+  title: { color: 'var(--vn-text)', fontSize: '1.6rem', fontWeight: '900', margin: '0 0 8px', letterSpacing: '-0.03em' },
+  sub: { color: 'var(--vn-text-sub)', fontSize: '14px', lineHeight: 1.6, margin: '0 0 28px' },
   label: { display: 'block', color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', letterSpacing: '2px', textTransform: 'uppercase' },
-  input: { width: '100%', padding: '13px 16px', border: '2px solid var(--rn-input-border)', borderRadius: '10px', fontSize: '14px', color: 'var(--rn-input-color)', background: 'var(--rn-input-bg)', outline: 'none', boxSizing: 'border-box', marginBottom: '20px' },
+  input: { width: '100%', padding: '13px 16px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.14))', borderRadius: '10px', fontSize: '14px', color: 'var(--vn-text)', background: 'var(--vn-bg, #FFF8EA)', outline: 'none', boxSizing: 'border-box', marginBottom: '20px' },
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '10px 14px', margin: '0 0 16px' },
-  btn: { width: '100%', padding: '14px', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
+  btn: { width: '100%', padding: '14px', background: '#0E96CD', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer' },
   success: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '12px' },
-  successIcon: { width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
+  successIcon: { width: '60px', height: '60px', borderRadius: '50%', background: '#0E96CD', color: '#fff', fontSize: '1.5rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center' },
 };

@@ -1,7 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Veniar Ocean Breeze — static brand tokens (never change with theme) ── */
+:root {
+  /* Core Ocean Breeze product identity */
+  --vn-ocean-cyan:         #1692A2;
+  --vn-ocean-cyan-hover:   #0F7F8F;
+  --vn-ocean-cyan-active:  #0A6C78;
+
+  --vn-lagoon-blue:        #0E96CD;
+  --vn-lagoon-blue-hover:  #077FAF;
+  --vn-lagoon-blue-active: #06698F;
+
+  --vn-deep-teal:          #0F6356;
+  --vn-tropical-teal:      #0F8966;
+  --vn-sea-glass:          #5CB2C9;
+
+  /* Deep frame / serious product contrast */
+  --vn-night-frame:        #0A1211;
+  --vn-deep-water:         #07131A;
+  --vn-ink:                #101820;
+
+  /* Sunset and reward colors */
+  --vn-sunset-yellow:      #F8C922;
+  --vn-sunset-gold:        #EDA81B;
+  --vn-sunset-orange:      #D66024;
+  --vn-coral-red:          #AA382F;
+
+  /* Tropical greens */
+  --vn-palm-green:         #185035;
+  --vn-palm-bright:        #648D62;
+  --vn-reef-green:         #0A6C58;
+
+  /* Warm natural supports */
+  --vn-sand:               #D99B67;
+  --vn-earth-brown:        #573128;
+  --vn-olive-shadow:       #586755;
+
+  /* Light mode surfaces */
+  --vn-cream:              #FFF8EA;
+  --vn-shell:              #F5F5F4;
+  --vn-soft-sand:          #F7E8CF;
+  --vn-white:              #FFFFFF;
+
+  /* Text */
+  --vn-text-static:        #101820;
+  --vn-muted-static:       #5F6B73;
+  --vn-muted-teal:         #627887;
+
+  /* Borders and focus */
+  --vn-border:             rgba(16,24,32,0.14);
+  --vn-border-strong:      rgba(16,24,32,0.24);
+  --vn-focus:              #1692A2;
+
+  /* Dark mode surfaces */
+  --vn-dark-bg:            #0A1211;
+  --vn-dark-surface:       #07131A;
+  --vn-dark-panel:         #0B2B30;
+  --vn-dark-panel-strong:  #0F3F45;
+
+  /* Dark mode text */
+  --vn-dark-text:          #FFF8EA;
+  --vn-dark-muted:         #B8C7CC;
+
+  /* Dark mode accents */
+  --vn-dark-cyan:          #5CB2C9;
+  --vn-dark-lagoon:        #0E96CD;
+  --vn-dark-yellow:        #F8C922;
+  --vn-dark-orange:        #D66024;
+  --vn-dark-green:         #648D62;
+
+  /* Dark mode borders */
+  --vn-border-dark:        rgba(255,248,234,0.16);
+  --vn-border-dark-strong: rgba(255,248,234,0.28);
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,6 +85,103 @@ body {
   box-sizing: border-box;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ── Ocean Breeze component classes ─────────────────────────────────────── */
+
+.vn-card {
+  transition: transform 0.22s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.22s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.22s ease;
+}
+.vn-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(22,146,162,0.12) !important;
+  border-color: var(--vn-ocean-cyan-hover) !important;
+}
+
+.vn-cta-primary {
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.vn-cta-primary:hover {
+  background-color: var(--vn-lagoon-blue-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(14,150,205,0.30) !important;
+}
+.vn-cta-primary:active {
+  transform: translateY(0);
+}
+
+.vn-cta-cyan {
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.vn-cta-cyan:hover {
+  background-color: var(--vn-ocean-cyan-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(22,146,162,0.28) !important;
+}
+.vn-cta-cyan:active {
+  transform: translateY(0);
+}
+
+.vn-cta-ghost {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+.vn-cta-ghost:hover {
+  background-color: var(--vn-shell) !important;
+  border-color: var(--vn-ocean-cyan) !important;
+}
+
+.vn-nav-btn {
+  transition: background-color 0.12s ease, color 0.12s ease;
+  cursor: pointer;
+}
+.vn-nav-btn:hover {
+  background-color: var(--vn-shell, rgba(245,245,244,0.7)) !important;
+}
+
+.vn-footer-link {
+  transition: color 0.14s ease;
+  cursor: pointer;
+}
+.vn-footer-link:hover {
+  color: var(--vn-dark-cyan, #5CB2C9) !important;
+}
+
+/* Dashboard mock card — slide in from right on mount */
+.vn-dash-card {
+  animation: vnSlideRight 0.75s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+}
+@keyframes vnSlideRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Route accent line draw */
+.vn-route-line {
+  animation: vnLineDraw 1.4s cubic-bezier(0.16,1,0.3,1) 0.6s both;
+  transform-origin: left;
+}
+@keyframes vnLineDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Network dot pulse */
+.vn-dot-pulse {
+  animation: vnDotPulse 2.4s ease-in-out infinite;
+}
+@keyframes vnDotPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }

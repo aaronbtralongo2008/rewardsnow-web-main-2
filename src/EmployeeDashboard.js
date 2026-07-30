@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
+import { useTheme } from './ThemeContext';
 import { API } from './config';
-import AnimatedStripes from './AnimatedStripes';
 
-const ROYAL = '#2563eb';
-const LOGO = process.env.PUBLIC_URL + '/logo514.png';
+const ROYAL = '#0E96CD';
 
 function EmployeeDashboard() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const { isDark } = useTheme();
   const [token, setToken] = useState(null);
   const [employee, setEmployee] = useState(null);
   const [email, setEmail] = useState('');
@@ -162,21 +162,20 @@ function EmployeeDashboard() {
     return (
         <div style={{ display: 'flex', minHeight: '100vh', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
           {!isMobile && (
-              <div style={st.loginLeft}>
-                <div style={st.loginOrb1} />
-                <div style={st.loginOrb2} />
-                <div style={st.loginOrb3} />
-                <AnimatedStripes count={4} />
+              <div style={{
+                ...st.loginLeft,
+                background: isDark ? '#0A1211' : 'var(--vn-section-alt, #F5F5F4)',
+              }}>
                 <div style={st.loginLeftContent}>
-                  <img src={LOGO} alt="Veniar" style={{ ...st.loginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />
+                  <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.5rem', color: isDark ? '#FFF8EA' : '#1692A2', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/business-overview')}>Veniar</span>
                   <div style={st.loginGoldLine} />
-                  <h1 style={st.loginHeadline}>Built for<br />your team.</h1>
-                  <p style={st.loginDesc}>Look up customers and manage reward transactions in seconds.</p>
+                  <h1 style={{ ...st.loginHeadline, color: isDark ? '#FFF8EA' : 'var(--vn-text)' }}>Built for<br />your team.</h1>
+                  <p style={{ ...st.loginDesc, color: isDark ? 'rgba(255,248,234,0.65)' : 'var(--vn-text-sub)' }}>Look up customers and manage reward transactions in seconds.</p>
                 </div>
               </div>
           )}
           <div style={{ ...st.loginRight, width: isMobile ? '100%' : '480px', flex: isMobile ? 1 : 'none', padding: isMobile ? '48px 24px' : '80px 64px', boxSizing: 'border-box' }}>
-            {isMobile && <img src={LOGO} alt="Veniar" style={{ ...st.mobileLoginLogoImg, cursor: 'pointer' }} onClick={() => navigate('/business-overview')} />}
+            {isMobile && <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#0E96CD', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'28px'}} onClick={() => navigate('/business-overview')}>Veniar</span>}
             <span style={st.loginPortalTag}>EMPLOYEE PORTAL</span>
             <h2 style={st.loginTitle}>Staff Login</h2>
             <p style={st.loginSub}>Sign in to issue customer points</p>
@@ -287,7 +286,7 @@ function EmployeeDashboard() {
                         const pts = mode === 'issue' ? svc.rewardsGrant : svc.rewardsCost;
                         return (
                             <div key={svc.id}
-                                 style={{ ...st.menuItem, border: selected ? `2.5px solid ${mode === 'redeem' ? '#2e7d52' : ROYAL}` : '2px solid var(--rn-portal-border)', background: selected ? (mode === 'redeem' ? '#e8f4ed' : '#f0f4ff') : 'var(--rn-portal-surface)', transform: selected ? 'scale(1.02)' : 'scale(1)' }}
+                                 style={{ ...st.menuItem, border: selected ? `2.5px solid ${mode === 'redeem' ? '#2e7d52' : ROYAL}` : '2px solid var(--vn-card-border, rgba(16,24,32,0.10))', background: selected ? (mode === 'redeem' ? '#e8f4ed' : '#f0f4ff') : 'var(--vn-surface, #F5F5F4)', transform: selected ? 'scale(1.02)' : 'scale(1)' }}
                                  onClick={() => toggleService(svc)}>
                               {selected && <div style={{ ...st.checkMark, color: mode === 'redeem' ? '#2e7d52' : ROYAL }}>✓</div>}
                               <p style={st.menuItemName}>{svc.name}</p>
@@ -398,66 +397,59 @@ function EmployeeDashboard() {
 }
 
 const st = {
-  loginLeft: { flex: 1, background: 'var(--rn-bg)', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
-  loginOrb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'var(--rn-orb1)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  loginOrb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'var(--rn-emp-orb2)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  loginOrb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'var(--rn-orb3)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  loginLeft: { flex: 1, background: '#0A1211', display: 'flex', alignItems: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   loginLeftContent: { position: 'relative', zIndex: 2 },
-  loginBrandBadge: { color: '#f59e0b', fontSize: '12px', fontWeight: '700', letterSpacing: '4px', marginBottom: '20px' },
-  loginGoldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
-  loginHeadline: { color: 'var(--rn-text)', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
-  loginDesc: { color: 'var(--rn-text-sub)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
-  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--rn-form-bg)' },
-  mobileLoginBrand: { color: '#2563eb', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.01em', marginBottom: '32px' },
-  loginPortalTag: { display: 'inline-block', background: 'var(--rn-input-bg)', color: '#60a5fa', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px', border: '1px solid var(--rn-input-border)' },
-  loginTitle: { color: 'var(--rn-form-text)', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
-  loginSub: { color: 'var(--rn-form-sub)', fontSize: '1rem', margin: '0 0 36px 0' },
+  loginGoldLine: { width: '56px', height: '3px', background: '#F8C922', marginBottom: '32px', borderRadius: '2px' },
+  loginHeadline: { color: '#FFF8EA', fontSize: '3.2rem', fontWeight: '900', lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px 0', maxWidth: '440px' },
+  loginDesc: { color: 'rgba(255,248,234,0.65)', fontSize: '15px', lineHeight: 1.7, margin: 0, maxWidth: '360px' },
+  loginRight: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--vn-card, #FFFFFF)' },
+  loginPortalTag: { display: 'inline-block', background: 'rgba(14,150,205,0.10)', color: '#0E96CD', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '5px 12px', borderRadius: '20px', marginBottom: '20px', border: '1px solid rgba(14,150,205,0.25)' },
+  loginTitle: { color: 'var(--vn-text)', fontSize: '2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  loginSub: { color: 'var(--vn-text-sub)', fontSize: '1rem', margin: '0 0 36px 0' },
   loginLabel: { color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
-  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid var(--rn-input-border)', background: 'var(--rn-input-bg)', color: 'var(--rn-input-color)', fontSize: '15px', marginBottom: '6px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  loginEmailHint: { color: 'var(--rn-form-sub)', fontSize: '11px', margin: '0 0 16px', lineHeight: 1.5 },
-  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
+  loginInput: { padding: '14px 16px', borderRadius: '10px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.14))', background: 'var(--vn-bg, #FFF8EA)', color: 'var(--vn-text)', fontSize: '15px', marginBottom: '6px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginEmailHint: { color: 'var(--vn-text-sub)', fontSize: '11px', margin: '0 0 16px', lineHeight: 1.5 },
+  loginBtn: { padding: '16px', borderRadius: '12px', border: 'none', background: '#0E96CD', color: '#fff', fontSize: '16px', fontWeight: '700', cursor: 'pointer', width: '100%' },
   loginError: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
-  loginLogoImg: { height: '48px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
-  mobileLoginLogoImg: { height: '40px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '28px' },
-  loginDivider: { height: '1px', background: 'var(--rn-divider)', margin: '24px 0 16px' },
-  loginBizNote: { color: 'var(--rn-form-sub)', fontSize: '13px', margin: '0 0 10px', textAlign: 'center' },
-  loginBizBtn: { width: '100%', padding: '13px 16px', borderRadius: '12px', border: `1.5px solid ${ROYAL}`, background: 'var(--rn-outline-btn-bg)', color: ROYAL, fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxSizing: 'border-box', fontFamily: 'inherit' },
-  label: { color: 'var(--rn-portal-text-sub)', fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' },
-  input: { padding: '10px 14px', borderRadius: '8px', border: '1.5px solid var(--rn-portal-input-border)', background: 'var(--rn-portal-input-bg)', color: 'var(--rn-portal-input-color)', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  loginDivider: { height: '1px', background: 'var(--vn-card-border, rgba(16,24,32,0.12))', margin: '24px 0 16px' },
+  loginBizNote: { color: 'var(--vn-text-sub)', fontSize: '13px', margin: '0 0 10px', textAlign: 'center' },
+  loginBizBtn: { width: '100%', padding: '13px 16px', borderRadius: '12px', border: `1.5px solid ${ROYAL}`, background: 'transparent', color: ROYAL, fontSize: '14px', fontWeight: '700', cursor: 'pointer', boxSizing: 'border-box', fontFamily: 'inherit' },
+  label: { color: 'var(--vn-text-sub)', fontSize: '12px', fontWeight: '600', display: 'block', marginBottom: '6px' },
+  input: { padding: '10px 14px', borderRadius: '8px', border: '1.5px solid var(--vn-card-border, rgba(16,24,32,0.14))', background: 'var(--vn-bg, #FFF8EA)', color: 'var(--vn-text)', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
   primaryBtn: { padding: '12px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', width: '100%' },
   error: { color: '#dc2626', fontSize: '13px', background: '#fef2f2', padding: '10px 14px', borderRadius: '8px', border: '1px solid #fecaca', margin: '0 0 14px 0' },
-  container: { minHeight: '100vh', background: 'var(--rn-portal-bg)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
-  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: 'var(--rn-portal-topbar)', borderBottom: '1px solid var(--rn-portal-border)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
+  container: { minHeight: '100vh', background: 'var(--vn-bg, #FFF8EA)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', background: 'var(--vn-card, #FFFFFF)', borderBottom: '1px solid var(--vn-card-border, rgba(16,24,32,0.10))', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', position: 'sticky', top: 0, zIndex: 100 },
   logo: { color: ROYAL, fontSize: '1.2rem', fontWeight: '800', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' },
   empBadge: { background: '#e8f4ed', color: '#2e7d52', fontSize: '10px', fontWeight: '700', letterSpacing: '2px', padding: '3px 10px', borderRadius: '20px' },
   uniqueBadge: { background: '#f0e8ff', color: '#6b21a8', fontSize: '10px', fontWeight: '700', letterSpacing: '1px', padding: '3px 10px', borderRadius: '20px' },
-  empName: { color: 'var(--rn-portal-text-sub)', fontSize: '13px', fontWeight: '600' },
-  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid var(--rn-portal-border)', background: 'transparent', color: 'var(--rn-portal-text-sub)', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
+  empName: { color: 'var(--vn-text-sub)', fontSize: '13px', fontWeight: '600' },
+  logoutBtn: { padding: '7px 14px', borderRadius: '8px', border: '1.5px solid var(--vn-card-border, rgba(16,24,32,0.10))', background: 'transparent', color: 'var(--vn-text-sub)', cursor: 'pointer', fontSize: '13px', fontWeight: '600' },
   body: { flex: 1, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', boxSizing: 'border-box' },
   stepContainer: { width: '100%', maxWidth: '680px' },
   stepHeader: { display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' },
   stepNum: { width: '32px', height: '32px', borderRadius: '50%', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
-  stepTitle: { color: 'var(--rn-portal-text)', fontSize: '1.1rem', fontWeight: '700', margin: '0 0 2px 0' },
-  stepSub: { color: 'var(--rn-portal-text-muted)', fontSize: '13px', margin: 0 },
-  lookupCard: { background: 'var(--rn-portal-surface)', borderRadius: '16px', padding: '20px', border: '1px solid var(--rn-portal-border)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' },
+  stepTitle: { color: 'var(--vn-text)', fontSize: '1.1rem', fontWeight: '700', margin: '0 0 2px 0' },
+  stepSub: { color: 'var(--vn-text-sub)', fontSize: '13px', margin: 0 },
+  lookupCard: { background: 'var(--vn-surface, #F5F5F4)', borderRadius: '16px', padding: '20px', border: '1px solid var(--vn-card-border, rgba(16,24,32,0.10))', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' },
   lookupRow: { display: 'flex', gap: '10px', alignItems: 'center' },
   lookupBtn: { padding: '13px 16px', borderRadius: '10px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 },
-  lookupHint: { color: 'var(--rn-portal-text-muted)', fontSize: '12px', marginTop: '12px', lineHeight: 1.5 },
+  lookupHint: { color: 'var(--vn-text-sub)', fontSize: '12px', marginTop: '12px', lineHeight: 1.5 },
   inlineError: { color: '#e03434', fontSize: '13px', marginTop: '8px', marginBottom: 0 },
-  customerBanner: { background: 'var(--rn-portal-surface)', borderRadius: '14px', padding: '14px 16px', border: '1px solid var(--rn-portal-border)', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' },
-  customerAvatar: { width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #1e40af, #2563eb)', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  customerBanner: { background: 'var(--vn-surface, #F5F5F4)', borderRadius: '14px', padding: '14px 16px', border: '1px solid var(--vn-card-border, rgba(16,24,32,0.10))', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' },
+  customerAvatar: { width: '40px', height: '40px', borderRadius: '50%', background: '#0E96CD', color: '#fff', fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   customerInfo: { flex: 1, minWidth: '100px' },
-  customerName: { color: 'var(--rn-portal-text)', fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' },
-  customerBalance: { color: 'var(--rn-portal-text-muted)', fontSize: '12px', margin: 0 },
-  changeCustomerBtn: { padding: '7px 12px', borderRadius: '8px', border: '1.5px solid var(--rn-portal-border)', background: 'transparent', color: 'var(--rn-portal-text-sub)', fontSize: '12px', fontWeight: '600', cursor: 'pointer', flexShrink: 0 },
+  customerName: { color: 'var(--vn-text)', fontSize: '14px', fontWeight: '700', margin: '0 0 2px 0' },
+  customerBalance: { color: 'var(--vn-text-sub)', fontSize: '12px', margin: 0 },
+  changeCustomerBtn: { padding: '7px 12px', borderRadius: '8px', border: '1.5px solid var(--vn-card-border, rgba(16,24,32,0.10))', background: 'transparent', color: 'var(--vn-text-sub)', fontSize: '12px', fontWeight: '600', cursor: 'pointer', flexShrink: 0 },
   modeToggle: { display: 'flex', gap: '8px', marginBottom: '20px' },
   modeBtn: { padding: '10px 16px', borderRadius: '10px', border: `1.5px solid ${ROYAL}`, fontSize: '13px', fontWeight: '700', cursor: 'pointer', flex: 1 },
-  emptyMenu: { background: 'var(--rn-portal-surface)', borderRadius: '14px', padding: '32px', textAlign: 'center', border: '1px solid var(--rn-portal-border)', color: 'var(--rn-portal-text-sub)', fontSize: '14px' },
+  emptyMenu: { background: 'var(--vn-surface, #F5F5F4)', borderRadius: '14px', padding: '32px', textAlign: 'center', border: '1px solid var(--vn-card-border, rgba(16,24,32,0.10))', color: 'var(--vn-text-sub)', fontSize: '14px' },
   menuGrid: { display: 'grid', gap: '10px', marginBottom: '16px' },
   menuItem: { borderRadius: '14px', padding: '14px', cursor: 'pointer', transition: 'all 0.15s', position: 'relative' },
   checkMark: { position: 'absolute', top: '10px', right: '12px', fontSize: '14px', fontWeight: '800' },
-  menuItemName: { color: 'var(--rn-portal-text)', fontSize: '13px', fontWeight: '700', margin: '0 0 4px 0', paddingRight: '20px' },
-  menuItemDesc: { color: 'var(--rn-portal-text-muted)', fontSize: '11px', margin: '0 0 10px 0', lineHeight: 1.4 },
+  menuItemName: { color: 'var(--vn-text)', fontSize: '13px', fontWeight: '700', margin: '0 0 4px 0', paddingRight: '20px' },
+  menuItemDesc: { color: 'var(--vn-text-sub)', fontSize: '11px', margin: '0 0 10px 0', lineHeight: 1.4 },
   earnBadge: { fontSize: '11px', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', display: 'inline-block' },
   orderSummary: { borderRadius: '14px', padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' },
   orderLeft: { flex: 1, minWidth: '120px' },
@@ -466,31 +458,31 @@ const st = {
   orderRight: { display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 },
   orderPoints: { color: '#fff', fontSize: '1.2rem', fontWeight: '800', margin: 0 },
   confirmBtn: { padding: '9px 16px', borderRadius: '10px', border: 'none', background: '#fff', color: ROYAL, fontSize: '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' },
-  confirmCard: { background: 'var(--rn-portal-surface)', borderRadius: '16px', padding: '20px', border: '1px solid var(--rn-portal-border)', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' },
+  confirmCard: { background: 'var(--vn-surface, #F5F5F4)', borderRadius: '16px', padding: '20px', border: '1px solid var(--vn-card-border, rgba(16,24,32,0.10))', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' },
   confirmSection: { marginBottom: '4px' },
-  confirmLabel: { color: 'var(--rn-portal-text-muted)', fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 6px 0' },
-  confirmValue: { color: 'var(--rn-portal-text)', fontSize: '1rem', fontWeight: '700', margin: '0 0 14px 0' },
-  confirmDivider: { height: '1px', background: 'var(--rn-portal-border)', margin: '14px 0' },
+  confirmLabel: { color: 'var(--vn-text-sub)', fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 6px 0' },
+  confirmValue: { color: 'var(--vn-text)', fontSize: '1rem', fontWeight: '700', margin: '0 0 14px 0' },
+  confirmDivider: { height: '1px', background: 'var(--vn-card-border, rgba(16,24,32,0.10))', margin: '14px 0' },
   confirmItem: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' },
-  confirmItemName: { color: 'var(--rn-portal-text-sub)', fontSize: '14px', fontWeight: '600' },
+  confirmItemName: { color: 'var(--vn-text-sub)', fontSize: '14px', fontWeight: '600' },
   confirmItemPts: { fontSize: '14px', fontWeight: '700' },
   confirmTotal: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  confirmTotalLabel: { color: 'var(--rn-portal-text)', fontSize: '14px', fontWeight: '700', margin: 0 },
+  confirmTotalLabel: { color: 'var(--vn-text)', fontSize: '14px', fontWeight: '700', margin: 0 },
   confirmTotalPts: { fontSize: '1.6rem', fontWeight: '800', margin: 0 },
   confirmActions: { display: 'flex', gap: '10px', marginTop: '20px' },
-  backBtn: { padding: '12px 14px', borderRadius: '10px', border: '1.5px solid var(--rn-portal-border)', background: 'transparent', color: 'var(--rn-portal-text-sub)', fontSize: '13px', fontWeight: '600', cursor: 'pointer', flex: 1 },
+  backBtn: { padding: '12px 14px', borderRadius: '10px', border: '1.5px solid var(--vn-card-border, rgba(16,24,32,0.10))', background: 'transparent', color: 'var(--vn-text-sub)', fontSize: '13px', fontWeight: '600', cursor: 'pointer', flex: 1 },
   issueBtn: { padding: '12px 14px', borderRadius: '10px', border: 'none', color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer', flex: 2 },
-  successCard: { background: 'var(--rn-portal-surface)', borderRadius: '20px', padding: '36px 24px', textAlign: 'center', boxShadow: '0 8px 40px rgba(0,0,0,0.08)', border: '1px solid var(--rn-portal-border)' },
+  successCard: { background: 'var(--vn-surface, #F5F5F4)', borderRadius: '20px', padding: '36px 24px', textAlign: 'center', boxShadow: '0 8px 40px rgba(0,0,0,0.08)', border: '1px solid var(--vn-card-border, rgba(16,24,32,0.10))' },
   successIcon: { width: '60px', height: '60px', borderRadius: '50%', fontSize: '1.6rem', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto' },
-  successTitle: { color: 'var(--rn-portal-text)', fontSize: '1.5rem', fontWeight: '800', margin: '0 0 8px 0' },
-  successMsg: { color: 'var(--rn-portal-text-sub)', fontSize: '14px', margin: '0 0 20px 0' },
-  newBalanceCard: { background: 'linear-gradient(135deg, #152a9e, #1e35b5)', borderRadius: '14px', padding: '20px', marginBottom: '18px' },
+  successTitle: { color: 'var(--vn-text)', fontSize: '1.5rem', fontWeight: '800', margin: '0 0 8px 0' },
+  successMsg: { color: 'var(--vn-text-sub)', fontSize: '14px', margin: '0 0 20px 0' },
+  newBalanceCard: { background: '#0A1211', borderRadius: '14px', padding: '20px', marginBottom: '18px' },
   newBalanceLabel: { color: 'rgba(255,255,255,0.7)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '2px', margin: '0 0 4px 0' },
   newBalanceAmount: { color: '#fff', fontSize: '2.6rem', fontWeight: '800', margin: 0, lineHeight: 1 },
   newBalanceSub: { color: 'rgba(255,255,255,0.5)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '3px', margin: '4px 0 0 0' },
   successItems: { margin: '0 0 24px 0', textAlign: 'left' },
-  successItemsLabel: { color: 'var(--rn-portal-text-muted)', fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' },
-  successItem: { color: 'var(--rn-portal-text-sub)', fontSize: '13px', margin: '0 0 3px 0' },
+  successItemsLabel: { color: 'var(--vn-text-sub)', fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' },
+  successItem: { color: 'var(--vn-text-sub)', fontSize: '13px', margin: '0 0 3px 0' },
   newTransactionBtn: { padding: '13px 28px', borderRadius: '12px', border: 'none', background: ROYAL, color: '#fff', fontSize: '14px', fontWeight: '700', cursor: 'pointer' },
 };
 

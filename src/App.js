@@ -15,6 +15,20 @@ import LandingPage from './LandingPage';
 import BusinessOverview from './BusinessOverview';
 import { ForgotPassword, ResetPassword } from './AuthPages';
 import CustomerSettings from './CustomerSettings';
+// New marketing / info pages
+import ServicesPage from './ServicesPage';
+import VeniarProductPage from './VeniarProductPage';
+import NetworkPage from './NetworkPage';
+import CustomerAppPage from './CustomerAppPage';
+import MerchantDashboardPage from './MerchantDashboardPage';
+import PricingPage from './PricingPage';
+import SupportPage from './SupportPage';
+import ContactPage from './ContactPage';
+import CompanyPage from './CompanyPage';
+import MissionPage from './MissionPage';
+import PartnersPage from './PartnersPage';
+import NewsPage from './NewsPage';
+import JoinPage from './JoinPage';
 
 
 function FloatingThemeToggle() {
@@ -55,13 +69,10 @@ function FloatingThemeToggle() {
 
 function App() {
   useEffect(() => {
-    // Remove all default margins and padding
     document.body.style.margin = '0';
     document.body.style.padding = '0';
     document.documentElement.style.margin = '0';
     document.documentElement.style.padding = '0';
-    
-    // Optional: Remove default browser styles completely
     document.body.style.boxSizing = 'border-box';
     document.documentElement.style.boxSizing = 'border-box';
   }, []);
@@ -121,14 +132,11 @@ function App() {
     navigate('/business');
   };
 
-  // Redirects unauthenticated customers to the login page
   const Protected = ({ children }) => {
     if (!customer) return <Navigate to="/signin" replace />;
     return children;
   };
 
-  // Redirects already-authenticated customers away from staff/admin portals.
-  // Unauthenticated visitors still reach the portal's own login form.
   const StaffRoute = ({ children }) => {
     if (customer) return <Navigate to="/home" replace />;
     return children;
@@ -151,20 +159,41 @@ function App() {
     <ThemeProvider>
     <FloatingThemeToggle />
     <Routes>
+      {/* Public marketing pages */}
       <Route path="/" element={<LandingPage />} />
+      <Route path="/services" element={<ServicesPage />} />
+      <Route path="/aboutus" element={<VeniarProductPage />} />
+      <Route path="/veniar" element={<Navigate to="/aboutus" replace />} />
+      <Route path="/network" element={<NetworkPage />} />
+      <Route path="/customer-app" element={<CustomerAppPage />} />
+      <Route path="/merchant-dashboard" element={<MerchantDashboardPage />} />
+      <Route path="/pricing" element={<PricingPage />} />
+      <Route path="/support" element={<SupportPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/company" element={<CompanyPage />} />
+      <Route path="/mission" element={<MissionPage />} />
+      <Route path="/partners" element={<PartnersPage />} />
+      <Route path="/news" element={<NewsPage />} />
+      <Route path="/join" element={<JoinPage />} />
+
+      {/* Auth */}
       <Route path="/signin" element={<Login onLogin={handleLogin} />} />
       <Route path="/register" element={<Register onRegister={handleLogin} onBack={() => navigate('/signin')} />} />
-      <Route path="/business-overview" element={<BusinessOverview />} />
-      <Route path="/business-register" element={<BusinessRegister onBack={() => navigate('/business-overview')} onSuccess={() => setRefreshKey(k => k + 1)} />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 
+      {/* Business info & onboarding */}
+      <Route path="/business-overview" element={<BusinessOverview />} />
+      <Route path="/business-register" element={<BusinessRegister onBack={() => navigate('/business-overview')} onSuccess={() => setRefreshKey(k => k + 1)} />} />
+
+      {/* Authenticated customer routes */}
       <Route path="/home" element={<Protected><Home customer={customer} onLogout={handleLogout} onNavigate={navigate} refreshKey={refreshKey} /></Protected>} />
       <Route path="/settings" element={<Protected><CustomerSettings customer={customer} onCustomerUpdate={handleCustomerUpdate} onLogout={handleLogout} /></Protected>} />
       <Route path="/businesses" element={<Protected><BusinessList key={refreshKey} customer={customer} onLogout={handleLogout} onSelectBusiness={handleSelectBusiness} onNavigate={navigate} /></Protected>} />
       <Route path="/business" element={<Protected><BusinessDetailWrapper /></Protected>} />
       <Route path="/map" element={<Protected><BusinessMap key={refreshKey} customer={customer} onLogout={handleLogout} onNavigate={navigate} onSelectBusiness={handleSelectBusiness} /></Protected>} />
 
+      {/* Staff / admin portals */}
       <Route path="/admin" element={<StaffRoute><AdminDashboard /></StaffRoute>} />
       <Route path="/business-owner" element={<StaffRoute><BusinessOwnerDashboard /></StaffRoute>} />
       <Route path="/employee" element={<StaffRoute><EmployeeDashboard /></StaffRoute>} />

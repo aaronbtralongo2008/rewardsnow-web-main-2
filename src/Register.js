@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from './useIsMobile';
 import { API } from './config';
-import AnimatedStripes from './AnimatedStripes';
-
-const LOGO = process.env.PUBLIC_URL + '/logo514.png';
 
 function Register({ onRegister, onBack }) {
   const navigate = useNavigate();
@@ -61,17 +58,13 @@ function Register({ onRegister, onBack }) {
 
           {isMobile ? (
               <div style={s.mobileHeader}>
-                <img src={LOGO} alt="Veniar" style={{ ...s.mobileLogoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#1692A2', letterSpacing:'-0.03em', cursor:'pointer'}} onClick={() => navigate('/')}>Veniar</span>
                 <span style={s.mobileHeaderSub}>Create your free account</span>
               </div>
           ) : (
               <div style={s.leftPanel}>
-                <div style={s.orb1} />
-                <div style={s.orb2} />
-                <div style={s.orb3} />
-                <AnimatedStripes count={4} />
                 <div style={s.leftContent}>
-                  <img src={LOGO} alt="Veniar" style={{ ...s.logoImg, cursor: 'pointer' }} onClick={() => navigate('/')} />
+                  <span style={{fontStyle:'italic', fontWeight:800, fontSize:'1.4rem', color:'#FFF8EA', letterSpacing:'-0.03em', cursor:'pointer', display:'block', marginBottom:'20px'}} onClick={() => navigate('/')}>Veniar</span>
                   <div style={s.goldLine} />
                   <p style={s.tagline}>Join thousands earning rewards every day.</p>
                 </div>
@@ -156,31 +149,26 @@ function Register({ onRegister, onBack }) {
 }
 
 const s = {
-  container: { minHeight: '100vh', background: 'var(--rn-bg)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
+  container: { minHeight: '100vh', background: 'var(--vn-bg, #FFF8EA)', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", display: 'flex', flexDirection: 'column' },
   wrapper: { display: 'flex', flex: 1 },
-  mobileHeader: { background: 'var(--rn-bg)', padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
-  mobileLogoImg: { height: '44px', width: 'auto', objectFit: 'contain', marginBottom: '2px' },
-  mobileHeaderSub: { color: 'var(--rn-text-sub)', fontSize: '13px', marginTop: '4px' },
-  leftPanel: { flex: 1, background: 'var(--rn-bg)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
-  orb1: { position: 'absolute', top: '-100px', left: '-80px', width: '520px', height: '520px', borderRadius: '50%', background: 'var(--rn-orb1)', filter: 'blur(110px)', zIndex: 1, pointerEvents: 'none' },
-  orb2: { position: 'absolute', bottom: '-80px', right: '-40px', width: '420px', height: '420px', borderRadius: '50%', background: 'var(--rn-orb2)', filter: 'blur(90px)', zIndex: 1, pointerEvents: 'none' },
-  orb3: { position: 'absolute', top: '48%', right: '22%', width: '260px', height: '260px', borderRadius: '50%', background: 'var(--rn-orb3)', filter: 'blur(70px)', zIndex: 1, pointerEvents: 'none' },
+  mobileHeader: { background: 'var(--vn-bg, #FFF8EA)', padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' },
+  mobileHeaderSub: { color: 'var(--vn-text-sub)', fontSize: '13px', marginTop: '4px' },
+  leftPanel: { flex: 1, background: '#0A1211', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', position: 'relative', overflow: 'hidden' },
   leftContent: { position: 'relative', zIndex: 2 },
-  logoImg: { height: '52px', width: 'auto', objectFit: 'contain', display: 'block', marginBottom: '20px' },
-  goldLine: { width: '56px', height: '3px', background: 'linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b)', marginBottom: '32px', borderRadius: '2px' },
-  tagline: { color: 'var(--rn-text)', fontSize: '3.4rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 16px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
-  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--rn-form-bg)', boxSizing: 'border-box', overflowY: 'auto' },
-  brandName: { color: 'var(--rn-form-text)', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
-  brandSub: { color: 'var(--rn-form-sub)', fontSize: '1rem', margin: '0 0 24px 0' },
+  goldLine: { width: '48px', height: '3px', background: '#F2B84B', marginBottom: '32px', borderRadius: '2px' },
+  tagline: { color: '#FFF8EA', fontSize: '3.4rem', fontWeight: '900', lineHeight: 1.06, margin: '0 0 16px 0', maxWidth: '440px', letterSpacing: '-0.03em' },
+  rightPanel: { display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--vn-card, #FFFFFF)', boxSizing: 'border-box', overflowY: 'auto' },
+  brandName: { color: 'var(--vn-text)', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' },
+  brandSub: { color: 'var(--vn-text-sub)', fontSize: '1rem', margin: '0 0 24px 0' },
   row: { display: 'flex', gap: '12px' },
   half: { flex: 1, display: 'flex', flexDirection: 'column' },
-  inputLabel: { color: '#b45309', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
-  input: { padding: '12px 16px', borderRadius: '10px', border: '2px solid var(--rn-input-border)', background: 'var(--rn-input-bg)', color: 'var(--rn-input-color)', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  registerBtn: { padding: '14px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #1e40af 0%, #2563eb 100%)', color: '#ffffff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%', marginTop: '4px', boxShadow: '0 4px 24px rgba(37, 99, 235, 0.45)' },
-  backBtn: { padding: '14px', borderRadius: '12px', border: '2px solid var(--rn-outline-btn-border)', background: 'var(--rn-outline-btn-bg)', color: 'var(--rn-outline-btn-color)', fontSize: '14px', fontWeight: '600', cursor: 'pointer', width: '100%' },
+  inputLabel: { color: 'var(--vn-text-sub)', fontSize: '10px', fontWeight: '700', marginBottom: '7px', display: 'block', letterSpacing: '2px', textTransform: 'uppercase' },
+  input: { padding: '12px 16px', borderRadius: '10px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.14))', background: 'var(--vn-bg, #FFF8EA)', color: 'var(--vn-text)', fontSize: '14px', marginBottom: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' },
+  registerBtn: { padding: '14px', borderRadius: '10px', border: 'none', background: '#0E96CD', color: '#ffffff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', width: '100%', marginTop: '4px' },
+  backBtn: { padding: '14px', borderRadius: '12px', border: '2px solid var(--vn-card-border, rgba(16,24,32,0.18))', background: 'transparent', color: 'var(--vn-text)', fontSize: '14px', fontWeight: '600', cursor: 'pointer', width: '100%' },
   divider: { display: 'flex', alignItems: 'center', gap: '12px', margin: '18px 0' },
-  dividerLine: { flex: 1, height: '1px', background: 'var(--rn-divider)' },
-  dividerText: { color: '#60a5fa', fontSize: '13px' },
+  dividerLine: { flex: 1, height: '1px', background: 'var(--vn-card-border, rgba(16,24,32,0.12))' },
+  dividerText: { color: 'var(--vn-text-sub)', fontSize: '13px' },
   error: { color: '#dc2626', fontSize: '13px', margin: '0 0 14px 0', background: '#fff0f0', padding: '10px 14px', borderRadius: '8px', border: '1px solid #ffd0d0' },
 };
 
